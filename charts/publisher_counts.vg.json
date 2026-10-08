@@ -1,0 +1,22 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Top 12 publisher groups represented among 2024–2026 Prime Minister's Literary Awards shortlisted and winning books.",
+  "data": { "url": "data/pmla_2024_2026.csv" },
+  "width": "container",
+  "height": 430,
+  "transform": [
+    { "aggregate": [{ "op": "count", "as": "books" }], "groupby": ["publisher_key"] },
+    { "window": [{ "op": "row_number", "as": "rank" }], "sort": [{ "field": "books", "order": "descending" }, { "field": "publisher_key", "order": "ascending" }] },
+    { "filter": "datum.rank <= 12" }
+  ],
+  "mark": { "type": "bar", "color": "#367392" },
+  "encoding": {
+    "x": { "field": "books", "type": "quantitative", "title": "Books on the shortlists", "axis": { "tickMinStep": 1 } },
+    "y": { "field": "publisher_key", "type": "nominal", "sort": { "field": "books", "order": "descending" }, "title": null, "axis": { "labelLimit": 260 } },
+    "tooltip": [
+      { "field": "publisher_key", "type": "nominal", "title": "Publisher" },
+      { "field": "books", "type": "quantitative", "title": "Books" }
+    ]
+  },
+  "config": { "view": { "stroke": null }, "axis": { "labelFontSize": 12, "titleFontSize": 13 } }
+}

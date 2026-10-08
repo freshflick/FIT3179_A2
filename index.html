@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How Australia Chooses Its Stories</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Embed pattern adapted from FIT3179/Vega-Lite/5_multiple_charts_html. -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">Australian literary awards</p>
+      <h1>How Australia Chooses Its Stories</h1>
+      <p class="intro">A first look at the publishers represented among shortlisted and winning books in the 2024–2026 Prime Minister’s Literary Awards.</p>
+    </header>
+
+    <section aria-labelledby="publisher-heading">
+      <h2 id="publisher-heading">Which publishers appear most often?</h2>
+      <p>Each book is counted once. These figures describe the award shortlists, not all books published in Australia.</p>
+      <div id="publisher-chart" class="chart" aria-label="Publisher counts among Prime Minister’s Literary Awards shortlisted and winning books"></div>
+    </section>
+
+    <footer>
+      <p>Source: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia, Prime Minister’s Literary Awards</a>. Award years 2024–2026. Data and chart specification are in this project.</p>
+      <p>Page structure adapted from the <a href="https://github.com/FIT3179/Vega-Lite/tree/main/5_multiple_charts_html">FIT3179 Vega-Lite teaching example</a>.</p>
+    </footer>
+  </main>
+
+  <script>
+    vegaEmbed('#publisher-chart', 'charts/publisher_counts.vg.json', { actions: false })
+      .catch(error => {
+        console.error(error);
+        document.querySelector('#publisher-chart').textContent = 'Could not load the chart. Check the local server and browser console.';
+      });
+  </script>
+</body>
+</html>
