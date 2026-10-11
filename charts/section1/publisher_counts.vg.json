@@ -1,0 +1,79 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Publishers with at least three appearances among 2024–2026 Prime Minister's Literary Awards shortlisted and winning books.",
+  "data": { "url": "data/pmla_2024_2026.csv" },
+  "width": "container",
+  "height": 330,
+  "autosize": { "type": "fit-x", "contains": "padding", "resize": true },
+  "transform": [
+    {
+      "aggregate": [{ "op": "count", "as": "books" }],
+      "groupby": ["publisher_key"]
+    },
+    { "filter": "datum.books >= 3" },
+    {
+      "window": [{ "op": "row_number", "as": "publisher_rank" }],
+      "sort": [
+        { "field": "books", "order": "descending" },
+        { "field": "publisher_key", "order": "ascending" }
+      ]
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "books",
+      "type": "quantitative",
+      "title": "Books on the award list",
+      "scale": { "domain": [0, 20] },
+      "axis": {
+        "values": [0, 5, 10, 15, 20],
+        "grid": true,
+        "gridColor": "#e6ecee",
+        "tickSize": 0
+      }
+    },
+    "y": {
+      "field": "publisher_key",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": { "labelLimit": 350, "tickSize": 0, "domain": false }
+    },
+    "tooltip": [
+      { "field": "publisher_key", "type": "nominal", "title": "Publisher" },
+      { "field": "books", "type": "quantitative", "title": "Books" }
+    ]
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "cornerRadiusEnd": 2 },
+      "encoding": {
+        "color": {
+          "condition": {
+            "test": "datum.publisher_key === 'Allen & Unwin'",
+            "value": "#c65d21"
+          },
+          "value": "#aab5bb"
+        }
+      }
+    },
+    {
+      "mark": { "type": "text", "align": "left", "dx": 6, "fontWeight": "bold" },
+      "encoding": {
+        "text": { "field": "books", "type": "quantitative", "format": "d" }
+      }
+    }
+  ],
+  "config": {
+    "view": { "stroke": null },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelColor": "#3c4c56",
+      "titleColor": "#3c4c56",
+      "labelFontSize": 12,
+      "titleFontSize": 12
+    },
+    "text": { "font": "Arial", "color": "#233441", "fontSize": 12 }
+  }
+}

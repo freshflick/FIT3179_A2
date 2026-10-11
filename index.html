@@ -3,39 +3,181 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How Australia Chooses Its Stories</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <!-- Embed pattern adapted from FIT3179/Vega-Lite/5_multiple_charts_html. -->
+  <title>Behind Australia's Literary Shortlists</title>
+  <link rel="stylesheet" href="css/styles.css?v=4">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 </head>
 <body>
-  <main class="page">
-    <header>
-      <p class="eyebrow">Australian literary awards</p>
-      <h1>How Australia Chooses Its Stories</h1>
-      <p class="intro">A first look at the publishers represented among shortlisted and winning books in the 2024–2026 Prime Minister’s Literary Awards.</p>
-    </header>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">Australian literary awards · 2024–2026</p>
+    <h1>Behind Australia's literary shortlists</h1>
+    <p class="intro">Literary awards bring a small selection of books into view. Which publishers appear most often, and do they appear across many categories or focus on a few? We begin with the Prime Minister’s Literary Awards.</p>
+  </header>
 
-    <section aria-labelledby="publisher-heading">
-      <h2 id="publisher-heading">Which publishers appear most often?</h2>
-      <p>Each book is counted once. These figures describe the award shortlists, not all books published in Australia.</p>
-      <div id="publisher-chart" class="chart" aria-label="Publisher counts among Prime Minister’s Literary Awards shortlisted and winning books"></div>
-    </section>
+  <section class="story-section" aria-labelledby="landscape-heading">
+    <div class="section-heading">
+      <p class="section-number">01 / The award landscape</p>
+      <h2 id="landscape-heading">Prime Minister’s Literary Awards</h2>
+    </div>
+    <p class="section-lead">The 2024–2026 Prime Minister’s Literary Awards data contains 90 shortlisted or winning books across six categories. These charts examine which publishers are represented in that selection.</p>
 
-    <footer>
-      <p>Source: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia, Prime Minister’s Literary Awards</a>. Award years 2024–2026. Data and chart specification are in this project.</p>
-      <p>Page structure adapted from the <a href="https://github.com/FIT3179/Vega-Lite/tree/main/5_multiple_charts_html">FIT3179 Vega-Lite teaching example</a>.</p>
-    </footer>
-  </main>
+    <div class="chart-block">
+      <h3>Which publishers appear the most often?</h3>
+      <p class="chart-intro">Ten publishers ranked by shortlisted and winning books · Prime Minister’s Literary Awards, 2024–2026</p>
 
-  <script>
-    vegaEmbed('#publisher-chart', 'charts/publisher_counts.vg.json', { actions: false })
-      .catch(error => {
-        console.error(error);
-        document.querySelector('#publisher-chart').textContent = 'Could not load the chart. Check the local server and browser console.';
-      });
-  </script>
+      <div class="publisher-layout">
+        <div id="publisher-chart" class="chart" role="img"
+             aria-label="Bar chart of publishers ordered by number of books on the award lists"></div>
+
+        <aside class="chart-explanation" aria-label="Publisher chart interpretation">
+          <h4>Allen &amp; Unwin leads the list</h4>
+          <p>Its 18 appearances are more than twice the next publisher’s eight.</p>
+          <p>Together, these ten publishers account for 65 of the 90 listed books. The chart measures visibility in this award selection, not publishers’ overall output.</p>
+        </aside>
+      </div>
+    </div>
+
+    <div class="chart-block">
+      <h3>Where do the most represented publishers appear?</h3>
+      <p class="chart-intro">Distribution of publishers' books across six award categories · 2024–2026</p>
+      <div class="chart-story-layout">
+        <div id="heatmap-chart" class="chart" role="img" aria-label="Heatmap of publisher appearances across six award categories"></div>
+        <aside class="story" aria-label="Category heatmap interpretation">
+          <h4>Equal totals can hide different patterns</h4>
+          <p>Giramondo and Hachette each have six appearances. All six of Giramondo’s are in Poetry, while Hachette’s books span four categories.</p>
+          <p>So a publisher’s total alone cannot tell us whether its award representation is concentrated or spread across categories.</p>
+        </aside>
+      </div>
+      <p class="chart-note">A pale cell means no appearance in this selection; it does not mean the publisher produces no books in that category. Hover for exact counts. Each book is counted once, including winners.</p>
+    </div>
+  </section>
+
+  <section class="story-section" aria-labelledby="awards-heading">
+    <div class="chart-block">
+      <h3 id="awards-heading">Publisher shares diverge between the prizes</h3>
+      <p class="chart-intro">Share of listed books by publisher · Prime Minister’s Literary Awards and Stella Prize, 2024–2026</p>
+      <div id="award-comparison-chart" class="chart dot-chart"></div>
+      <div class="chart-text-grid">
+        <aside class="chart-explanation" aria-label="Award comparison finding">
+          <h4>Different awards, different leaders</h4>
+          <p>Allen &amp; Unwin accounts for 20% of the Prime Minister’s list, while Giramondo accounts for 14% of Stella’s.</p>
+        </aside>
+        <p class="chart-context">Publishers shown have at least four appearances combined. Shares use 90 Prime Minister’s shortlisted or winning books and 36 Stella longlisted books.</p>
+      </div>
+    </div>
+
+    <div class="chart-block">
+      <h3>Stella’s longlists broaden beyond fiction</h3>
+      <p class="chart-intro">One square per longlisted book · Stella Prize, 2024–2026</p>
+      <div class="stella-layout">
+        <aside class="chart-explanation stella-explanation">
+          <h4>Fiction’s share falls by half</h4>
+          <p>Fiction accounts for eight of 12 longlisted books in 2024, compared with four of 12 in 2026.</p>
+        </aside>
+        <div id="stella-genre-chart" class="chart stella-units-chart"></div>
+      </div>
+      <p class="chart-note">Genres are grouped for comparison, not official Stella categories. Each book appears once in its year’s longlist, even if it later won.</p>
+    </div>
+  </section>
+
+  <section class="story-section" aria-labelledby="outcomes-heading">
+    <div class="section-heading">
+      <p class="section-number">03 / From lists to winners</p>
+      <h2 id="outcomes-heading">Does visibility lead to wins?</h2>
+    </div>
+    <p class="section-lead">Appearing often can increase a publisher’s presence on an award list. The winning books tell a more specific story.</p>
+
+    <div class="chart-block">
+      <h3>Do the most visible publishers win more often?</h3>
+      <p class="chart-intro">Listed books and winners by publisher · Prime Minister’s Literary Awards, 2024–2026</p>
+      <div id="publisher-wins-chart" class="chart full-width-chart" role="img" aria-label="Scatter plot comparing award-list appearances and wins for publishers with at least three listed books"></div>
+      <div class="chart-text-grid">
+        <aside class="chart-explanation" aria-label="Publisher wins finding">
+          <h4>The same number of wins, with fewer appearances</h4>
+          <p>University of Queensland Press and Allen &amp; Unwin each have three wins, from eight and 18 listed books respectively.</p>
+        </aside>
+        <p class="chart-context">Each dot is a publisher with at least three listed books. The dashed line marks one win per five appearances, the overall ratio across these awards.</p>
+      </div>
+      <p class="chart-note">Two publishers with three appearances and one win are nudged slightly apart so both dots can be seen. Hover for exact counts. A publisher’s small set of appearances should not be treated as a reliable win rate.</p>
+    </div>
+
+    <div class="chart-block">
+      <h3>Which genres make it from Stella’s longlist to the winner?</h3>
+      <p class="chart-intro">
+        Books reaching each prize stage, grouped by genre · Stella Prize, 2024–2026
+      </p>
+
+      <div id="stella-progression-chart" class="chart full-width-chart"
+           role="img"
+           aria-label="Flow chart of Stella books by genre from longlist to shortlist and winner"></div>
+
+      <div class="chart-text-grid">
+        <aside class="chart-explanation">
+          <h4>Fiction leads, but does not take every prize</h4>
+          <p>Fiction supplies most books at every stage and two of the three winners. The other winning book is a graphic novel.</p>
+        </aside>
+        <p class="chart-context">
+          Ribbon width represents books that reached the next stage. Books that did not advance end at their last stage. Genre labels are grouped for comparison rather than official Stella categories.
+        </p>
+      </div>
+
+      <p class="chart-note">
+        All 36 books entered the longlist. The shortlist count includes the eventual winners, so each book is counted once at each stage it reached. Hover over a ribbon or block for its count.
+      </p>
+    </div>
+
+    <div class="chart-block">
+      <h3>Shared books are spread across six publishers</h3>
+      <p class="chart-intro">
+        Publisher area represents distinct books within each award-list group ·
+        Prime Minister’s Literary Awards and Stella Prize, 2024–2026
+      </p>
+
+      <div id="award-overlap-chart" class="chart full-width-chart"
+           role="img"
+           aria-label="Treemap comparing books unique to each prize list with books appearing on both"></div>
+
+      <div class="chart-text-grid">
+        <aside class="chart-explanation">
+          <h4>Only a small group appears on both lists</h4>
+          <p>Most books appear in just one of these selections. The highlighted tile shows the shared titles; the chart identifies the book that won both prizes.</p>
+        </aside>
+        <p class="chart-context">
+          Each coloured group shows books listed by one prize or both.
+          Within it, each rectangle is a publisher; its area and printed number
+          represent distinct books. Shared books use the publisher name recorded
+          in the Prime Minister’s dataset. Hover for exact names and counts.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Data: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia, Prime Minister’s Literary Awards</a>, 2024–2026. Publisher names were standardised in the accompanying CSV. These lists are a selection, not all books published in Australia.</p>
+    <p>HTML embedding pattern adapted from the <a href="https://github.com/FIT3179/Vega-Lite/tree/main/5_multiple_charts_html">FIT3179 Vega-Lite teaching example</a>. Chart specifications and prepared data are included in this project.</p>
+  </footer>
+</main>
+
+<script>
+  const charts = [
+    ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=3'],
+    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json'],
+    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json'],
+    ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json'],
+    ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json'],
+    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json'],
+    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json']
+  ];
+  charts.forEach(([target, spec]) => {
+    vegaEmbed(target, spec, { actions: false }).catch(error => {
+      console.error(error);
+      document.querySelector(target).textContent =
+              'Chart unavailable. Check the browser console and local server.';
+    });
+  });
+</script>
 </body>
 </html>
