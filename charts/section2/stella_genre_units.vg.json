@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "One square per Stella Prize longlisted book, grouped by genre and year, 2024–2026.",
+  "data": { "url": "data/stella_2024_2026.csv" },
+  "transform": [
+    {
+      "calculate": "datum.genre == 'Fiction' ? 'Fiction' : datum.genre == 'Poetry' ? 'Poetry' : datum.genre == 'Graphic Novel' ? 'Graphic novel' : 'Non-fiction & memoir'",
+      "as": "genre_group"
+    },
+    {
+      "calculate": "datum.genre_group == 'Fiction' ? 1 : datum.genre_group == 'Non-fiction & memoir' ? 2 : datum.genre_group == 'Poetry' ? 3 : 4",
+      "as": "genre_order"
+    },
+    {
+      "window": [{ "op": "row_number", "as": "book_position" }],
+      "sort": [
+        { "field": "genre_order", "order": "ascending" },
+        { "field": "title", "order": "ascending" }
+      ],
+      "groupby": ["award_year"]
+    },
+    {
+      "calculate": "(datum.book_position - 1) % 4",
+      "as": "grid_column"
+    },
+    {
+      "calculate": "floor((datum.book_position - 1) / 4)",
+      "as": "grid_row"
+    }
+  ],
+  "facet": {
+    "column": {
+      "field": "award_year",
+      "type": "ordinal",
+      "sort": "ascending",
+      "header": {
+        "title": null,
+        "labelFont": "Arial",
+        "labelFontSize": 16,
+        "labelFontWeight": "bold",
+        "labelColor": "#233441",
+        "labelPadding": 12
+      }
+    }
+  },
+  "spacing": 22,
+  "spec": {
+    "width": 268,
+    "height": 204,
+    "mark": {
+      "type": "rect",
+      "stroke": "white",
+      "strokeWidth": 3
+    },
+    "encoding": {
+      "x": {
+        "field": "grid_column",
+        "type": "ordinal",
+        "sort": "ascending",
+        "axis": null,
+        "scale": { "paddingInner": 0.03, "paddingOuter": 0 }
+      },
+      "y": {
+        "field": "grid_row",
+        "type": "ordinal",
+        "sort": "ascending",
+        "axis": null,
+        "scale": { "paddingInner": 0.03, "paddingOuter": 0 }
+      },
+      "color": {
+        "field": "genre_group",
+        "type": "nominal",
+        "title": null,
+        "scale": {
+          "domain": [
+            "Fiction",
+            "Non-fiction & memoir",
+            "Poetry",
+            "Graphic novel"
+          ],
+          "range": [
+            "#63336f",
+            "#9584bf",
+            "#d78e64",
+            "#648b97"
+          ]
+        },
+        "legend": {
+          "orient": "bottom",
+          "columns": 4,
+          "symbolType": "square",
+          "symbolSize": 130
+        }
+      },
+      "tooltip": [
+        { "field": "title", "type": "nominal", "title": "Book" },
+        { "field": "author", "type": "nominal", "title": "Author" },
+        { "field": "award_year", "type": "ordinal", "title": "Award year" },
+        { "field": "genre_group", "type": "nominal", "title": "Genre group" },
+        { "field": "genre", "type": "nominal", "title": "Genre in data" },
+        { "field": "outcome", "type": "nominal", "title": "Final list stage" }
+      ]
+    }
+  },
+  "config": {
+    "view": { "stroke": null },
+    "legend": {
+      "labelFont": "Arial",
+      "labelFontSize": 11,
+      "labelColor": "#3c4c56"
+    }
+  }
+}

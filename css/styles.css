@@ -170,3 +170,36 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
         grid-template-columns: 1fr;
     }
 }
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    gap: 28px;
+    align-items: center;
+}
+
+.hero-copy {
+    min-width: 0;
+}
+
+.hero-art {
+    width: 100%;
+}
+
+.hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 800px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .hero-art {
+        max-width: 290px;
+        justify-self: center;
+    }
+}

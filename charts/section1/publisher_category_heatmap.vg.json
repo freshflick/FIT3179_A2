@@ -1,0 +1,151 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Award category appearances for publishers with at least three books in the 2024–2026 Prime Minister's Literary Awards data.",
+  "data": { "url": "data/pmla_2024_2026.csv" },
+  "width": 560,
+  "height": 340,
+  "transform": [
+    {
+      "joinaggregate": [{ "op": "count", "as": "publisher_total" }],
+      "groupby": ["publisher_key"]
+    },
+    { "filter": "datum.publisher_total >= 3" },
+    {
+      "aggregate": [{ "op": "count", "as": "books" }],
+      "groupby": ["publisher_key", "category"]
+    },
+    {
+      "impute": "books",
+      "key": "category",
+      "groupby": ["publisher_key"],
+      "keyvals": [
+        "Fiction",
+        "Non-fiction",
+        "Australian history",
+        "Poetry",
+        "Young adult literature",
+        "Children’s literature"
+      ],
+      "value": 0
+    },
+    {
+      "joinaggregate": [
+        { "op": "sum", "field": "books", "as": "publisher_total_for_sort" }
+      ],
+      "groupby": ["publisher_key"]
+    },
+    {
+      "window": [{ "op": "dense_rank", "as": "publisher_rank" }],
+      "sort": [
+        { "field": "publisher_total_for_sort", "order": "descending" },
+        { "field": "publisher_key", "order": "ascending" }
+      ]
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "category",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Fiction",
+        "Non-fiction",
+        "Australian history",
+        "Poetry",
+        "Young adult literature",
+        "Children’s literature"
+      ],
+      "axis": {
+        "labelAngle": -27,
+        "labelLimit": 120,
+        "tickSize": 0,
+        "domain": false,
+        "labelExpr": "datum.label == 'Australian history' ? 'History' : datum.label == 'Young adult literature' ? 'Young adult' : datum.label == 'Children’s literature' ? 'Children’s' : datum.label"
+      }
+    },
+    "y": {
+      "field": "publisher_key",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "publisher_rank",
+        "op": "min",
+        "order": "ascending"
+      },
+      "axis": {
+        "labelLimit": 325,
+        "tickSize": 0,
+        "domain": false
+      }
+    },
+    "tooltip": [
+      { "field": "publisher_key", "type": "nominal", "title": "Publisher" },
+      { "field": "category", "type": "nominal", "title": "Category" },
+      { "field": "books", "type": "quantitative", "title": "Books" }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "books",
+          "type": "quantitative",
+          "title": "Books on list",
+          "scale": {
+            "domain": [0, 6],
+            "range": ["#f5f1f7", "#63336f"]
+          },
+          "legend": {
+            "orient": "bottom",
+            "gradientLength": 220,
+            "gradientThickness": 10
+          }
+        }
+      }
+    },
+    {
+      "transform": [{ "filter": "datum.books >= 3" }],
+      "mark": {
+        "type": "text",
+        "fontWeight": "bold",
+        "fontSize": 13
+      },
+      "encoding": {
+        "text": {
+          "field": "books",
+          "type": "quantitative",
+          "format": "d"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.books >= 4",
+            "value": "white"
+          },
+          "value": "#233441"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": { "stroke": null },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelColor": "#3c4c56",
+      "labelFontSize": 11
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelColor": "#3c4c56",
+      "titleColor": "#3c4c56",
+      "labelFontSize": 11,
+      "titleFontSize": 11
+    }
+  }
+}

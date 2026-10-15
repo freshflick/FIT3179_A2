@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Publisher treemap grouped by award-list coverage. Area shows distinct books; colour shows winning books, 2024–2026.",
+  "padding": 4,
+  "autosize": "pad",
+  "background": "#ffffff",
+  "signals": [
+    {"name":"width","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 56 : 96)))","on":[{"events":"window:resize","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 56 : 96)))"}]},
+    {"name":"compact","update":"width < 1050"},
+    {"name":"twoCards","update":"compact && width >= 650"},
+    {"name":"treeW","update":"compact ? width : width - 272"},
+    {"name":"treeH","update":"compact ? (twoCards ? 540 : 500) : 570"},
+    {"name":"panelX","update":"compact ? 4 : treeW + 26"},
+    {"name":"panelW","update":"compact ? (twoCards ? width / 2 - 10 : width - 8) : width - panelX - 4"},
+    {"name":"panel2X","update":"twoCards ? width / 2 + 4 : panelX"},
+    { "name": "card1Y", "update": "compact ? treeH + 16 : 263" },
+    { "name": "card2Y", "update": "twoCards ? card1Y : (compact ? treeH + 130 : 64)" },
+    {"name":"legendYPos","update":"compact ? (twoCards ? treeH + 140 : treeH + 250) : treeH + 22"},
+    {"name":"height","update":"compact ? (twoCards ? treeH + 205 : treeH + 310) : treeH + 105"}
+  ],
+  "data": [
+    {"name":"pmla","url":"data/pmla_2024_2026.csv","format":{"type":"csv"},"transform":[{"type":"formula","as":"book_key","expr":"lower(trim(split(datum.title, ':')[0])) + '|' + lower(trim(datum.author)) + '|' + datum.award_year"}]},
+    {"name":"stella","url":"data/stella_2024_2026.csv","format":{"type":"csv"},"transform":[{"type":"formula","as":"book_key","expr":"lower(trim(split(datum.title, ':')[0])) + '|' + lower(trim(datum.author)) + '|' + datum.award_year"}]},
+    {"name":"pmlaBooks","source":"pmla","transform":[{"type":"lookup","from":"stella","key":"book_key","fields":["book_key"],"values":["title","outcome"],"as":["stella_title","stella_outcome"]},{"type":"formula","as":"membership","expr":"datum.stella_title == null ? 'PMLA only' : 'Both awards'"},{"type":"formula","as":"won_book","expr":"datum.outcome === 'winner' || datum.stella_outcome === 'winner' ? 1 : 0"},{"type":"formula","as":"dual_winner","expr":"datum.outcome === 'winner' && datum.stella_outcome === 'winner' ? 1 : 0"},{"type":"formula","as":"shared_flag","expr":"datum.membership === 'Both awards' ? 1 : 0"}]},
+    {"name":"stellaOnly","source":"stella","transform":[{"type":"lookup","from":"pmla","key":"book_key","fields":["book_key"],"values":["title"],"as":["pmla_title"]},{"type":"filter","expr":"datum.pmla_title == null"},{"type":"formula","as":"membership","expr":"'Stella only'"},{"type":"formula","as":"won_book","expr":"datum.outcome === 'winner' ? 1 : 0"},{"type":"formula","as":"dual_winner","expr":"0"},{"type":"formula","as":"shared_flag","expr":"0"}]},
+    {"name":"books","source":["pmlaBooks","stellaOnly"]},
+    {"name":"publisherCounts","source":"books","transform":[{"type":"aggregate","groupby":["membership","publisher_key"],"fields":["book_key","won_book","dual_winner"],"ops":["distinct","sum","sum"],"as":["books","wins","dual_wins"]},{"type":"formula","as":"publisher_label","expr":"datum.membership === 'Both awards' || datum.books >= 2 ? datum.publisher_key : 'Other publishers'"}]},
+    {"name":"publisherTiles","source":"publisherCounts","transform":[{"type":"aggregate","groupby":["membership","publisher_label"],"fields":["books","wins","dual_wins","publisher_key"],"ops":["sum","sum","sum","distinct"],"as":["books","wins","dual_wins","publishers"]}]},
+    {"name":"membershipCounts","source":"books","transform":[{"type":"aggregate","groupby":["membership"],"fields":["book_key"],"ops":["distinct"],"as":["books"]}]},
+    {"name":"tree","source":"publisherTiles","transform":[{"type":"nest","keys":["membership"],"generate":true},{"type":"treemap","field":"books","method":"squarify","sort":{"field":"value","order":"descending"},"paddingInner":4,"paddingOuter":3,"paddingTop":35,"round":true,"size":[{"signal":"treeW"},{"signal":"treeH"}]}]},
+    {"name":"groups","source":"tree","transform":[{"type":"filter","expr":"datum.depth === 1"},{"type":"lookup","from":"membershipCounts","key":"membership","fields":["key"],"values":["books"],"as":["books"]}]},
+    {"name":"tiles","source":"tree","transform":[{"type":"filter","expr":"datum.depth === 2"},{"type":"formula","as":"chars","expr":"max(1, floor((datum.x1 - datum.x0 - 14) / 6))"},{"type":"formula","as":"cut","expr":"length(datum.publisher_label) <= datum.chars ? length(datum.publisher_label) : lastindexof(substring(datum.publisher_label, 0, datum.chars + 1), ' ')"},{"type":"formula","as":"line1","expr":"datum.cut > 0 ? substring(datum.publisher_label, 0, datum.cut) : ''"},{"type":"formula","as":"line2","expr":"datum.cut < length(datum.publisher_label) ? trim(substring(datum.publisher_label, datum.cut)) : ''"},{"type":"formula","as":"labelFits","expr":"datum.chars >= 7 && length(datum.line1) > 0 && length(datum.line1) <= datum.chars && length(datum.line2) <= datum.chars && datum.y1 - datum.y0 >= (length(datum.line2) ? 78 : 50)"},{"type":"formula","as":"labelLines","expr":"length(datum.line2) ? [datum.line1, datum.line2] : [datum.line1]"}]},
+    {"name":"overlapStats","source":"books","transform":[{"type":"aggregate","fields":["book_key","shared_flag"],"ops":["distinct","sum"],"as":["total","shared"]}]},
+    {"name":"overlapGroup","source":"groups","transform":[{"type":"filter","expr":"datum.key === 'Both awards'"}]},
+    {"name":"topPublisherTile","source":"tiles","transform":[{"type":"filter","expr":"datum.membership === 'PMLA only' && datum.publisher_label !== 'Other publishers'"},{"type":"window","sort":{"field":["books","publisher_label"],"order":["descending","ascending"]},"ops":["row_number"],"as":["rank"]},{"type":"filter","expr":"datum.rank === 1"}]}
+  ],
+  "scales": [
+    {"name":"winnerColour","type":"linear","domain":{"data":"publisherTiles","field":"wins"},"zero":true,"range":["#F4E5C9","#1D668E"]}
+  ],
+  "legends": [
+    {"fill":"winnerColour","type":"gradient","orient":"none","legendX":{"signal":"max(12, (width - min(300, width - 40)) / 2)"},"legendY":{"signal":"legendYPos"},"title":"Winning books in tile","direction":"horizontal","gradientLength":{"signal":"min(300, width - 40)"},"gradientThickness":12,"labelFont":"Arial","labelFontSize":11,"titleFont":"Arial","titleFontSize":12,"titleColor":"#233441","labelColor":"#50616b"}
+  ],
+  "marks": [
+    {"type":"rect","encode":{"update":{"x":{"field":"x0"},"x2":{"field":"x1"},"y":{"field":"y0"},"y2":{"field":"y1"},"fill":{"signal":"datum.key === 'Both awards' ? '#A76A16' : '#344F62'"},"tooltip":{"signal":"datum.key + ': ' + datum.books + ' distinct books'"}}},"from":{"data":"groups"}},
+    {"type":"rect","encode":{"update":{"x":{"field":"x0"},"x2":{"field":"x1"},"y":{"field":"y0"},"y2":{"field":"y1"},"fill":{"scale":"winnerColour","field":"wins"},"stroke":{"signal":"datum.dual_wins > 0 ? '#203847' : '#ffffff'"},"strokeWidth":{"signal":"datum.dual_wins > 0 ? 3 : 1.5"},"tooltip":{"signal":"datum.publisher_label + ' | ' + datum.membership + ' | ' + datum.books + ' distinct books | ' + datum.wins + ' winning books' + (datum.publishers > 1 ? ' | ' + datum.publishers + ' publishers combined' : '')"}}},"from":{"data":"tiles"}},
+    {"type":"text","encode":{"update":{"x":{"signal":"datum.x0 + 7"},"y":{"signal":"datum.y0 + 7"},"baseline":{"value":"top"},"text":{"field":"labelLines"},"opacity":{"signal":"datum.labelFits ? 1 : 0"},"font":{"value":"Arial"},"fontSize":{"value":11},"fontWeight":{"value":"bold"},"fill":{"signal":"datum.wins >= 3 ? '#ffffff' : '#233441'"},"lineHeight":{"value":13}}},"from":{"data":"tiles"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"datum.x0 + 7"},"y":{"signal":"datum.y0 + (datum.labelFits ? (length(datum.line2) ? 42 : 29) : 9)"},"baseline":{"value":"top"},"text":{"signal":"datum.books + (datum.books === 1 ? ' book' : ' books')"},"opacity":{"signal":"datum.x1 - datum.x0 > 46 && datum.y1 - datum.y0 > (datum.labelFits ? (length(datum.line2) ? 65 : 52) : 27) ? 1 : 0"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"signal":"datum.wins >= 3 ? '#ffffff' : '#233441'"}}},"from":{"data":"tiles"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"datum.x0 + 7"},"y":{"signal":"datum.y0 + (datum.labelFits ? (length(datum.line2) ? 63 : 50) : 30)"},"baseline":{"value":"top"},"text":{"signal":"datum.wins + (datum.wins === 1 ? ' winner' : ' winners')"},"opacity":{"signal":"datum.x1 - datum.x0 > 76 && datum.y1 - datum.y0 > (datum.labelFits ? (length(datum.line2) ? 91 : 77) : 51) ? 1 : 0"},"font":{"value":"Arial"},"fontSize":{"value":11},"fill":{"signal":"datum.wins >= 3 ? '#ffffff' : '#233441'"}}},"from":{"data":"tiles"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"datum.x0 + 9"},"y":{"signal":"datum.y0 + 18"},"baseline":{"value":"middle"},"limit":{"signal":"max(0, datum.x1 - datum.x0 - 14)"},"text":{"signal":"datum.key + ' · ' + datum.books + ' books'"},"font":{"value":"Arial"},"fontSize":{"value":14},"fontWeight":{"value":"bold"},"fill":{"value":"#ffffff"}}},"from":{"data":"groups"},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"signal":"(datum.x0 + datum.x1) / 2"},"y":{"signal":"(datum.y0 + datum.y1) / 2"},"x2":{"signal":"panelX"},"y2":{"signal":"card1Y + 50"},"stroke":{"value":"#91A5B2"},"strokeWidth":{"value":1},"opacity":{"signal":"compact ? 0 : 1"}}},"from":{"data":"overlapGroup"},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"signal":"(datum.x0 + datum.x1) / 2"},"y":{"signal":"(datum.y0 + datum.y1) / 2"},"x2":{"signal":"panelX"},"y2":{"signal":"card2Y + 50"},"stroke":{"value":"#91A5B2"},"strokeWidth":{"value":1},"opacity":{"signal":"compact ? 0 : 1"}}},"from":{"data":"topPublisherTile"},"interactive":false},
+    {"type":"rect","encode":{"update":{"x":{"signal":"panelX"},"x2":{"signal":"panelX + panelW"},"y":{"signal":"card1Y"},"y2":{"signal":"card1Y + 100"},"fill":{"value":"#F0F4F6"}}},"from":{"data":"overlapStats"}},
+    {"type":"rect","encode":{"update":{"x":{"signal":"panel2X"},"x2":{"signal":"panel2X + panelW"},"y":{"signal":"card2Y"},"y2":{"signal":"card2Y + 100"},"fill":{"value":"#F0F4F6"}}},"from":{"data":"topPublisherTile"}},
+    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 13"},"y":{"signal":"card1Y + 24"},"text":{"value":"Very little overlap"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"overlapStats"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 13"},"y":{"signal":"card1Y + 49"},"text":{"signal":"datum.shared + ' of ' + datum.total + ' distinct books'"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"overlapStats"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 13"},"y":{"signal":"card1Y + 72"},"text":{"signal":"'appear on both lists (' + format(100 * datum.shared / datum.total, '.1f') + '%).'"},"font":{"value":"Arial"},"fontSize":{"value":12},"fill":{"value":"#50616b"}}},"from":{"data":"overlapStats"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 13"},"y":{"signal":"card2Y + 24"},"text":{"value":"PMLA-only leader"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"topPublisherTile"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 13"},"y":{"signal":"card2Y + 49"},"limit":{"signal":"panelW - 26"},"text":{"field":"publisher_label"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"topPublisherTile"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 13"},"y":{"signal":"card2Y + 72"},"text":{"signal":"datum.books + ' books; ' + datum.wins + ' winners.'"},"font":{"value":"Arial"},"fontSize":{"value":12},"fill":{"value":"#50616b"}}},"from":{"data":"topPublisherTile"},"interactive":false}
+  ]
+}

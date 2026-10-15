@@ -1,0 +1,156 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Publisher shares of the 2024–2026 Prime Minister's Literary Awards and Stella Prize lists.",
+  "data": { "url": "data/publisher_award_comparison.csv" },
+  "width": "container",
+  "height": 340,
+  "transform": [
+    {
+      "calculate": "datum.pmla_books / 90",
+      "as": "pmla_share"
+    },
+    {
+      "calculate": "datum.stella_books / 36",
+      "as": "stella_share"
+    },
+    {
+      "calculate": "abs(datum.pmla_books * 36 - datum.stella_books * 90)",
+      "as": "share_gap_order"
+    },
+    {
+      "window": [{ "op": "row_number", "as": "difference_rank" }],
+      "sort": [
+        { "field": "share_gap_order", "order": "descending" },
+        { "field": "publisher_key", "order": "ascending" }
+      ]
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "publisher_key",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "difference_rank",
+        "op": "min",
+        "order": "ascending"
+      },
+      "axis": {
+        "labelLimit": 330,
+        "tickSize": 0,
+        "domain": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#bcc5c9",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "pmla_share",
+          "type": "quantitative",
+          "title": "Share of books on each award list",
+          "scale": { "domain": [0, 0.22] },
+          "axis": {
+            "format": ".0%",
+            "grid": true,
+            "gridColor": "#e8ecee",
+            "tickSize": 0
+          }
+        },
+        "x2": { "field": "stella_share" }
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": ["pmla_share", "stella_share"],
+          "as": ["award_key", "share"]
+        },
+        {
+          "calculate": "datum.award_key === 'pmla_share' ? 'Prime Minister’s Literary Awards' : 'Stella Prize'",
+          "as": "award"
+        },
+        {
+          "calculate": "datum.award_key === 'pmla_share' ? datum.pmla_books : datum.stella_books",
+          "as": "award_books"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 85
+      },
+      "encoding": {
+        "x": {
+          "field": "share",
+          "type": "quantitative",
+          "title": "Share of books on each award list",
+          "scale": { "domain": [0, 0.22] },
+          "axis": {
+            "format": ".0%",
+            "grid": true,
+            "gridColor": "#e8ecee",
+            "tickSize": 0
+          }
+        },
+        "color": {
+          "field": "award",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Prime Minister’s Literary Awards",
+              "Stella Prize"
+            ],
+            "range": ["#d78e64", "#9584bf"]
+          },
+          "legend": { "orient": "bottom" }
+        },
+        "tooltip": [
+          {
+            "field": "publisher_key",
+            "type": "nominal",
+            "title": "Publisher"
+          },
+          {
+            "field": "award",
+            "type": "nominal",
+            "title": "Award"
+          },
+          {
+            "field": "award_books",
+            "type": "quantitative",
+            "title": "Books"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share of list",
+            "format": ".1%"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": { "stroke": null },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelColor": "#3c4c56",
+      "titleColor": "#233441",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "labelColor": "#3c4c56",
+      "labelFontSize": 11,
+      "symbolSize": 85
+    }
+  }
+}
