@@ -1,0 +1,150 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "City reference points for documented offices of the ten most represented publishers in the 2024–2026 Prime Minister's Literary Awards lists. Circle area represents listed books.",
+  "width": "container",
+  "height": 470,
+  "background": "#ffffff",
+  "projection": {"type": "mercator"},
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
+      },
+      "transform": [
+        {"filter": "datum.properties.NAME === 'Australia'"}
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E8EEF1",
+        "stroke": "#AABDC7",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {"url": "data/pmla_2024_2026.csv"},
+      "transform": [
+        {
+          "aggregate": [{"op": "count", "as": "publisher_books"}],
+          "groupby": ["publisher_key"]
+        },
+        {
+          "window": [{"op": "row_number", "as": "publisher_rank"}],
+          "sort": [
+            {"field": "publisher_books", "order": "descending"},
+            {"field": "publisher_key", "order": "ascending"}
+          ]
+        },
+        {"filter": "datum.publisher_rank <= 10"},
+        {
+          "lookup": "publisher_key",
+          "from": {
+            "data": {"url": "data/publisher_office_locations_top10.csv"},
+            "key": "publisher_key",
+            "fields": [
+              "office_city",
+              "map_city",
+              "state",
+              "longitude",
+              "latitude"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.longitude) && isValid(datum.latitude)"
+        },
+        {
+          "aggregate": [
+            {"op": "sum", "field": "publisher_books", "as": "books"},
+            {"op": "count", "as": "publishers"}
+          ],
+          "groupby": ["map_city", "state", "longitude", "latitude"]
+        },
+        {
+          "calculate": "datum.map_city + ' · ' + datum.books + ' books'",
+          "as": "map_label"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "color": "#A45231",
+            "opacity": 0.84,
+            "stroke": "#ffffff",
+            "strokeWidth": 1.7
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "books",
+              "type": "quantitative",
+              "title": "Listed books",
+              "scale": {"range": [120, 3100]},
+              "legend": {"orient": "bottom"}
+            },
+            "tooltip": [
+              {
+                "field": "map_city",
+                "type": "nominal",
+                "title": "Office metro area"
+              },
+              {
+                "field": "state",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "books",
+                "type": "quantitative",
+                "title": "Listed books"
+              },
+              {
+                "field": "publishers",
+                "type": "quantitative",
+                "title": "Top-ten publishers"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "dy": -29,
+            "font": "Arial",
+            "fontSize": 13,
+            "fontWeight": "bold",
+            "color": "#233441"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "map_label",
+              "type": "nominal"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}

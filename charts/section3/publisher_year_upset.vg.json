@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "UpSet plot of Prime Minister’s Literary Awards publishers by the years in which they appeared, 2024–2026.",
+  "padding": 4,
+  "autosize": "pad",
+  "background": "#ffffff",
+  "signals": [
+    {"name":"width","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 56 : 96)))","on":[{"events":"window:resize","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 56 : 96)))"}]},
+    {"name":"compact","update":"width < 980"},
+    {"name":"twoCards","update":"compact && width >= 650"},
+    {"name":"plotW","update":"compact ? width - 8 : width - 300"},
+    {"name":"panelX","update":"compact ? 4 : plotW + 25"},
+    {"name":"panelW","update":"compact ? (twoCards ? width / 2 - 10 : width - 8) : width - panelX - 4"},
+    {"name":"panel2X","update":"twoCards ? width / 2 + 4 : panelX"},
+    {"name":"card1Y","update":"compact ? 458 : 78"},
+    {"name":"card2Y","update":"twoCards ? card1Y : (compact ? 572 : 252)"},
+    {"name":"height","update":"compact ? (twoCards ? 590 : 700) : 455"}
+  ],
+  "data": [
+    {"name":"pmla","url":"data/pmla_2024_2026.csv","format":{"type":"csv"}},
+    {"name":"publisherYear","source":"pmla","transform":[{"type":"aggregate","groupby":["publisher_key","award_year"],"fields":["publisher_key"],"ops":["count"],"as":["books"]},{"type":"formula","as":"y2024","expr":"datum.award_year == '2024' ? 1 : 0"},{"type":"formula","as":"y2025","expr":"datum.award_year == '2025' ? 1 : 0"},{"type":"formula","as":"y2026","expr":"datum.award_year == '2026' ? 1 : 0"}]},
+    {"name":"publisherPresence","source":"publisherYear","transform":[{"type":"aggregate","groupby":["publisher_key"],"fields":["y2024","y2025","y2026"],"ops":["max","max","max"],"as":["y2024","y2025","y2026"]},{"type":"formula","as":"pattern","expr":"datum.y2024 + '' + datum.y2025 + '' + datum.y2026"},{"type":"formula","as":"years","expr":"datum.y2024 + datum.y2025 + datum.y2026"},{"type":"formula","as":"oneYear","expr":"datum.years === 1 ? 1 : 0"},{"type":"formula","as":"allYears","expr":"datum.years === 3 ? 1 : 0"}]},
+    {"name":"patternCounts","source":"publisherPresence","transform":[{"type":"aggregate","groupby":["pattern","y2024","y2025","y2026","years"],"fields":["publisher_key","publisher_key"],"ops":["count","values"],"as":["publishers","members"]},{"type":"formula","as":"yearList","expr":"(datum.y2024 ? '2024 ' : '') + (datum.y2025 ? '2025 ' : '') + (datum.y2026 ? '2026' : '')"}]},
+    {"name":"summary","source":"publisherPresence","transform":[{"type":"aggregate","fields":["publisher_key","oneYear","allYears"],"ops":["count","sum","sum"],"as":["total","once","everyYear"]}]},
+    {"name":"threeYearPattern","source":"patternCounts","transform":[{"type":"filter","expr":"datum.years === 3"}]}
+  ],
+  "scales": [
+    {"name":"x","type":"band","domain":{"data":"patternCounts","field":"pattern","sort":{"op":"max","field":"publishers","order":"descending"}},"range":[68,{"signal":"plotW - 12"}],"paddingInner":0.22,"paddingOuter":0.12},
+    {"name":"y","type":"linear","domain":{"data":"patternCounts","field":"publishers"},"zero":true,"nice":true,"range":[244,46]}
+  ],
+  "marks": [
+    {"type":"text","encode":{"update":{"x":{"value":68},"y":{"value":22},"text":{"value":"Publishers in each year combination"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":244},"stroke":{"value":"#C9D7DD"},"strokeWidth":{"value":1}}},"interactive":false},
+    {"type":"rect","encode":{"update":{"x":{"scale":"x","field":"pattern"},"width":{"scale":"x","band":1},"y":{"scale":"y","field":"publishers"},"y2":{"scale":"y","value":0},"fill":{"signal":"datum.years === 3 ? '#B36E21' : '#3B7693'"},"cornerRadiusTopLeft":{"value":3},"cornerRadiusTopRight":{"value":3},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
+    {"type":"text","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"signal":"scale('y', datum.publishers) - 9"},"align":{"value":"center"},"text":{"field":"publishers"},"font":{"value":"Arial"},"fontSize":{"value":14},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"patternCounts"},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"value":64},"x2":{"signal":"plotW - 5"},"y":{"value":276},"stroke":{"value":"#DCE5E9"},"strokeWidth":{"value":1}}},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"value":68},"y":{"value":269},"text":{"value":"Years represented"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":310},"stroke":{"value":"#EEF2F4"},"strokeWidth":{"value":1}}},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"value":10},"y":{"value":310},"baseline":{"value":"middle"},"text":{"value":"2024"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":350},"stroke":{"value":"#EEF2F4"},"strokeWidth":{"value":1}}},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"value":10},"y":{"value":350},"baseline":{"value":"middle"},"text":{"value":"2025"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":390},"stroke":{"value":"#EEF2F4"},"strokeWidth":{"value":1}}},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"value":10},"y":{"value":390},"baseline":{"value":"middle"},"text":{"value":"2026"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
+    {"type":"rule","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"signal":"datum.y2024 ? 310 : datum.y2025 ? 350 : 390"},"y2":{"signal":"datum.y2026 ? 390 : datum.y2025 ? 350 : 310"},"stroke":{"value":"#35566B"},"strokeWidth":{"value":2},"opacity":{"signal":"datum.years > 1 ? 1 : 0"}}},"from":{"data":"patternCounts"},"interactive":false},
+    {"type":"symbol","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"value":310},"size":{"value":125},"shape":{"value":"circle"},"fill":{"signal":"datum.y2024 ? (datum.years === 3 ? '#B36E21' : '#35566B') : '#DFE8EC'"},"stroke":{"value":"#ffffff"},"strokeWidth":{"value":1},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
+    {"type":"symbol","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"value":350},"size":{"value":125},"shape":{"value":"circle"},"fill":{"signal":"datum.y2025 ? (datum.years === 3 ? '#B36E21' : '#35566B') : '#DFE8EC'"},"stroke":{"value":"#ffffff"},"strokeWidth":{"value":1},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
+    {"type":"symbol","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"value":390},"size":{"value":125},"shape":{"value":"circle"},"fill":{"signal":"datum.y2026 ? (datum.years === 3 ? '#B36E21' : '#35566B') : '#DFE8EC'"},"stroke":{"value":"#ffffff"},"strokeWidth":{"value":1},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
+    {"type":"rule","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"signal":"scale('y', datum.publishers)"},"x2":{"signal":"panelX"},"y2":{"signal":"card2Y + 51"},"stroke":{"value":"#A9B9C1"},"strokeWidth":{"value":1},"opacity":{"signal":"compact ? 0 : 1"}}},"from":{"data":"threeYearPattern"},"interactive":false},
+    {"type":"rect","encode":{"update":{"x":{"signal":"panelX"},"x2":{"signal":"panelX + panelW"},"y":{"signal":"card1Y"},"y2":{"signal":"card1Y + 100"},"fill":{"value":"#F1F5F7"}}},"from":{"data":"summary"}},
+    {"type":"rect","encode":{"update":{"x":{"signal":"panel2X"},"x2":{"signal":"panel2X + panelW"},"y":{"signal":"card2Y"},"y2":{"signal":"card2Y + 100"},"fill":{"value":"#F1F5F7"}}},"from":{"data":"summary"}},
+    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 14"},"y":{"signal":"card1Y + 25"},"text":{"value":"One-year appearances dominate"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 14"},"y":{"signal":"card1Y + 51"},"text":{"signal":"datum.once + ' of ' + datum.total + ' publishers'"},"font":{"value":"Arial"},"fontSize":{"value":16},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 14"},"y":{"signal":"card1Y + 76"},"text":{"value":"appear in just one year."},"font":{"value":"Arial"},"fontSize":{"value":12},"fill":{"value":"#50616b"}}},"from":{"data":"summary"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 14"},"y":{"signal":"card2Y + 25"},"text":{"value":"A smaller recurring core"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 14"},"y":{"signal":"card2Y + 51"},"text":{"signal":"datum.everyYear + ' publishers'"},"font":{"value":"Arial"},"fontSize":{"value":16},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
+    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 14"},"y":{"signal":"card2Y + 76"},"text":{"value":"appear in all three years."},"font":{"value":"Arial"},"fontSize":{"value":12},"fill":{"value":"#50616b"}}},"from":{"data":"summary"},"interactive":false}
+  ]
+}

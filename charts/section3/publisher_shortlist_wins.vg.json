@@ -1,0 +1,203 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Compare Prime Minister's Literary Awards list appearances with wins for publishers represented at least three times, 2024–2026. Highlights, labels and overlap offsets are calculated from the data.",
+  "width": "container",
+  "height": 370,
+  "autosize": { "type": "fit", "contains": "padding" },
+  "layer": [
+    {
+      "data": { "url": "data/pmla_2024_2026.csv" },
+      "transform": [
+        { "calculate": "datum.outcome === 'winner' ? 1 : 0", "as": "won" },
+        { "joinaggregate": [{ "op": "count", "as": "publisher_appearances" }], "groupby": ["publisher_key"] },
+        {
+          "aggregate": [
+            { "op": "max", "field": "publisher_appearances", "as": "most_appearances" },
+            { "op": "count", "as": "total_books" },
+            { "op": "sum", "field": "won", "as": "total_wins" }
+          ]
+        },
+        { "calculate": "0", "as": "start" },
+        { "calculate": "datum.most_appearances + 2", "as": "end" },
+        { "fold": ["start", "end"], "as": ["end_point", "appearances"] },
+        { "calculate": "datum.appearances * datum.total_wins / datum.total_books", "as": "wins" }
+      ],
+      "mark": { "type": "line", "strokeDash": [5, 5], "strokeWidth": 1.5, "color": "#b8c7cc" },
+      "encoding": {
+        "x": {
+          "field": "appearances", "type": "quantitative",
+          "title": "Books on the award lists",
+          "scale": { "zero": true },
+          "axis": { "format": "d", "tickMinStep": 1, "grid": true, "gridColor": "#e6ecee", "tickSize": 0 }
+        },
+        "y": {
+          "field": "wins", "type": "quantitative",
+          "title": "Winning books",
+          "scale": { "zero": true },
+          "axis": { "format": "d", "tickMinStep": 1, "grid": true, "gridColor": "#e6ecee", "tickSize": 0 }
+        }
+      }
+    },
+    {
+      "data": { "url": "data/pmla_2024_2026.csv" },
+      "transform": [
+        { "calculate": "datum.outcome === 'winner' ? 1 : 0", "as": "won" },
+        {
+          "aggregate": [
+            { "op": "count", "as": "appearances" },
+            { "op": "sum", "field": "won", "as": "wins" }
+          ],
+          "groupby": ["publisher_key"]
+        },
+        { "filter": "datum.appearances >= 3" },
+        {
+          "joinaggregate": [
+            { "op": "max", "field": "appearances", "as": "most_appearances" },
+            { "op": "max", "field": "wins", "as": "most_wins" }
+          ]
+        },
+        {
+          "joinaggregate": [
+            { "op": "min", "field": "wins", "as": "fewest_wins_at_count" },
+            { "op": "max", "field": "wins", "as": "most_wins_at_count" }
+          ],
+          "groupby": ["appearances"]
+        },
+        {
+          "window": [{ "op": "first_value", "field": "publisher_key", "as": "lower_win_peer" }],
+          "groupby": ["appearances"],
+          "sort": [
+            { "field": "wins", "order": "ascending" },
+            { "field": "publisher_key", "order": "ascending" }
+          ],
+          "frame": [null, null]
+        },
+        {
+          "calculate": "datum.most_wins_at_count > datum.fewest_wins_at_count && datum.wins === datum.most_wins_at_count ? datum.wins : 0",
+          "as": "contrast_wins"
+        },
+        { "joinaggregate": [{ "op": "max", "field": "contrast_wins", "as": "best_contrast_wins" }] },
+        {
+          "calculate": "datum.appearances === datum.most_appearances ? 'Most listed' : datum.wins === datum.most_wins ? 'Ties most wins' : datum.contrast_wins > 0 && datum.contrast_wins === datum.best_contrast_wins ? 'Same count, more wins' : 'Other'",
+          "as": "highlight_role"
+        },
+        {
+          "window": [{ "op": "row_number", "as": "duplicate_index" }],
+          "groupby": ["appearances", "wins"],
+          "sort": [{ "field": "publisher_key", "order": "ascending" }]
+        },
+        {
+          "joinaggregate": [{ "op": "count", "as": "duplicate_count" }],
+          "groupby": ["appearances", "wins"]
+        },
+        {
+          "calculate": "datum.appearances + (datum.duplicate_index - (datum.duplicate_count + 1) / 2) * 0.24",
+          "as": "display_appearances"
+        },
+        { "calculate": "datum.most_appearances * 0.50", "as": "box_left" },
+        { "calculate": "datum.most_appearances * 0.98", "as": "box_right" },
+        { "calculate": "datum.most_wins * 0.57", "as": "box_top" },
+        { "calculate": "datum.most_wins * 0.20", "as": "box_bottom" },
+        { "calculate": "datum.box_left + datum.most_appearances * 0.018", "as": "box_text_x" },
+        { "calculate": "datum.box_top - datum.most_wins * 0.04", "as": "box_heading_y" },
+        { "calculate": "datum.box_top - datum.most_wins * 0.15", "as": "box_line_one_y" },
+        { "calculate": "datum.box_top - datum.most_wins * 0.26", "as": "box_line_two_y" },
+        {
+          "calculate": "datum.publisher_key + ': ' + datum.wins + ' wins / ' + datum.appearances + ' listed'",
+          "as": "box_line_one"
+        },
+        {
+          "calculate": "datum.lower_win_peer + ': ' + datum.fewest_wins_at_count + ' wins / ' + datum.appearances + ' listed'",
+          "as": "box_line_two"
+        }
+      ],
+      "encoding": {
+        "x": { "field": "display_appearances", "type": "quantitative", "axis": { "format": "d", "tickMinStep": 1 } },
+        "y": { "field": "wins", "type": "quantitative", "axis": { "format": "d", "tickMinStep": 1 } },
+        "tooltip": [
+          { "field": "publisher_key", "type": "nominal", "title": "Publisher" },
+          { "field": "appearances", "type": "quantitative", "title": "Books on lists", "format": "d" },
+          { "field": "wins", "type": "quantitative", "title": "Winners", "format": "d" }
+        ]
+      },
+      "layer": [
+        {
+          "mark": { "type": "circle", "size": 185, "opacity": 0.93, "stroke": "white", "strokeWidth": 1.5 },
+          "encoding": {
+            "color": {
+              "condition": [
+                { "test": "datum.highlight_role === 'Most listed' || datum.highlight_role === 'Ties most wins'", "value": "#40556B" },
+                { "test": "datum.highlight_role === 'Same count, more wins'", "value": "#2E7D4B" }
+              ],
+              "value": "#AEB9C0"
+            }
+          }
+        },
+        {
+          "transform": [{ "filter": "datum.highlight_role === 'Most listed'" }],
+          "mark": { "type": "text", "align": "right", "dx": -11, "dy": -12, "fontWeight": "bold", "fontSize": 12, "color": "#233441" },
+          "encoding": { "text": { "field": "publisher_key" } }
+        },
+        {
+          "transform": [{ "filter": "datum.highlight_role === 'Ties most wins'" }],
+          "mark": { "type": "text", "align": "left", "dx": 11, "dy": -12, "fontWeight": "bold", "fontSize": 12, "color": "#233441" },
+          "encoding": { "text": { "field": "publisher_key" } }
+        },
+        {
+          "transform": [{ "filter": "datum.highlight_role === 'Same count, more wins'" }],
+          "mark": { "type": "text", "align": "right", "dx": -11, "dy": -14, "fontWeight": "bold", "fontSize": 12, "color": "#2E7D4B" },
+          "encoding": { "text": { "field": "publisher_key" } }
+        },
+        {
+          "transform": [{ "filter": "datum.highlight_role === 'Same count, more wins'" }],
+          "mark": { "type": "rect", "fill": "#F5F8F6", "stroke": "#D8E5DD", "cornerRadius": 3 },
+          "encoding": {
+            "x": { "field": "box_left", "type": "quantitative" },
+            "x2": { "field": "box_right" },
+            "y": { "field": "box_top", "type": "quantitative" },
+            "y2": { "field": "box_bottom" },
+            "tooltip": { "value": null }
+          }
+        },
+        {
+          "transform": [{ "filter": "datum.highlight_role === 'Same count, more wins'" }],
+          "mark": { "type": "text", "align": "left", "baseline": "middle", "fontWeight": "bold", "fontSize": 12, "color": "#233441" },
+          "encoding": {
+            "x": { "field": "box_text_x", "type": "quantitative" },
+            "y": { "field": "box_heading_y", "type": "quantitative" },
+            "text": { "value": "Same appearances, different wins" },
+            "tooltip": { "value": null }
+          }
+        },
+        {
+          "transform": [{ "filter": "datum.highlight_role === 'Same count, more wins'" }],
+          "mark": { "type": "text", "align": "left", "baseline": "middle", "fontSize": 11, "color": "#394953" },
+          "encoding": {
+            "x": { "field": "box_text_x", "type": "quantitative" },
+            "y": { "field": "box_line_one_y", "type": "quantitative" },
+            "text": { "field": "box_line_one" },
+            "tooltip": { "value": null }
+          }
+        },
+        {
+          "transform": [{ "filter": "datum.highlight_role === 'Same count, more wins'" }],
+          "mark": { "type": "text", "align": "left", "baseline": "middle", "fontSize": 11, "color": "#394953" },
+          "encoding": {
+            "x": { "field": "box_text_x", "type": "quantitative" },
+            "y": { "field": "box_line_two_y", "type": "quantitative" },
+            "text": { "field": "box_line_two" },
+            "tooltip": { "value": null }
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": { "scale": { "x": "shared", "y": "shared" } },
+  "config": {
+    "view": { "stroke": null },
+    "axis": {
+      "labelFont": "Arial", "titleFont": "Arial", "labelColor": "#3c4c56",
+      "titleColor": "#3c4c56", "labelFontSize": 12, "titleFontSize": 12
+    }
+  }
+}

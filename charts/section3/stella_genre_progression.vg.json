@@ -1,0 +1,279 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Flow of Stella Prize books from the longlist to the shortlist and winner, by grouped genre, 2024–2026.",
+  "width": 800,
+  "height": 390,
+  "padding": {
+    "left": 18,
+    "right": 18,
+    "top": 12,
+    "bottom": 55
+  },
+  "autosize": "pad",
+  "background": "#ffffff",
+  "signals": [
+    { "name": "nodeWidth", "value": 22 }
+  ],
+  "data": [
+    {
+      "name": "books",
+      "url": "data/stella_2024_2026.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        {
+          "type": "formula",
+          "as": "genre_group",
+          "expr": "datum.genre === 'Fiction' ? 'Fiction' : datum.genre === 'Poetry' ? 'Poetry' : datum.genre === 'Graphic Novel' ? 'Graphic novel' : 'Non-fiction / memoir'"
+        },
+        { "type": "formula", "as": "longlist", "expr": "1" },
+        {
+          "type": "formula",
+          "as": "shortlist",
+          "expr": "datum.outcome === 'longlisted' ? 0 : 1"
+        },
+        {
+          "type": "formula",
+          "as": "winner",
+          "expr": "datum.outcome === 'winner' ? 1 : 0"
+        }
+      ]
+    },
+    {
+      "name": "stageCounts",
+      "source": "books",
+      "transform": [
+        {
+          "type": "fold",
+          "fields": ["longlist", "shortlist", "winner"],
+          "as": ["stage", "reached"]
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["stage", "genre_group"],
+          "fields": ["reached"],
+          "ops": ["sum"],
+          "as": ["books"]
+        }
+      ]
+    },
+    {
+      "name": "stageTotals",
+      "source": "stageCounts",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["stage"],
+          "fields": ["books"],
+          "ops": ["sum"],
+          "as": ["total"]
+        },
+        {
+          "type": "joinaggregate",
+          "fields": ["total"],
+          "ops": ["max"],
+          "as": ["maxTotal"]
+        },
+        {
+          "type": "formula",
+          "as": "heading",
+          "expr": "(datum.stage === 'longlist' ? 'LONGLIST' : datum.stage === 'shortlist' ? 'SHORTLIST' : 'WINNERS') + '  ·  ' + datum.total"
+        }
+      ]
+    },
+    {
+      "name": "nodes",
+      "source": "stageCounts",
+      "transform": [
+        {
+          "type": "stack",
+          "groupby": ["stage"],
+          "field": "books",
+          "sort": {
+            "field": "genre_group",
+            "order": "ascending"
+          },
+          "as": ["y0", "y1"]
+        },
+        {
+          "type": "lookup",
+          "from": "stageTotals",
+          "key": "stage",
+          "fields": ["stage"],
+          "values": ["total", "maxTotal"],
+          "as": ["stageTotal", "maxTotal"]
+        },
+        {
+          "type": "formula",
+          "as": "top",
+          "expr": "datum.y0 + (datum.maxTotal - datum.stageTotal) / 2"
+        },
+        {
+          "type": "formula",
+          "as": "bottom",
+          "expr": "datum.y1 + (datum.maxTotal - datum.stageTotal) / 2"
+        },
+        {
+          "type": "formula",
+          "as": "nodeKey",
+          "expr": "datum.stage + '|' + datum.genre_group"
+        }
+      ]
+    },
+    {
+      "name": "links",
+      "source": "nodes",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.stage !== 'winner'"
+        },
+        {
+          "type": "formula",
+          "as": "nextStage",
+          "expr": "datum.stage === 'longlist' ? 'shortlist' : 'winner'"
+        },
+        {
+          "type": "formula",
+          "as": "nextKey",
+          "expr": "datum.nextStage + '|' + datum.genre_group"
+        },
+        {
+          "type": "lookup",
+          "from": "nodes",
+          "key": "nodeKey",
+          "fields": ["nextKey"],
+          "values": ["top", "bottom", "books"],
+          "as": ["targetTop", "targetBottom", "survivors"]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.survivors > 0"
+        },
+        {
+          "type": "formula",
+          "as": "sourceBottom",
+          "expr": "datum.top + datum.survivors"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "stageX",
+      "type": "point",
+      "domain": ["longlist", "shortlist", "winner"],
+      "range": [74, 605]
+    },
+    {
+      "name": "booksY",
+      "type": "linear",
+      "domain": {
+        "data": "stageTotals",
+        "field": "maxTotal"
+      },
+      "zero": true,
+      "nice": false,
+      "range": [55, 352]
+    },
+    {
+      "name": "genreColour",
+      "type": "ordinal",
+      "domain": {
+        "data": "nodes",
+        "field": "genre_group",
+        "sort": true
+      },
+      "range": ["#0072B2", "#E69F00", "#4D4D4D", "#56B4E9"]
+    }
+  ],
+  "legends": [
+    {
+      "fill": "genreColour",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "title": null,
+      "symbolType": "square",
+      "symbolSize": 115,
+      "labelFont": "Arial",
+      "labelFontSize": 11,
+      "labelColor": "#3c4c56",
+      "columns": 2,
+      "offset": 10
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "from": { "data": "links" },
+      "encode": {
+        "update": {
+          "path": {
+            "signal": "'M' + (scale('stageX', datum.stage) + nodeWidth/2) + ',' + scale('booksY', datum.top) + ' C' + ((scale('stageX', datum.stage) + scale('stageX', datum.nextStage))/2) + ',' + scale('booksY', datum.top) + ' ' + ((scale('stageX', datum.stage) + scale('stageX', datum.nextStage))/2) + ',' + scale('booksY', datum.targetTop) + ' ' + (scale('stageX', datum.nextStage) - nodeWidth/2) + ',' + scale('booksY', datum.targetTop) + ' L' + (scale('stageX', datum.nextStage) - nodeWidth/2) + ',' + scale('booksY', datum.targetBottom) + ' C' + ((scale('stageX', datum.stage) + scale('stageX', datum.nextStage))/2) + ',' + scale('booksY', datum.targetBottom) + ' ' + ((scale('stageX', datum.stage) + scale('stageX', datum.nextStage))/2) + ',' + scale('booksY', datum.sourceBottom) + ' ' + (scale('stageX', datum.stage) + nodeWidth/2) + ',' + scale('booksY', datum.sourceBottom) + ' Z'"
+          },
+          "fill": {
+            "scale": "genreColour",
+            "field": "genre_group"
+          },
+          "fillOpacity": { "value": 0.66 },
+          "tooltip": {
+            "signal": "datum.genre_group + ': ' + datum.survivors + ' books reached ' + datum.nextStage + ' from ' + datum.stage"
+          }
+        },
+        "hover": {
+          "fillOpacity": { "value": 0.95 }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": { "data": "nodes" },
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "scale('stageX', datum.stage) - nodeWidth/2"
+          },
+          "x2": {
+            "signal": "scale('stageX', datum.stage) + nodeWidth/2"
+          },
+          "y": {
+            "scale": "booksY",
+            "field": "top"
+          },
+          "y2": {
+            "scale": "booksY",
+            "field": "bottom"
+          },
+          "fill": {
+            "scale": "genreColour",
+            "field": "genre_group"
+          },
+          "stroke": { "value": "#ffffff" },
+          "strokeWidth": { "value": 1 },
+          "tooltip": {
+            "signal": "datum.genre_group + ' • ' + datum.books + ' books at ' + datum.stage + ' (' + datum.stageTotal + ' total)'"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "stageTotals" },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "stageX",
+            "field": "stage"
+          },
+          "y": { "value": 22 },
+          "align": { "value": "center" },
+          "baseline": { "value": "middle" },
+          "text": { "field": "heading" },
+          "font": { "value": "Arial" },
+          "fontSize": { "value": 12 },
+          "fontWeight": { "value": "bold" },
+          "fill": { "value": "#233441" }
+        }
+      }
+    }
+  ]
+}
