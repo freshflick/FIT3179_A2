@@ -301,7 +301,7 @@
     ['#publisher-office-map', 'charts/section4/publisher_office_map.vl.json?v=1']
   ];
   charts.forEach(([target, spec]) => {
-    vegaEmbed(target, spec, { actions: false }).catch(error => {
+    vegaEmbed(target, spec, { actions: true }).catch(error => {
       console.error(error);
       document.querySelector(target).textContent =
               'Chart unavailable. Check the browser console and local server.';
