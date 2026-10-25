@@ -98,7 +98,7 @@
           "title": "Books on list",
           "scale": {
             "domain": [0, 6],
-            "range": ["#f5f1f7", "#63336f"]
+            "range": ["#fff1ef", "#a53e59"]
           },
           "legend": {
             "orient": "bottom",
@@ -123,7 +123,7 @@
         },
         "color": {
           "condition": {
-            "test": "datum.books >= 4",
+            "test": "datum.books >= 5",
             "value": "white"
           },
           "value": "#233441"

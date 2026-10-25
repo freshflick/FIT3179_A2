@@ -23,7 +23,7 @@
         {
           "type": "formula",
           "as": "genre_group",
-          "expr": "datum.genre === 'Fiction' ? 'Fiction' : datum.genre === 'Poetry' ? 'Poetry' : datum.genre === 'Graphic Novel' ? 'Graphic novel' : 'Non-fiction / memoir'"
+          "expr": "datum.genre === 'Fiction' ? 'Fiction' : datum.genre === 'Poetry' ? 'Poetry' : datum.genre === 'Graphic Novel' ? 'Graphic novel' : 'Non-fiction & memoir'"
         },
         { "type": "formula", "as": "longlist", "expr": "1" },
         {
@@ -178,12 +178,8 @@
     {
       "name": "genreColour",
       "type": "ordinal",
-      "domain": {
-        "data": "nodes",
-        "field": "genre_group",
-        "sort": true
-      },
-      "range": ["#0072B2", "#E69F00", "#4D4D4D", "#56B4E9"]
+      "domain": ["Fiction", "Non-fiction & memoir", "Poetry", "Graphic novel"],
+      "range": ["#63336f", "#9584bf", "#d78e64", "#648b97"]
     }
   ],
   "legends": [

@@ -5,6 +5,9 @@
   "height": 430,
   "background": "#ffffff",
   "projection": {"type": "azimuthalEqualArea", "rotate": [-134, 25]},
+  "params": [
+    {"name": "minimumSites", "value": 1, "bind": {"input": "range", "min": 1, "max": 50, "step": 1, "name": "Minimum libraries per cell: "}}
+  ],
   "layer": [
     {
       "data": {"url": "data/abs_states_2021.geojson", "format": {"type": "json", "property": "features"}},
@@ -12,12 +15,15 @@
     },
     {
       "data": {"url": "data/public_library_hex_bins_2018.geojson", "format": {"type": "json", "property": "features"}},
-      "transform": [{"calculate": "datum.properties.libraries", "as": "libraries"}],
+      "transform": [
+        {"calculate": "datum.properties.libraries", "as": "libraries"},
+        {"filter": "datum.libraries >= minimumSites"}
+      ],
       "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.65, "opacity": 0.98},
       "encoding": {
         "color": {
           "field": "libraries", "type": "quantitative", "title": "Public libraries per bin",
-          "scale": {"type": "threshold", "domain": [2, 5, 15, 50], "range": ["#dbeae9", "#aacfd0", "#6ca9b3", "#2d768d", "#124b68"]},
+          "scale": {"type": "threshold", "domain": [2, 5, 15, 50], "range": ["#edf4e7", "#bfdcb9", "#82bd91", "#3d9775", "#176552"]},
           "legend": {"orient": "bottom", "direction": "horizontal", "labelExpr": "datum.label == '≥50' ? '50+' : datum.label"}
         },
         "tooltip": [

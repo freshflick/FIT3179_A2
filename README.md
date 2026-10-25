@@ -23,3 +23,7 @@ Run `python3 -m http.server 8000` in this folder, then open `http://localhost:80
 - [Carl Higgs, Australian public lending library locations (2016–2018), RMIT University](https://doi.org/10.25439/rmt.21944840.v1). The library map is explicitly a historical comparison. Its adapted files retain the [CC BY-SA 4.0 licence](data/LICENSE_public_libraries.md).
 
 The maps locate documented publisher office metro areas and historically recorded public libraries. They do not locate authors or book settings, trace book movements, or identify which award titles libraries held.
+
+## Visual encodings
+
+The heatmap uses a rose scale for publisher-by-category counts; the state map uses copper for winning-book counts; the library map uses green for recorded-site density. Stella genre groups keep the same categorical colours in the year grids and the longlist-to-winner flow. The library slider filters cells by their recorded-site count without changing the source data. A geographic flow map is not used because these sources do not establish book movements between places.

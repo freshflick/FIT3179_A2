@@ -23,7 +23,7 @@
         "color": {
           "condition": {"test": "datum.listed_books == 0", "value": "#e8eceb"},
           "field": "winning_books", "type": "quantitative", "title": "Winning books",
-          "scale": {"domain": [0, 8], "range": ["#d9e8ee", "#0e5870"]},
+          "scale": {"domain": [0, 8], "range": ["#f7eadb", "#a34d2b"]},
           "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 220, "tickCount": 5}
         },
         "tooltip": [
