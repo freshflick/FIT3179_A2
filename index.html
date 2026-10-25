@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -142,15 +142,15 @@
     </div>
     <p class="section-lead">A publisher prominent in one prize may have a much smaller share of another. Stella’s three longlists also show a changing genre mix.</p>
     <div class="chart-block">
-      <h3>Publisher shares diverge between the prizes</h3>
-      <p class="chart-intro">Share of listed books by publisher · Prime Minister’s Literary Awards and Stella Prize, 2024–2026</p>
+      <h3>Which publishers have the largest gap between prizes?</h3>
+      <p class="chart-intro">Each line connects one publisher’s share of the Prime Minister’s and Stella lists · 2024–2026</p>
       <div id="award-comparison-chart" class="chart dot-chart" role="img" aria-label="Connected dot plot comparing each publisher’s share of the two award lists"></div>
       <div class="chart-text-grid">
         <aside class="chart-explanation" aria-label="Award comparison finding">
-          <h4>The leaders reverse</h4>
-          <p>Allen &amp; Unwin holds 20% of the Prime Minister’s list but 5.6% of Stella’s. Giramondo holds 6.7% and 13.9%, respectively.</p>
+          <h4>The largest gap favours Allen &amp; Unwin</h4>
+          <p>Its 18 Prime Minister’s entries make up 20% of that list, versus two Stella entries (5.6%). Giramondo moves the other way: 6.7% and 13.9%, respectively.</p>
         </aside>
-        <p class="chart-context">Publishers shown have at least four appearances combined. Shares use 90 Prime Minister’s shortlisted or winning books and 36 Stella longlisted books.</p>
+        <p class="chart-context">Longer lines mean a larger difference between prizes. Rows are sorted by that difference. Publishers shown have at least four appearances combined; the shares use 90 Prime Minister’s and 36 Stella books.</p>
       </div>
     </div>
 
@@ -190,7 +190,7 @@
     </div>
 
     <div class="chart-block">
-      <h3>Which genres make it from Stella’s longlist to the winner?</h3>
+      <h3>How many Stella books reach each prize stage?</h3>
       <p class="chart-intro">
         Books reaching each prize stage, grouped by genre · Stella Prize, 2024–2026
       </p>
@@ -201,8 +201,8 @@
 
       <div class="chart-text-grid">
         <aside class="chart-explanation">
-          <h4>Three winners emerge from 36 longlisted books</h4>
-          <p>Eighteen reached the shortlist. Fiction supplies two of the three winners; the other is a graphic novel.</p>
+          <h4>Half advance once; three win</h4>
+          <p>Eighteen of 36 longlisted books reach the shortlist, then three of those 18 win. Fiction supplies two winners; the other is a graphic novel.</p>
         </aside>
         <p class="chart-context">
           Ribbon width represents books that reached the next stage. Books that did not advance end at their last stage. Genre labels are grouped for comparison rather than official Stella categories.
@@ -349,10 +349,10 @@
   const charts = [
     ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=5'],
     ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=3'],
-    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=2'],
+    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=3'],
     ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json'],
-    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=2'],
+    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=3'],
     ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json'],
     ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=1'],
     ['#publisher-office-map', 'charts/section4/publisher_office_map.vl.json?v=2'],
