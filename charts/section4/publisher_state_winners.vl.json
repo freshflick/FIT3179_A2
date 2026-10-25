@@ -1,0 +1,35 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "ABS 2021 state boundaries shaded by winning PMLA books associated with the documented office states of the ten most represented publishers, 2024–2026.",
+  "width": "container",
+  "height": 430,
+  "background": "#ffffff",
+  "projection": {"type": "mercator"},
+  "data": {"url": "data/abs_states_2021.geojson", "format": {"type": "json", "property": "features"}},
+  "transform": [
+    {
+      "lookup": "properties.state",
+      "from": {
+        "data": {"url": "data/publisher_office_state_summary.csv"},
+        "key": "state_name",
+        "fields": ["listed_books", "winning_books", "winner_share_pct"]
+      }
+    }
+  ],
+  "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.7},
+  "encoding": {
+    "color": {
+      "condition": {"test": "datum.listed_books == 0", "value": "#e8eceb"},
+      "field": "winning_books", "type": "quantitative", "title": "Winning books",
+      "scale": {"domain": [0, 8], "range": ["#d9e8ee", "#0e5870"]},
+      "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 220, "tickCount": 5}
+    },
+    "tooltip": [
+      {"field": "properties.state", "type": "nominal", "title": "Publisher office state"},
+      {"field": "winning_books", "type": "quantitative", "title": "Winning books"},
+      {"field": "listed_books", "type": "quantitative", "title": "Listed books"},
+      {"field": "winner_share_pct", "type": "quantitative", "title": "Winner share (%)", "format": ".1f"}
+    ]
+  },
+  "config": {"view": {"stroke": null}, "legend": {"labelFont": "Arial", "titleFont": "Arial"}}
+}
