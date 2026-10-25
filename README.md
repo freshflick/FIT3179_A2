@@ -1,30 +1,25 @@
-# Australian Literary Awards starter
+# Behind Australia's literary shortlists
 
-This is a small starting point for FIT3179 Data Visualisation 2. It is **not** the completed assignment: it has one chart and no maps yet. The full submission needs at least ten charts, three distinct map idioms, meaningful advanced idioms, and the story sections in your sketch.
+A FIT3179 Data Visualisation 2 dashboard about publisher visibility in the 2024–2026 Prime Minister’s Literary Awards and Stella Prize lists. The page contains eleven Vega and Vega-Lite charts, including three geographic views.
 
-## Open it in VS Code
+## View locally
 
-1. Unzip the project and open the `literary-awards-starter` folder in VS Code (`File > Open Folder`).
-2. In VS Code, select `Terminal > New Terminal`.
-3. Run `python3 -m http.server 8000` from this folder.
-4. Visit `http://localhost:8000/` in a browser. Stop the server with `Ctrl+C` in the terminal.
-
-The web server is necessary because the chart loads a local JSON spec and CSV file. You do not need npm or React.
+Run `python3 -m http.server 8000` in this folder, then open `http://localhost:8000/`. A local web server is needed because the specifications load CSV and GeoJSON files. The published dashboard is at [freshflick.github.io/FIT3179_A2](https://freshflick.github.io/FIT3179_A2/).
 
 ## Files
 
-- `index.html`: page layout and one `vegaEmbed` call, adapted from the FIT3179 teaching example.
-- `css/styles.css`: responsive page styling.
-- `charts/publisher_counts.vg.json`: human-readable Vega-Lite chart specification.
-- `data/pmla_2024_2026.csv`: 90 shortlisted or winning books, 2024–2026.
-- `data/stella_2024_2026.csv`: 36 longlisted, shortlisted or winning books, 2024–2026.
-- `data/miles_franklin_2022_titles.csv`: 88 titles in the State Library of NSW 2022 Miles Franklin list, all published in 2021. This file has no outcome field; do not treat it as a shortlist.
+- `index.html`: story text, chart containers, and the `vegaEmbed` calls that load each JSON specification with the chart action menu enabled.
+- `css/styles.css`: responsive layout and chart cards.
+- `charts/section1`–`charts/section4`: all Vega and Vega-Lite chart specifications. The first three section folders contain the non-map charts; the fourth contains the three maps.
+- `data/`: award tables, publisher office references, simplified official state outlines, and a prepared historical public-library location table and hex grid.
+- `data/map_methodology.md`: geographic sources, count method, and limitations.
+- `scripts/build_geography.py` and `scripts/build_library_map.py`: reproducible state and hex-grid preparation.
 
-## Data and template sources
+## Data sources
 
-- Prime Minister’s Literary Awards: https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards
-- Stella Prize: https://stella.org.au/past-prize-winners/
-- State Library of NSW Miles Franklin 2022 list: https://content-lists.sl.nsw.gov.au/tabular-list/miles-franklin-literary-award-2022
-- Course template: https://github.com/FIT3179/Vega-Lite/tree/main/5_multiple_charts_html
+- [Creative Australia, Prime Minister’s Literary Awards](https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards), 2024–2026; individual book source links are in `data/pmla_2024_2026.csv`.
+- [Stella Prize](https://stella.org.au/prize/), 2024–2026.
+- [Australian Bureau of Statistics ASGS 2021 state boundaries](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files).
+- [Carl Higgs, Australian public lending library locations (2016–2018), RMIT University](https://doi.org/10.25439/rmt.21944840.v1). The library map is explicitly a historical comparison. Its adapted files retain the [CC BY-SA 4.0 licence](data/LICENSE_public_libraries.md).
 
-When publishing your final work, add your own authorship/date and acknowledge AI assistance in your submission as required by the spec.
+The maps locate documented publisher office metro areas and historically recorded public libraries. They do not locate authors or book settings, trace book movements, or identify which award titles libraries held.

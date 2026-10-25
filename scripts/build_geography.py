@@ -1,4 +1,4 @@
-"""Rebuild the two map tables and simplified ABS state boundaries.
+"""Rebuild the publisher-office state table and simplified ABS boundaries.
 
 Download the ABS GDA2020 2021 States and Territories shapefile ZIP from
 https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files
@@ -178,56 +178,10 @@ def point_in_ring(lon, lat, ring):
     return inside
 
 
-def hex_bins(city_year):
-    states = json.loads((DATA / "abs_states_2021.geojson").read_text())["features"]
-    rings = [polygon[0] for state in states for polygon in state["geometry"]["coordinates"]]
-    projected = [project(lon, lat) for ring in rings for lon, lat in ring]
-    xs, ys = [p[0] for p in projected], [p[1] for p in projected]
-    occupied = {}
-    for (lon, lat, city, year), count in city_year.items():
-        q, r = hex_cell(lon, lat)
-        entry = occupied.setdefault((q, r), {"cities": set(), "counts": Counter()})
-        entry["cities"].add(city)
-        entry["counts"][year] += count
-    features = []
-    q_min, q_max = math.floor(min(xs) / (1.5 * HEX_RADIUS_KM)) - 1, math.ceil(max(xs) / (1.5 * HEX_RADIUS_KM)) + 1
-    r_min, r_max = -25, 25
-    for q in range(q_min, q_max + 1):
-        for r in range(r_min, r_max + 1):
-            cx, cy = cell_centre(q, r)
-            if not (min(ys) - HEX_RADIUS_KM <= cy <= max(ys) + HEX_RADIUS_KM):
-                continue
-            lon, lat = unproject(cx, cy)
-            is_land = any(point_in_ring(lon, lat, ring) for ring in rings)
-            if not is_land and (q, r) not in occupied:
-                continue
-            entry = occupied.get((q, r), {"cities": set(), "counts": Counter()})
-            vertices = []
-            for i in range(6, -1, -1):
-                angle = math.radians(i * 60)
-                vx = cx + HEX_RADIUS_KM * math.cos(angle)
-                vy = cy + HEX_RADIUS_KM * math.sin(angle)
-                vertices.append([round(value, 5) for value in unproject(vx, vy)])
-            counts = entry["counts"]
-            features.append({
-                "type": "Feature",
-                "properties": {
-                    "hex_id": f"{q}:{r}", "office_metros": ", ".join(sorted(entry["cities"])),
-                    "centre_lon": round(lon, 5), "centre_lat": round(lat, 5),
-                    "y2024": counts["2024"], "y2025": counts["2025"], "y2026": counts["2026"]
-                },
-                "geometry": {"type": "Polygon", "coordinates": [vertices]}
-            })
-    assert sum(f["properties"]["y2024"] + f["properties"]["y2025"]
-               + f["properties"]["y2026"] for f in features) == 65
-    (DATA / "publisher_office_hex_year.geojson").write_text(
-        json.dumps({"type": "FeatureCollection", "features": features}, separators=(",", ":")) + "\n")
-
-
 def counts():
     offices = {row["publisher_key"]: row for row in csv.DictReader(
         (DATA / "publisher_office_locations_top10.csv").open())}
-    listed, wins, by_year, city_year = Counter(), Counter(), Counter(), Counter()
+    listed, wins = Counter(), Counter()
     for row in csv.DictReader((DATA / "pmla_2024_2026.csv").open()):
         office = offices.get(row["publisher_key"])
         if not office:
@@ -235,9 +189,6 @@ def counts():
         state = office["state"]
         listed[state] += 1
         wins[state] += row["outcome"].strip().lower() == "winner"
-        by_year[(state, row["award_year"])] += 1
-        city_year[(float(office["longitude"]), float(office["latitude"]),
-                   office["map_city"], row["award_year"])] += 1
     assert sum(listed.values()) == 65
     with (DATA / "publisher_office_state_summary.csv").open("w", newline="") as f:
         writer = csv.writer(f, lineterminator="\n")
@@ -245,7 +196,6 @@ def counts():
         for state, name in STATE_NAMES.items():
             n = listed[state]
             writer.writerow([state, name, n, wins[state], round(100 * wins[state] / n, 1) if n else ""])
-    hex_bins(city_year)
 
 
 if __name__ == "__main__":

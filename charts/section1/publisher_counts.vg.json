@@ -3,7 +3,7 @@
   "description": "Publishers with at least three appearances among 2024–2026 Prime Minister's Literary Awards shortlisted and winning books.",
   "data": { "url": "data/pmla_2024_2026.csv" },
   "width": "container",
-  "height": 330,
+  "height": 390,
   "autosize": { "type": "fit-x", "contains": "padding", "resize": true },
   "transform": [
     {
@@ -36,7 +36,7 @@
       "field": "publisher_key",
       "type": "nominal",
       "title": null,
-      "sort": "-x",
+      "sort": { "field": "publisher_rank", "op": "min", "order": "ascending" },
       "axis": { "labelLimit": 350, "tickSize": 0, "domain": false }
     },
     "tooltip": [
@@ -51,9 +51,9 @@
         "color": {
           "condition": {
             "test": "datum.publisher_key === 'Allen & Unwin'",
-            "value": "#c65d21"
+            "value": "#b6813e"
           },
-          "value": "#aab5bb"
+          "value": "#79a1ad"
         }
       }
     },

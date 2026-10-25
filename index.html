@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=6">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -99,8 +99,8 @@
 
   <section class="story-section" aria-labelledby="landscape-heading">
     <div class="section-heading">
-      <p class="section-number">01 / The award landscape</p>
-      <h2 id="landscape-heading">Prime Minister’s Literary Awards</h2>
+      <p class="section-number">01 / Prime Minister’s Literary Awards</p>
+      <h2 id="landscape-heading">A small group dominates the lists</h2>
     </div>
     <p class="section-lead">The 2024–2026 Prime Minister’s Literary Awards data contains 90 shortlisted or winning books across six categories. These charts examine which publishers are represented in that selection.</p>
 
@@ -266,12 +266,11 @@
       <h2 id="geography-heading">Where are the publishers behind the lists?</h2>
     </div>
     <p class="section-lead">
-      Follow the ten most represented publishers from their documented offices to
-      their award-list appearances and wins. These maps locate publishers, not authors or book settings.
+      The award publishers cluster in a few cities. Compare their documented offices and
+      wins with a wider historical snapshot of Australia’s public library network.
     </p>
 
     <div class="chart-block map-card map-primary">
-      <p class="map-kicker">MAP 01 · PROPORTIONAL SYMBOL</p>
       <h3>Most appearances cluster in Sydney and Melbourne</h3>
       <p class="chart-intro">
         Office metro areas of the ten most represented publishers ·
@@ -301,7 +300,6 @@
 
     <div class="map-pair" aria-label="State map comparison">
       <article class="map-card">
-        <p class="map-kicker">MAP 02 · CHOROPLETH</p>
         <h3>Where are the winners’ publishers based?</h3>
         <p class="chart-intro">Winners from the ten most represented publishers · 2024–2026</p>
         <div id="publisher-state-winners-map" class="chart full-width-chart map-visual"
@@ -313,19 +311,18 @@
       </article>
 
       <article class="map-card">
-        <p class="map-kicker">MAP 03 · HEXAGONAL BIN MAP</p>
-        <h3>How do office clusters change by year?</h3>
-        <p class="chart-intro">Listed books in equal-area geographic bins · move the year slider</p>
+        <h3>Public libraries reach beyond the award hubs</h3>
+        <p class="chart-intro">1,440 recorded public library locations, 2016–2018 · each shaded area counts sites within a 115 km radius grid cell</p>
         <div id="publisher-hex-map" class="chart map-visual"
-             role="img" aria-label="Interactive hexagonal bin map of books listed by publisher office location and award year"></div>
+             role="img" aria-label="Map of 1,440 historical Australian public library locations grouped into equal-area hexagonal cells, with publisher office metro locations marked in orange"></div>
         <aside class="chart-explanation map-insight">
-          <h4>Melbourne’s bin doubles</h4>
-          <p>Listed books linked to Melbourne offices rise from four in 2024 to eight in 2026. Each hex is a regular 170 km radius area; only documented office coordinates supply counts.</p>
+          <h4>Reading spaces are more dispersed</h4>
+          <p>The historical archive records 375 sites in NSW and 328 in Queensland, together 703 of the 1,440 mapped libraries. Orange dots mark the four metro areas used for the publisher offices. The library records do not identify award-book holdings.</p>
         </aside>
       </article>
     </div>
 
-    <p class="geography-source">Map counts come from the <a href="data/pmla_2024_2026.csv">PMLA book table</a> joined to <a href="data/publisher_office_locations_top10.csv">documented publisher offices</a>. State boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. <a href="data/map_methodology.md">Read the mapping method and limitations</a>.</p>
+    <p class="geography-source">Award geography uses the <a href="data/pmla_2024_2026.csv">PMLA book table</a> and <a href="data/publisher_office_locations_top10.csv">documented publisher offices</a>. Library locations: <a href="https://research-repository.rmit.edu.au/articles/dataset/Australian_public_lending_library_locations_2016-2018_/21944840">Carl Higgs, RMIT University, 2016–2018</a>. State boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. <a href="data/map_methodology.md">Mapping method and limitations</a>.</p>
   </section>
 
   <footer>
@@ -338,7 +335,7 @@
       <div class="footer-panel">
         <h3>Sources and method</h3>
         <p>Book lists: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia</a> and the <a href="https://stella.org.au/prize/">Stella Prize</a>, 2024–2026. These lists represent selected books, not all Australian publishing.</p>
-        <p>Map geography: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">ABS boundaries</a> and <a href="data/publisher_office_locations_top10.csv">publisher office sources</a>. Chart specifications and prepared data are in the <a href="https://github.com/freshflick/FIT3179_A2/tree/shayan-dev/testing/charts">JSON folder</a>.</p>
+        <p>Map geography: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">ABS boundaries</a>, <a href="data/publisher_office_locations_top10.csv">publisher office sources</a>, and <a href="https://research-repository.rmit.edu.au/articles/dataset/Australian_public_lending_library_locations_2016-2018_/21944840">RMIT historical library locations</a>. Chart specifications and prepared data are in the <a href="https://github.com/freshflick/FIT3179_A2/tree/shayan-dev/testing/charts">JSON folder</a>.</p>
       </div>
     </div>
     <div class="footer-meta">
@@ -350,17 +347,17 @@
 
 <script>
   const charts = [
-    ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=3'],
-    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json'],
-    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json'],
+    ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=5'],
+    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=2'],
+    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=2'],
     ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json'],
     ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json'],
     ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json'],
     ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=1'],
-    ['#publisher-office-map', 'charts/section4/publisher_office_map.vl.json?v=1'],
-    ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=1'],
-    ['#publisher-hex-map', 'charts/section4/publisher_office_hex_bins.vl.json?v=1']
+    ['#publisher-office-map', 'charts/section4/publisher_office_map.vl.json?v=2'],
+    ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=2'],
+    ['#publisher-hex-map', 'charts/section4/public_library_hex_bins.vl.json?v=1']
   ];
   charts.forEach(([target, spec]) => {
     vegaEmbed(target, spec, { actions: true }).catch(error => {
