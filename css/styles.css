@@ -282,14 +282,6 @@ body {
 }
 .map-visual { min-height: 0; }
 .map-visual .vega-embed { width: 100%; }
-.tile-map-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 640px) minmax(210px, 1fr);
-    align-items: center;
-    gap: 32px;
-}
-.tile-map { min-width: 0; }
-.tile-map-explanation { max-width: 330px; }
 .geography-source {
     max-width: 90ch;
     margin-top: 20px;
@@ -301,8 +293,6 @@ footer { padding-top: 24px; }
 @media (max-width: 800px) {
     .site-nav { align-items: start; padding: 14px 0; }
     .site-nav-links { justify-content: flex-end; gap: 10px 16px; }
-    .tile-map-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-    .tile-map-explanation { max-width: 70ch; }
 }
 @media (max-width: 600px) {
     .site-nav { display: block; }

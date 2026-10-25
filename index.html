@@ -313,14 +313,14 @@
       </article>
 
       <article class="map-card">
-        <p class="map-kicker">MAP 03 · STATE TILE MAP</p>
-        <h3>Does that concentration change by year?</h3>
-        <p class="chart-intro">Listed books from the same publishers · move the year slider</p>
-        <div id="publisher-state-year-map" class="chart map-visual tile-map"
-             role="img" aria-label="Interactive state tile map of books listed by publisher office state and award year"></div>
+        <p class="map-kicker">MAP 03 · HEXAGONAL BIN MAP</p>
+        <h3>How do office clusters change by year?</h3>
+        <p class="chart-intro">Listed books in equal-area geographic bins · move the year slider</p>
+        <div id="publisher-hex-map" class="chart map-visual"
+             role="img" aria-label="Interactive hexagonal bin map of books listed by publisher office location and award year"></div>
         <aside class="chart-explanation map-insight">
-          <h4>Victoria rises from four to eight</h4>
-          <p>Books linked to Victorian offices double between 2024 and 2026. Tiles show states schematically, so equal tile sizes do not mean equal land area.</p>
+          <h4>Melbourne’s bin doubles</h4>
+          <p>Listed books linked to Melbourne offices rise from four in 2024 to eight in 2026. Each hex is a regular 170 km radius area; only documented office coordinates supply counts.</p>
         </aside>
       </article>
     </div>
@@ -360,7 +360,7 @@
     ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=1'],
     ['#publisher-office-map', 'charts/section4/publisher_office_map.vl.json?v=1'],
     ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=1'],
-    ['#publisher-state-year-map', 'charts/section4/publisher_state_year_tiles.vl.json?v=1']
+    ['#publisher-hex-map', 'charts/section4/publisher_office_hex_bins.vl.json?v=1']
   ];
   charts.forEach(([target, spec]) => {
     vegaEmbed(target, spec, { actions: true }).catch(error => {

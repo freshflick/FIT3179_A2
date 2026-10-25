@@ -22,10 +22,9 @@ STATE_NAMES = {
     "SA": "South Australia", "WA": "Western Australia", "TAS": "Tasmania",
     "NT": "Northern Territory", "ACT": "Australian Capital Territory",
 }
-TILES = {
-    "WA": (0, 1), "NT": (1, 0), "SA": (1, 1), "QLD": (2, 0),
-    "NSW": (2, 1), "VIC": (2, 2), "TAS": (2, 3), "ACT": (3, 2),
-}
+EARTH_RADIUS_KM = 6371.0088
+CENTRE_LON, CENTRE_LAT = math.radians(134), math.radians(-25)
+HEX_RADIUS_KM = 170
 
 
 def read_dbf(data):
@@ -131,10 +130,104 @@ def boundaries(zip_path):
         json.dumps({"type": "FeatureCollection", "features": features}, separators=(",", ":")) + "\n")
 
 
+def project(lon, lat):
+    lam, phi = math.radians(lon), math.radians(lat)
+    delta = lam - CENTRE_LON
+    k = math.sqrt(2 / (1 + math.sin(CENTRE_LAT) * math.sin(phi)
+                       + math.cos(CENTRE_LAT) * math.cos(phi) * math.cos(delta)))
+    return (EARTH_RADIUS_KM * k * math.cos(phi) * math.sin(delta),
+            EARTH_RADIUS_KM * k * (math.cos(CENTRE_LAT) * math.sin(phi)
+                                - math.sin(CENTRE_LAT) * math.cos(phi) * math.cos(delta)))
+
+
+def unproject(x, y):
+    rho = math.hypot(x, y)
+    if rho == 0:
+        return math.degrees(CENTRE_LON), math.degrees(CENTRE_LAT)
+    c = 2 * math.asin(min(1, rho / (2 * EARTH_RADIUS_KM)))
+    phi = math.asin(math.cos(c) * math.sin(CENTRE_LAT)
+                    + y * math.sin(c) * math.cos(CENTRE_LAT) / rho)
+    lam = CENTRE_LON + math.atan2(x * math.sin(c),
+                                   rho * math.cos(CENTRE_LAT) * math.cos(c)
+                                   - y * math.sin(CENTRE_LAT) * math.sin(c))
+    return math.degrees(lam), math.degrees(phi)
+
+
+def hex_cell(lon, lat):
+    x, y = project(lon, lat)
+    q = (2 / 3 * x) / HEX_RADIUS_KM
+    r = (-x / 3 + math.sqrt(3) * y / 3) / HEX_RADIUS_KM
+    cube = [q, -q - r, r]
+    rounded = [round(value) for value in cube]
+    delta = [abs(a - b) for a, b in zip(cube, rounded)]
+    rounded[delta.index(max(delta))] = -sum(rounded[i] for i in range(3)
+                                             if i != delta.index(max(delta)))
+    return rounded[0], rounded[2]
+
+
+def cell_centre(q, r):
+    return (HEX_RADIUS_KM * 1.5 * q,
+            HEX_RADIUS_KM * math.sqrt(3) * (r + q / 2))
+
+
+def point_in_ring(lon, lat, ring):
+    inside = False
+    for (x1, y1), (x2, y2) in zip(ring, ring[1:]):
+        if (y1 > lat) != (y2 > lat) and lon < (x2 - x1) * (lat - y1) / (y2 - y1) + x1:
+            inside = not inside
+    return inside
+
+
+def hex_bins(city_year):
+    states = json.loads((DATA / "abs_states_2021.geojson").read_text())["features"]
+    rings = [polygon[0] for state in states for polygon in state["geometry"]["coordinates"]]
+    projected = [project(lon, lat) for ring in rings for lon, lat in ring]
+    xs, ys = [p[0] for p in projected], [p[1] for p in projected]
+    occupied = {}
+    for (lon, lat, city, year), count in city_year.items():
+        q, r = hex_cell(lon, lat)
+        entry = occupied.setdefault((q, r), {"cities": set(), "counts": Counter()})
+        entry["cities"].add(city)
+        entry["counts"][year] += count
+    features = []
+    q_min, q_max = math.floor(min(xs) / (1.5 * HEX_RADIUS_KM)) - 1, math.ceil(max(xs) / (1.5 * HEX_RADIUS_KM)) + 1
+    r_min, r_max = -25, 25
+    for q in range(q_min, q_max + 1):
+        for r in range(r_min, r_max + 1):
+            cx, cy = cell_centre(q, r)
+            if not (min(ys) - HEX_RADIUS_KM <= cy <= max(ys) + HEX_RADIUS_KM):
+                continue
+            lon, lat = unproject(cx, cy)
+            is_land = any(point_in_ring(lon, lat, ring) for ring in rings)
+            if not is_land and (q, r) not in occupied:
+                continue
+            entry = occupied.get((q, r), {"cities": set(), "counts": Counter()})
+            vertices = []
+            for i in range(6, -1, -1):
+                angle = math.radians(i * 60)
+                vx = cx + HEX_RADIUS_KM * math.cos(angle)
+                vy = cy + HEX_RADIUS_KM * math.sin(angle)
+                vertices.append([round(value, 5) for value in unproject(vx, vy)])
+            counts = entry["counts"]
+            features.append({
+                "type": "Feature",
+                "properties": {
+                    "hex_id": f"{q}:{r}", "office_metros": ", ".join(sorted(entry["cities"])),
+                    "centre_lon": round(lon, 5), "centre_lat": round(lat, 5),
+                    "y2024": counts["2024"], "y2025": counts["2025"], "y2026": counts["2026"]
+                },
+                "geometry": {"type": "Polygon", "coordinates": [vertices]}
+            })
+    assert sum(f["properties"]["y2024"] + f["properties"]["y2025"]
+               + f["properties"]["y2026"] for f in features) == 65
+    (DATA / "publisher_office_hex_year.geojson").write_text(
+        json.dumps({"type": "FeatureCollection", "features": features}, separators=(",", ":")) + "\n")
+
+
 def counts():
     offices = {row["publisher_key"]: row for row in csv.DictReader(
         (DATA / "publisher_office_locations_top10.csv").open())}
-    listed, wins, by_year = Counter(), Counter(), Counter()
+    listed, wins, by_year, city_year = Counter(), Counter(), Counter(), Counter()
     for row in csv.DictReader((DATA / "pmla_2024_2026.csv").open()):
         office = offices.get(row["publisher_key"])
         if not office:
@@ -143,6 +236,8 @@ def counts():
         listed[state] += 1
         wins[state] += row["outcome"].strip().lower() == "winner"
         by_year[(state, row["award_year"])] += 1
+        city_year[(float(office["longitude"]), float(office["latitude"]),
+                   office["map_city"], row["award_year"])] += 1
     assert sum(listed.values()) == 65
     with (DATA / "publisher_office_state_summary.csv").open("w", newline="") as f:
         writer = csv.writer(f, lineterminator="\n")
@@ -150,13 +245,7 @@ def counts():
         for state, name in STATE_NAMES.items():
             n = listed[state]
             writer.writerow([state, name, n, wins[state], round(100 * wins[state] / n, 1) if n else ""])
-    with (DATA / "publisher_office_state_year.csv").open("w", newline="") as f:
-        writer = csv.writer(f, lineterminator="\n")
-        writer.writerow(["year", "state", "state_name", "tile_x", "tile_y", "listed_books"])
-        for year in ("2024", "2025", "2026"):
-            for state, name in STATE_NAMES.items():
-                x, y = TILES[state]
-                writer.writerow([year, state, name, x, y, by_year[(state, year)]])
+    hex_bins(city_year)
 
 
 if __name__ == "__main__":
