@@ -57,6 +57,7 @@
           "scale": { "domain": [0, 0.22] },
           "axis": {
             "format": ".0%",
+            "values": [0, 0.05, 0.10, 0.15, 0.20],
             "grid": true,
             "gridColor": "#e8ecee",
             "tickSize": 0
@@ -92,6 +93,7 @@
           "scale": { "domain": [0, 0.22] },
           "axis": {
             "format": ".0%",
+            "values": [0, 0.05, 0.10, 0.15, 0.20],
             "grid": true,
             "gridColor": "#e8ecee",
             "tickSize": 0
@@ -106,7 +108,7 @@
               "Prime Minister’s Literary Awards",
               "Stella Prize"
             ],
-            "range": ["#d78e64", "#9584bf"]
+            "range": ["#ad6d37", "#7565a3"]
           },
           "legend": { "orient": "bottom" }
         },
