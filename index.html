@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=7">
+  <link rel="stylesheet" href="css/styles.css?v=8">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -102,36 +102,32 @@
       <p class="section-number">01 / Prime Minister’s Literary Awards</p>
       <h2 id="landscape-heading">A small group dominates the lists</h2>
     </div>
-    <p class="section-lead">Ten publishers account for 65 of the 90 books on the 2024–2026 Prime Minister’s Literary Awards lists. Their reach across the six categories varies sharply.</p>
+    <p class="section-lead"><strong class="emphasis-copper">Ten publishers hold 65 of 90 places</strong> on the 2024–2026 Prime Minister’s Literary Awards lists. Visibility is concentrated, but the publishers do not reach the same categories.</p>
 
+    <div class="chart-pair">
     <div class="chart-block">
-      <h3>Which publishers appear the most often?</h3>
+      <h3>A clear leader in appearances</h3>
       <p class="chart-intro">Books on the award lists, ranked by publisher · 2024–2026</p>
 
-      <div class="publisher-layout">
         <div id="publisher-chart" class="chart" role="img"
              aria-label="Bar chart of publishers ordered by number of books on the award lists"></div>
 
-        <aside class="chart-explanation" aria-label="Publisher chart interpretation">
-          <h4>Allen &amp; Unwin leads the list</h4>
-          <p>Its 18 appearances are more than twice the next publisher’s eight.</p>
-          <p>The chart measures appearances in this award selection, not publishers’ overall output.</p>
+        <aside class="finding finding-copper" aria-label="Publisher chart finding">
+          <h4><span class="finding-index">01</span> Allen &amp; Unwin sets the pace</h4>
+          <p><strong class="emphasis-copper">18 listed books</strong> put it ten ahead of University of Queensland Press, the next publisher at eight. Its titles span <strong>five of six categories</strong>; Poetry is the exception.</p>
         </aside>
-      </div>
     </div>
 
     <div class="chart-block">
-      <h3>Where do the most represented publishers appear?</h3>
+      <h3>Equal totals, different specialisms</h3>
       <p class="chart-intro">Distribution of publishers' books across six award categories · 2024–2026</p>
-      <div class="chart-story-layout">
         <div id="heatmap-chart" class="chart" role="img" aria-label="Heatmap of publisher appearances across six award categories"></div>
-        <aside class="story" aria-label="Category heatmap interpretation">
-          <h4>Equal totals can hide different patterns</h4>
-          <p>Giramondo and Hachette each have six appearances. All six of Giramondo’s are in Poetry, while Hachette’s books span four categories.</p>
-          <p>Their equal totals therefore represent very different category reach.</p>
+        <aside class="finding finding-rose" aria-label="Category heatmap finding">
+          <h4><span class="finding-index">02</span> Six books can mean two stories</h4>
+          <p><strong class="emphasis-rose">All six Giramondo books are Poetry</strong>, including two winners. Hachette also has six listed books, but they span <strong>four categories</strong> and include one winner.</p>
         </aside>
-      </div>
-      <p class="chart-note">A pale cell means no appearance in this selection; it does not mean the publisher produces no books in that category. Hover for exact counts. Each book is counted once, including winners.</p>
+      <p class="chart-note">Counts cover this award selection only. Categories have 15 listed books each by the award’s design.</p>
+    </div>
     </div>
   </section>
 
@@ -140,31 +136,28 @@
       <p class="section-number">02 / Comparing award selections</p>
       <h2 id="awards-heading">The prize changes the picture</h2>
     </div>
-    <p class="section-lead">A publisher prominent in one prize may have a much smaller share of another. Stella’s three longlists also show a changing genre mix.</p>
+    <p class="section-lead">The two prizes reward different kinds of visibility. <strong class="emphasis-lilac">Publisher shares reverse</strong> between lists, while Stella’s recent longlists become less fiction heavy.</p>
     <div class="chart-block">
-      <h3>Which publishers have the largest gap between prizes?</h3>
-      <p class="chart-intro">Each line connects one publisher’s share of the Prime Minister’s and Stella lists · 2024–2026</p>
+      <h3>The same publishers, different shares</h3>
+      <p class="chart-intro">Share of listed books by publisher · Prime Minister’s Literary Awards and Stella Prize, 2024–2026</p>
       <div id="award-comparison-chart" class="chart dot-chart" role="img" aria-label="Connected dot plot comparing each publisher’s share of the two award lists"></div>
-      <div class="chart-text-grid">
-        <aside class="chart-explanation" aria-label="Award comparison finding">
-          <h4>The largest gap favours Allen &amp; Unwin</h4>
-          <p>Its 18 Prime Minister’s entries make up 20% of that list, versus two Stella entries (5.6%). Giramondo moves the other way: 6.7% and 13.9%, respectively.</p>
-        </aside>
-        <p class="chart-context">Longer lines mean a larger difference between prizes. Rows are sorted by that difference. Publishers shown have at least four appearances combined; the shares use 90 Prime Minister’s and 36 Stella books.</p>
+      <div class="finding-row">
+        <aside class="finding finding-copper" aria-label="Award comparison finding"><h4>Allen &amp; Unwin: strong on the PMLA list</h4><p><strong class="emphasis-copper">20.0% of PMLA books</strong> are published by Allen &amp; Unwin, compared with <strong>5.6% of Stella books</strong>. Its gap is <strong>14.4 percentage points</strong>.</p></aside>
+        <aside class="finding finding-lilac"><h4>Giramondo moves the other way</h4><p>Its share rises from <strong>6.7% on PMLA</strong> to <strong class="emphasis-lilac">13.9% on Stella</strong>, a 7.2 point change. These are shares of each prize’s list, rather than a publisher’s total output.</p></aside>
       </div>
     </div>
 
     <div class="chart-block">
       <h3>Stella’s longlists broaden beyond fiction</h3>
-      <p class="chart-intro">One square per longlisted book · Stella Prize, 2024–2026</p>
+      <p class="chart-intro">Genre composition of Stella’s longlists · 2024–2026</p>
       <div class="stella-layout">
         <aside class="chart-explanation stella-explanation">
           <h4>Fiction’s share falls by half</h4>
-          <p>Fiction falls from eight of 12 books in 2024 to four of 12 in 2026. That 2026 list also includes five non-fiction or memoir books, two poetry books and a graphic novel.</p>
+          <p><strong class="emphasis-plum">Fiction falls from eight of 12 books to four of 12</strong> between 2024 and 2026. The 2026 longlist makes room for five non-fiction or memoir books, two poetry books and a graphic novel.</p>
         </aside>
         <div id="stella-genre-chart" class="chart stella-units-chart" role="img" aria-label="Twelve book squares for each Stella award year, coloured by genre group"></div>
       </div>
-      <p class="chart-note">Genres are grouped for comparison, not official Stella categories. Each book appears once in its year’s longlist, even if it later won.</p>
+      <p class="chart-note">These genre groups are based on the listed book descriptions; they are not official Stella categories.</p>
     </div>
   </section>
 
@@ -173,24 +166,20 @@
       <p class="section-number">03 / From lists to winners</p>
       <h2 id="outcomes-heading">A shortlist is only the start</h2>
     </div>
-    <p class="section-lead">Appearances, wins, repeat appearances and overlap between prizes reveal different kinds of recognition. We follow the books from their lists to the final outcomes.</p>
+    <p class="section-lead">Frequent appearances do not guarantee the same results. The charts trace <strong class="emphasis-blue">who wins, which genres advance, and how little the two prizes overlap</strong>.</p>
 
     <div class="chart-block">
-      <h3>Do the most visible publishers win more often?</h3>
+      <h3>More appearances do not guarantee more wins</h3>
       <p class="chart-intro">Listed books and winners by publisher · Prime Minister’s Literary Awards, 2024–2026</p>
       <div id="publisher-wins-chart" class="chart full-width-chart" role="img" aria-label="Scatter plot comparing award-list appearances and wins for publishers with at least three listed books"></div>
-      <div class="chart-text-grid">
-        <aside class="chart-explanation" aria-label="Publisher wins finding">
-          <h4>The same number of wins, with fewer appearances</h4>
-          <p>University of Queensland Press and Allen &amp; Unwin each have three wins, from eight and 18 listed books respectively.</p>
-        </aside>
-        <p class="chart-context">Each dot is a publisher with at least three listed books. The dashed line marks one win per five appearances, the overall ratio across these awards.</p>
+      <div class="finding-row">
+        <aside class="finding finding-blue" aria-label="Publisher wins finding"><h4>Three wins from very different list sizes</h4><p><strong class="emphasis-blue">University of Queensland Press: 3 wins from 8 books.</strong> Allen &amp; Unwin also has three wins, from 18 listed books. Those counts show different outcomes for the two most visible publishers.</p></aside>
+        <aside class="finding finding-green"><h4>Specialisation can stand out</h4><p><strong class="emphasis-green">Giramondo’s 2 wins came from 6 listed books</strong>, all in Poetry. Across all 90 PMLA listed books, 18 won; these small publisher totals are not a reliable prediction of future wins.</p></aside>
       </div>
-      <p class="chart-note">Two publishers with three appearances and one win are nudged slightly apart so both dots can be seen. Hover for exact counts. A publisher’s small set of appearances should not be treated as a reliable win rate.</p>
     </div>
 
     <div class="chart-block">
-      <h3>How many Stella books reach each prize stage?</h3>
+      <h3>The shortlist narrows, and fiction remains prominent</h3>
       <p class="chart-intro">
         Books reaching each prize stage, grouped by genre · Stella Prize, 2024–2026
       </p>
@@ -199,25 +188,13 @@
            role="img"
            aria-label="Flow chart of Stella books by genre from longlist to shortlist and winner"></div>
 
-      <div class="chart-text-grid">
-        <aside class="chart-explanation">
-          <h4>Half advance once; three win</h4>
-          <p>Eighteen of 36 longlisted books reach the shortlist, then three of those 18 win. Fiction supplies two winners; the other is a graphic novel.</p>
-        </aside>
-        <p class="chart-context">
-          Ribbon width represents books that reached the next stage. Books that did not advance end at their last stage. Genre labels are grouped for comparison rather than official Stella categories.
-        </p>
-      </div>
-
-      <p class="chart-note">
-        All 36 books entered the longlist. The shortlist count includes the eventual winners, so each book is counted once at each stage it reached. Hover over a ribbon or block for its count.
-      </p>
+      <div class="finding-row"><aside class="finding finding-plum"><h4>One in six shortlisted books wins</h4><p><strong class="emphasis-plum">18 of 36 longlisted books reached the shortlist</strong> across 2024–2026. Three of those 18 became winners; two were fiction.</p></aside><aside class="finding finding-teal"><h4>A new form reaches the top</h4><p>The third winner is a <strong class="emphasis-teal">graphic novel</strong>, a genre represented by one book across these three Stella longlists. The 2026 winner shows that the wider longlist mix can carry through to the final result.</p></aside></div>
     </div>
 
     <div class="chart-block">
       <h3>Shared books are spread across six publishers</h3>
       <p class="chart-intro">
-        Publisher area represents distinct books within each award-list group ·
+        Distinct books by publisher and award-list overlap ·
         Prime Minister’s Literary Awards and Stella Prize, 2024–2026
       </p>
 
@@ -225,18 +202,7 @@
            role="img"
            aria-label="Treemap comparing books unique to each prize list with books appearing on both"></div>
 
-      <div class="chart-text-grid">
-        <aside class="chart-explanation">
-          <h4>Only nine titles cross the two lists</h4>
-          <p>Nine of 117 distinct books appear on both lists, across six publishers. The highlighted area contains those shared titles, including the book that won both prizes.</p>
-        </aside>
-        <p class="chart-context">
-          Each coloured group shows books listed by one prize or both.
-          Within it, each rectangle is a publisher; its area and printed number
-          represent distinct books. Shared books use the publisher name recorded
-          in the Prime Minister’s dataset. Hover for exact names and counts.
-        </p>
-      </div>
+      <div class="finding-row"><aside class="finding finding-blue"><h4>Most titles stay on one list</h4><p><strong class="emphasis-blue">Only 9 of 117 distinct books</strong> appear on both prizes’ lists, about 7.7%. The remaining 108 titles appear on just one of the two lists.</p></aside><aside class="finding finding-copper"><h4>The crossover reaches six publishers</h4><p>Those nine shared titles are spread across <strong class="emphasis-copper">six publishers</strong>. One title went further and won both prizes, showing that rare overlap can still lead to recognition at both.</p></aside></div>
     </div>
 
     <div class="chart-block">
@@ -253,10 +219,7 @@
               aria-label="UpSet chart showing which publishers appeared in the 2024, 2025 and 2026 Prime Minister’s Literary Awards lists"
       ></div>
 
-      <p class="chart-note">
-        Each bar represents one exact combination of years. Filled dots mark those years;
-        pale dots mark years without an appearance. Hover to see publisher names.
-      </p>
+      <div class="finding-row"><aside class="finding finding-copper"><h4>Most publishers appear briefly</h4><p><strong class="emphasis-copper">15 of 29 publishers</strong> appear in only one of the three PMLA years. A single year of visibility is more common than sustained presence.</p></aside><aside class="finding finding-blue"><h4>A smaller recurring group remains</h4><p><strong class="emphasis-blue">Eight publishers appear in all three years</strong>, while six appear in exactly two. The all-year group forms the largest single year combination.</p></aside></div>
     </div>
   </section>
 
@@ -265,60 +228,33 @@
       <p class="section-number">04 / The geography of literary visibility</p>
       <h2 id="geography-heading">Publishing hubs in a wider reading landscape</h2>
     </div>
-    <p class="section-lead">
-      The ten leading publishers map to four documented office metro areas. A separate
-      historical library snapshot shows how much more widely reading spaces are located.
-    </p>
+    <p class="section-lead">The award offices cluster in a few metros, while <strong class="emphasis-green">1,440 recorded public libraries</strong> cover a much wider part of Australia. The library map is a separate 2016–2018 snapshot that gives geographic context, not award-book holdings.</p>
 
     <div class="chart-block map-card map-primary">
-      <h3>Most appearances cluster in Sydney and Melbourne</h3>
-      <p class="chart-intro">
-        Office metro areas of the ten most represented publishers ·
-        Prime Minister’s Literary Awards, 2024–2026
-      </p>
-
-      <div id="publisher-office-map" class="chart full-width-chart"
-           role="img"
-           aria-label="Map of Australia with circles showing listed books by publisher office metro area"></div>
-
-      <div class="chart-text-grid">
-        <aside class="chart-explanation">
-          <h4>Sydney accounts for the largest share</h4>
-          <p>Publishers mapped to Sydney account for 37 of the 65 books from the top ten publishers. Melbourne follows with 17; Brisbane and Broome contribute eight and three.</p>
-        </aside>
-        <p class="chart-context">
-          Circle area represents listed books, not all books published in each city.
-          The points use city reference coordinates for documented publisher offices;
-          they do not show where authors live or where stories take place.
-        </p>
+      <h3>A wider network of reading spaces</h3>
+      <p class="chart-intro">Recorded Australian public lending libraries, 2016–2018 · grouped into equal-area hexagonal cells</p>
+      <div class="map-stage">
+        <div id="publisher-hex-map" class="chart map-visual" role="img" aria-label="Map of 1,440 historical Australian public library locations grouped into equal-area hexagonal cells, with publisher office metro locations marked in orange"></div>
+        <div class="map-callouts" aria-label="Library map findings">
+          <aside class="map-callout map-callout-green"><span class="map-callout-label">Recorded network</span><strong>1,440 sites</strong><p>across mainland Australia and Tasmania in the 2016–2018 archive.</p></aside>
+          <aside class="map-callout map-callout-copper"><span class="map-callout-label">Two largest state totals</span><strong>703 sites</strong><p>in NSW and Queensland combined: 375 and 328, respectively.</p></aside>
+        </div>
       </div>
-
-      <p class="chart-note">
-        Multi-office publishers use one documented office for mapping.
-      </p>
+      <div class="map-summary"><p><strong class="emphasis-green">The library footprint extends well beyond the four publisher office metros.</strong> Recorded sites cluster most strongly along the eastern and south-eastern corridors.</p><p>The library archive predates these 2024–2026 award lists. It does not identify where the nominated books were stocked or borrowed.</p></div>
     </div>
 
-    <div class="map-pair" aria-label="State map comparison">
+    <div class="map-pair" aria-label="Publisher office and winner maps">
       <article class="map-card">
-        <h3>Where are the winners’ publishers based?</h3>
-        <p class="chart-intro">Winners from the ten most represented publishers · 2024–2026</p>
-        <div id="publisher-state-winners-map" class="chart full-width-chart map-visual"
-             role="img" aria-label="Choropleth of Australian states shaded by winning books associated with top-ten publishers' documented offices"></div>
-        <aside class="chart-explanation map-insight">
-          <h4>Eight of 14 winners map to NSW</h4>
-          <p>Queensland has three, Victoria two and Western Australia one. Grey states have no selected top-ten publisher office; they are not zero-win claims for all publishers.</p>
-        </aside>
+        <h3>Award-list visibility clusters in four metros</h3>
+        <p class="chart-intro">Documented office metro areas for the ten most represented PMLA publishers · 2024–2026</p>
+        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of Australia with circles showing listed books by publisher office metro area"></div>
+        <aside class="finding finding-copper"><h4>Sydney leads this selected group</h4><p><strong class="emphasis-copper">37 of 65 listed books</strong> map to a Sydney office; Melbourne has 17, Brisbane eight and Broome three. These are selected office locations, not book origins or travel routes.</p></aside>
       </article>
-
       <article class="map-card">
-        <h3>Public libraries reach beyond the award hubs</h3>
-        <p class="chart-intro">1,440 recorded public library locations, 2016–2018 · each shaded area counts sites within a 115 km radius grid cell. Use the slider to reveal denser clusters.</p>
-        <div id="publisher-hex-map" class="chart map-visual"
-             role="img" aria-label="Map of 1,440 historical Australian public library locations grouped into equal-area hexagonal cells, with publisher office metro locations marked in orange"></div>
-        <aside class="chart-explanation map-insight">
-          <h4>Reading spaces are more dispersed</h4>
-          <p>The historical archive records 375 sites in NSW and 328 in Queensland, together 703 of the 1,440 mapped libraries. Orange dots mark the four office metros. These site counts are neither population-adjusted nor evidence of award-book holdings.</p>
-        </aside>
+        <h3>Winning books point to a different split</h3>
+        <p class="chart-intro">PMLA winners linked to those ten publishers’ documented office states · 2024–2026</p>
+        <div id="publisher-state-winners-map" class="chart map-visual" role="img" aria-label="Choropleth of Australian states shaded by winning books associated with top-ten publishers' documented offices"></div>
+        <aside class="finding finding-copper"><h4>NSW accounts for most mapped winners</h4><p><strong class="emphasis-copper">Eight of 14 winning books</strong> map to NSW offices. Queensland has three, Victoria two and Western Australia one, among this top-ten publisher group.</p></aside>
       </article>
     </div>
 
@@ -330,7 +266,7 @@
       <div class="footer-panel">
         <p class="section-number">The story in brief</p>
         <h2>Visibility clusters; recognition varies.</h2>
-        <p>Ten publishers account for 65 of 90 PMLA books. Across PMLA and Stella, only nine of 117 distinct titles appear on both lists. The mapped publisher offices cluster in four metros; historical library sites offer a wider geographic context.</p>
+        <p><strong class="emphasis-copper">Ten publishers account for 65 of 90 PMLA books.</strong> Across PMLA and Stella, <strong class="emphasis-blue">only nine of 117 distinct titles</strong> appear on both lists. The mapped publisher offices cluster in four metros; historical library sites offer a wider geographic context.</p>
       </div>
       <div class="footer-panel">
         <h3>Sources and method</h3>
@@ -348,13 +284,13 @@
 <script>
   const charts = [
     ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=5'],
-    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=3'],
+    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=4'],
     ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=3'],
     ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json'],
     ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=3'],
-    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json'],
-    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=1'],
+    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=2'],
+    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=2'],
     ['#publisher-office-map', 'charts/section4/publisher_office_map.vl.json?v=2'],
     ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=3'],
     ['#publisher-hex-map', 'charts/section4/public_library_hex_bins.vl.json?v=2']
