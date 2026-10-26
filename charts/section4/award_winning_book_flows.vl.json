@@ -2,105 +2,807 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "International publishing reach of four books recognised by Australian literary prizes. Solid teal routes mark published foreign editions; dashed violet routes mark territories where an agent lists publishing-rights sales. Gold routes have both types of evidence.",
   "width": "container",
-  "height": 380,
-  "padding": {"left": 8, "right": 8, "top": 8, "bottom": 8},
+  "height": 330,
+  "autosize": {"type": "fit-x", "contains": "padding", "resize": true},
+  "padding": {"left": 5, "right": 5, "top": 5, "bottom": 5},
   "projection": {
     "type": "equirectangular",
-    "rotate": [-150, 0, 0],
-    "fit": {"type": "Feature", "properties": {}, "geometry": {"type": "MultiPoint", "coordinates": [[-29.99, 75], [-29.99, -55], [-30.01, 75], [-30.01, -55]]}},
-    "clipExtent": {"expr": "[[0, 0], [width, height]]"}
-  },
-  "layer": [
-    {"data": {"sphere": true}, "mark": {"type": "geoshape", "fill": "#EAF3F8", "stroke": null, "clip": true}},
-    {"data": {"graticule": {"step": [30, 30]}}, "mark": {"type": "geoshape", "stroke": "#C7D9E1", "strokeWidth": 0.55, "opacity": 0.7, "clip": true}},
-    {"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@3/data/world-110m.json", "format": {"type": "topojson", "feature": "countries"}}, "transform": [{"filter": "toNumber(datum.id) !== 10"}], "mark": {"type": "geoshape", "fill": "#ECEAE4", "stroke": "#FFFFFF", "strokeWidth": 0.55, "clip": true}},
-    {"data": {"values": [{"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[-180, 0], [180, 0]]}}]}, "mark": {"type": "geoshape", "filled": false, "stroke": "#8A9BAA", "strokeWidth": 0.8, "strokeDash": [4, 4], "clip": true}},
-    {
-      "data": {"url": "data/award_winning_book_edition_flows.geojson?v=14", "format": {"type": "json", "property": "features"}},
-      "mark": {"type": "geoshape", "filled": false, "strokeCap": "round", "opacity": 0.86, "clip": true},
-      "encoding": {
-        "stroke": {"field": "properties.evidence_type", "type": "nominal", "scale": {"domain": ["edition", "rights", "both"], "range": ["#147F79", "#6554A4", "#D18A32"]}, "legend": null},
-        "strokeDash": {"field": "properties.evidence_type", "type": "nominal", "scale": {"domain": ["edition", "rights", "both"], "range": [[], [6, 3], [2, 2]]}, "legend": null},
-        "strokeWidth": {"field": "properties.title_count", "type": "quantitative", "scale": {"domain": [1, 4], "range": [1.2, 3.0]}, "legend": null},
-        "tooltip": [
-          {"field": "properties.destination_market", "type": "nominal", "title": "Market"},
-          {"field": "properties.title_count", "type": "quantitative", "title": "Selected award-winning books with evidence"},
-          {"field": "properties.books", "type": "nominal", "title": "Titles"},
-          {"field": "properties.edition_details", "type": "nominal", "title": "Published-edition evidence"},
-          {"field": "properties.rights_details", "type": "nominal", "title": "Rights-sale evidence"},
-          {"field": "properties.awards", "type": "nominal", "title": "Awards"}
+    "rotate": [
+      -150,
+      0,
+      0
+    ],
+    "fit": {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            -29.99,
+            75
+          ],
+          [
+            -29.99,
+            -55
+          ],
+          [
+            -30.01,
+            75
+          ],
+          [
+            -30.01,
+            -55
+          ]
         ]
       }
     },
+    "clipExtent": {
+      "expr": "[[0, 0], [width, height]]"
+    }
+  },
+  "layer": [
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "mark": {"type": "circle", "filled": true, "stroke": "#FFFFFF", "strokeWidth": 1.5, "opacity": 1, "clip": true},
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#EAF3F8",
+        "stroke": null,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "graticule": {
+          "step": [
+            60,
+            30
+          ]
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#C7D9E1",
+        "strokeWidth": 0.55,
+        "opacity": 0.7,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/vega-datasets@3/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "transform": [
+        {
+          "filter": "toNumber(datum.id) !== 10"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ECEAE4",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.55,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  -180,
+                  0
+                ],
+                [
+                  180,
+                  0
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#8A9BAA",
+        "strokeWidth": 0.8,
+        "strokeDash": [
+          4,
+          4
+        ],
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"longitude": 0, "latitude": -49, "label": "0°"},
+          {"longitude": -24, "latitude": 30, "label": "30°N"},
+          {"longitude": -24, "latitude": 0, "label": "0°"},
+          {"longitude": -24, "latitude": -30, "label": "30°S"}
+        ]
+      },
+      "mark": {"type": "text", "fontSize": 9, "color": "#7A8C98", "align": "left", "dx": 3},
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
         "latitude": {"field": "latitude", "type": "quantitative"},
-        "size": {"field": "title_count", "type": "quantitative", "scale": {"domain": [1, 4], "range": [55, 180]}, "legend": null},
-        "color": {"field": "kind", "type": "nominal", "scale": {"domain": ["origin", "market"], "range": ["#27364B", "#465A9B"]}, "legend": null},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {
+        "url": "data/award_winning_book_edition_routes.csv?v=15",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.longitude < -30 ? datum.longitude + 360 : datum.longitude",
+          "as": "end_lon"
+        },
+        {
+          "calculate": "133.7751",
+          "as": "start_lon"
+        },
+        {
+          "calculate": "-25.2744",
+          "as": "start_lat"
+        },
+        {
+          "calculate": "datum.end_lon - datum.start_lon",
+          "as": "dx"
+        },
+        {
+          "calculate": "datum.latitude - datum.start_lat",
+          "as": "dy"
+        },
+        {
+          "calculate": "datum.start_lon + datum.dx / 3 - datum.dy * 0.06",
+          "as": "c1_lon"
+        },
+        {
+          "calculate": "datum.start_lat + datum.dy / 3 + datum.dx * 0.06",
+          "as": "c1_lat"
+        },
+        {
+          "calculate": "datum.start_lon + 2 * datum.dx / 3 - datum.dy * 0.06",
+          "as": "c2_lon"
+        },
+        {
+          "calculate": "datum.start_lat + 2 * datum.dy / 3 + datum.dx * 0.06",
+          "as": "c2_lat"
+        },
+        {
+          "calculate": "sequence(0, 41, 1)",
+          "as": "steps"
+        },
+        {
+          "flatten": [
+            "steps"
+          ],
+          "as": [
+            "step"
+          ]
+        },
+        {
+          "calculate": "datum.step / 40",
+          "as": "t"
+        },
+        {
+          "calculate": "pow(1 - datum.t, 3) * datum.start_lon + 3 * pow(1 - datum.t, 2) * datum.t * datum.c1_lon + 3 * (1 - datum.t) * pow(datum.t, 2) * datum.c2_lon + pow(datum.t, 3) * datum.end_lon",
+          "as": "route_lon"
+        },
+        {
+          "calculate": "pow(1 - datum.t, 3) * datum.start_lat + 3 * pow(1 - datum.t, 2) * datum.t * datum.c1_lat + 3 * (1 - datum.t) * pow(datum.t, 2) * datum.c2_lat + pow(datum.t, 3) * datum.latitude",
+          "as": "route_lat"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "interpolate": "basis",
+        "strokeCap": "round",
+        "opacity": 0.9,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "route_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "route_lat",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "destination_market",
+          "type": "nominal"
+        },
+        "order": {
+          "field": "step",
+          "type": "quantitative",
+          "sort": "ascending"
+        },
+        "stroke": {
+          "field": "evidence_type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "edition",
+              "rights",
+              "both"
+            ],
+            "range": [
+              "#147F79",
+              "#6554A4",
+              "#D18A32"
+            ]
+          },
+          "legend": null
+        },
+        "strokeDash": {
+          "field": "evidence_type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "edition",
+              "rights",
+              "both"
+            ],
+            "range": [
+              [],
+              [
+                6,
+                3
+              ],
+              [
+                2,
+                2
+              ]
+            ]
+          },
+          "legend": null
+        },
+        "strokeWidth": {
+          "field": "title_count",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1,
+              4
+            ],
+            "range": [
+              1.5,
+              6
+            ]
+          },
+          "legend": null
+        },
         "tooltip": [
-          {"field": "place", "type": "nominal", "title": "Market"},
-          {"field": "title_count", "type": "quantitative", "title": "Selected titles with publishing evidence"},
-          {"field": "evidence_type", "type": "nominal", "title": "Evidence type"}
+          {
+            "field": "destination_market",
+            "type": "nominal",
+            "title": "Market"
+          },
+          {
+            "field": "title_count",
+            "type": "quantitative",
+            "title": "Selected award-winning books with evidence"
+          },
+          {
+            "field": "books",
+            "type": "nominal",
+            "title": "Titles"
+          },
+          {
+            "field": "edition_details",
+            "type": "nominal",
+            "title": "Published-edition evidence"
+          },
+          {
+            "field": "rights_details",
+            "type": "nominal",
+            "title": "Rights-sale evidence"
+          },
+          {
+            "field": "awards",
+            "type": "nominal",
+            "title": "Awards"
+          }
         ]
       }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'United Kingdom'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": -12, "dy": -15, "align": "right", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 1.5,
+        "opacity": 1,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "title_count",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1,
+              4
+            ],
+            "range": [
+              55,
+              180
+            ]
+          },
+          "legend": null
+        },
+        "color": {
+          "field": "kind",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "origin",
+              "market"
+            ],
+            "range": [
+              "#27364B",
+              "#465A9B"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "place",
+            "type": "nominal",
+            "title": "Market"
+          },
+          {
+            "field": "title_count",
+            "type": "quantitative",
+            "title": "Selected titles with publishing evidence"
+          },
+          {
+            "field": "evidence_type",
+            "type": "nominal",
+            "title": "Evidence type"
+          }
+        ]
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'France'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": -24, "dy": 1, "align": "right", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'United Kingdom'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": -12,
+        "dy": -15,
+        "align": "right",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'Germany'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": 20, "dy": -18, "align": "left", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'France'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": -24,
+        "dy": 1,
+        "align": "right",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'Poland'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": 24, "dy": 2, "align": "left", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'Germany'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": 20,
+        "dy": -18,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'Serbia'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": 21, "dy": 16, "align": "left", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'Poland'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": 24,
+        "dy": 2,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'United States'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": 14, "dy": -9, "align": "left", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'Serbia'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": 21,
+        "dy": 16,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'China'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": 18, "dy": -12, "align": "left", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'United States'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": 14,
+        "dy": -9,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.place === 'Taiwan'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "dx": 18, "dy": 14, "align": "left", "baseline": "middle"},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'China'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": 18,
+        "dy": -12,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     },
     {
-      "data": {"url": "data/award_winning_book_edition_markets.csv?v=14", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
-      "transform": [{"filter": "datum.kind === 'origin'"}],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#27364B", "dx": 8, "dy": 17, "align": "left", "clip": true},
-      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "place", "type": "nominal"}}
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.place === 'Taiwan'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#263746",
+        "dx": 18,
+        "dy": 14,
+        "align": "left",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "title_count": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.kind === 'origin'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#27364B",
+        "dx": 8,
+        "dy": 17,
+        "align": "left",
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "place",
+          "type": "nominal"
+        }
+      }
     }
   ],
-  "config": {"view": {"stroke": null}, "legend": {"labelFont": "Arial", "titleFont": "Arial", "labelFontSize": 11, "titleFontSize": 11}}
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 11,
+      "titleFontSize": 11
+    }
+  }
 }
