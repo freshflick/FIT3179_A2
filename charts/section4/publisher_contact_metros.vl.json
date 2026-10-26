@@ -28,7 +28,8 @@
             "opacity": 0.84,
             "stroke": "#ffffff",
             "strokeWidth": 1.7,
-            "size": 100
+            "size": 100,
+            "cursor": "pointer"
           },
           "encoding": {
             "longitude": {

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=9">
+  <link rel="stylesheet" href="css/styles.css?v=13">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -240,19 +240,25 @@
           <aside class="map-callout map-callout-copper"><span class="map-callout-label">Second hub</span><strong>Melbourne · 11</strong><p>mapped publishers account for 39 shortlist records.</p></aside>
         </div>
       </div>
-      <div class="metro-insets" aria-label="Sydney and Melbourne publisher contact close-ups">
-        <div class="metro-inset"><h4>Sydney contacts spread beyond the centre</h4><div id="publisher-sydney-map" class="chart map-visual" role="img" aria-label="Sydney close-up of PMLA publisher contact localities and shortlist records"></div><p><strong class="emphasis-blue">Crows Nest accounts for 22 records</strong> through Allen &amp; Unwin; Parramatta adds nine through Giramondo.</p></div>
-        <div class="metro-inset"><h4>Melbourne has several smaller clusters</h4><div id="publisher-melbourne-map" class="chart map-visual" role="img" aria-label="Melbourne close-up of PMLA publisher contact localities and shortlist records"></div><p><strong class="emphasis-blue">Collingwood has nine records</strong> across three publishers; Southbank has eight through Text Publishing.</p></div>
-      </div>
-      <div class="map-summary"><p><strong class="emphasis-green">Sydney and Melbourne together account for 106 of 135 mapped records.</strong> The suburb views separate contacts that overlap on the national map.</p><p>The other six contact metros contribute 29 records. Locality points use sourced suburb centroids, so they show approximate contact areas rather than office doors.</p></div>
+      <div class="map-summary"><p><strong class="emphasis-green">Sydney and Melbourne together account for 106 of 135 mapped records.</strong> The location map below lets you inspect the publisher contacts within each hub.</p><p>The other six contact metros contribute 29 records. Contact points use sourced suburb centroids, so they show approximate areas rather than office doors.</p></div>
     </div>
 
     <div class="map-pair" aria-label="Publisher contact and winner maps">
       <article class="map-card">
-        <h3>Two metros account for most mapped books</h3>
-        <p class="chart-intro">Listed PMLA records by documented publisher contact metro · 2022–2026</p>
-        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of Australia with circles showing 135 listed records across eight publisher contact metro areas"></div>
-        <aside class="finding finding-blue"><h4>106 records cluster in two metros</h4><p><strong class="emphasis-blue">Sydney has 67 and Melbourne 39.</strong> Brisbane adds 16, while Broome adds five. Newcastle and Perth each add three; Geelong and Canberra each add one.</p></aside>
+        <h3>Zoom into the publisher contacts</h3>
+        <p class="chart-intro">Listed PMLA records by documented publisher contact location · 2022–2026</p>
+        <div class="map-view-controls" role="group" aria-label="Publisher location map view">
+          <button type="button" data-map-view="australia" aria-pressed="true">Australia</button>
+          <button type="button" data-map-view="sydney" aria-pressed="false">Sydney</button>
+          <button type="button" data-map-view="melbourne" aria-pressed="false">Melbourne</button>
+          <span class="map-zoom-controls">
+            <button type="button" data-map-zoom="out" aria-label="Zoom out of city map" disabled>−</button>
+            <button type="button" data-map-zoom="in" aria-label="Zoom into city map" disabled>+</button>
+          </span>
+        </div>
+        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of publisher contacts, with national metro totals and detailed Sydney and Melbourne views"></div>
+          <p id="publisher-map-detail" class="map-detail" aria-live="polite">Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.</p>
+        <aside class="finding finding-blue"><h4>106 records cluster in two metros</h4><p><strong class="emphasis-blue">Sydney has 67 and Melbourne 39.</strong> In the Sydney close-up, Crows Nest accounts for 22 records and Parramatta nine. In Melbourne, Collingwood has nine and Southbank eight.</p></aside>
       </article>
       <article class="map-card">
         <h3>Queensland leads on winner share in this selection</h3>
@@ -262,7 +268,7 @@
       </article>
     </div>
 
-    <p class="geography-source">The maps use the <a href="data/pmla_2024_2026.csv">2024–2026 PMLA book table</a>, <a href="data/pmla_2022_2023_geography.csv">2022–2023 publisher-attributed records</a>, and <a href="data/publisher_contact_locations.csv">sourced publisher contacts</a>. Nine records lack a supported Australian contact and are excluded; all 30 winners are mapped. State boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. Locality centroids: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. <a href="data/map_methodology.md">Mapping method and limitations</a>.</p>
+    <p class="geography-source">The maps use the <a href="data/pmla_2024_2026.csv">2024–2026 PMLA book table</a>, <a href="data/pmla_2022_2023_geography.csv">2022–2023 publisher-attributed records</a>, and <a href="data/publisher_contact_locations.csv">sourced publisher contacts</a>. Nine records lack a supported Australian contact and are excluded; all 30 winners are mapped. State and suburb boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. Locality centroids: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. <a href="data/map_methodology.md">Mapping method and limitations</a>.</p>
   </section>
 
   <footer>
@@ -295,11 +301,8 @@
     ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=4'],
     ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=2'],
     ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=2'],
-    ['#publisher-office-map', 'charts/section4/publisher_contact_metros.vl.json?v=3'],
     ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=6'],
-    ['#publisher-hex-map', 'charts/section4/pmla_publisher_contact_hex_bins.vl.json?v=3'],
-    ['#publisher-sydney-map', 'charts/section4/publisher_sydney_localities.vl.json?v=5'],
-    ['#publisher-melbourne-map', 'charts/section4/publisher_melbourne_localities.vl.json?v=5']
+    ['#publisher-hex-map', 'charts/section4/pmla_publisher_contact_hex_bins.vl.json?v=3']
   ];
   charts.forEach(([target, spec]) => {
     vegaEmbed(target, spec, { actions: true }).catch(error => {
@@ -308,6 +311,68 @@
               'Chart unavailable. Check the browser console and local server.';
     });
   });
+
+  const publisherMapViews = {
+    australia: {
+      source: 'charts/section4/publisher_contact_metros.vl.json?v=6',
+      detail: 'Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.'
+    },
+    sydney: {
+      source: 'charts/section4/publisher_sydney_localities.vl.json?v=11',
+      detail: 'Crows Nest accounts for 22 records through Allen & Unwin; Parramatta adds nine through Giramondo. Hover over a point for its publisher names and counts.'
+    },
+    melbourne: {
+      source: 'charts/section4/publisher_melbourne_localities.vl.json?v=11',
+      detail: 'Collingwood has nine records across three publishers; Southbank has eight through Text Publishing. Hover over a point for its publisher names and counts.'
+    }
+  };
+  let publisherMapRequest = 0;
+  let publisherMapPlace = 'australia';
+  let publisherMapZoom = 1;
+  async function showPublisherMap(place) {
+    if (place !== publisherMapPlace) publisherMapZoom = 1;
+    publisherMapPlace = place;
+    const request = ++publisherMapRequest;
+    const target = document.querySelector('#publisher-office-map');
+    document.querySelectorAll('[data-map-view]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.mapView === place));
+    });
+    document.querySelector('[data-map-zoom="in"]').disabled = place === 'australia' || publisherMapZoom >= 2.4;
+    document.querySelector('[data-map-zoom="out"]').disabled = place === 'australia' || publisherMapZoom <= 1;
+    document.querySelector('#publisher-map-detail').textContent = publisherMapViews[place].detail;
+    try {
+      const response = await fetch(publisherMapViews[place].source);
+      if (!response.ok) throw new Error(`Map source returned ${response.status}`);
+      const spec = await response.json();
+      if (target.clientWidth < 500) spec.height = place === 'australia' ? 280 : 340;
+      if (place !== 'australia') {
+        spec.projection.scale *= Math.min(1, target.clientWidth / 480) * publisherMapZoom;
+      }
+      if (request !== publisherMapRequest) return;
+      const result = await vegaEmbed(target, spec, { actions: true, renderer: 'svg' });
+      if (place === 'australia') {
+        result.view.addEventListener('click', (_event, item) => {
+          const city = item && item.datum && item.datum.map_city;
+          if (city === 'Sydney' || city === 'Melbourne') showPublisherMap(city.toLowerCase());
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      target.textContent = 'Map unavailable. Check the browser console and local server.';
+    }
+  }
+  document.querySelectorAll('[data-map-view]').forEach(button => {
+    button.addEventListener('click', () => showPublisherMap(button.dataset.mapView));
+  });
+  document.querySelectorAll('[data-map-zoom]').forEach(button => {
+    button.addEventListener('click', () => {
+      publisherMapZoom = button.dataset.mapZoom === 'in'
+        ? Math.min(2.4, publisherMapZoom * 1.35)
+        : Math.max(1, publisherMapZoom / 1.35);
+      showPublisherMap(publisherMapPlace);
+    });
+  });
+  showPublisherMap('australia');
 
 </script>
 </body>

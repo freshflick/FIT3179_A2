@@ -39,8 +39,14 @@ their unit is the metro rather than the suburb. Little River is grouped with
 Geelong following [City of Greater Geelong planning material](https://www.geelongaustralia.com.au/common/Public/Documents/8d9a8466b3d2832-gphs2024-summaryreport.pdf).
 The state outlines derive from the
 [ABS ASGS 2021 digital state boundaries](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files).
-The national GeoJSON is simplified for rendering. The city views use a
-latitude/longitude grid at the scale of the documented localities.
+The national GeoJSON is simplified for rendering. The Sydney and Melbourne
+views use [ABS 2021 Suburbs and Localities (SAL) boundaries](https://geo.abs.gov.au/arcgis/rest/services/ASGS2021/SAL/MapServer/0)
+queried for each metropolitan viewport and stored as compact local GeoJSON.
+They provide real coastline and harbour shapes under a faint geographic grid.
+Internal suburb boundaries are hidden to keep the small maps legible. The
+boundaries are background geography; the award counts remain at documented
+publisher contacts. The [preparation script](../scripts/prepare_suburb_boundaries.py)
+rewinds the official GeoJSON polygons for Vega's spherical rendering convention.
 
 There are **135 mapped book records from 33 publishers**, including all 30
 winners. Nine records are unmapped. Four are from the 2024–2026 table:
@@ -61,9 +67,12 @@ An author’s own location is never substituted for a missing publisher contact.
    contacts; the neutral cells provide national context. The slider changes
    the minimum publisher count shown in colour. The [derived GeoJSON](pmla_publisher_contact_hex_bins.geojson)
    also stores listed and winning records by cell.
-2. **Sydney and Melbourne close-ups:** circles use the documented suburb
-   centroid. Area counts listed-book records at the contact locality, and
-   tooltips name the publishers. These close-ups separate multiple contacts
+2. **Sydney and Melbourne close-ups:** the location map's city controls, or
+   clicking a national city symbol, switch
+   from national metro totals to documented suburb centroids over ABS suburb
+   geography. The plus and minus buttons adjust the city projection scale.
+   Circle area counts listed-book records at the contact locality,
+   and tooltips name the publishers. The close-ups separate multiple contacts
    that overlap in a national view. Sydney has 14 mapped publishers and 67
    listed records; Melbourne has 11 and 39. Their combined 106 records
    represent 78.5% of the 135 mapped records.
