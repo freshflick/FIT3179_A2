@@ -23,175 +23,36 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#f1ede4",
-        "stroke": "#d7ddd9",
-        "strokeWidth": 0.32,
+        "fill": "#f4f0e9",
+        "stroke": "#b8c8ce",
+        "strokeWidth": 0.62,
         "clip": true
       }
     },
     {
       "data": {
-        "values": [
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  150.9,
-                  -34.05
-                ],
-                [
-                  150.9,
-                  -33.65
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  151.0,
-                  -34.05
-                ],
-                [
-                  151.0,
-                  -33.65
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  151.1,
-                  -34.05
-                ],
-                [
-                  151.1,
-                  -33.65
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  151.2,
-                  -34.05
-                ],
-                [
-                  151.2,
-                  -33.65
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  151.3,
-                  -34.05
-                ],
-                [
-                  151.3,
-                  -33.65
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  150.8,
-                  -34.0
-                ],
-                [
-                  151.4,
-                  -34.0
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  150.8,
-                  -33.9
-                ],
-                [
-                  151.4,
-                  -33.9
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  150.8,
-                  -33.8
-                ],
-                [
-                  151.4,
-                  -33.8
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  150.8,
-                  -33.7
-                ],
-                [
-                  151.4,
-                  -33.7
-                ]
-              ]
-            },
-            "properties": {}
-          }
-        ]
+        "graticule": {
+          "extent": [
+            [
+              150.8,
+              -34.05
+            ],
+            [
+              151.4,
+              -33.65
+            ]
+          ],
+          "step": [
+            0.1,
+            0.1
+          ]
+        }
       },
       "mark": {
         "type": "geoshape",
         "fill": null,
-        "stroke": "#bdd3da",
-        "strokeWidth": 0.55,
+        "stroke": "#c6d8de",
+        "strokeWidth": 0.65,
         "clip": true
       }
     },
@@ -279,7 +140,7 @@
   "config": {
     "view": {
       "stroke": null,
-      "fill": "#d9edf4"
+      "fill": "#e7f2f6"
     }
   }
 }

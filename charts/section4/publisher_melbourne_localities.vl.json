@@ -1,21 +1,68 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Documented publisher-contact localities around Melbourne for PMLA-listed books, 2022\u20132026. ABS 2021 suburb polygons provide geographic context; circle area shows listed-book records.",
+  "description": "Publisher-contact localities around Melbourne for Prime Minister's Literary Awards shortlist records, 2022\u20132026. Circle area shows listed books; copper color shows winner share.",
   "width": "container",
-  "height": 400,
-  "background": "#ffffff",
+  "height": 340,
+  "background": "white",
+  "params": [
+    {
+      "name": "melbourne_zoom",
+      "value": 1
+    },
+    {
+      "name": "melbourne_pan_x",
+      "value": 0
+    },
+    {
+      "name": "melbourne_pan_y",
+      "value": 0
+    }
+  ],
   "projection": {
     "type": "mercator",
     "center": [
-      144.99,
-      -37.84
+      145.07,
+      -37.88
     ],
-    "scale": 70000
+    "fit": {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            144.57,
+            -38.21
+          ],
+          [
+            145.57,
+            -37.55
+          ]
+        ]
+      }
+    },
+    "extent": {
+      "expr": "[[width / 2 + melbourne_pan_x - (width - 20) * melbourne_zoom / 2, height / 2 + melbourne_pan_y - (height - 20) * melbourne_zoom / 2], [width / 2 + melbourne_pan_x + (width - 20) * melbourne_zoom / 2, height / 2 + melbourne_pan_y + (height - 20) * melbourne_zoom / 2]]"
+    },
+    "clipExtent": {
+      "expr": "[[0, 0], [width, height]]"
+    }
   },
   "layer": [
     {
       "data": {
-        "url": "data/abs_melbourne_suburbs_2021.geojson?v=2",
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#EAF3F8",
+        "stroke": null,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/abs_melbourne_suburbs_2021.geojson?v=3",
         "format": {
           "type": "json",
           "property": "features"
@@ -23,175 +70,37 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#f1ede4",
-        "stroke": "#d7ddd9",
-        "strokeWidth": 0.32,
+        "fill": "#F4F3EF",
+        "stroke": "#92A6AE",
+        "strokeWidth": 0.45,
         "clip": true
       }
     },
     {
       "data": {
-        "values": [
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  144.8,
-                  -38.08
-                ],
-                [
-                  144.8,
-                  -37.6
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  144.9,
-                  -38.08
-                ],
-                [
-                  144.9,
-                  -37.6
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  145.0,
-                  -38.08
-                ],
-                [
-                  145.0,
-                  -37.6
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  145.1,
-                  -38.08
-                ],
-                [
-                  145.1,
-                  -37.6
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  145.2,
-                  -38.08
-                ],
-                [
-                  145.2,
-                  -37.6
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  144.7,
-                  -38.0
-                ],
-                [
-                  145.3,
-                  -38.0
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  144.7,
-                  -37.9
-                ],
-                [
-                  145.3,
-                  -37.9
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  144.7,
-                  -37.8
-                ],
-                [
-                  145.3,
-                  -37.8
-                ]
-              ]
-            },
-            "properties": {}
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
-                [
-                  144.7,
-                  -37.7
-                ],
-                [
-                  145.3,
-                  -37.7
-                ]
-              ]
-            },
-            "properties": {}
-          }
-        ]
+        "graticule": {
+          "step": [
+            0.25,
+            0.25
+          ],
+          "extent": [
+            [
+              143.57,
+              -39.21
+            ],
+            [
+              146.57,
+              -36.55
+            ]
+          ]
+        }
       },
       "mark": {
         "type": "geoshape",
         "fill": null,
-        "stroke": "#bdd3da",
-        "strokeWidth": 0.55,
+        "stroke": "#B9D1DE",
+        "strokeWidth": 0.4,
+        "opacity": 0.35,
         "clip": true
       }
     },
@@ -201,122 +110,139 @@
       },
       "transform": [
         {
-          "filter": "datum.map_city == 'Melbourne'"
-        }
-      ],
-      "layer": [
-        {
-          "mark": {
-            "type": "circle",
-            "color": "#286f91",
-            "opacity": 0.86,
-            "stroke": "#ffffff",
-            "strokeWidth": 1.7,
-            "clip": true
-          },
-          "encoding": {
-            "longitude": {
-              "field": "longitude",
-              "type": "quantitative"
-            },
-            "latitude": {
-              "field": "latitude",
-              "type": "quantitative"
-            },
-            "size": {
-              "field": "listed_books",
-              "type": "quantitative",
-              "title": "Listed books",
-              "scale": {
-                "domain": [
-                  0,
-                  22
-                ],
-                "range": [
-                  55,
-                  1600
-                ]
-              },
-              "legend": {
-                "orient": "bottom",
-                "values": [
-                  1,
-                  10,
-                  20
-                ],
-                "symbolFillColor": "#286f91"
-              }
-            },
-            "tooltip": [
-              {
-                "field": "contact_locality",
-                "type": "nominal",
-                "title": "Contact locality"
-              },
-              {
-                "field": "listed_books",
-                "type": "quantitative",
-                "title": "Listed books"
-              },
-              {
-                "field": "winning_books",
-                "type": "quantitative",
-                "title": "Winners"
-              },
-              {
-                "field": "publishers",
-                "type": "quantitative",
-                "title": "Publishers"
-              },
-              {
-                "field": "publisher_names",
-                "type": "nominal",
-                "title": "Publisher names"
-              }
-            ]
-          }
+          "filter": "datum.map_city === 'Melbourne'"
         },
         {
-          "transform": [
-            {
-              "filter": "indexof(['Collingwood', 'Southbank'], datum.contact_locality) >= 0"
-            }
-          ],
-          "mark": {
-            "type": "text",
-            "dy": -17,
-            "font": "Arial",
-            "fontSize": 12,
-            "fontWeight": "bold",
-            "color": "#213b48",
-            "clip": true
-          },
-          "encoding": {
-            "longitude": {
-              "field": "longitude",
-              "type": "quantitative"
-            },
-            "latitude": {
-              "field": "latitude",
-              "type": "quantitative"
-            },
-            "text": {
-              "field": "contact_locality",
-              "type": "nominal"
-            }
-          }
+          "calculate": "datum.winning_books / datum.listed_books * 100",
+          "as": "winner_share_pct"
         }
-      ]
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.9,
+        "stroke": "white",
+        "strokeWidth": 0.8,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "order": {
+          "field": "listed_books",
+          "type": "quantitative",
+          "sort": "descending"
+        },
+        "size": {
+          "field": "listed_books",
+          "type": "quantitative",
+          "title": "Listed books",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              22
+            ],
+            "range": [
+              12,
+              850
+            ],
+            "zero": true
+          },
+          "legend": {
+            "orient": "bottom",
+            "values": [
+              1,
+              10,
+              20
+            ],
+            "symbolFillColor": "white",
+            "symbolStrokeColor": "#74300B",
+            "symbolStrokeWidth": 1.5
+          }
+        },
+        "color": {
+          "field": "winner_share_pct",
+          "type": "quantitative",
+          "title": "Winner share (%)",
+          "scale": {
+            "domain": [
+              0,
+              20,
+              40
+            ],
+            "range": [
+              "#E8BB82",
+              "#BB7330",
+              "#74300B"
+            ],
+            "interpolate": "lab",
+            "clamp": true
+          },
+          "legend": {
+            "gradientLength": 190,
+            "gradientThickness": 10,
+            "values": [
+              0,
+              20,
+              40
+            ],
+            "format": ".0f",
+            "titleOrient": "top",
+            "titleAnchor": "start"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "map_city",
+            "type": "nominal",
+            "title": "City"
+          },
+          {
+            "field": "contact_locality",
+            "type": "nominal",
+            "title": "Area"
+          },
+          {
+            "field": "listed_books",
+            "type": "quantitative",
+            "title": "Listed books",
+            "format": ","
+          },
+          {
+            "field": "winning_books",
+            "type": "quantitative",
+            "title": "Winners"
+          },
+          {
+            "field": "winner_share_pct",
+            "type": "quantitative",
+            "title": "Winner share",
+            "format": ".1f"
+          }
+        ]
+      }
     }
   ],
   "config": {
+    "font": "Arial",
+    "title": {
+      "font": "Georgia",
+      "subtitleFont": "Arial"
+    },
     "view": {
-      "stroke": null,
-      "fill": "#d9edf4"
+      "stroke": "#C7D6DE",
+      "strokeWidth": 0.7
     },
     "legend": {
       "labelFont": "Arial",
-      "titleFont": "Arial"
+      "titleFont": "Arial",
+      "orient": "bottom"
     }
   }
 }

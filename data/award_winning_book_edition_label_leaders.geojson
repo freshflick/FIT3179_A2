@@ -1,0 +1,442 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "United States"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -74.006,
+            40.7128
+          ],
+          [
+            -86,
+            46
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "United Kingdom"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -0.1276,
+            51.5072
+          ],
+          [
+            -16,
+            58
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "France"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            2.3522,
+            48.8566
+          ],
+          [
+            -12,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Italy"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            12.4964,
+            41.9028
+          ],
+          [
+            21,
+            36
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Poland"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            21.0122,
+            52.2297
+          ],
+          [
+            34,
+            52
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "China"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.4074,
+            39.9042
+          ],
+          [
+            111,
+            47
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Germany"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            13.405,
+            52.52
+          ],
+          [
+            18,
+            61
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Netherlands"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            4.9041,
+            52.3676
+          ],
+          [
+            -2,
+            66
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Canada"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -79.3832,
+            43.6532
+          ],
+          [
+            -91,
+            50
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Serbia"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            20.4489,
+            44.7866
+          ],
+          [
+            31,
+            38
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Sweden"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            18.0686,
+            59.3293
+          ],
+          [
+            27,
+            69
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "North America"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -100.0,
+            39.0
+          ],
+          [
+            -110,
+            31
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Spain"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.7038,
+            40.4168
+          ],
+          [
+            -17,
+            39
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Portugal"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -9.1393,
+            38.7223
+          ],
+          [
+            -20,
+            31
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Taiwan"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.5654,
+            25.033
+          ],
+          [
+            135,
+            21
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Egypt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            31.2357,
+            30.0444
+          ],
+          [
+            39,
+            24
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Turkey"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            32.8597,
+            39.9334
+          ],
+          [
+            45,
+            35
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Denmark"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            12.5683,
+            55.6761
+          ],
+          [
+            3,
+            71
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Hungary"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            19.0402,
+            47.4979
+          ],
+          [
+            39,
+            45
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Slovenia"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            14.5058,
+            46.0569
+          ],
+          [
+            5,
+            31
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Russia"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            37.6173,
+            55.7558
+          ],
+          [
+            51,
+            64
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Norway"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            10.7522,
+            59.9139
+          ],
+          [
+            -2,
+            77
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "destination_market": "Romania"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            26.1025,
+            44.4268
+          ],
+          [
+            43,
+            48
+          ]
+        ]
+      }
+    }
+  ]
+}

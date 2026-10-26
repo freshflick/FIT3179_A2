@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=15">
+  <link rel="stylesheet" href="css/styles.css?v=18">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -226,55 +226,46 @@
   <section class="story-section" aria-labelledby="geography-heading">
     <div class="section-heading">
       <p class="section-number">04 / The geography of literary visibility</p>
-      <h2 id="geography-heading">Where the shortlisted publishers have contacts</h2>
+      <h2 id="geography-heading">Prize-winning books travel through global publishing</h2>
     </div>
-    <p class="section-lead">Extending the PMLA map to 2022–2026 brings <strong class="emphasis-blue">144 publisher-attributed shortlist records</strong> into view. Documented Australian contacts place 135 records from 33 publishers in eight metro areas. The map shows the geography of <strong class="emphasis-green">publisher contacts</strong>, while the state view compares the share that won.</p>
+    <p class="section-lead">The map follows <strong class="emphasis-indigo">published editions and documented rights sales</strong> for four books recognised by Australian literary prizes. Their international paths show how a local award can connect a book with readers well beyond Australia.</p>
 
     <div class="chart-block map-card map-primary">
-      <h3>Publisher contacts cluster within two cities</h3>
-      <p class="chart-intro">Documented contacts of PMLA-listed publishers · 2022–2026</p>
-      <div class="hex-city-pair" aria-label="Sydney and Melbourne publisher contact maps">
-        <div class="hex-city-panel">
-          <h4>Sydney <span>14 publishers · 67 listed books</span></h4>
-          <div id="publisher-sydney-hex-map" class="chart map-visual" role="img" aria-label="Sydney map with seven occupied areas showing distinct PMLA publisher contacts"></div>
-          <p><strong class="emphasis-green">Two publishers account for 34 records</strong> in one north Sydney area.</p>
-        </div>
-        <div class="hex-city-panel">
-          <h4>Melbourne <span>11 publishers · 39 listed books</span></h4>
-          <div id="publisher-melbourne-hex-map" class="chart map-visual" role="img" aria-label="Melbourne map with seven occupied areas showing distinct PMLA publisher contacts"></div>
-          <p><strong class="emphasis-green">Three publishers account for 16 records</strong> in one central area.</p>
-        </div>
+      <h3>Four award-winning books connect Australia to 23 international markets</h3>
+      <p class="chart-intro">Published editions for <em>Carpentaria</em>, <em>The Yield</em> and <em>Cold Enough for Snow</em>; publisher-rights sales for <em>No Friend But the Mountains</em></p>
+      <div id="award-edition-flow-map" class="chart map-visual" role="img" aria-label="World flow map linking Australia to 23 international publishing markets for four books recognised by Australian literary prizes; solid routes are documented editions, dashed routes are rights sales"></div>
+      <div class="flow-map-legend" aria-label="Flow map legend"><span><i class="flow-line-sample" aria-hidden="true"></i>Published foreign edition</span><span><i class="flow-rights-sample" aria-hidden="true"></i>Publishing rights sold</span><span><i class="flow-both-sample" aria-hidden="true"></i>Both evidence types</span><span><i class="flow-dot-sample" aria-hidden="true"></i>Market; Australia is the origin anchor</span><span><i class="flow-width-sample" aria-hidden="true"></i>Line width: number of selected titles</span></div>
+      <div class="flow-map-callouts" aria-label="Key findings from the publishing flow map">
+        <aside class="flow-callout flow-callout-rights"><h4>A prize-winning account reaches 19 territories</h4><p>The rights catalogue for <em>No Friend But the Mountains</em> lists sales across <strong>19 territories</strong>, from the UK and Europe to Taiwan and Egypt.</p></aside>
+        <aside class="flow-callout flow-callout-editions"><h4>Three novels have documented editions in 11 countries</h4><p><em>Carpentaria</em>, <em>The Yield</em> and <em>Cold Enough for Snow</em> appear in shared markets including France, Germany, Poland and the UK.</p></aside>
       </div>
-      <div class="hex-map-legend" aria-label="Publishers in each occupied area"><strong>Publishers in one area</strong><span><i style="background:#b5d9c7"></i>1</span><span><i style="background:#7dbda2"></i>2</span><span><i style="background:#3e9878"></i>3</span><span><i style="background:#0f6652"></i>4</span></div>
-      <div class="map-summary"><p><strong class="emphasis-green">The two cities account for 106 of 135 mapped records.</strong> Smaller areas reveal fourteen distinct contact clusters across their suburbs.</p><p>The other six contact metros contribute 29 records. The location map below opens each city's documented contact localities.</p></div>
+      <div class="map-summary"><p><strong class="emphasis-indigo">Publishing evidence spans 23 distinct markets.</strong> The rights catalogue and edition records overlap in seven markets, while other routes show a book reaching places not shared by the rest of this sample.</p><p>Solid lines indicate a published foreign edition; dashed lines indicate publishing rights sold, which do not by themselves confirm publication. Endpoints are representative city coordinates, and the selected titles are a sourced sample rather than a complete count of Australian literature overseas.</p></div>
     </div>
 
     <div class="map-pair" aria-label="Publisher contact and winner maps">
       <article class="map-card">
         <h3>Zoom into the publisher contacts</h3>
         <p class="chart-intro">Listed PMLA records by documented publisher contact location · 2022–2026</p>
+        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of publisher contacts, with national metro totals and detailed Sydney and Melbourne views"></div>
         <div class="map-view-controls" role="group" aria-label="Publisher location map view">
           <button type="button" data-map-view="australia" aria-pressed="true">Australia</button>
           <button type="button" data-map-view="sydney" aria-pressed="false">Sydney</button>
           <button type="button" data-map-view="melbourne" aria-pressed="false">Melbourne</button>
-          <span class="map-zoom-controls">
-            <button type="button" data-map-zoom="out" aria-label="Zoom out of city map" disabled>−</button>
-            <button type="button" data-map-zoom="in" aria-label="Zoom into city map" disabled>+</button>
-          </span>
         </div>
-        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of publisher contacts, with national metro totals and detailed Sydney and Melbourne views"></div>
+        <div id="publisher-map-navigation"></div>
           <p id="publisher-map-detail" class="map-detail" aria-live="polite">Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.</p>
-        <aside class="finding finding-blue"><h4>106 records cluster in two metros</h4><p><strong class="emphasis-blue">Sydney has 67 and Melbourne 39.</strong> In the Sydney close-up, Crows Nest accounts for 22 records and Parramatta nine. In Melbourne, Collingwood has nine and Southbank eight.</p></aside>
+        <aside class="finding finding-copper"><h4>106 records cluster in two metros</h4><p><strong class="emphasis-copper">Sydney has 67 and Melbourne 39.</strong> In the Sydney close-up, Crows Nest accounts for 22 records and Parramatta nine. In Melbourne, Collingwood has nine and Southbank eight.</p></aside>
       </article>
       <article class="map-card">
         <h3>Queensland leads on winner share in this selection</h3>
         <p class="chart-intro">Winning books as a share of listed PMLA records by publisher contact state · 2022–2026</p>
         <div id="publisher-state-winners-map" class="chart map-visual" role="img" aria-label="Choropleth of winner share among listed PMLA books associated with documented publisher contact states"></div>
-        <aside class="finding finding-copper"><h4>Five of UQP’s 16 listed books won</h4><p><strong class="emphasis-copper">Queensland’s mapped winner share is 31.2%</strong>, ahead of NSW’s 21.4% (15 of 70). All 16 Queensland records come from University of Queensland Press, so this is a publisher-level result rather than a state-wide success rate.</p></aside>
+        <div id="state-map-navigation" class="state-map-navigation" aria-label="Map navigation controls"></div>
+        <aside class="finding finding-rose"><h4>Five of UQP’s 16 listed books won</h4><p><strong class="emphasis-rose">Queensland’s mapped winner share is 31.2%</strong>, ahead of NSW’s 21.4% (15 of 70). All 16 Queensland records come from University of Queensland Press, so this is a publisher-level result rather than a state-wide success rate.</p></aside>
       </article>
     </div>
 
-    <p class="geography-source">The maps use the <a href="data/pmla_2024_2026.csv">2024–2026 PMLA book table</a>, <a href="data/pmla_2022_2023_geography.csv">2022–2023 publisher-attributed records</a>, and <a href="data/publisher_contact_locations.csv">sourced publisher contacts</a>. Nine records lack a supported Australian contact and are excluded; all 30 winners are mapped. State and suburb boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. Locality centroids: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. <a href="data/map_methodology.md">Mapping method and limitations</a>.</p>
+    <p class="geography-source">Prize results are verified by <a href="https://www.perpetual.com.au/insights/two-time-winner-alexis-wright-joins-esteemed-ranks/">Perpetual’s Miles Franklin history</a>, <a href="https://tarajunewinch.format.com/">Tara June Winch’s official site</a>, <a href="https://giramondopublishing.com/books/jessica-au-cold-enough-for-snow/">Giramondo Publishing</a> and the <a href="https://www.sl.nsw.gov.au/awards/national-biography-award/2019-winner-no-friend-mountains">State Library of NSW award record</a>. Edition evidence includes <a href="https://www.ndbooks.com/book/carpentaria/">New Directions</a>, <a href="https://www.westernsydney.edu.au/writing-society/events/archive/china-australia-literary-forum2">Western Sydney University’s record of the Chinese translation</a>, <a href="https://www.haymonverlag.at/magazin/leseprobe-aus-wie-rote-erde-von-tara-june-winch/">Haymon Verlag</a>, <a href="https://czarne.com.pl/katalog/ksiazki/plon">Wydawnictwo Czarne</a>, <a href="https://www.finna.fi/Record/jakobstad.1e424868-fc48-4dfe-a2dd-53fd1d917498">Finna library catalogue</a> and <a href="https://isfar.org.au/wp-content/uploads/2024/03/75_ELAINE-LEWIS_Bibliographical-Notes.pdf">ISFAR’s Australian publications bibliography</a>. Foreign rights territories for <em>No Friend But the Mountains</em> are listed in the <a href="https://www.agenciabalcells.com/fileadmin/Catalogos/Jane_Novak_2023_rights_catalogue.pdf">rights-agent catalogue</a>. See the <a href="data/award_winning_book_editions.csv">edition data</a>, <a href="data/award_winning_book_rights_sales.csv">rights-sale data</a> and <a href="data/map_methodology.md">mapping method and limitations</a>. The other maps use the <a href="data/pmla_2024_2026.csv">2024–2026 PMLA book table</a>, <a href="data/pmla_2022_2023_geography.csv">2022–2023 publisher-attributed records</a>, and <a href="data/publisher_contact_locations.csv">sourced publisher contacts</a>. Nine records lack a supported Australian contact and are excluded; all 30 winners are mapped. State and suburb boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. Locality centroids: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>.</p>
   </section>
 
   <footer>
@@ -298,89 +289,178 @@
 </main>
 
 <script>
+  function createViewUpdater(view) {
+    let pending = {}, needsResize = false, scheduled = false, running = false;
+    async function flush() {
+      scheduled = false;
+      if (running) return;
+      running = true;
+      try {
+        while (Object.keys(pending).length) {
+          const values = pending;
+          const resize = needsResize;
+          pending = {}; needsResize = false;
+          if (resize) view.resize();
+          await view.runAsync(null, current => {
+            Object.entries(values).forEach(([name, value]) => current.signal(name, value));
+          });
+        }
+      } catch (error) { console.error('Chart update failed:', error); }
+      finally {
+        running = false;
+        if (Object.keys(pending).length && !scheduled) {
+          scheduled = true; requestAnimationFrame(flush);
+        }
+      }
+    }
+    return (values, resize = false) => {
+      Object.assign(pending, values); needsResize ||= resize;
+      if (!scheduled && !running) { scheduled = true; requestAnimationFrame(flush); }
+    };
+  }
+
+  function enableMapNavigation(view, container, options = {}) {
+    const svg = container.querySelector('svg.marks');
+    const frame = svg?.querySelector(options.frameSelector || 'g.mark-group.role-frame.root');
+    if (!svg || !frame) return;
+    const prefix = options.prefix || 'map';
+    const label = options.label || 'Australian';
+    const focusTarget = options.focusFrame ? frame : container;
+    const controlsHost = options.controlsHost || container;
+    const update = options.update || createViewUpdater(view);
+    const widthSignal = options.widthSignal || 'width';
+    focusTarget.tabIndex = 0;
+    focusTarget.setAttribute('role', 'region');
+    focusTarget.setAttribute('aria-label', `Interactive ${label} map. Drag to move, scroll to zoom. Arrow keys move the view; plus and minus zoom; Home resets.`);
+    const toolbar = document.createElement('div');
+    toolbar.className = 'map-toolbar';
+    toolbar.innerHTML = `<div class="map-controls" role="group" aria-label="${label} map navigation"><button type="button" data-map-action="out" aria-label="Zoom out of ${label}" title="Zoom out">−</button><output class="map-zoom-value" aria-label="${label} zoom level">100%</output><button type="button" data-map-action="in" aria-label="Zoom into ${label}" title="Zoom in">+</button><button type="button" data-map-action="reset" class="map-reset" title="Reset ${label} map">Reset</button></div>`;
+    if (options.showHelp !== false) {
+      const help = document.createElement('p'); help.className = 'map-help'; help.textContent = 'Drag to move. Scroll to zoom.'; toolbar.appendChild(help);
+    }
+    controlsHost.appendChild(toolbar);
+    const zoomValue = toolbar.querySelector('output');
+    const zoomIn = toolbar.querySelector('[data-map-action="in"]');
+    const zoomOut = toolbar.querySelector('[data-map-action="out"]');
+    let camera = { zoom: 1, x: 0, y: 0 }, drag = null;
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const dimensions = () => ({ width: Number(typeof widthSignal === 'number' ? widthSignal : view.signal(widthSignal)), height: Number(view.signal('height')) });
+    function plotPoint(event) {
+      const matrix = frame.getScreenCTM(); if (!matrix) return null;
+      const point = svg.createSVGPoint(); point.x = event.clientX; point.y = event.clientY;
+      return point.matrixTransform(matrix.inverse());
+    }
+    function inside(point) {
+      const { width, height } = dimensions();
+      return point && point.x >= 0 && point.y >= 0 && point.x <= width && point.y <= height;
+    }
+    function moveCamera(next) {
+      const { width, height } = dimensions(), zoom = clamp(next.zoom, 1, 6);
+      camera = { zoom, x: clamp(next.x, -width * ((zoom - 1) / 2 + .35), width * ((zoom - 1) / 2 + .35)), y: clamp(next.y, -height * ((zoom - 1) / 2 + .35), height * ((zoom - 1) / 2 + .35)) };
+      update({ [`${prefix}_zoom`]: camera.zoom, [`${prefix}_pan_x`]: camera.x, [`${prefix}_pan_y`]: camera.y });
+      zoomValue.textContent = `${Math.round(zoom * 100)}%`; zoomOut.disabled = zoom <= 1; zoomIn.disabled = zoom >= 6;
+    }
+    function changeZoom(factor, point) {
+      const { width, height } = dimensions(), nextZoom = clamp(camera.zoom * factor, 1, 6);
+      if (nextZoom === camera.zoom) return;
+      if (nextZoom === 1) return moveCamera({ zoom: 1, x: 0, y: 0 });
+      const anchor = point || { x: width / 2, y: height / 2 }, ratio = nextZoom / camera.zoom;
+      moveCamera({ zoom: nextZoom, x: (anchor.x - width / 2) * (1 - ratio) + camera.x * ratio, y: (anchor.y - height / 2) * (1 - ratio) + camera.y * ratio });
+    }
+    toolbar.addEventListener('click', event => {
+      const action = event.target.closest('button')?.dataset.mapAction;
+      if (action === 'in') changeZoom(1.35);
+      if (action === 'out') changeZoom(1 / 1.35);
+      if (action === 'reset') moveCamera({ zoom: 1, x: 0, y: 0 });
+    });
+    svg.addEventListener('wheel', event => {
+      const point = plotPoint(event); if (!inside(point)) return;
+      const multiplier = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 300 : 1;
+      const factor = Math.exp(-clamp(event.deltaY * multiplier, -250, 250) * .002);
+      if (clamp(camera.zoom * factor, 1, 6) === camera.zoom) return;
+      event.preventDefault(); changeZoom(factor, point);
+    }, { passive: false });
+    svg.addEventListener('pointerdown', event => {
+      const point = plotPoint(event); if (event.button !== 0 || drag || !inside(point)) return;
+      event.preventDefault(); focusTarget.focus({ preventScroll: true });
+      drag = { id: event.pointerId, point, x: camera.x, y: camera.y };
+      svg.setPointerCapture(event.pointerId); frame.classList.add('is-dragging');
+    });
+    svg.addEventListener('pointermove', event => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const point = plotPoint(event); if (!point) return;
+      moveCamera({ zoom: camera.zoom, x: drag.x + point.x - drag.point.x, y: drag.y + point.y - drag.point.y });
+    });
+    function endDrag(event) {
+      if (!drag || event.pointerId !== drag.id) return;
+      const id = drag.id; drag = null; frame.classList.remove('is-dragging');
+      if (svg.hasPointerCapture(id)) svg.releasePointerCapture(id);
+    }
+    svg.addEventListener('pointerup', endDrag); svg.addEventListener('pointercancel', endDrag); svg.addEventListener('lostpointercapture', endDrag);
+    focusTarget.addEventListener('keydown', event => {
+      if (event.target.closest('button, summary, a, input')) return;
+      const moves = { ArrowLeft: [40, 0], ArrowRight: [-40, 0], ArrowUp: [0, 40], ArrowDown: [0, -40] };
+      if (moves[event.key]) { event.preventDefault(); const [x, y] = moves[event.key]; moveCamera({ zoom: camera.zoom, x: camera.x + x, y: camera.y + y }); }
+      else if (event.key === '+' || event.key === '=') { event.preventDefault(); changeZoom(1.35); }
+      else if (event.key === '-') { event.preventDefault(); changeZoom(1 / 1.35); }
+      else if (event.key === 'Home' || event.key === '0') { event.preventDefault(); moveCamera({ zoom: 1, x: 0, y: 0 }); }
+    });
+    zoomOut.disabled = true;
+  }
+
   const charts = [
     ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=5'],
     ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=5'],
     ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=3'],
     ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json'],
-    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=4'],
+    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=5'],
     ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=2'],
-    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=2'],
-    ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=6'],
-    ['#publisher-sydney-hex-map', 'charts/section4/pmla_publisher_sydney_hex.vl.json?v=2'],
-    ['#publisher-melbourne-hex-map', 'charts/section4/pmla_publisher_melbourne_hex.vl.json?v=2']
+    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=2']
   ];
-  charts.forEach(([target, spec]) => {
-    vegaEmbed(target, spec, { actions: true }).catch(error => {
-      console.error(error);
-      document.querySelector(target).textContent =
-              'Chart unavailable. Check the browser console and local server.';
-    });
-  });
+  charts.forEach(([target, spec]) => vegaEmbed(target, spec, { actions: true }).catch(error => {
+    console.error(error); document.querySelector(target).textContent = 'Chart unavailable. Check the browser console and local server.';
+  }));
+
+  async function embedInteractiveMap(container, source, label, prefix = 'map') {
+    try {
+      const result = await vegaEmbed(container, source, { actions: true, renderer: 'svg' });
+      const controlsHost = container.id === 'publisher-office-map'
+        ? document.querySelector('#publisher-map-navigation')
+        : container.id === 'publisher-state-winners-map'
+          ? document.querySelector('#state-map-navigation')
+          : container;
+      enableMapNavigation(result.view, container, { prefix, label, controlsHost });
+      return result;
+    } catch (error) { console.error(error); container.textContent = 'Map unavailable. Check the browser console and local server.'; }
+  }
+  const awardFlowTarget = document.querySelector('#award-edition-flow-map');
+  embedInteractiveMap(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=11', 'international publishing flows');
+
+  const stateMapTarget = document.querySelector('#publisher-state-winners-map');
+  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=13', 'publisher winner-share');
 
   const publisherMapViews = {
-    australia: {
-      source: 'charts/section4/publisher_contact_metros.vl.json?v=6',
-      detail: 'Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.'
-    },
-    sydney: {
-      source: 'charts/section4/publisher_sydney_localities.vl.json?v=13',
-      detail: 'Crows Nest accounts for 22 records through Allen & Unwin; Parramatta adds nine through Giramondo. Hover over a point for its publisher names and counts.'
-    },
-    melbourne: {
-      source: 'charts/section4/publisher_melbourne_localities.vl.json?v=13',
-      detail: 'Collingwood has nine records across three publishers; Southbank has eight through Text Publishing. Hover over a point for its publisher names and counts.'
-    }
+    australia: { source: 'charts/section4/publisher_contact_metros.vl.json?v=10', detail: 'Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.' },
+    sydney: { source: 'charts/section4/publisher_sydney_localities.vl.json?v=20', detail: 'Crows Nest accounts for 22 records through Allen & Unwin; Parramatta adds nine through Giramondo. Hover over a point for its publisher names and counts.' },
+    melbourne: { source: 'charts/section4/publisher_melbourne_localities.vl.json?v=20', detail: 'Collingwood has nine records across three publishers; Southbank has eight through Text Publishing. Hover over a point for its publisher names and counts.' }
   };
-  let publisherMapRequest = 0;
-  let publisherMapPlace = 'australia';
-  let publisherMapZoom = 1;
+  let publisherMapPlace = 'australia', publisherMapView = null, publisherMapSuppressClickUntil = 0;
+  const publisherMapTarget = document.querySelector('#publisher-office-map');
   async function showPublisherMap(place) {
-    if (place !== publisherMapPlace) publisherMapZoom = 1;
     publisherMapPlace = place;
-    const request = ++publisherMapRequest;
-    const target = document.querySelector('#publisher-office-map');
-    document.querySelectorAll('[data-map-view]').forEach(button => {
-      button.setAttribute('aria-pressed', String(button.dataset.mapView === place));
-    });
-    document.querySelector('[data-map-zoom="in"]').disabled = place === 'australia' || publisherMapZoom >= 2.4;
-    document.querySelector('[data-map-zoom="out"]').disabled = place === 'australia' || publisherMapZoom <= 1;
+    document.querySelector('#publisher-map-navigation').replaceChildren();
+    document.querySelectorAll('[data-map-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mapView === place)));
     document.querySelector('#publisher-map-detail').textContent = publisherMapViews[place].detail;
-    try {
-      const response = await fetch(publisherMapViews[place].source);
-      if (!response.ok) throw new Error(`Map source returned ${response.status}`);
-      const spec = await response.json();
-      if (target.clientWidth < 500) spec.height = place === 'australia' ? 280 : 340;
-      if (place !== 'australia') {
-        spec.projection.scale *= Math.min(1, target.clientWidth / 480) * publisherMapZoom;
-      }
-      if (request !== publisherMapRequest) return;
-      const result = await vegaEmbed(target, spec, { actions: true, renderer: 'svg' });
-      if (place === 'australia') {
-        result.view.addEventListener('click', (_event, item) => {
-          const city = item && item.datum && item.datum.map_city;
-          if (city === 'Sydney' || city === 'Melbourne') showPublisherMap(city.toLowerCase());
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      target.textContent = 'Map unavailable. Check the browser console and local server.';
-    }
-  }
-  document.querySelectorAll('[data-map-view]').forEach(button => {
-    button.addEventListener('click', () => showPublisherMap(button.dataset.mapView));
-  });
-  document.querySelectorAll('[data-map-zoom]').forEach(button => {
-    button.addEventListener('click', () => {
-      publisherMapZoom = button.dataset.mapZoom === 'in'
-        ? Math.min(2.4, publisherMapZoom * 1.35)
-        : Math.max(1, publisherMapZoom / 1.35);
-      showPublisherMap(publisherMapPlace);
+    publisherMapView = await embedInteractiveMap(publisherMapTarget, publisherMapViews[place].source, `${place} publisher contact`, place === 'australia' ? 'map' : place);
+    if (place === 'australia' && publisherMapView) publisherMapView.view.addEventListener('click', (_event, item) => {
+      if (Date.now() < publisherMapSuppressClickUntil) return;
+      const city = item?.datum?.map_city;
+      if (city === 'Sydney' || city === 'Melbourne') showPublisherMap(city.toLowerCase());
     });
-  });
+  }
+  document.querySelectorAll('[data-map-view]').forEach(button => button.addEventListener('click', () => showPublisherMap(button.dataset.mapView)));
   showPublisherMap('australia');
-
 </script>
 </body>
 </html>
