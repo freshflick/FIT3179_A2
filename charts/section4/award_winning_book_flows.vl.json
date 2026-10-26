@@ -57,7 +57,7 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#EAF3F8",
+        "fill": "#F2F7FA",
         "stroke": null,
         "clip": true
       }
@@ -73,9 +73,9 @@
       },
       "mark": {
         "type": "geoshape",
-        "stroke": "#C7D9E1",
-        "strokeWidth": 0.55,
-        "opacity": 0.7,
+        "stroke": "#D7E1E7",
+        "strokeWidth": 0.45,
+        "opacity": 0.65,
         "clip": true
       }
     },
@@ -94,7 +94,7 @@
       ],
       "mark": {
         "type": "geoshape",
-        "fill": "#ECEAE4",
+        "fill": "#EBE8E1",
         "stroke": "#FFFFFF",
         "strokeWidth": 0.55,
         "clip": true
@@ -220,19 +220,19 @@
           "as": "dy"
         },
         {
-          "calculate": "datum.start_lon + datum.dx / 3 - datum.dy * 0.06",
+          "calculate": "datum.start_lon + datum.dx / 3 - datum.dy * 0.09",
           "as": "c1_lon"
         },
         {
-          "calculate": "datum.start_lat + datum.dy / 3 + datum.dx * 0.06",
+          "calculate": "datum.start_lat + datum.dy / 3 + datum.dx * 0.09",
           "as": "c1_lat"
         },
         {
-          "calculate": "datum.start_lon + 2 * datum.dx / 3 - datum.dy * 0.06",
+          "calculate": "datum.start_lon + 2 * datum.dx / 3 - datum.dy * 0.09",
           "as": "c2_lon"
         },
         {
-          "calculate": "datum.start_lat + 2 * datum.dy / 3 + datum.dx * 0.06",
+          "calculate": "datum.start_lat + 2 * datum.dy / 3 + datum.dx * 0.09",
           "as": "c2_lat"
         },
         {
@@ -404,16 +404,20 @@
           "legend": null
         },
         "color": {
-          "field": "kind",
+          "field": "evidence_type",
           "type": "nominal",
           "scale": {
             "domain": [
               "origin",
-              "market"
+              "edition",
+              "rights",
+              "both"
             ],
             "range": [
               "#27364B",
-              "#465A9B"
+              "#147F79",
+              "#6554A4",
+              "#D18A32"
             ]
           },
           "legend": null
