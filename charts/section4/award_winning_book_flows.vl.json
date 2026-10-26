@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "International publishing reach of four books recognised by Australian literary prizes. Solid teal routes mark published foreign editions; dashed violet routes mark territories where an agent lists publishing-rights sales. Gold routes have both types of evidence.",
+  "width": "container",
+  "height": 460,
+  "padding": {"left": 8, "right": 8, "top": 8, "bottom": 8},
+  "params": [
+    {"name": "map_zoom", "value": 1},
+    {"name": "map_pan_x", "value": 0},
+    {"name": "map_pan_y", "value": 0}
+  ],
+  "projection": {
+    "type": "equirectangular",
+    "rotate": [-120, 0, 0],
+    "fit": {"type": "Feature", "properties": {}, "geometry": {"type": "MultiPoint", "coordinates": [[-170, -55], [-170, 78], [170, -55], [170, 78]]}},
+    "extent": {"expr": "[[width / 2 + map_pan_x - (width - 20) * map_zoom / 2, height / 2 + map_pan_y - (height - 20) * map_zoom / 2], [width / 2 + map_pan_x + (width - 20) * map_zoom / 2, height / 2 + map_pan_y + (height - 20) * map_zoom / 2]]"},
+    "clipExtent": {"expr": "[[0, 0], [width, height]]"}
+  },
+  "layer": [
+    {"data": {"sphere": true}, "mark": {"type": "geoshape", "fill": "#EAF3F8", "stroke": null, "clip": true}},
+    {"data": {"graticule": {"step": [30, 30]}}, "mark": {"type": "geoshape", "stroke": "#C7D9E1", "strokeWidth": 0.55, "opacity": 0.7, "clip": true}},
+    {"data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@3/data/world-110m.json", "format": {"type": "topojson", "feature": "countries"}}, "transform": [{"filter": "toNumber(datum.id) !== 10"}], "mark": {"type": "geoshape", "fill": "#ECEAE4", "stroke": "#FFFFFF", "strokeWidth": 0.55, "clip": true}},
+    {"data": {"values": [{"type": "Feature", "geometry": {"type": "LineString", "coordinates": [[-180, 0], [180, 0]]}}]}, "mark": {"type": "geoshape", "filled": false, "stroke": "#8A9BAA", "strokeWidth": 0.8, "strokeDash": [4, 4], "clip": true}},
+    {
+      "data": {"url": "data/award_winning_book_edition_flows.geojson", "format": {"type": "json", "property": "features"}},
+      "mark": {"type": "geoshape", "filled": false, "strokeCap": "round", "opacity": 0.86, "clip": true},
+      "encoding": {
+        "stroke": {"field": "properties.evidence_type", "type": "nominal", "scale": {"domain": ["edition", "rights", "both"], "range": ["#147F79", "#6554A4", "#D18A32"]}, "legend": null},
+        "strokeDash": {"field": "properties.evidence_type", "type": "nominal", "scale": {"domain": ["edition", "rights", "both"], "range": [[], [6, 3], [2, 2]]}, "legend": null},
+        "strokeWidth": {"field": "properties.title_count", "type": "quantitative", "scale": {"domain": [1, 4], "range": [1.4, 4.2]}, "legend": null},
+        "tooltip": [
+          {"field": "properties.destination_market", "type": "nominal", "title": "Market"},
+          {"field": "properties.title_count", "type": "quantitative", "title": "Selected award-winning books with evidence"},
+          {"field": "properties.books", "type": "nominal", "title": "Titles"},
+          {"field": "properties.edition_details", "type": "nominal", "title": "Published-edition evidence"},
+          {"field": "properties.rights_details", "type": "nominal", "title": "Rights-sale evidence"},
+          {"field": "properties.awards", "type": "nominal", "title": "Awards"}
+        ]
+      }
+    },
+    {
+      "data": {"url": "data/award_winning_book_edition_markets.csv", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
+      "mark": {"type": "circle", "filled": true, "stroke": "#FFFFFF", "strokeWidth": 1.5, "opacity": 1, "clip": true},
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {"field": "title_count", "type": "quantitative", "scale": {"domain": [1, 4], "range": [55, 180]}, "legend": null},
+        "color": {"field": "kind", "type": "nominal", "scale": {"domain": ["origin", "market"], "range": ["#27364B", "#465A9B"]}, "legend": null},
+        "tooltip": [
+          {"field": "place", "type": "nominal", "title": "Market"},
+          {"field": "title_count", "type": "quantitative", "title": "Selected titles with publishing evidence"},
+          {"field": "evidence_type", "type": "nominal", "title": "Evidence type"}
+        ]
+      }
+    },
+    {
+      "data": {"url": "data/award_winning_book_edition_markets.csv", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "label_longitude": "number", "label_latitude": "number", "title_count": "number"}}},
+      "transform": [{"filter": "datum.kind === 'market'"}],
+      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#263746", "align": "center", "baseline": "middle"},
+      "encoding": {"longitude": {"field": "label_longitude", "type": "quantitative"}, "latitude": {"field": "label_latitude", "type": "quantitative"}, "text": {"field": "label", "type": "nominal"}}
+    },
+    {
+      "data": {"url": "data/award_winning_book_edition_markets.csv", "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number", "title_count": "number"}}},
+      "transform": [{"filter": "datum.kind === 'origin'"}],
+      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold", "color": "#27364B", "dx": 8, "dy": 17, "align": "left", "clip": true},
+      "encoding": {"longitude": {"field": "longitude", "type": "quantitative"}, "latitude": {"field": "latitude", "type": "quantitative"}, "text": {"field": "place", "type": "nominal"}}
+    }
+  ],
+  "config": {"view": {"stroke": null}, "legend": {"labelFont": "Arial", "titleFont": "Arial", "labelFontSize": 11, "titleFontSize": 11}}
+}

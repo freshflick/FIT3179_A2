@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=18">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -29,12 +29,12 @@
       <p class="intro">
         Literary prizes bring a small selection of books into view. Follow the
         2024–2026 award lists to see who appears, which categories they reach,
-        what wins, and where leading publishers have documented offices.
+        and what wins. The maps widen the PMLA view to 2022–2026.
       </p>
       <div class="hero-meta" aria-label="Story scope">
-        <span><strong>90</strong> PMLA books</span>
-        <span><strong>36</strong> Stella books</span>
-        <span><strong>3</strong> award years</span>
+        <span><strong>90</strong><small>PMLA books · core story</small></span>
+        <span><strong>36</strong><small>Stella books · core story</small></span>
+        <span><strong>135</strong><small>PMLA map records · 2022–26</small></span>
       </div>
     </div>
 
@@ -102,36 +102,32 @@
       <p class="section-number">01 / Prime Minister’s Literary Awards</p>
       <h2 id="landscape-heading">A small group dominates the lists</h2>
     </div>
-    <p class="section-lead">Ten publishers account for 65 of the 90 books on the 2024–2026 Prime Minister’s Literary Awards lists. Their reach across the six categories varies sharply.</p>
+    <p class="section-lead"><strong class="emphasis-copper">Ten publishers hold 65 of 90 places</strong> on the 2024–2026 Prime Minister’s Literary Awards lists. Visibility is concentrated, but the publishers do not reach the same categories.</p>
 
+    <div class="chart-pair">
     <div class="chart-block">
-      <h3>Which publishers appear the most often?</h3>
+      <h3>A clear leader in appearances</h3>
       <p class="chart-intro">Books on the award lists, ranked by publisher · 2024–2026</p>
 
-      <div class="publisher-layout">
         <div id="publisher-chart" class="chart" role="img"
              aria-label="Bar chart of publishers ordered by number of books on the award lists"></div>
 
-        <aside class="chart-explanation" aria-label="Publisher chart interpretation">
-          <h4>Allen &amp; Unwin leads the list</h4>
-          <p>Its 18 appearances are more than twice the next publisher’s eight.</p>
-          <p>The chart measures appearances in this award selection, not publishers’ overall output.</p>
+        <aside class="finding finding-copper" aria-label="Publisher chart finding">
+          <h4><span class="finding-index">01</span> Allen &amp; Unwin sets the pace</h4>
+          <p><strong class="emphasis-copper">18 listed books</strong> put it ten ahead of University of Queensland Press, the next publisher at eight. Its titles span <strong>five of six categories</strong>; Poetry is the exception.</p>
         </aside>
-      </div>
     </div>
 
     <div class="chart-block">
-      <h3>Where do the most represented publishers appear?</h3>
+      <h3>Equal totals, different specialisms</h3>
       <p class="chart-intro">Distribution of publishers' books across six award categories · 2024–2026</p>
-      <div class="chart-story-layout">
         <div id="heatmap-chart" class="chart" role="img" aria-label="Heatmap of publisher appearances across six award categories"></div>
-        <aside class="story" aria-label="Category heatmap interpretation">
-          <h4>Equal totals can hide different patterns</h4>
-          <p>Giramondo and Hachette each have six appearances. All six of Giramondo’s are in Poetry, while Hachette’s books span four categories.</p>
-          <p>Their equal totals therefore represent very different category reach.</p>
+        <aside class="finding finding-rose" aria-label="Category heatmap finding">
+          <h4><span class="finding-index">02</span> Six books can mean two stories</h4>
+          <p><strong class="emphasis-rose">All six Giramondo books are Poetry</strong>, including two winners. Hachette also has six listed books, but they span <strong>four categories</strong> and include one winner.</p>
         </aside>
-      </div>
-      <p class="chart-note">A pale cell means no appearance in this selection; it does not mean the publisher produces no books in that category. Hover for exact counts. Each book is counted once, including winners.</p>
+      <p class="chart-note">Counts cover this award selection only. Categories have 15 listed books each by the award’s design.</p>
+    </div>
     </div>
   </section>
 
@@ -140,31 +136,28 @@
       <p class="section-number">02 / Comparing award selections</p>
       <h2 id="awards-heading">The prize changes the picture</h2>
     </div>
-    <p class="section-lead">A publisher prominent in one prize may have a much smaller share of another. Stella’s three longlists also show a changing genre mix.</p>
+    <p class="section-lead">The two prizes reward different kinds of visibility. <strong class="emphasis-lilac">Publisher shares reverse</strong> between lists, while Stella’s recent longlists become less fiction heavy.</p>
     <div class="chart-block">
-      <h3>Publisher shares diverge between the prizes</h3>
+      <h3>The same publishers, different shares</h3>
       <p class="chart-intro">Share of listed books by publisher · Prime Minister’s Literary Awards and Stella Prize, 2024–2026</p>
       <div id="award-comparison-chart" class="chart dot-chart" role="img" aria-label="Connected dot plot comparing each publisher’s share of the two award lists"></div>
-      <div class="chart-text-grid">
-        <aside class="chart-explanation" aria-label="Award comparison finding">
-          <h4>The leaders reverse</h4>
-          <p>Allen &amp; Unwin holds 20% of the Prime Minister’s list but 5.6% of Stella’s. Giramondo holds 6.7% and 13.9%, respectively.</p>
-        </aside>
-        <p class="chart-context">Publishers shown have at least four appearances combined. Shares use 90 Prime Minister’s shortlisted or winning books and 36 Stella longlisted books.</p>
+      <div class="finding-row">
+        <aside class="finding finding-copper" aria-label="Award comparison finding"><h4>Allen &amp; Unwin: strong on the PMLA list</h4><p><strong class="emphasis-copper">20.0% of PMLA books</strong> are published by Allen &amp; Unwin, compared with <strong>5.6% of Stella books</strong>. Its gap is <strong>14.4 percentage points</strong>.</p></aside>
+        <aside class="finding finding-lilac"><h4>Giramondo moves the other way</h4><p>Its share rises from <strong>6.7% on PMLA</strong> to <strong class="emphasis-lilac">13.9% on Stella</strong>, a 7.2 point change. These are shares of each prize’s list, rather than a publisher’s total output.</p></aside>
       </div>
     </div>
 
     <div class="chart-block">
       <h3>Stella’s longlists broaden beyond fiction</h3>
-      <p class="chart-intro">One square per longlisted book · Stella Prize, 2024–2026</p>
+      <p class="chart-intro">Genre composition of Stella’s longlists · 2024–2026</p>
       <div class="stella-layout">
         <aside class="chart-explanation stella-explanation">
           <h4>Fiction’s share falls by half</h4>
-          <p>Fiction falls from eight of 12 books in 2024 to four of 12 in 2026. That 2026 list also includes five non-fiction or memoir books, two poetry books and a graphic novel.</p>
+          <p><strong class="emphasis-plum">Fiction falls from eight of 12 books to four of 12</strong> between 2024 and 2026. The 2026 longlist makes room for five non-fiction or memoir books, two poetry books and a graphic novel.</p>
         </aside>
         <div id="stella-genre-chart" class="chart stella-units-chart" role="img" aria-label="Twelve book squares for each Stella award year, coloured by genre group"></div>
       </div>
-      <p class="chart-note">Genres are grouped for comparison, not official Stella categories. Each book appears once in its year’s longlist, even if it later won.</p>
+      <p class="chart-note">These genre groups are based on the listed book descriptions; they are not official Stella categories.</p>
     </div>
   </section>
 
@@ -173,51 +166,35 @@
       <p class="section-number">03 / From lists to winners</p>
       <h2 id="outcomes-heading">A shortlist is only the start</h2>
     </div>
-    <p class="section-lead">Appearances, wins, repeat appearances and overlap between prizes reveal different kinds of recognition. We follow the books from their lists to the final outcomes.</p>
+    <p class="section-lead">Frequent appearances do not guarantee the same results. The charts trace <strong class="emphasis-blue">who wins, which genres advance, and how little the two prizes overlap</strong>.</p>
 
     <div class="chart-block">
-      <h3>Do the most visible publishers win more often?</h3>
+      <h3>More appearances do not guarantee more wins</h3>
       <p class="chart-intro">Listed books and winners by publisher · Prime Minister’s Literary Awards, 2024–2026</p>
       <div id="publisher-wins-chart" class="chart full-width-chart" role="img" aria-label="Scatter plot comparing award-list appearances and wins for publishers with at least three listed books"></div>
-      <div class="chart-text-grid">
-        <aside class="chart-explanation" aria-label="Publisher wins finding">
-          <h4>The same number of wins, with fewer appearances</h4>
-          <p>University of Queensland Press and Allen &amp; Unwin each have three wins, from eight and 18 listed books respectively.</p>
-        </aside>
-        <p class="chart-context">Each dot is a publisher with at least three listed books. The dashed line marks one win per five appearances, the overall ratio across these awards.</p>
+      <div class="finding-row">
+        <aside class="finding finding-blue" aria-label="Publisher wins finding"><h4>Three wins from very different list sizes</h4><p><strong class="emphasis-blue">University of Queensland Press: 3 wins from 8 books.</strong> Allen &amp; Unwin also has three wins, from 18 listed books. Those counts show different outcomes for the two most visible publishers.</p></aside>
+        <aside class="finding finding-green"><h4>Specialisation can stand out</h4><p><strong class="emphasis-green">Giramondo’s 2 wins came from 6 listed books</strong>, all in Poetry. Across all 90 PMLA listed books, 18 won; these small publisher totals are not a reliable prediction of future wins.</p></aside>
       </div>
-      <p class="chart-note">Two publishers with three appearances and one win are nudged slightly apart so both dots can be seen. Hover for exact counts. A publisher’s small set of appearances should not be treated as a reliable win rate.</p>
     </div>
 
     <div class="chart-block">
-      <h3>Which genres make it from Stella’s longlist to the winner?</h3>
+      <h3>Where Stella’s 36 longlisted books finish</h3>
       <p class="chart-intro">
-        Books reaching each prize stage, grouped by genre · Stella Prize, 2024–2026
+        Progression and exits by genre · Stella Prize, 2024–2026
       </p>
 
       <div id="stella-progression-chart" class="chart full-width-chart"
            role="img"
-           aria-label="Flow chart of Stella books by genre from longlist to shortlist and winner"></div>
+           aria-label="Alluvial chart of Stella books by genre, including books that stopped at the longlist or shortlist and the three winners"></div>
 
-      <div class="chart-text-grid">
-        <aside class="chart-explanation">
-          <h4>Three winners emerge from 36 longlisted books</h4>
-          <p>Eighteen reached the shortlist. Fiction supplies two of the three winners; the other is a graphic novel.</p>
-        </aside>
-        <p class="chart-context">
-          Ribbon width represents books that reached the next stage. Books that did not advance end at their last stage. Genre labels are grouped for comparison rather than official Stella categories.
-        </p>
-      </div>
-
-      <p class="chart-note">
-        All 36 books entered the longlist. The shortlist count includes the eventual winners, so each book is counted once at each stage it reached. Hover over a ribbon or block for its count.
-      </p>
+      <div class="finding-row"><aside class="finding finding-plum"><h4>Half the longlist ends at the first cut</h4><p><strong class="emphasis-plum">18 of 36 longlisted books did not reach the shortlist</strong> across 2024–2026. Ten of those 18 were fiction, so the largest starting group also accounts for most early exits.</p></aside><aside class="finding finding-teal"><h4>The final step is narrower still</h4><p>Of 18 shortlisted books, <strong class="emphasis-teal">only three won</strong>: two fiction titles and one graphic novel. Seven non-fiction or memoir books reached the shortlist, but none won in these three years.</p></aside></div>
     </div>
 
     <div class="chart-block">
       <h3>Shared books are spread across six publishers</h3>
       <p class="chart-intro">
-        Publisher area represents distinct books within each award-list group ·
+        Distinct books by publisher and award-list overlap ·
         Prime Minister’s Literary Awards and Stella Prize, 2024–2026
       </p>
 
@@ -225,18 +202,7 @@
            role="img"
            aria-label="Treemap comparing books unique to each prize list with books appearing on both"></div>
 
-      <div class="chart-text-grid">
-        <aside class="chart-explanation">
-          <h4>Only nine titles cross the two lists</h4>
-          <p>Nine of 117 distinct books appear on both lists, across six publishers. The highlighted area contains those shared titles, including the book that won both prizes.</p>
-        </aside>
-        <p class="chart-context">
-          Each coloured group shows books listed by one prize or both.
-          Within it, each rectangle is a publisher; its area and printed number
-          represent distinct books. Shared books use the publisher name recorded
-          in the Prime Minister’s dataset. Hover for exact names and counts.
-        </p>
-      </div>
+      <div class="finding-row"><aside class="finding finding-blue"><h4>Prize-specific selections dominate</h4><p><strong class="emphasis-blue">108 titles appear on only one list</strong>: 81 on PMLA alone and 27 on Stella alone. The two prizes offer largely separate routes to visibility.</p></aside><aside class="finding finding-copper"><h4>The crossover reaches six publishers</h4><p>The shared titles are spread across <strong class="emphasis-copper">six publishers</strong>. One title went further and won both prizes, showing that rare overlap can still lead to recognition at both.</p></aside></div>
     </div>
 
     <div class="chart-block">
@@ -253,76 +219,53 @@
               aria-label="UpSet chart showing which publishers appeared in the 2024, 2025 and 2026 Prime Minister’s Literary Awards lists"
       ></div>
 
-      <p class="chart-note">
-        Each bar represents one exact combination of years. Filled dots mark those years;
-        pale dots mark years without an appearance. Hover to see publisher names.
-      </p>
+      <div class="finding-row"><aside class="finding finding-copper"><h4>One-year appearances peak in 2025</h4><p>Of the publishers seen in only one year, <strong class="emphasis-copper">six appear in 2025 alone</strong>, five in 2026 alone and four in 2024 alone.</p></aside><aside class="finding finding-blue"><h4>Continuity is usually unbroken</h4><p>Four publishers appear in 2024 and 2025 only; two appear in 2025 and 2026 only. <strong class="emphasis-blue">None return in 2026 after missing 2025</strong> in this three-year selection.</p></aside></div>
     </div>
   </section>
 
   <section class="story-section" aria-labelledby="geography-heading">
     <div class="section-heading">
       <p class="section-number">04 / The geography of literary visibility</p>
-      <h2 id="geography-heading">Publishing hubs in a wider reading landscape</h2>
+      <h2 id="geography-heading">Prize-winning books travel through global publishing</h2>
     </div>
-    <p class="section-lead">
-      The ten leading publishers map to four documented office metro areas. A separate
-      historical library snapshot shows how much more widely reading spaces are located.
-    </p>
+    <p class="section-lead">The map follows <strong class="emphasis-indigo">published editions and documented rights sales</strong> for four books recognised by Australian literary prizes. Their international paths show how a local award can connect a book with readers well beyond Australia.</p>
 
     <div class="chart-block map-card map-primary">
-      <h3>Most appearances cluster in Sydney and Melbourne</h3>
-      <p class="chart-intro">
-        Office metro areas of the ten most represented publishers ·
-        Prime Minister’s Literary Awards, 2024–2026
-      </p>
-
-      <div id="publisher-office-map" class="chart full-width-chart"
-           role="img"
-           aria-label="Map of Australia with circles showing listed books by publisher office metro area"></div>
-
-      <div class="chart-text-grid">
-        <aside class="chart-explanation">
-          <h4>Sydney accounts for the largest share</h4>
-          <p>Publishers mapped to Sydney account for 37 of the 65 books from the top ten publishers. Melbourne follows with 17; Brisbane and Broome contribute eight and three.</p>
-        </aside>
-        <p class="chart-context">
-          Circle area represents listed books, not all books published in each city.
-          The points use city reference coordinates for documented publisher offices;
-          they do not show where authors live or where stories take place.
-        </p>
+      <h3>Four award-winning books connect Australia to 23 international markets</h3>
+      <p class="chart-intro">Published editions for <em>Carpentaria</em>, <em>The Yield</em> and <em>Cold Enough for Snow</em>; publisher-rights sales for <em>No Friend But the Mountains</em></p>
+      <div id="award-edition-flow-map" class="chart map-visual" role="img" aria-label="World flow map linking Australia to 23 international publishing markets for four books recognised by Australian literary prizes; solid routes are documented editions, dashed routes are rights sales"></div>
+      <div class="flow-map-legend" aria-label="Flow map legend"><span><i class="flow-line-sample" aria-hidden="true"></i>Published foreign edition</span><span><i class="flow-rights-sample" aria-hidden="true"></i>Publishing rights sold</span><span><i class="flow-both-sample" aria-hidden="true"></i>Both evidence types</span><span><i class="flow-dot-sample" aria-hidden="true"></i>Market; Australia is the origin anchor</span><span><i class="flow-width-sample" aria-hidden="true"></i>Line width: number of selected titles</span></div>
+      <div class="flow-map-callouts" aria-label="Key findings from the publishing flow map">
+        <aside class="flow-callout flow-callout-rights"><h4>A prize-winning account reaches 19 territories</h4><p>The rights catalogue for <em>No Friend But the Mountains</em> lists sales across <strong>19 territories</strong>, from the UK and Europe to Taiwan and Egypt.</p></aside>
+        <aside class="flow-callout flow-callout-editions"><h4>Three novels have documented editions in 11 countries</h4><p><em>Carpentaria</em>, <em>The Yield</em> and <em>Cold Enough for Snow</em> appear in shared markets including France, Germany, Poland and the UK.</p></aside>
       </div>
-
-      <p class="chart-note">
-        Multi-office publishers use one documented office for mapping.
-      </p>
+      <div class="map-summary"><p><strong class="emphasis-indigo">Publishing evidence spans 23 distinct markets.</strong> The rights catalogue and edition records overlap in seven markets, while other routes show a book reaching places not shared by the rest of this sample.</p><p>Solid lines indicate a published foreign edition; dashed lines indicate publishing rights sold, which do not by themselves confirm publication. Endpoints are representative city coordinates, and the selected titles are a sourced sample rather than a complete count of Australian literature overseas.</p></div>
     </div>
 
-    <div class="map-pair" aria-label="State map comparison">
+    <div class="map-pair" aria-label="Publisher contact and winner maps">
       <article class="map-card">
-        <h3>Where are the winners’ publishers based?</h3>
-        <p class="chart-intro">Winners from the ten most represented publishers · 2024–2026</p>
-        <div id="publisher-state-winners-map" class="chart full-width-chart map-visual"
-             role="img" aria-label="Choropleth of Australian states shaded by winning books associated with top-ten publishers' documented offices"></div>
-        <aside class="chart-explanation map-insight">
-          <h4>Eight of 14 winners map to NSW</h4>
-          <p>Queensland has three, Victoria two and Western Australia one. Grey states have no selected top-ten publisher office; they are not zero-win claims for all publishers.</p>
-        </aside>
+        <h3>Zoom into the publisher contacts</h3>
+        <p class="chart-intro">Listed PMLA records by documented publisher contact location · 2022–2026</p>
+        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of publisher contacts, with national metro totals and detailed Sydney and Melbourne views"></div>
+        <div class="map-view-controls" role="group" aria-label="Publisher location map view">
+          <button type="button" data-map-view="australia" aria-pressed="true">Australia</button>
+          <button type="button" data-map-view="sydney" aria-pressed="false">Sydney</button>
+          <button type="button" data-map-view="melbourne" aria-pressed="false">Melbourne</button>
+        </div>
+        <div id="publisher-map-navigation"></div>
+          <p id="publisher-map-detail" class="map-detail" aria-live="polite">Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.</p>
+        <aside class="finding finding-copper"><h4>106 records cluster in two metros</h4><p><strong class="emphasis-copper">Sydney has 67 and Melbourne 39.</strong> In the Sydney close-up, Crows Nest accounts for 22 records and Parramatta nine. In Melbourne, Collingwood has nine and Southbank eight.</p></aside>
       </article>
-
       <article class="map-card">
-        <h3>Public libraries reach beyond the award hubs</h3>
-        <p class="chart-intro">1,440 recorded public library locations, 2016–2018 · each shaded area counts sites within a 115 km radius grid cell. Use the slider to reveal denser clusters.</p>
-        <div id="publisher-hex-map" class="chart map-visual"
-             role="img" aria-label="Map of 1,440 historical Australian public library locations grouped into equal-area hexagonal cells, with publisher office metro locations marked in orange"></div>
-        <aside class="chart-explanation map-insight">
-          <h4>Reading spaces are more dispersed</h4>
-          <p>The historical archive records 375 sites in NSW and 328 in Queensland, together 703 of the 1,440 mapped libraries. Orange dots mark the four office metros. These site counts are neither population-adjusted nor evidence of award-book holdings.</p>
-        </aside>
+        <h3>Queensland leads on winner share in this selection</h3>
+        <p class="chart-intro">Winning books as a share of listed PMLA records by publisher contact state · 2022–2026</p>
+        <div id="publisher-state-winners-map" class="chart map-visual" role="img" aria-label="Choropleth of winner share among listed PMLA books associated with documented publisher contact states"></div>
+        <div id="state-map-navigation" class="state-map-navigation" aria-label="Map navigation controls"></div>
+        <aside class="finding finding-rose"><h4>Five of UQP’s 16 listed books won</h4><p><strong class="emphasis-rose">Queensland’s mapped winner share is 31.2%</strong>, ahead of NSW’s 21.4% (15 of 70). All 16 Queensland records come from University of Queensland Press, so this is a publisher-level result rather than a state-wide success rate.</p></aside>
       </article>
     </div>
 
-    <p class="geography-source">Award geography uses the <a href="data/pmla_2024_2026.csv">PMLA book table</a> and <a href="data/publisher_office_locations_top10.csv">documented publisher offices</a>. Library locations: <a href="https://research-repository.rmit.edu.au/articles/dataset/Australian_public_lending_library_locations_2016-2018_/21944840">Carl Higgs, RMIT University, 2016–2018</a>. State boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. <a href="data/map_methodology.md">Mapping method and limitations</a>.</p>
+    <p class="geography-source">Prize results are verified by <a href="https://www.perpetual.com.au/insights/two-time-winner-alexis-wright-joins-esteemed-ranks/">Perpetual’s Miles Franklin history</a>, <a href="https://tarajunewinch.format.com/">Tara June Winch’s official site</a>, <a href="https://giramondopublishing.com/books/jessica-au-cold-enough-for-snow/">Giramondo Publishing</a> and the <a href="https://www.sl.nsw.gov.au/awards/national-biography-award/2019-winner-no-friend-mountains">State Library of NSW award record</a>. Edition evidence includes <a href="https://www.ndbooks.com/book/carpentaria/">New Directions</a>, <a href="https://www.westernsydney.edu.au/writing-society/events/archive/china-australia-literary-forum2">Western Sydney University’s record of the Chinese translation</a>, <a href="https://www.haymonverlag.at/magazin/leseprobe-aus-wie-rote-erde-von-tara-june-winch/">Haymon Verlag</a>, <a href="https://czarne.com.pl/katalog/ksiazki/plon">Wydawnictwo Czarne</a>, <a href="https://www.finna.fi/Record/jakobstad.1e424868-fc48-4dfe-a2dd-53fd1d917498">Finna library catalogue</a> and <a href="https://isfar.org.au/wp-content/uploads/2024/03/75_ELAINE-LEWIS_Bibliographical-Notes.pdf">ISFAR’s Australian publications bibliography</a>. Foreign rights territories for <em>No Friend But the Mountains</em> are listed in the <a href="https://www.agenciabalcells.com/fileadmin/Catalogos/Jane_Novak_2023_rights_catalogue.pdf">rights-agent catalogue</a>. See the <a href="data/award_winning_book_editions.csv">edition data</a>, <a href="data/award_winning_book_rights_sales.csv">rights-sale data</a> and <a href="data/map_methodology.md">mapping method and limitations</a>. The other maps use the <a href="data/pmla_2024_2026.csv">2024–2026 PMLA book table</a>, <a href="data/pmla_2022_2023_geography.csv">2022–2023 publisher-attributed records</a>, and <a href="data/publisher_contact_locations.csv">sourced publisher contacts</a>. Nine records lack a supported Australian contact and are excluded; all 30 winners are mapped. State and suburb boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. Locality centroids: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>.</p>
   </section>
 
   <footer>
@@ -330,12 +273,12 @@
       <div class="footer-panel">
         <p class="section-number">The story in brief</p>
         <h2>Visibility clusters; recognition varies.</h2>
-        <p>Ten publishers account for 65 of 90 PMLA books. Across PMLA and Stella, only nine of 117 distinct titles appear on both lists. The mapped publisher offices cluster in four metros; historical library sites offer a wider geographic context.</p>
+        <p><strong class="emphasis-copper">Ten publishers account for 65 of 90 PMLA books</strong> in the core 2024–2026 story. Across PMLA and Stella, <strong class="emphasis-blue">only nine of 117 distinct titles</strong> appear on both lists. The five-year map adds earlier PMLA lists and places 106 of 135 mapped records around Sydney and Melbourne.</p>
       </div>
       <div class="footer-panel">
         <h3>Sources and method</h3>
-        <p>Book lists: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia</a> and the <a href="https://stella.org.au/prize/">Stella Prize</a>, 2024–2026. These lists represent selected books, not all Australian publishing.</p>
-        <p>Map geography: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">ABS boundaries</a>, <a href="data/publisher_office_locations_top10.csv">publisher office sources</a>, and <a href="https://research-repository.rmit.edu.au/articles/dataset/Australian_public_lending_library_locations_2016-2018_/21944840">RMIT historical library locations</a>. Chart specifications and prepared data are in the <a href="https://github.com/freshflick/FIT3179_A2/tree/main/charts">JSON folder</a>.</p>
+        <p>Book lists: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia</a> and the <a href="https://stella.org.au/prize/">Stella Prize</a>. The main comparisons cover 2024–2026; the maps extend PMLA to 2022. These lists represent selected books, not all Australian publishing.</p>
+        <p>Map geography: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">ABS boundaries</a> and <a href="data/publisher_contact_locations.csv">publisher contact sources</a>. Chart specifications and prepared data are in the <a href="https://github.com/freshflick/FIT3179_A2/tree/main/charts">JSON folder</a>.</p>
       </div>
     </div>
     <div class="footer-meta">
@@ -346,27 +289,178 @@
 </main>
 
 <script>
+  function createViewUpdater(view) {
+    let pending = {}, needsResize = false, scheduled = false, running = false;
+    async function flush() {
+      scheduled = false;
+      if (running) return;
+      running = true;
+      try {
+        while (Object.keys(pending).length) {
+          const values = pending;
+          const resize = needsResize;
+          pending = {}; needsResize = false;
+          if (resize) view.resize();
+          await view.runAsync(null, current => {
+            Object.entries(values).forEach(([name, value]) => current.signal(name, value));
+          });
+        }
+      } catch (error) { console.error('Chart update failed:', error); }
+      finally {
+        running = false;
+        if (Object.keys(pending).length && !scheduled) {
+          scheduled = true; requestAnimationFrame(flush);
+        }
+      }
+    }
+    return (values, resize = false) => {
+      Object.assign(pending, values); needsResize ||= resize;
+      if (!scheduled && !running) { scheduled = true; requestAnimationFrame(flush); }
+    };
+  }
+
+  function enableMapNavigation(view, container, options = {}) {
+    const svg = container.querySelector('svg.marks');
+    const frame = svg?.querySelector(options.frameSelector || 'g.mark-group.role-frame.root');
+    if (!svg || !frame) return;
+    const prefix = options.prefix || 'map';
+    const label = options.label || 'Australian';
+    const focusTarget = options.focusFrame ? frame : container;
+    const controlsHost = options.controlsHost || container;
+    const update = options.update || createViewUpdater(view);
+    const widthSignal = options.widthSignal || 'width';
+    focusTarget.tabIndex = 0;
+    focusTarget.setAttribute('role', 'region');
+    focusTarget.setAttribute('aria-label', `Interactive ${label} map. Drag to move, scroll to zoom. Arrow keys move the view; plus and minus zoom; Home resets.`);
+    const toolbar = document.createElement('div');
+    toolbar.className = 'map-toolbar';
+    toolbar.innerHTML = `<div class="map-controls" role="group" aria-label="${label} map navigation"><button type="button" data-map-action="out" aria-label="Zoom out of ${label}" title="Zoom out">−</button><output class="map-zoom-value" aria-label="${label} zoom level">100%</output><button type="button" data-map-action="in" aria-label="Zoom into ${label}" title="Zoom in">+</button><button type="button" data-map-action="reset" class="map-reset" title="Reset ${label} map">Reset</button></div>`;
+    if (options.showHelp !== false) {
+      const help = document.createElement('p'); help.className = 'map-help'; help.textContent = 'Drag to move. Scroll to zoom.'; toolbar.appendChild(help);
+    }
+    controlsHost.appendChild(toolbar);
+    const zoomValue = toolbar.querySelector('output');
+    const zoomIn = toolbar.querySelector('[data-map-action="in"]');
+    const zoomOut = toolbar.querySelector('[data-map-action="out"]');
+    let camera = { zoom: 1, x: 0, y: 0 }, drag = null;
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const dimensions = () => ({ width: Number(typeof widthSignal === 'number' ? widthSignal : view.signal(widthSignal)), height: Number(view.signal('height')) });
+    function plotPoint(event) {
+      const matrix = frame.getScreenCTM(); if (!matrix) return null;
+      const point = svg.createSVGPoint(); point.x = event.clientX; point.y = event.clientY;
+      return point.matrixTransform(matrix.inverse());
+    }
+    function inside(point) {
+      const { width, height } = dimensions();
+      return point && point.x >= 0 && point.y >= 0 && point.x <= width && point.y <= height;
+    }
+    function moveCamera(next) {
+      const { width, height } = dimensions(), zoom = clamp(next.zoom, 1, 6);
+      camera = { zoom, x: clamp(next.x, -width * ((zoom - 1) / 2 + .35), width * ((zoom - 1) / 2 + .35)), y: clamp(next.y, -height * ((zoom - 1) / 2 + .35), height * ((zoom - 1) / 2 + .35)) };
+      update({ [`${prefix}_zoom`]: camera.zoom, [`${prefix}_pan_x`]: camera.x, [`${prefix}_pan_y`]: camera.y });
+      zoomValue.textContent = `${Math.round(zoom * 100)}%`; zoomOut.disabled = zoom <= 1; zoomIn.disabled = zoom >= 6;
+    }
+    function changeZoom(factor, point) {
+      const { width, height } = dimensions(), nextZoom = clamp(camera.zoom * factor, 1, 6);
+      if (nextZoom === camera.zoom) return;
+      if (nextZoom === 1) return moveCamera({ zoom: 1, x: 0, y: 0 });
+      const anchor = point || { x: width / 2, y: height / 2 }, ratio = nextZoom / camera.zoom;
+      moveCamera({ zoom: nextZoom, x: (anchor.x - width / 2) * (1 - ratio) + camera.x * ratio, y: (anchor.y - height / 2) * (1 - ratio) + camera.y * ratio });
+    }
+    toolbar.addEventListener('click', event => {
+      const action = event.target.closest('button')?.dataset.mapAction;
+      if (action === 'in') changeZoom(1.35);
+      if (action === 'out') changeZoom(1 / 1.35);
+      if (action === 'reset') moveCamera({ zoom: 1, x: 0, y: 0 });
+    });
+    svg.addEventListener('wheel', event => {
+      const point = plotPoint(event); if (!inside(point)) return;
+      const multiplier = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 300 : 1;
+      const factor = Math.exp(-clamp(event.deltaY * multiplier, -250, 250) * .002);
+      if (clamp(camera.zoom * factor, 1, 6) === camera.zoom) return;
+      event.preventDefault(); changeZoom(factor, point);
+    }, { passive: false });
+    svg.addEventListener('pointerdown', event => {
+      const point = plotPoint(event); if (event.button !== 0 || drag || !inside(point)) return;
+      event.preventDefault(); focusTarget.focus({ preventScroll: true });
+      drag = { id: event.pointerId, point, x: camera.x, y: camera.y };
+      svg.setPointerCapture(event.pointerId); frame.classList.add('is-dragging');
+    });
+    svg.addEventListener('pointermove', event => {
+      if (!drag || event.pointerId !== drag.id) return;
+      const point = plotPoint(event); if (!point) return;
+      moveCamera({ zoom: camera.zoom, x: drag.x + point.x - drag.point.x, y: drag.y + point.y - drag.point.y });
+    });
+    function endDrag(event) {
+      if (!drag || event.pointerId !== drag.id) return;
+      const id = drag.id; drag = null; frame.classList.remove('is-dragging');
+      if (svg.hasPointerCapture(id)) svg.releasePointerCapture(id);
+    }
+    svg.addEventListener('pointerup', endDrag); svg.addEventListener('pointercancel', endDrag); svg.addEventListener('lostpointercapture', endDrag);
+    focusTarget.addEventListener('keydown', event => {
+      if (event.target.closest('button, summary, a, input')) return;
+      const moves = { ArrowLeft: [40, 0], ArrowRight: [-40, 0], ArrowUp: [0, 40], ArrowDown: [0, -40] };
+      if (moves[event.key]) { event.preventDefault(); const [x, y] = moves[event.key]; moveCamera({ zoom: camera.zoom, x: camera.x + x, y: camera.y + y }); }
+      else if (event.key === '+' || event.key === '=') { event.preventDefault(); changeZoom(1.35); }
+      else if (event.key === '-') { event.preventDefault(); changeZoom(1 / 1.35); }
+      else if (event.key === 'Home' || event.key === '0') { event.preventDefault(); moveCamera({ zoom: 1, x: 0, y: 0 }); }
+    });
+    zoomOut.disabled = true;
+  }
+
   const charts = [
     ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=5'],
-    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=3'],
-    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=2'],
+    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=5'],
+    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=3'],
     ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json'],
-    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=2'],
-    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json'],
-    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=1'],
-    ['#publisher-office-map', 'charts/section4/publisher_office_map.vl.json?v=2'],
-    ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=3'],
-    ['#publisher-hex-map', 'charts/section4/public_library_hex_bins.vl.json?v=2']
+    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=5'],
+    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=2'],
+    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=2']
   ];
-  charts.forEach(([target, spec]) => {
-    vegaEmbed(target, spec, { actions: true }).catch(error => {
-      console.error(error);
-      document.querySelector(target).textContent =
-              'Chart unavailable. Check the browser console and local server.';
-    });
-  });
+  charts.forEach(([target, spec]) => vegaEmbed(target, spec, { actions: true }).catch(error => {
+    console.error(error); document.querySelector(target).textContent = 'Chart unavailable. Check the browser console and local server.';
+  }));
 
+  async function embedInteractiveMap(container, source, label, prefix = 'map') {
+    try {
+      const result = await vegaEmbed(container, source, { actions: true, renderer: 'svg' });
+      const controlsHost = container.id === 'publisher-office-map'
+        ? document.querySelector('#publisher-map-navigation')
+        : container.id === 'publisher-state-winners-map'
+          ? document.querySelector('#state-map-navigation')
+          : container;
+      enableMapNavigation(result.view, container, { prefix, label, controlsHost });
+      return result;
+    } catch (error) { console.error(error); container.textContent = 'Map unavailable. Check the browser console and local server.'; }
+  }
+  const awardFlowTarget = document.querySelector('#award-edition-flow-map');
+  embedInteractiveMap(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=11', 'international publishing flows');
+
+  const stateMapTarget = document.querySelector('#publisher-state-winners-map');
+  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=13', 'publisher winner-share');
+
+  const publisherMapViews = {
+    australia: { source: 'charts/section4/publisher_contact_metros.vl.json?v=10', detail: 'Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.' },
+    sydney: { source: 'charts/section4/publisher_sydney_localities.vl.json?v=20', detail: 'Crows Nest accounts for 22 records through Allen & Unwin; Parramatta adds nine through Giramondo. Hover over a point for its publisher names and counts.' },
+    melbourne: { source: 'charts/section4/publisher_melbourne_localities.vl.json?v=20', detail: 'Collingwood has nine records across three publishers; Southbank has eight through Text Publishing. Hover over a point for its publisher names and counts.' }
+  };
+  let publisherMapPlace = 'australia', publisherMapView = null, publisherMapSuppressClickUntil = 0;
+  const publisherMapTarget = document.querySelector('#publisher-office-map');
+  async function showPublisherMap(place) {
+    publisherMapPlace = place;
+    document.querySelector('#publisher-map-navigation').replaceChildren();
+    document.querySelectorAll('[data-map-view]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.mapView === place)));
+    document.querySelector('#publisher-map-detail').textContent = publisherMapViews[place].detail;
+    publisherMapView = await embedInteractiveMap(publisherMapTarget, publisherMapViews[place].source, `${place} publisher contact`, place === 'australia' ? 'map' : place);
+    if (place === 'australia' && publisherMapView) publisherMapView.view.addEventListener('click', (_event, item) => {
+      if (Date.now() < publisherMapSuppressClickUntil) return;
+      const city = item?.datum?.map_city;
+      if (city === 'Sydney' || city === 'Melbourne') showPublisherMap(city.toLowerCase());
+    });
+  }
+  document.querySelectorAll('[data-map-view]').forEach(button => button.addEventListener('click', () => showPublisherMap(button.dataset.mapView)));
+  showPublisherMap('australia');
 </script>
 </body>
 </html>

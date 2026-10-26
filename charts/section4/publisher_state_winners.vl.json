@@ -1,33 +1,47 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "ABS 2021 state boundaries shaded by winning PMLA books associated with the documented office states of the ten most represented publishers, 2024–2026.",
+  "description": "ABS 2021 state boundaries shaded by PMLA winner share among publisher-attributed shortlist records associated with documented publisher contact states, 2022–2026; all 30 winners are included.",
   "width": "container",
   "height": 430,
   "background": "#ffffff",
-  "projection": {"type": "mercator"},
+  "params": [
+    {"name": "map_zoom", "value": 1},
+    {"name": "map_pan_x", "value": 0},
+    {"name": "map_pan_y", "value": 0}
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": [134, -27],
+    "fit": {"type": "Feature", "properties": {}, "geometry": {"type": "MultiPoint", "coordinates": [[112, -45], [155, -9]]}},
+    "extent": {"expr": "[[width / 2 + map_pan_x - (width - 20) * map_zoom / 2, height / 2 + map_pan_y - (height - 20) * map_zoom / 2], [width / 2 + map_pan_x + (width - 20) * map_zoom / 2, height / 2 + map_pan_y + (height - 20) * map_zoom / 2]]"},
+    "clipExtent": {"expr": "[[0, 0], [width, height]]"}
+  },
   "layer": [
+    {
+      "data": {"sphere": true},
+      "mark": {"type": "geoshape", "fill": "#EAF3F8", "stroke": null, "clip": true}
+    },
     {
       "data": {"url": "data/abs_states_2021.geojson", "format": {"type": "json", "property": "features"}},
       "transform": [
         {
           "lookup": "properties.state",
           "from": {
-            "data": {"url": "data/publisher_office_state_summary.csv"},
+            "data": {"url": "data/publisher_contact_state_summary.csv"},
             "key": "state_name",
             "fields": ["listed_books", "winning_books", "winner_share_pct"]
           }
         }
       ],
-      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.7},
+      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.1, "clip": true},
       "encoding": {
         "color": {
-          "condition": {"test": "datum.listed_books == 0", "value": "#e8eceb"},
-          "field": "winning_books", "type": "quantitative", "title": "Winning books",
-          "scale": {"domain": [0, 8], "range": ["#f7eadb", "#a34d2b"]},
+          "field": "winner_share_pct", "type": "quantitative", "title": "Winner share (%)",
+          "scale": {"domain": [0, 20, 40], "range": ["#F8E8EF", "#CB7FA1", "#78334F"], "clamp": true, "unknown": "#e8eceb"},
           "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 220, "tickCount": 5}
         },
         "tooltip": [
-          {"field": "properties.state", "type": "nominal", "title": "Publisher office state"},
+          {"field": "properties.state", "type": "nominal", "title": "Publisher contact state"},
           {"field": "winning_books", "type": "quantitative", "title": "Winning books"},
           {"field": "listed_books", "type": "quantitative", "title": "Listed books"},
           {"field": "winner_share_pct", "type": "quantitative", "title": "Winner share (%)", "format": ".1f"}
@@ -35,24 +49,55 @@
       }
     },
     {
+      "data": {"graticule": {"extent": [[112, -45], [155, -9]], "step": [10, 10]}},
+      "mark": {"type": "geoshape", "fill": null, "stroke": "#B9D1DE", "strokeWidth": 0.4, "opacity": 0.35, "clip": true}
+    },
+    {
+      "data": {"values": [
+        {"longitude": 120, "latitude": -9.5, "label": "120°E"},
+        {"longitude": 130, "latitude": -9.5, "label": "130°E"},
+        {"longitude": 140, "latitude": -9.5, "label": "140°E"},
+        {"longitude": 150, "latitude": -9.5, "label": "150°E"}
+      ]},
+      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "color": "#526c75", "clip": true, "baseline": "bottom", "dy": -3},
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "label", "type": "nominal"}
+      }
+    },
+    {
+      "data": {"values": [
+        {"longitude": 113.8, "latitude": -20, "label": "20°S"},
+        {"longitude": 113.8, "latitude": -30, "label": "30°S"},
+        {"longitude": 113.8, "latitude": -40, "label": "40°S"}
+      ]},
+      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "color": "#526c75", "align": "right", "dx": -5, "clip": true},
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "label", "type": "nominal"}
+      }
+    },
+    {
       "data": {"values": [
         {"state": "WA", "longitude": 122, "latitude": -26},
         {"state": "QLD", "longitude": 144, "latitude": -21},
         {"state": "NSW", "longitude": 147, "latitude": -32},
-        {"state": "VIC", "longitude": 143, "latitude": -37}
+        {"state": "VIC", "longitude": 145, "latitude": -36.6}
       ]},
       "transform": [
-        {"lookup": "state", "from": {"data": {"url": "data/publisher_office_state_summary.csv"}, "key": "state", "fields": ["winning_books"]}},
-        {"calculate": "datum.state + '  ' + datum.winning_books", "as": "label"}
+        {"lookup": "state", "from": {"data": {"url": "data/publisher_contact_state_summary.csv"}, "key": "state", "fields": ["winner_share_pct"]}},
+        {"calculate": "datum.state + '  ' + format(datum.winner_share_pct, '.1f') + '%'", "as": "label"}
       ],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold"},
+      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "center", "baseline": "middle", "clip": true},
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
         "latitude": {"field": "latitude", "type": "quantitative"},
         "text": {"field": "label", "type": "nominal"},
-        "color": {"condition": {"test": "datum.state == 'NSW'", "value": "#ffffff"}, "value": "#233441"}
+        "color": {"condition": {"test": "datum.state == 'QLD'", "value": "#ffffff"}, "value": "#233441"}
       }
     }
   ],
-  "config": {"view": {"stroke": null}, "legend": {"labelFont": "Arial", "titleFont": "Arial"}}
+  "config": {"view": {"stroke": "#C7D6DE", "strokeWidth": 0.7, "fill": "white"}, "legend": {"labelFont": "Arial", "titleFont": "Arial"}}
 }

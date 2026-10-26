@@ -5,7 +5,7 @@
   "autosize": "pad",
   "background": "#ffffff",
   "signals": [
-    {"name":"width","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 56 : 96)))","on":[{"events":"window:resize","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 56 : 96)))"}]},
+    {"name":"width","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 110 : windowSize()[0] < 1100 ? 160 : 96)))","on":[{"events":"window:resize","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 110 : windowSize()[0] < 1100 ? 160 : 96)))"}]},
     {"name":"compact","update":"width < 980"},
     {"name":"twoCards","update":"compact && width >= 650"},
     {"name":"plotW","update":"compact ? width - 8 : width - 300"},

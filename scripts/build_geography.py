@@ -1,4 +1,4 @@
-"""Rebuild the publisher-office state table and simplified ABS boundaries.
+"""Rebuild publisher-location summaries and simplified ABS boundaries.
 
 Download the ABS GDA2020 2021 States and Territories shapefile ZIP from
 https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files
@@ -179,23 +179,61 @@ def point_in_ring(lon, lat, ring):
 
 
 def counts():
-    offices = {row["publisher_key"]: row for row in csv.DictReader(
-        (DATA / "publisher_office_locations_top10.csv").open())}
-    listed, wins = Counter(), Counter()
-    for row in csv.DictReader((DATA / "pmla_2024_2026.csv").open()):
-        office = offices.get(row["publisher_key"])
-        if not office:
+    locations = {row["publisher_key"]: row for row in csv.DictReader(
+        (DATA / "publisher_contact_locations.csv").open())}
+    listed, wins, city_listed, city_wins = Counter(), Counter(), Counter(), Counter()
+    city_publishers = {}
+    locality_listed, locality_wins = Counter(), Counter()
+    locality_publishers = {}
+    books = list(csv.DictReader((DATA / "pmla_2024_2026.csv").open()))
+    books += list(csv.DictReader((DATA / "pmla_2022_2023_geography.csv").open()))
+    for row in books:
+        location = locations.get(row["publisher_key"])
+        if not location:
             continue
-        state = office["state"]
+        state = location["state"]
+        city = location["map_city"]
         listed[state] += 1
         wins[state] += row["outcome"].strip().lower() == "winner"
-    assert sum(listed.values()) == 65
-    with (DATA / "publisher_office_state_summary.csv").open("w", newline="") as f:
+        city_listed[city] += 1
+        city_wins[city] += row["outcome"].strip().lower() == "winner"
+        city_publishers.setdefault(city, set()).add(row["publisher_key"])
+        locality = (city, location["contact_locality"])
+        locality_listed[locality] += 1
+        locality_wins[locality] += row["outcome"].strip().lower() == "winner"
+        locality_publishers.setdefault(locality, set()).add(row["publisher_key"])
+    assert len(books) == 144 and len(locations) == 33
+    assert sum(wins.values()) == sum(row["outcome"].strip().lower() == "winner" for row in books)
+    with (DATA / "publisher_contact_state_summary.csv").open("w", newline="") as f:
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["state", "state_name", "listed_books", "winning_books", "winner_share_pct"])
         for state, name in STATE_NAMES.items():
             n = listed[state]
             writer.writerow([state, name, n, wins[state], round(100 * wins[state] / n, 1) if n else ""])
+    with (DATA / "publisher_contact_city_summary.csv").open("w", newline="") as f:
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(["map_city", "state", "longitude", "latitude", "listed_books", "winning_books", "publishers", "publisher_names"])
+        city_centres = {
+            "Sydney": (151.207, -33.868), "Melbourne": (144.963, -37.814),
+            "Brisbane": (153.028, -27.468), "Broome": (122.23922, -17.955379),
+            "Canberra": (149.128, -35.283), "Geelong": (144.361, -38.147),
+            "Newcastle": (151.78, -32.93), "Perth": (115.861, -31.952),
+        }
+        for city, n in city_listed.most_common():
+            location = next(item for item in locations.values() if item["map_city"] == city)
+            names = sorted(city_publishers[city])
+            writer.writerow([city, location["state"], *city_centres[city], n, city_wins[city], len(names), "; ".join(names)])
+    with (DATA / "publisher_contact_locality_summary.csv").open("w", newline="") as f:
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(["map_city", "contact_locality", "state", "longitude", "latitude", "listed_books", "winning_books", "publishers", "publisher_names"])
+        for (city, locality), n in locality_listed.most_common():
+            location = next(item for item in locations.values()
+                            if item["map_city"] == city and item["contact_locality"] == locality)
+            names = sorted(locality_publishers[(city, locality)])
+            writer.writerow([city, locality, location["state"], location["longitude"], location["latitude"],
+                             n, locality_wins[(city, locality)], len(names), "; ".join(names)])
+    print(f"{sum(listed.values())} of {len(books)} books mapped from "
+          f"{len({row['publisher_key'] for row in books if row['publisher_key'] in locations})} publishers")
 
 
 if __name__ == "__main__":

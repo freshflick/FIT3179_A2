@@ -3,7 +3,7 @@
   "description": "Award category appearances for publishers with at least three books in the 2024–2026 Prime Minister's Literary Awards data.",
   "data": { "url": "data/pmla_2024_2026.csv" },
   "width": "container",
-  "height": 340,
+  "height": 311,
   "transform": [
     {
       "joinaggregate": [{ "op": "count", "as": "publisher_total" }],
@@ -56,7 +56,7 @@
         "Children’s literature"
       ],
       "axis": {
-        "labelAngle": -27,
+        "labelAngle": -40,
         "labelLimit": 120,
         "tickSize": 0,
         "domain": false,
@@ -73,7 +73,7 @@
         "order": "ascending"
       },
       "axis": {
-        "labelLimit": 325,
+        "labelLimit": 205,
         "tickSize": 0,
         "domain": false
       }
@@ -105,28 +105,6 @@
             "gradientLength": 220,
             "gradientThickness": 10
           }
-        }
-      }
-    },
-    {
-      "transform": [{ "filter": "datum.books >= 3" }],
-      "mark": {
-        "type": "text",
-        "fontWeight": "bold",
-        "fontSize": 13
-      },
-      "encoding": {
-        "text": {
-          "field": "books",
-          "type": "quantitative",
-          "format": "d"
-        },
-        "color": {
-          "condition": {
-            "test": "datum.books >= 5",
-            "value": "white"
-          },
-          "value": "#233441"
         }
       }
     }

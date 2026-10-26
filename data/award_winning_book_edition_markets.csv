@@ -1,0 +1,25 @@
+place,longitude,latitude,label,label_longitude,label_latitude,title_count,evidence_type,kind
+Australia,133.7751,-25.2744,Australia,133.7751,-25.2744,4,origin,origin
+United States,-74.006,40.7128,US,-70.4346,47.1414,3,edition,market
+United Kingdom,-0.1276,51.5072,UK,-10.1276,63.6501,4,both,market
+France,2.3522,48.8566,France,-19.0764,52.428,4,both,market
+Italy,12.4964,41.9028,Italy,22.4964,31.1885,2,both,market
+Poland,21.0122,52.2297,Poland,37.4408,54.0154,3,both,market
+China,116.4074,39.9042,China,108.5503,48.8328,1,edition,market
+Germany,13.405,52.52,Germany,23.405,64.6629,3,both,market
+Netherlands,4.9041,52.3676,Netherlands,-22.2388,68.7962,2,both,market
+Canada,-79.3832,43.6532,Canada,-99.0261,51.5103,1,edition,market
+Serbia,20.4489,44.7866,Serbia,39.3775,37.6437,2,both,market
+Sweden,18.0686,59.3293,Sweden,30.5686,71.8293,1,edition,market
+North America,-100.0,39.0,N. America,-108.5714,32.5714,1,rights,market
+Spain,-3.7038,40.4168,Spain,-20.8467,35.4168,1,rights,market
+Portugal,-9.1393,38.7223,Portugal,-28.425,24.4366,1,rights,market
+Taiwan,121.5654,25.033,Taiwan,129.4225,31.1044,1,rights,market
+Egypt,31.2357,30.0444,Egypt,40.8786,25.0444,1,rights,market
+Turkey,32.8597,39.9334,Turkey,50.0026,30.2905,1,rights,market
+Denmark,12.5683,55.6761,Denmark,25.0683,75.319,1,rights,market
+Hungary,19.0402,47.4979,Hungary,42.2545,47.4979,1,rights,market
+Slovenia,14.5058,46.0569,Slovenia,-5.4942,32.1283,1,rights,market
+Russia,37.6173,55.7558,Russia,57.2602,70.7558,1,rights,market
+Norway,10.7522,59.9139,Norway,-6.3907,81.6996,1,rights,market
+Romania,26.1025,44.4268,Romania,52.8882,32.6411,1,rights,market
