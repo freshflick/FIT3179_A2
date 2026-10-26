@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="stylesheet" href="css/styles.css?v=15">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -231,16 +231,22 @@
     <p class="section-lead">Extending the PMLA map to 2022–2026 brings <strong class="emphasis-blue">144 publisher-attributed shortlist records</strong> into view. Documented Australian contacts place 135 records from 33 publishers in eight metro areas. The map shows the geography of <strong class="emphasis-green">publisher contacts</strong>, while the state view compares the share that won.</p>
 
     <div class="chart-block map-card map-primary">
-      <h3>The list clusters around two publishing hubs</h3>
-      <p class="chart-intro">Distinct publishers of PMLA-listed books by documented contact location · 2022–2026</p>
-      <div class="map-stage">
-        <div id="publisher-hex-map" class="chart map-visual" role="img" aria-label="Equal-area hexagonal map of 33 publishers of PMLA-listed books by documented Australian contact location"></div>
-        <div class="map-callouts" aria-label="Publisher map findings">
-          <aside class="map-callout map-callout-green"><span class="map-callout-label">More publishers</span><strong>Sydney · 14</strong><p>mapped publishers account for 67 shortlist records.</p></aside>
-          <aside class="map-callout map-callout-copper"><span class="map-callout-label">Second hub</span><strong>Melbourne · 11</strong><p>mapped publishers account for 39 shortlist records.</p></aside>
+      <h3>Publisher contacts cluster within two cities</h3>
+      <p class="chart-intro">Documented contacts of PMLA-listed publishers · 2022–2026</p>
+      <div class="hex-city-pair" aria-label="Sydney and Melbourne publisher contact maps">
+        <div class="hex-city-panel">
+          <h4>Sydney <span>14 publishers · 67 listed books</span></h4>
+          <div id="publisher-sydney-hex-map" class="chart map-visual" role="img" aria-label="Sydney map with seven occupied areas showing distinct PMLA publisher contacts"></div>
+          <p><strong class="emphasis-green">Two publishers account for 34 records</strong> in one north Sydney area.</p>
+        </div>
+        <div class="hex-city-panel">
+          <h4>Melbourne <span>11 publishers · 39 listed books</span></h4>
+          <div id="publisher-melbourne-hex-map" class="chart map-visual" role="img" aria-label="Melbourne map with seven occupied areas showing distinct PMLA publisher contacts"></div>
+          <p><strong class="emphasis-green">Three publishers account for 16 records</strong> in one central area.</p>
         </div>
       </div>
-      <div class="map-summary"><p><strong class="emphasis-green">Sydney and Melbourne together account for 106 of 135 mapped records.</strong> The location map below lets you inspect the publisher contacts within each hub.</p><p>The other six contact metros contribute 29 records. Contact points use sourced suburb centroids, so they show approximate areas rather than office doors.</p></div>
+      <div class="hex-map-legend" aria-label="Publishers in each occupied area"><strong>Publishers in one area</strong><span><i style="background:#b5d9c7"></i>1</span><span><i style="background:#7dbda2"></i>2</span><span><i style="background:#3e9878"></i>3</span><span><i style="background:#0f6652"></i>4</span></div>
+      <div class="map-summary"><p><strong class="emphasis-green">The two cities account for 106 of 135 mapped records.</strong> Smaller areas reveal fourteen distinct contact clusters across their suburbs.</p><p>The other six contact metros contribute 29 records. The location map below opens each city's documented contact localities.</p></div>
     </div>
 
     <div class="map-pair" aria-label="Publisher contact and winner maps">
@@ -302,7 +308,8 @@
     ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=2'],
     ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=2'],
     ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=6'],
-    ['#publisher-hex-map', 'charts/section4/pmla_publisher_contact_hex_bins.vl.json?v=3']
+    ['#publisher-sydney-hex-map', 'charts/section4/pmla_publisher_sydney_hex.vl.json?v=2'],
+    ['#publisher-melbourne-hex-map', 'charts/section4/pmla_publisher_melbourne_hex.vl.json?v=2']
   ];
   charts.forEach(([target, spec]) => {
     vegaEmbed(target, spec, { actions: true }).catch(error => {
@@ -318,11 +325,11 @@
       detail: 'Sydney has 67 listed records and Melbourne 39. Select a city or click its circle to inspect documented contact localities.'
     },
     sydney: {
-      source: 'charts/section4/publisher_sydney_localities.vl.json?v=11',
+      source: 'charts/section4/publisher_sydney_localities.vl.json?v=13',
       detail: 'Crows Nest accounts for 22 records through Allen & Unwin; Parramatta adds nine through Giramondo. Hover over a point for its publisher names and counts.'
     },
     melbourne: {
-      source: 'charts/section4/publisher_melbourne_localities.vl.json?v=11',
+      source: 'charts/section4/publisher_melbourne_localities.vl.json?v=13',
       detail: 'Collingwood has nine records across three publishers; Southbank has eight through Text Publishing. Hover over a point for its publisher names and counts.'
     }
   };

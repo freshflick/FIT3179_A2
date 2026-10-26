@@ -39,16 +39,16 @@ def specification(slug, config):
         "description": (f"Documented publisher-contact localities around {city} for "
                         "PMLA-listed books, 2022–2026. ABS 2021 suburb polygons provide "
                         "geographic context; circle area shows listed-book records."),
-        "width": "container", "height": 400, "background": "#dceef4",
+        "width": "container", "height": 400, "background": "#ffffff",
         "projection": {"type": "mercator", "center": config["center"],
                        "scale": config["scale"]},
         "layer": [
             {"data": {"url": f"data/abs_{slug}_suburbs_2021.geojson?v=2",
                       "format": {"type": "json", "property": "features"}},
-             "mark": {"type": "geoshape", "fill": "#f2eee5", "stroke": None,
+             "mark": {"type": "geoshape", "fill": "#f1ede4", "stroke": "#d7ddd9", "strokeWidth": 0.32,
                       "clip": True}},
             {"data": {"values": grid},
-             "mark": {"type": "geoshape", "fill": None, "stroke": "#d2dfe1",
+             "mark": {"type": "geoshape", "fill": None, "stroke": "#bdd3da",
                       "strokeWidth": 0.55, "clip": True}},
             {"data": {"url": "data/publisher_contact_locality_summary.csv"},
              "transform": [{"filter": f"datum.map_city == '{city}'"}],
@@ -81,8 +81,60 @@ def specification(slug, config):
                                "text": {"field": "contact_locality", "type": "nominal"}}}
              ]}
         ],
-        "config": {"view": {"stroke": None},
+        "config": {"view": {"stroke": None, "fill": "#d9edf4"},
                    "legend": {"labelFont": "Arial", "titleFont": "Arial"}}
+    }
+
+
+def bin_specification(slug, config):
+    """One geographic close-up of occupied 2 km publisher-contact cells."""
+    city = config["label"]
+    left, bottom, right, top = config["extent"]
+    grid = ([{"type": "Feature", "geometry": {"type": "LineString",
+                                             "coordinates": [[longitude, bottom], [longitude, top]]},
+              "properties": {}} for longitude in config["longitudes"]] +
+            [{"type": "Feature", "geometry": {"type": "LineString",
+                                             "coordinates": [[left, latitude], [right, latitude]]},
+              "properties": {}} for latitude in config["latitudes"]])
+    return {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "description": (f"Distinct publishers of 2022–2026 PMLA-listed books in "
+                        f"occupied 2 km equal-area cells around {city}. "
+                        "Locations are sourced publisher-contact locality centroids."),
+        "width": "container", "height": 340, "background": "#ffffff",
+        "projection": {"type": "mercator", "center": config["center"],
+                       "scale": config["scale"]},
+        "layer": [
+            {"data": {"url": f"data/abs_{slug}_suburbs_2021.geojson?v=2",
+                      "format": {"type": "json", "property": "features"}},
+             "mark": {"type": "geoshape", "fill": "#f1ede4", "stroke": "#d7ddd9", "strokeWidth": 0.32,
+                      "clip": True}},
+            {"data": {"values": grid},
+             "mark": {"type": "geoshape", "fill": None, "stroke": "#bdd3da",
+                      "strokeWidth": 0.55, "clip": True}},
+            {"data": {"url": "data/pmla_publisher_contact_hex_bins.geojson?v=4",
+                      "format": {"type": "json", "property": "features"}},
+             "transform": [
+                 {"calculate": "datum.properties.metro_areas", "as": "metro"},
+                 {"calculate": "datum.properties.publishers", "as": "publishers"},
+                 {"calculate": "datum.properties.listed_books", "as": "listed_books"},
+                 {"calculate": "datum.properties.winning_books", "as": "winning_books"},
+                 {"filter": f"datum.metro == '{city}'"}
+             ],
+             "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.3,
+                      "opacity": 0.96, "clip": True},
+             "encoding": {
+                 "color": {"field": "publishers", "type": "ordinal", "legend": None,
+                           "scale": {"domain": [1, 2, 3, 4],
+                                     "range": ["#b5d9c7", "#7dbda2", "#3e9878", "#0f6652"]}},
+                 "tooltip": [
+                     {"field": "metro", "type": "nominal", "title": "Contact metro"},
+                     {"field": "publishers", "type": "quantitative", "title": "Publishers"},
+                     {"field": "listed_books", "type": "quantitative", "title": "Listed books"},
+                     {"field": "winning_books", "type": "quantitative", "title": "Winners"}
+                 ]}}
+        ],
+        "config": {"view": {"stroke": None, "fill": "#d9edf4"}}
     }
 
 
@@ -91,3 +143,6 @@ if __name__ == "__main__":
         target = ROOT / f"charts/section4/publisher_{slug}_localities.vl.json"
         target.write_text(json.dumps(specification(slug, config), indent=2) + "\n")
         print(target.relative_to(ROOT))
+        bin_target = ROOT / f"charts/section4/pmla_publisher_{slug}_hex.vl.json"
+        bin_target.write_text(json.dumps(bin_specification(slug, config), indent=2) + "\n")
+        print(bin_target.relative_to(ROOT))

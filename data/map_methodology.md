@@ -60,13 +60,15 @@ An author’s own location is never substituted for a missing publisher contact.
 
 ## What the maps count
 
-1. **National equal-area bins:** one documented contact locality per publisher
-   is placed into a 115 km radius hexagonal cell in a Lambert azimuthal
-   equal-area projection. Colour counts distinct publishers with at least one
-   book in the five-year selection. Nine of 225 displayed land cells contain
-   contacts; the neutral cells provide national context. The slider changes
-   the minimum publisher count shown in colour. The [derived GeoJSON](pmla_publisher_contact_hex_bins.geojson)
-   also stores listed and winning records by cell.
+1. **Equal-area contact bins:** one documented contact locality per publisher
+   is placed into a 2 km radius hexagonal cell in a Lambert azimuthal
+   equal-area projection. The [derived GeoJSON](pmla_publisher_contact_hex_bins.geojson)
+   contains 22 occupied cells nationwide; 7 are in Sydney and 7 in Melbourne.
+   The two city views show those 14 occupied cells over ABS geographic context.
+   Colour counts distinct publishers with at least one book in the five-year
+   selection. Empty cells are omitted so the geographic context remains clear.
+   The GeoJSON also stores listed and winning records by cell. The cell
+   locations are approximate because their input points are locality centroids.
 2. **Sydney and Melbourne close-ups:** the location map's city controls, or
    clicking a national city symbol, switch
    from national metro totals to documented suburb centroids over ABS suburb

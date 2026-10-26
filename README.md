@@ -1,6 +1,6 @@
 # Behind Australia's literary shortlists
 
-A FIT3179 Data Visualisation 2 dashboard about publisher visibility in the 2024–2026 Prime Minister’s Literary Awards and Stella Prize lists. The geographic section extends the PMLA selection to 2022–2026. The page contains Vega and Vega-Lite charts, including a national bin map, a location map that zooms into Sydney and Melbourne, and a state choropleth.
+A FIT3179 Data Visualisation 2 dashboard about publisher visibility in the 2024–2026 Prime Minister’s Literary Awards and Stella Prize lists. The geographic section extends the PMLA selection to 2022–2026. The page contains Vega and Vega-Lite charts, including Sydney and Melbourne contact-bin maps, a national location map that zooms into both cities, and a state choropleth.
 
 ## View locally
 
@@ -27,4 +27,4 @@ The maps locate documented publisher contact localities for 135 of 144 publisher
 
 ## Visual encodings
 
-The heatmap uses a rose scale for publisher-by-category counts; the hex map uses green for distinct publisher contacts per cell; the city and metro circle maps use blue for listed-book records; the state map uses copper for the winner share among mapped records. Stella genre groups keep the same categorical colours in the year grids and the longlist-to-winner alluvial. The hex slider filters coloured cells by publisher count without changing the source data. A geographic flow map is not used because these sources do not establish book movements between places.
+The heatmap uses a rose scale for publisher-by-category counts; the city bins use green for distinct publisher contacts per cell; the city and metro circle maps use blue for listed-book records; the state map uses copper for the winner share among mapped records. Stella genre groups keep the same categorical colours in the year grids and the longlist-to-winner alluvial. A geographic flow map is not used because these sources do not establish book movements between places.

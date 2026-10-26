@@ -1,0 +1,285 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Distinct publishers of 2022\u20132026 PMLA-listed books in occupied 2 km equal-area cells around Melbourne. Locations are sourced publisher-contact locality centroids.",
+  "width": "container",
+  "height": 340,
+  "background": "#ffffff",
+  "projection": {
+    "type": "mercator",
+    "center": [
+      144.99,
+      -37.84
+    ],
+    "scale": 70000
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/abs_melbourne_suburbs_2021.geojson?v=2",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f1ede4",
+        "stroke": "#d7ddd9",
+        "strokeWidth": 0.32,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.8,
+                  -38.08
+                ],
+                [
+                  144.8,
+                  -37.6
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.9,
+                  -38.08
+                ],
+                [
+                  144.9,
+                  -37.6
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  145.0,
+                  -38.08
+                ],
+                [
+                  145.0,
+                  -37.6
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  145.1,
+                  -38.08
+                ],
+                [
+                  145.1,
+                  -37.6
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  145.2,
+                  -38.08
+                ],
+                [
+                  145.2,
+                  -37.6
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.7,
+                  -38.0
+                ],
+                [
+                  145.3,
+                  -38.0
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.7,
+                  -37.9
+                ],
+                [
+                  145.3,
+                  -37.9
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.7,
+                  -37.8
+                ],
+                [
+                  145.3,
+                  -37.8
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.7,
+                  -37.7
+                ],
+                [
+                  145.3,
+                  -37.7
+                ]
+              ]
+            },
+            "properties": {}
+          }
+        ]
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#bdd3da",
+        "strokeWidth": 0.55,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/pmla_publisher_contact_hex_bins.geojson?v=4",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.metro_areas",
+          "as": "metro"
+        },
+        {
+          "calculate": "datum.properties.publishers",
+          "as": "publishers"
+        },
+        {
+          "calculate": "datum.properties.listed_books",
+          "as": "listed_books"
+        },
+        {
+          "calculate": "datum.properties.winning_books",
+          "as": "winning_books"
+        },
+        {
+          "filter": "datum.metro == 'Melbourne'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.3,
+        "opacity": 0.96,
+        "clip": true
+      },
+      "encoding": {
+        "color": {
+          "field": "publishers",
+          "type": "ordinal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "range": [
+              "#b5d9c7",
+              "#7dbda2",
+              "#3e9878",
+              "#0f6652"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "metro",
+            "type": "nominal",
+            "title": "Contact metro"
+          },
+          {
+            "field": "publishers",
+            "type": "quantitative",
+            "title": "Publishers"
+          },
+          {
+            "field": "listed_books",
+            "type": "quantitative",
+            "title": "Listed books"
+          },
+          {
+            "field": "winning_books",
+            "type": "quantitative",
+            "title": "Winners"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null,
+      "fill": "#d9edf4"
+    }
+  }
+}

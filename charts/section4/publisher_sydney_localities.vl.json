@@ -3,7 +3,7 @@
   "description": "Documented publisher-contact localities around Sydney for PMLA-listed books, 2022\u20132026. ABS 2021 suburb polygons provide geographic context; circle area shows listed-book records.",
   "width": "container",
   "height": 400,
-  "background": "#dceef4",
+  "background": "#ffffff",
   "projection": {
     "type": "mercator",
     "center": [
@@ -23,8 +23,9 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#f2eee5",
-        "stroke": null,
+        "fill": "#f1ede4",
+        "stroke": "#d7ddd9",
+        "strokeWidth": 0.32,
         "clip": true
       }
     },
@@ -189,7 +190,7 @@
       "mark": {
         "type": "geoshape",
         "fill": null,
-        "stroke": "#d2dfe1",
+        "stroke": "#bdd3da",
         "strokeWidth": 0.55,
         "clip": true
       }
@@ -310,7 +311,8 @@
   ],
   "config": {
     "view": {
-      "stroke": null
+      "stroke": null,
+      "fill": "#d9edf4"
     },
     "legend": {
       "labelFont": "Arial",
