@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Eight metro reference points for documented publisher contact localities covering 86 of 90 listed books in the 2024–2026 Prime Minister's Literary Awards. Circle area represents listed books.",
+  "description": "Eight metro reference points for documented publisher contact localities covering 135 of 144 publisher-attributed PMLA shortlist records in 2022–2026. Circle area represents listed-book records.",
   "width": "container",
   "height": 430,
   "background": "#ffffff",
@@ -43,8 +43,8 @@
               "field": "listed_books",
               "type": "quantitative",
               "title": "Listed books",
-              "scale": {"domain": [0, 45], "range": [90, 2700]},
-              "legend": {"orient": "bottom", "values": [1, 10, 25, 45]}
+              "scale": {"domain": [0, 67], "range": [90, 3100]},
+              "legend": {"orient": "bottom", "values": [1, 15, 35, 65]}
             },
             "tooltip": [
               {
@@ -96,7 +96,7 @@
               "type": "nominal"
             }
           },
-          "transform": [{"filter": "datum.listed_books >= 3 && datum.map_city != 'Broome'"}]
+          "transform": [{"filter": "indexof(['Sydney', 'Melbourne', 'Brisbane'], datum.map_city) >= 0"}]
         },
         {
           "transform": [{"filter": "datum.map_city == 'Broome'"}],

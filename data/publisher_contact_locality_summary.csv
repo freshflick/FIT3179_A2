@@ -1,0 +1,25 @@
+map_city,contact_locality,state,longitude,latitude,listed_books,winning_books,publishers,publisher_names
+Sydney,Crows Nest,NSW,151.201474,-33.825627,22,4,1,Allen & Unwin
+Brisbane,St Lucia,QLD,153.006498,-27.498943,16,5,1,University of Queensland Press
+Sydney,Sydney,NSW,151.208285,-33.869844,14,2,4,Hachette Australia; HarperCollins Publishers; Pan Macmillan Australia; Pitt Street Poetry
+Sydney,North Sydney,NSW,151.209197,-33.834316,12,3,1,Penguin Random House Australia
+Melbourne,Melbourne,VIC,144.963173,-37.814245,10,1,2,Affirm Press; Black Inc.
+Melbourne,Collingwood,VIC,144.988139,-37.802104,9,2,3,Hardie Grant Children's Publishing; Hardie Grant Explore; La Trobe University Press
+Sydney,Parramatta,NSW,151.002666,-33.813984,9,4,1,Giramondo Publishing
+Melbourne,Southbank,VIC,144.964020,-37.825362,8,3,1,Text Publishing
+Melbourne,Carlton,VIC,144.968434,-37.800423,6,2,1,Melbourne University Publishing
+Broome,Broome,WA,122.224018,-17.956691,5,2,1,Magabala Books
+Sydney,Willoughby North,NSW,151.199449,-33.794257,4,1,2,Scribner Australia; Simon & Schuster Australia
+Newcastle,Waratah,NSW,151.725000,-32.905278,3,0,1,Puncher and Wattmann
+Sydney,Ultimo,NSW,151.198435,-33.879473,3,0,3,Halstead Press; Powerhouse Museum; Ultimo Press
+Sydney,Randwick,NSW,151.243195,-33.945838,2,1,1,NewSouth Publishing
+Melbourne,Yarraville,VIC,144.881939,-37.818005,2,0,1,Transit Lounge
+Melbourne,Clayton,VIC,145.131386,-37.915802,2,0,1,Monash University Publishing
+Melbourne,Brunswick,VIC,144.961310,-37.766472,1,0,1,Scribe Publications
+Canberra,Mitchell,ACT,149.136383,-35.218893,1,0,1,Recent Work Press
+Perth,Fremantle,WA,115.758617,-32.053409,1,0,1,Fremantle Press
+Melbourne,Cremorne,VIC,144.992773,-37.829023,1,0,1,Thames & Hudson Australia
+Geelong,Little River,VIC,144.500987,-37.963927,1,0,1,Spinifex Press
+Sydney,Summer Hill,NSW,151.136873,-33.893395,1,0,1,Echo Publishing
+Perth,Nedlands,WA,115.805717,-31.979921,1,0,1,UWA Publishing
+Perth,Perth,WA,115.860578,-31.955897,1,0,1,Upswell Publishing

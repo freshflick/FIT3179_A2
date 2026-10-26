@@ -1,9 +1,9 @@
 state,state_name,listed_books,winning_books,winner_share_pct
-NSW,New South Wales,46,10,21.7
-VIC,Victoria,27,4,14.8
-QLD,Queensland,8,3,37.5
+NSW,New South Wales,70,15,21.4
+VIC,Victoria,40,8,20.0
+QLD,Queensland,16,5,31.2
 SA,South Australia,0,0,
-WA,Western Australia,4,1,25.0
+WA,Western Australia,8,2,25.0
 TAS,Tasmania,0,0,
 NT,Northern Territory,0,0,
 ACT,Australian Capital Territory,1,0,0.0

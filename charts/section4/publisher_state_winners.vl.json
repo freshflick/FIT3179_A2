@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "ABS 2021 state boundaries shaded by PMLA winner share among listed books associated with documented publisher contact states, 2024–2026; all 18 winners are included.",
+  "description": "ABS 2021 state boundaries shaded by PMLA winner share among publisher-attributed shortlist records associated with documented publisher contact states, 2022–2026; all 30 winners are included.",
   "width": "container",
   "height": 430,
   "background": "#ffffff",

@@ -1,7 +1,7 @@
 """Build the PMLA publisher-contact hex map from cited award and location tables.
 
-Each publisher is placed at its documented contact metro's reference point,
-not at an author's home or a precise street address. Empty mainland cells
+Each publisher is placed at its documented contact locality's OpenStreetMap
+centroid, not at an author's home or a precise street address. Empty mainland cells
 form a neutral grid so the occupied cells can be seen in national context.
 """
 
@@ -24,6 +24,7 @@ def make_bins():
     locations = {row["publisher_key"]: row for row in csv.DictReader(
         (DATA / "publisher_contact_locations.csv").open())}
     books = list(csv.DictReader((DATA / "pmla_2024_2026.csv").open()))
+    books += list(csv.DictReader((DATA / "pmla_2022_2023_geography.csv").open()))
     publishers = defaultdict(set)
     metros = defaultdict(set)
     listed = Counter()
@@ -73,14 +74,15 @@ def make_bins():
                 "geometry": {"type": "Polygon", "coordinates": [vertices]},
             })
 
-    assert len(books) == 90 and len(locations) == 26
-    assert sum(listed.values()) == 86 and sum(wins.values()) == 18
-    assert len({name for group in publishers.values() for name in group}) == 26
+    assert len(books) == 144 and len(locations) == 33
+    assert sum(wins.values()) == sum(book["outcome"].strip().lower() == "winner" for book in books)
+    assert len({name for group in publishers.values() for name in group}) == len(
+        {book["publisher_key"] for book in books if book["publisher_key"] in locations})
     (DATA / "pmla_publisher_contact_hex_bins.geojson").write_text(
         json.dumps({"type": "FeatureCollection", "features": features},
                    separators=(",", ":")) + "\n")
     print(f"{len(features)} land cells; {len(listed)} occupied cells; "
-          f"{sum(listed.values())} books from 26 publishers")
+          f"{sum(listed.values())} books from {len({name for group in publishers.values() for name in group})} publishers")
     print("Occupied:", sorted((", ".join(metros[cell]), len(publishers[cell]), listed[cell])
                               for cell in listed))
 

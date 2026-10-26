@@ -1,0 +1,229 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Documented publisher contact localities in Melbourne for publisher-attributed PMLA shortlist records, 2022\u20132026. Circle area shows listed-book records. Locations are OpenStreetMap locality centroids, not building points.",
+  "width": "container",
+  "height": 285,
+  "background": "#f3f7f8",
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.85,
+                  -38.0
+                ],
+                [
+                  144.85,
+                  -37.7
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.95,
+                  -38.0
+                ],
+                [
+                  144.95,
+                  -37.7
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  145.05,
+                  -38.0
+                ],
+                [
+                  145.05,
+                  -37.7
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  145.15,
+                  -38.0
+                ],
+                [
+                  145.15,
+                  -37.7
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.8,
+                  -37.95
+                ],
+                [
+                  145.2,
+                  -37.95
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.8,
+                  -37.85
+                ],
+                [
+                  145.2,
+                  -37.85
+                ]
+              ]
+            },
+            "properties": {}
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  144.8,
+                  -37.75
+                ],
+                [
+                  145.2,
+                  -37.75
+                ]
+              ]
+            },
+            "properties": {}
+          }
+        ]
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#dce7eb",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/publisher_contact_locality_summary.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.map_city == 'Melbourne'"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "color": "#286f91",
+            "opacity": 0.78,
+            "stroke": "#ffffff",
+            "strokeWidth": 1.8
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "listed_books",
+              "type": "quantitative",
+              "title": "Listed books",
+              "scale": {
+                "domain": [
+                  0,
+                  22
+                ],
+                "range": [
+                  45,
+                  1800
+                ]
+              },
+              "legend": {
+                "orient": "bottom",
+                "values": [
+                  1,
+                  10,
+                  20
+                ],
+                "symbolFillColor": "#286f91"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "contact_locality",
+                "type": "nominal",
+                "title": "Contact locality"
+              },
+              {
+                "field": "listed_books",
+                "type": "quantitative",
+                "title": "Listed books"
+              },
+              {
+                "field": "publishers",
+                "type": "quantitative",
+                "title": "Publishers"
+              },
+              {
+                "field": "publisher_names",
+                "type": "nominal",
+                "title": "Publisher names"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=9">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -29,12 +29,12 @@
       <p class="intro">
         Literary prizes bring a small selection of books into view. Follow the
         2024–2026 award lists to see who appears, which categories they reach,
-        what wins, and where award-list publishers have documented contacts.
+        and what wins. The maps widen the PMLA view to 2022–2026.
       </p>
       <div class="hero-meta" aria-label="Story scope">
-        <span><strong>90</strong> PMLA books</span>
-        <span><strong>36</strong> Stella books</span>
-        <span><strong>3</strong> award years</span>
+        <span><strong>90</strong><small>PMLA books · core story</small></span>
+        <span><strong>36</strong><small>Stella books · core story</small></span>
+        <span><strong>135</strong><small>PMLA map records · 2022–26</small></span>
       </div>
     </div>
 
@@ -179,16 +179,16 @@
     </div>
 
     <div class="chart-block">
-      <h3>The shortlist narrows, and fiction remains prominent</h3>
+      <h3>Where Stella’s 36 longlisted books finish</h3>
       <p class="chart-intro">
-        Books reaching each prize stage, grouped by genre · Stella Prize, 2024–2026
+        Progression and exits by genre · Stella Prize, 2024–2026
       </p>
 
       <div id="stella-progression-chart" class="chart full-width-chart"
            role="img"
-           aria-label="Flow chart of Stella books by genre from longlist to shortlist and winner"></div>
+           aria-label="Alluvial chart of Stella books by genre, including books that stopped at the longlist or shortlist and the three winners"></div>
 
-      <div class="finding-row"><aside class="finding finding-plum"><h4>One in six shortlisted books wins</h4><p><strong class="emphasis-plum">18 of 36 longlisted books reached the shortlist</strong> across 2024–2026. Three of those 18 became winners; two were fiction.</p></aside><aside class="finding finding-teal"><h4>A new form reaches the top</h4><p>The third winner is a <strong class="emphasis-teal">graphic novel</strong>, a genre represented by one book across these three Stella longlists. The 2026 winner shows that the wider longlist mix can carry through to the final result.</p></aside></div>
+      <div class="finding-row"><aside class="finding finding-plum"><h4>Half the longlist ends at the first cut</h4><p><strong class="emphasis-plum">18 of 36 longlisted books did not reach the shortlist</strong> across 2024–2026. Ten of those 18 were fiction, so the largest starting group also accounts for most early exits.</p></aside><aside class="finding finding-teal"><h4>The final step is narrower still</h4><p>Of 18 shortlisted books, <strong class="emphasis-teal">only three won</strong>: two fiction titles and one graphic novel. Seven non-fiction or memoir books reached the shortlist, but none won in these three years.</p></aside></div>
     </div>
 
     <div class="chart-block">
@@ -226,39 +226,43 @@
   <section class="story-section" aria-labelledby="geography-heading">
     <div class="section-heading">
       <p class="section-number">04 / The geography of literary visibility</p>
-      <h2 id="geography-heading">Where award-list publishers are based</h2>
+      <h2 id="geography-heading">Where the shortlisted publishers have contacts</h2>
     </div>
-    <p class="section-lead">The publishers behind <strong class="emphasis-blue">86 of 90 listed PMLA books</strong> have documented Australian contact locations in eight metro areas. Their geographic spread looks different depending on whether we count <strong class="emphasis-green">publishers</strong>, listed books or winners.</p>
+    <p class="section-lead">Extending the PMLA map to 2022–2026 brings <strong class="emphasis-blue">144 publisher-attributed shortlist records</strong> into view. Documented Australian contacts place 135 records from 33 publishers in eight metro areas. The map shows the geography of <strong class="emphasis-green">publisher contacts</strong>, while the state view compares the share that won.</p>
 
     <div class="chart-block map-card map-primary">
-      <h3>Melbourne has the broader publisher base</h3>
-      <p class="chart-intro">Distinct publishers of PMLA-listed books by documented contact location · 2024–2026</p>
+      <h3>The list clusters around two publishing hubs</h3>
+      <p class="chart-intro">Distinct publishers of PMLA-listed books by documented contact location · 2022–2026</p>
       <div class="map-stage">
-        <div id="publisher-hex-map" class="chart map-visual" role="img" aria-label="Equal-area hexagonal map of 26 publishers of PMLA-listed books by documented Australian contact location"></div>
+        <div id="publisher-hex-map" class="chart map-visual" role="img" aria-label="Equal-area hexagonal map of 33 publishers of PMLA-listed books by documented Australian contact location"></div>
         <div class="map-callouts" aria-label="Publisher map findings">
-          <aside class="map-callout map-callout-green"><span class="map-callout-label">Broader base</span><strong>Melbourne · 11</strong><p>mapped publishers are associated with 26 shortlisted or winning books.</p></aside>
-          <aside class="map-callout map-callout-copper"><span class="map-callout-label">Larger list presence</span><strong>Sydney · 45</strong><p>listed books come from nine mapped publishers, including 18 from Allen &amp; Unwin.</p></aside>
+          <aside class="map-callout map-callout-green"><span class="map-callout-label">More publishers</span><strong>Sydney · 14</strong><p>mapped publishers account for 67 shortlist records.</p></aside>
+          <aside class="map-callout map-callout-copper"><span class="map-callout-label">Second hub</span><strong>Melbourne · 11</strong><p>mapped publishers account for 39 shortlist records.</p></aside>
         </div>
       </div>
-      <div class="map-summary"><p><strong class="emphasis-green">Melbourne’s 11 mapped publishers exceed Sydney’s nine.</strong> But Sydney’s publishers account for 45 listed books, compared with Melbourne’s 26.</p><p>The other six contact metros account for 15 listed books altogether. These are publisher contact locations, not where authors live or where their stories take place.</p></div>
+      <div class="metro-insets" aria-label="Sydney and Melbourne publisher contact close-ups">
+        <div class="metro-inset"><h4>Sydney contacts spread beyond the centre</h4><div id="publisher-sydney-map" class="chart map-visual" role="img" aria-label="Sydney close-up of PMLA publisher contact localities and shortlist records"></div><p><strong class="emphasis-blue">Crows Nest accounts for 22 records</strong> through Allen &amp; Unwin; Parramatta adds nine through Giramondo.</p></div>
+        <div class="metro-inset"><h4>Melbourne has several smaller clusters</h4><div id="publisher-melbourne-map" class="chart map-visual" role="img" aria-label="Melbourne close-up of PMLA publisher contact localities and shortlist records"></div><p><strong class="emphasis-blue">Collingwood has nine records</strong> across three publishers; Southbank has eight through Text Publishing.</p></div>
+      </div>
+      <div class="map-summary"><p><strong class="emphasis-green">Sydney and Melbourne together account for 106 of 135 mapped records.</strong> The suburb views separate contacts that overlap on the national map.</p><p>The other six contact metros contribute 29 records. Locality points use sourced suburb centroids, so they show approximate contact areas rather than office doors.</p></div>
     </div>
 
     <div class="map-pair" aria-label="Publisher contact and winner maps">
       <article class="map-card">
-        <h3>Sydney and Melbourne dominate the mapped list</h3>
-        <p class="chart-intro">Listed PMLA books by documented publisher contact metro · 2024–2026</p>
-        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of Australia with circles showing 86 listed books across eight publisher contact metro areas"></div>
-        <aside class="finding finding-blue"><h4>Two metros account for 71 of 86 mapped books</h4><p><strong class="emphasis-blue">Sydney has 45 and Melbourne 26.</strong> Brisbane has eight and Broome three. Canberra, Geelong, Newcastle and Perth each add one book, extending the mapped story beyond the original top-ten publishers.</p></aside>
+        <h3>Two metros account for most mapped books</h3>
+        <p class="chart-intro">Listed PMLA records by documented publisher contact metro · 2022–2026</p>
+        <div id="publisher-office-map" class="chart map-visual" role="img" aria-label="Map of Australia with circles showing 135 listed records across eight publisher contact metro areas"></div>
+        <aside class="finding finding-blue"><h4>106 records cluster in two metros</h4><p><strong class="emphasis-blue">Sydney has 67 and Melbourne 39.</strong> Brisbane adds 16, while Broome adds five. Newcastle and Perth each add three; Geelong and Canberra each add one.</p></aside>
       </article>
       <article class="map-card">
-        <h3>Queensland’s mapped books win most often</h3>
-        <p class="chart-intro">Winning books as a share of listed PMLA books by publisher contact state · 2024–2026</p>
+        <h3>Queensland leads on winner share in this selection</h3>
+        <p class="chart-intro">Winning books as a share of listed PMLA records by publisher contact state · 2022–2026</p>
         <div id="publisher-state-winners-map" class="chart map-visual" role="img" aria-label="Choropleth of winner share among listed PMLA books associated with documented publisher contact states"></div>
-        <aside class="finding finding-copper"><h4>Three of UQP’s eight listed books won</h4><p><strong class="emphasis-copper">Queensland’s mapped winner share is 37.5%</strong>, ahead of NSW’s 21.7% (ten of 46). All eight Queensland books come from one publisher, University of Queensland Press, so this difference describes a small selection rather than a state-wide success rate.</p></aside>
+        <aside class="finding finding-copper"><h4>Five of UQP’s 16 listed books won</h4><p><strong class="emphasis-copper">Queensland’s mapped winner share is 31.2%</strong>, ahead of NSW’s 21.4% (15 of 70). All 16 Queensland records come from University of Queensland Press, so this is a publisher-level result rather than a state-wide success rate.</p></aside>
       </article>
     </div>
 
-    <p class="geography-source">The three maps use the <a href="data/pmla_2024_2026.csv">PMLA book table</a> and <a href="data/publisher_contact_locations.csv">sourced publisher locations</a>. Four listed books lack a supported Australian contact location and are excluded; all winners are mapped. State boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. <a href="data/map_methodology.md">Mapping method and limitations</a>.</p>
+    <p class="geography-source">The maps use the <a href="data/pmla_2024_2026.csv">2024–2026 PMLA book table</a>, <a href="data/pmla_2022_2023_geography.csv">2022–2023 publisher-attributed records</a>, and <a href="data/publisher_contact_locations.csv">sourced publisher contacts</a>. Nine records lack a supported Australian contact and are excluded; all 30 winners are mapped. State boundaries: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics, ASGS 2021</a>. Locality centroids: <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>. <a href="data/map_methodology.md">Mapping method and limitations</a>.</p>
   </section>
 
   <footer>
@@ -266,11 +270,11 @@
       <div class="footer-panel">
         <p class="section-number">The story in brief</p>
         <h2>Visibility clusters; recognition varies.</h2>
-        <p><strong class="emphasis-copper">Ten publishers account for 65 of 90 PMLA books.</strong> Across PMLA and Stella, <strong class="emphasis-blue">only nine of 117 distinct titles</strong> appear on both lists. Publisher contacts for 86 PMLA books cluster around Sydney and Melbourne, but the city with more publishers is not the city with more listed books.</p>
+        <p><strong class="emphasis-copper">Ten publishers account for 65 of 90 PMLA books</strong> in the core 2024–2026 story. Across PMLA and Stella, <strong class="emphasis-blue">only nine of 117 distinct titles</strong> appear on both lists. The five-year map adds earlier PMLA lists and places 106 of 135 mapped records around Sydney and Melbourne.</p>
       </div>
       <div class="footer-panel">
         <h3>Sources and method</h3>
-        <p>Book lists: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia</a> and the <a href="https://stella.org.au/prize/">Stella Prize</a>, 2024–2026. These lists represent selected books, not all Australian publishing.</p>
+        <p>Book lists: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia</a> and the <a href="https://stella.org.au/prize/">Stella Prize</a>. The main comparisons cover 2024–2026; the maps extend PMLA to 2022. These lists represent selected books, not all Australian publishing.</p>
         <p>Map geography: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">ABS boundaries</a> and <a href="data/publisher_contact_locations.csv">publisher contact sources</a>. Chart specifications and prepared data are in the <a href="https://github.com/freshflick/FIT3179_A2/tree/main/charts">JSON folder</a>.</p>
       </div>
     </div>
@@ -288,12 +292,14 @@
     ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=3'],
     ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json'],
-    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=3'],
+    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=4'],
     ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=2'],
     ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=2'],
-    ['#publisher-office-map', 'charts/section4/publisher_contact_metros.vl.json?v=1'],
-    ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=5'],
-    ['#publisher-hex-map', 'charts/section4/pmla_publisher_contact_hex_bins.vl.json?v=1']
+    ['#publisher-office-map', 'charts/section4/publisher_contact_metros.vl.json?v=3'],
+    ['#publisher-state-winners-map', 'charts/section4/publisher_state_winners.vl.json?v=6'],
+    ['#publisher-hex-map', 'charts/section4/pmla_publisher_contact_hex_bins.vl.json?v=3'],
+    ['#publisher-sydney-map', 'charts/section4/publisher_sydney_localities.vl.json?v=5'],
+    ['#publisher-melbourne-map', 'charts/section4/publisher_melbourne_localities.vl.json?v=5']
   ];
   charts.forEach(([target, spec]) => {
     vegaEmbed(target, spec, { actions: true }).catch(error => {

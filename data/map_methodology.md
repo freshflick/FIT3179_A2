@@ -1,20 +1,92 @@
-# Award geography and count method
+# Award geography: sources and count method
 
-All three maps use the **2024–2026 Prime Minister’s Literary Awards (PMLA)** book lists. The [book table](pmla_2024_2026.csv) has 90 shortlisted or winning books from 29 distinct publishers, including 18 winners. [Documented Australian contact locations](publisher_contact_locations.csv) are available for 26 of those publishers, representing **86 books and all 18 winners**. The four unmapped books come from Vagabond Press (two), Quemar Press (one), and Shearsman Books (one). [Vagabond Press](https://vagabondpress.net/pages/contact-us) and [Quemar Press](https://quemarpress.weebly.com/about.html) do not have a current Australian contact locality supported by the sources checked; [Shearsman Books](https://www.shearsman.com/how-to-contact-shearsman-books) lists a UK contact. None was assigned a guessed Australian coordinate.
+The main dashboard compares **2024–2026** Prime Minister’s Literary Awards
+(PMLA) and Stella Prize lists. The geographic section extends the **PMLA
+selection to 2022–2026**. This gives 144 book records with a named publisher:
+90 from the [2024–2026 table](pmla_2024_2026.csv) and 54 from the
+[2022–2023 extension](pmla_2022_2023_geography.csv). These are shortlist
+records, including winners, rather than all submitted books or all Australian
+literary awards.
 
-## Sources
+The earlier extension draws from Creative Australia’s
+[2022 winners and shortlistees](https://creative.gov.au/2022-prime-ministers-literary-awards-winners-shortlistees-and-judges)
+and [2023 winners and shortlistees](https://creative.gov.au/2023-prime-ministers-literary-awards-winners-shortlistees-and-judges).
+The 2022 page provides a publisher for 25 entries and the 2023 page for 29.
+Entries without a published publisher field are excluded from the map
+extension. Each CSV row keeps its original publisher label and page URL;
+the `publisher_key` column merges clearly identified imprint or name variants
+for the geographic join. The 2023 Australian history winner is verified by
+[Creative Australia’s winner announcement](https://www.creative.gov.au/news-events/news/winners-2023-prime-ministers-literary-awards).
+The checked-in extension can be rebuilt from saved plain-text versions of the
+official pages with [the extraction script](../scripts/build_extended_pmla.py).
 
-- Award books and outcomes: [Creative Australia, Prime Minister’s Literary Awards](https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards). The source URL for each book appears in the book table.
-- Publisher locations: each row of the [location table](publisher_contact_locations.csv) has a direct publisher, parent-publisher, institution, or official registration/contact source, plus a `location_basis` field. Some rows are office addresses, some are postal contacts, and one is a publisher's stated metro area. A parent office is used for two named imprints. A documented contact is **not** an author residence, book setting, book origin, or travel route. Some publishers have multiple offices; the table selects one supported Australian contact locality for each.
-- Metro reference coordinates: [GeoNames Australian city coordinates](https://www.geonames.org/AU/largest-cities-in-australia.html), with a coordinate source in each row. The map uses a metro reference point rather than claiming a precise building coordinate. Spinifex Press's current Little River postal contact is grouped with Geelong; [the City of Greater Geelong lists Little River in its planning area](https://www.geelongaustralia.com.au/common/Public/Documents/8d9a8466b3d2832-gphs2024-summaryreport.pdf).
-- State outlines: [Australian Bureau of Statistics, ASGS Edition 3 (2021) States and Territories digital boundaries](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files). [The simplified GeoJSON](abs_states_2021.geojson) retains source vertices and omits very small offshore islands for legibility.
+## Location evidence
 
-## Map encodings
+The [publisher-contact table](publisher_contact_locations.csv) gives one
+documented Australian locality for each of 33 publishers. It records the
+publisher, parent company, institution or postal source for that locality.
+Some sources identify an office, some a mailing address, and two only a
+metro. A company can have more than one office; this table selects one
+supported Australian contact for each publisher. These are **not** author
+homes, book settings, sales, readership, or travel routes.
 
-1. **Equal-area hexagonal map:** each of the 26 sourced publisher contacts is placed at one of eight metro reference points in a 115 km radius hexagonal cell in a Lambert azimuthal equal-area projection centred on Australia. The colour counts **distinct publishers with a PMLA-listed book** in each cell. All 224 displayed land cells are derived from the ABS outline, independently of any library dataset. Eight cells contain publisher contacts. The slider controls the minimum publisher count shown in colour; underlying counts do not change. The [derived GeoJSON](pmla_publisher_contact_hex_bins.geojson) also records listed and winning books per cell. Melbourne has 11 publishers and 26 books; Sydney has nine publishers and 45 books.
-2. **Proportional-symbol map:** join the PMLA books to the same documented locations and aggregate by contact metro area. Circle area shows listed-book count. The [city summary](publisher_contact_city_summary.csv) records the book, winner, and distinct publisher totals: Sydney 45 books, Melbourne 26, Brisbane eight, Broome three, and Canberra, Geelong, Newcastle, and Perth one each.
-3. **State choropleth:** use the state from that same join and divide winning books by listed books in that state. Colour shows this **winner share**, normalized for the different list sizes. All 18 winners are included: NSW ten of 46 (21.7%), Victoria four of 27 (14.8%), Queensland three of eight (37.5%), and Western Australia one of four (25.0%). ACT has one listed book and no winner. States with no mapped publisher contact are neutral grey; this does not establish that they have no publishers or award winners. The hover shows both counts and the share. Counts and percentages are in the [state summary](publisher_contact_state_summary.csv). Small state denominators make the shares descriptive of this award selection, not estimates of publishers' underlying success rates.
+The longitude and latitude fields are centroids of the stated locality from
+[OpenStreetMap contributors](https://www.openstreetmap.org/copyright), not
+geocoded building entrances. Each row links the exact OSM object. The
+Australia-wide city symbols use separate [GeoNames metro reference
+points](https://www.geonames.org/AU/largest-cities-in-australia.html), because
+their unit is the metro rather than the suburb. Little River is grouped with
+Geelong following [City of Greater Geelong planning material](https://www.geelongaustralia.com.au/common/Public/Documents/8d9a8466b3d2832-gphs2024-summaryreport.pdf).
+The state outlines derive from the
+[ABS ASGS 2021 digital state boundaries](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files).
+The national GeoJSON is simplified for rendering. The city views use a
+latitude/longitude grid at the scale of the documented localities.
 
-The city and state tables and simplified boundaries are reproducible with [`../scripts/build_geography.py`](../scripts/build_geography.py) and the official ABS States and Territories shapefile ZIP. Use `--counts-only` to regenerate the award counts from the included data. The hex grid is reproducible with [`../scripts/build_award_hex_map.py`](../scripts/build_award_hex_map.py). Both scripts use only Python's standard library.
+There are **135 mapped book records from 33 publishers**, including all 30
+winners. Nine records are unmapped. Four are from the 2024–2026 table:
+Vagabond Press (two), Quemar Press (one), and Shearsman Books (one). Five older
+records have no supported Australian contact for the publisher label:
+Fomite, The Hare & Tortoise Books, Yandaarra Community Group, Virago, and
+MIP. The last label appears on Creative Australia’s page for *A World in a
+Shell*; [The MIT Press](https://mitpress.mit.edu/9780262047029/a-world-in-a-shell/)
+publishes that edition. It is not assigned an Australian coordinate.
+An author’s own location is never substituted for a missing publisher contact.
 
-The maps describe **publisher contact geography**, not where the books were written, where authors live, where readers are, or where award ceremonies occurred. They do not establish origin-to-destination movements, so no flow lines are drawn.
+## What the maps count
+
+1. **National equal-area bins:** one documented contact locality per publisher
+   is placed into a 115 km radius hexagonal cell in a Lambert azimuthal
+   equal-area projection. Colour counts distinct publishers with at least one
+   book in the five-year selection. Nine of 225 displayed land cells contain
+   contacts; the neutral cells provide national context. The slider changes
+   the minimum publisher count shown in colour. The [derived GeoJSON](pmla_publisher_contact_hex_bins.geojson)
+   also stores listed and winning records by cell.
+2. **Sydney and Melbourne close-ups:** circles use the documented suburb
+   centroid. Area counts listed-book records at the contact locality, and
+   tooltips name the publishers. These close-ups separate multiple contacts
+   that overlap in a national view. Sydney has 14 mapped publishers and 67
+   listed records; Melbourne has 11 and 39. Their combined 106 records
+   represent 78.5% of the 135 mapped records.
+3. **National proportional symbols:** [the metro summary](publisher_contact_city_summary.csv)
+   aggregates the same book records into eight areas. Sydney has 67,
+   Melbourne 39, Brisbane 16, Broome five, Newcastle and Perth three each,
+   and Geelong and Canberra one each. Circle area, not radius, follows the
+   record count.
+4. **State winner-share map:** [the state summary](publisher_contact_state_summary.csv)
+   divides winning records by listed records associated with a publisher
+   contact state. Queensland has five of 16 (31.2%), WA two of eight (25.0%),
+   NSW 15 of 70 (21.4%), Victoria eight of 40 (20.0%), and ACT zero of one.
+   States without mapped publisher contacts are neutral. These values describe
+   **this award selection**, not publishers’ underlying success rates or the
+   state where an author lives.
+
+The city, locality and state summaries can be regenerated with
+[`build_geography.py --counts-only`](../scripts/build_geography.py).
+The national bins come from [`build_award_hex_map.py`](../scripts/build_award_hex_map.py).
+Both use only Python’s standard library. Rebuilding the state boundaries
+requires the official ABS state shapefile ZIP cited above.
+
+Australia has many other literary awards with different categories, date
+ranges, eligibility and public metadata. Their records are not added to the
+PMLA map totals, because combining unlike shortlist fields or assigning
+unsupported locations would make the count misleading.
