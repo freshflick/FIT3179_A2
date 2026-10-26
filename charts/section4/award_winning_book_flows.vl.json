@@ -3,8 +3,17 @@
   "description": "International publishing reach of four books recognised by Australian literary prizes. Solid teal routes mark published foreign editions; dashed violet routes mark territories where an agent lists publishing-rights sales. Gold routes have both types of evidence.",
   "width": "container",
   "height": 330,
-  "autosize": {"type": "fit-x", "contains": "padding", "resize": true},
-  "padding": {"left": 5, "right": 5, "top": 5, "bottom": 5},
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 5
+  },
   "projection": {
     "type": "equirectangular",
     "rotate": [
@@ -127,22 +136,52 @@
     {
       "data": {
         "values": [
-          {"longitude": 0, "latitude": -49, "label": "0°"},
-          {"longitude": -24, "latitude": 30, "label": "30°N"},
-          {"longitude": -24, "latitude": 0, "label": "0°"},
-          {"longitude": -24, "latitude": -30, "label": "30°S"}
+          {
+            "longitude": 0,
+            "latitude": -49,
+            "label": "0°"
+          },
+          {
+            "longitude": -24,
+            "latitude": 30,
+            "label": "30°N"
+          },
+          {
+            "longitude": -24,
+            "latitude": 0,
+            "label": "0°"
+          },
+          {
+            "longitude": -24,
+            "latitude": -30,
+            "label": "30°S"
+          }
         ]
       },
-      "mark": {"type": "text", "fontSize": 9, "color": "#7A8C98", "align": "left", "dx": 3},
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "color": "#7A8C98",
+        "align": "left",
+        "dx": 3
+      },
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "label"}
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
       }
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_routes.csv?v=15",
+        "url": "data/award_winning_book_edition_markets.csv?v=14",
         "format": {
           "type": "csv",
           "parse": {
@@ -153,6 +192,13 @@
         }
       },
       "transform": [
+        {
+          "filter": "datum.kind === 'market'"
+        },
+        {
+          "calculate": "datum.place",
+          "as": "destination_market"
+        },
         {
           "calculate": "datum.longitude < -30 ? datum.longitude + 360 : datum.longitude",
           "as": "end_lon"
@@ -239,7 +285,7 @@
           "type": "quantitative",
           "sort": "ascending"
         },
-        "stroke": {
+        "color": {
           "field": "evidence_type",
           "type": "nominal",
           "scale": {
@@ -306,24 +352,9 @@
             "title": "Selected award-winning books with evidence"
           },
           {
-            "field": "books",
+            "field": "evidence_type",
             "type": "nominal",
-            "title": "Titles"
-          },
-          {
-            "field": "edition_details",
-            "type": "nominal",
-            "title": "Published-edition evidence"
-          },
-          {
-            "field": "rights_details",
-            "type": "nominal",
-            "title": "Rights-sale evidence"
-          },
-          {
-            "field": "awards",
-            "type": "nominal",
-            "title": "Awards"
+            "title": "Evidence"
           }
         ]
       }
@@ -426,11 +457,11 @@
       "mark": {
         "type": "text",
         "font": "Arial",
-        "fontSize": 12,
+        "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": -12,
-        "dy": -15,
+        "dx": -10,
+        "dy": -27,
         "align": "right",
         "baseline": "middle"
       },
@@ -469,11 +500,11 @@
       "mark": {
         "type": "text",
         "font": "Arial",
-        "fontSize": 12,
+        "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": -24,
-        "dy": 1,
+        "dx": -48,
+        "dy": 2,
         "align": "right",
         "baseline": "middle"
       },
@@ -512,11 +543,11 @@
       "mark": {
         "type": "text",
         "font": "Arial",
-        "fontSize": 12,
+        "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": 20,
-        "dy": -18,
+        "dx": 28,
+        "dy": -31,
         "align": "left",
         "baseline": "middle"
       },
@@ -555,11 +586,11 @@
       "mark": {
         "type": "text",
         "font": "Arial",
-        "fontSize": 12,
+        "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": 24,
-        "dy": 2,
+        "dx": 32,
+        "dy": -3,
         "align": "left",
         "baseline": "middle"
       },
@@ -598,11 +629,11 @@
       "mark": {
         "type": "text",
         "font": "Arial",
-        "fontSize": 12,
+        "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": 21,
-        "dy": 16,
+        "dx": 27,
+        "dy": 24,
         "align": "left",
         "baseline": "middle"
       },
