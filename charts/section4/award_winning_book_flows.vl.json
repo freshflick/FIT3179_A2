@@ -2,18 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "International publishing reach of four books recognised by Australian literary prizes. Solid teal routes mark published foreign editions; dashed violet routes mark territories where an agent lists publishing-rights sales. Gold routes have both types of evidence.",
   "width": "container",
-  "height": 460,
+  "height": 380,
   "padding": {"left": 8, "right": 8, "top": 8, "bottom": 8},
-  "params": [
-    {"name": "map_zoom", "value": 1},
-    {"name": "map_pan_x", "value": 0},
-    {"name": "map_pan_y", "value": 0}
-  ],
   "projection": {
     "type": "equirectangular",
-    "rotate": [-80, 0, 0],
-    "fit": {"type": "Feature", "properties": {}, "geometry": {"type": "MultiPoint", "coordinates": [[-170, -55], [-170, 78], [170, -55], [170, 78]]}},
-    "extent": {"expr": "[[width / 2 + map_pan_x - (width - 20) * 1.08 * map_zoom / 2, height / 2 + map_pan_y - (height - 20) * 1.08 * map_zoom / 2], [width / 2 + map_pan_x + (width - 20) * 1.08 * map_zoom / 2, height / 2 + map_pan_y + (height - 20) * 1.08 * map_zoom / 2]]"},
+    "rotate": [-150, 0, 0],
+    "fit": {"type": "Feature", "properties": {}, "geometry": {"type": "MultiPoint", "coordinates": [[-29.99, 75], [-29.99, -55], [-30.01, 75], [-30.01, -55]]}},
     "clipExtent": {"expr": "[[0, 0], [width, height]]"}
   },
   "layer": [
