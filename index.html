@@ -437,7 +437,9 @@
     } catch (error) { console.error(error); container.textContent = 'Map unavailable. Check the browser console and local server.'; }
   }
   const awardFlowTarget = document.querySelector('#award-edition-flow-map');
-  embedInteractiveMap(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=16', 'international publishing flows');
+  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=17', { actions: true, renderer: 'svg' }).catch(error => {
+    console.error(error); awardFlowTarget.textContent = 'Map unavailable. Check the browser console and local server.';
+  });
 
   const stateMapTarget = document.querySelector('#publisher-state-winners-map');
   embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=13', 'publisher winner-share');
