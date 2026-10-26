@@ -231,15 +231,17 @@
     <p class="section-lead">The map follows <strong class="emphasis-indigo">published editions and documented rights sales</strong> for four books recognised by Australian literary prizes. Their international paths show how a local award can connect a book with readers well beyond Australia.</p>
 
     <div class="chart-block map-card map-primary">
-      <h3>Four award-winning books connect Australia to 23 international markets</h3>
+      <h3>Eight key markets trace the reach of four prize-winning books</h3>
       <p class="chart-intro">Published editions for <em>Carpentaria</em>, <em>The Yield</em> and <em>Cold Enough for Snow</em>; publisher-rights sales for <em>No Friend But the Mountains</em></p>
-      <div id="award-edition-flow-map" class="chart map-visual" role="img" aria-label="World flow map linking Australia to 23 international publishing markets for four books recognised by Australian literary prizes; solid routes are documented editions, dashed routes are rights sales"></div>
-      <div class="flow-map-legend" aria-label="Flow map legend"><span><i class="flow-line-sample" aria-hidden="true"></i>Published foreign edition</span><span><i class="flow-rights-sample" aria-hidden="true"></i>Publishing rights sold</span><span><i class="flow-both-sample" aria-hidden="true"></i>Both evidence types</span><span><i class="flow-dot-sample" aria-hidden="true"></i>Market; Australia is the origin anchor</span><span><i class="flow-width-sample" aria-hidden="true"></i>Line width: number of selected titles</span></div>
-      <div class="flow-map-callouts" aria-label="Key findings from the publishing flow map">
-        <aside class="flow-callout flow-callout-rights"><h4>A prize-winning account reaches 19 territories</h4><p>The rights catalogue for <em>No Friend But the Mountains</em> lists sales across <strong>19 territories</strong>, from the UK and Europe to Taiwan and Egypt.</p></aside>
-        <aside class="flow-callout flow-callout-editions"><h4>Three novels have documented editions in 11 countries</h4><p><em>Carpentaria</em>, <em>The Yield</em> and <em>Cold Enough for Snow</em> appear in shared markets including France, Germany, Poland and the UK.</p></aside>
+      <div class="flow-map-visual-wrap">
+        <div id="award-edition-flow-map" class="chart map-visual" role="img" aria-label="World flow map linking Australia to eight selected international publishing markets for four books recognised by Australian literary prizes; solid routes are documented editions, dashed routes are rights sales"></div>
+        <div class="flow-map-overlay" aria-label="Map annotations">
+          <aside class="flow-overlay-note"><h4>Europe is the shared hub</h4><p><strong>Five selected European markets</strong> show both published editions and rights sales.</p></aside>
+          <aside class="flow-overlay-note"><h4>Rights extend the map</h4><p><em>No Friend But the Mountains</em> has rights sales listed in <strong>19 territories</strong>; the map shows eight selected markets.</p></aside>
+        </div>
       </div>
-      <div class="map-summary"><p><strong class="emphasis-indigo">Publishing evidence spans 23 distinct markets.</strong> The rights catalogue and edition records overlap in seven markets, while other routes show a book reaching places not shared by the rest of this sample.</p><p>Solid lines indicate a published foreign edition; dashed lines indicate publishing rights sold, which do not by themselves confirm publication. Endpoints are representative city coordinates, and the selected titles are a sourced sample rather than a complete count of Australian literature overseas.</p></div>
+      <div class="flow-map-legend" aria-label="Flow map legend"><span><i class="flow-line-sample" aria-hidden="true"></i>Published foreign edition</span><span><i class="flow-rights-sample" aria-hidden="true"></i>Publishing rights sold</span><span><i class="flow-both-sample" aria-hidden="true"></i>Both evidence types</span><span><i class="flow-dot-sample" aria-hidden="true"></i>Market; Australia is the origin anchor</span><span><i class="flow-width-sample" aria-hidden="true"></i>Line width: number of selected titles</span></div>
+      <div class="map-summary"><p><strong class="emphasis-indigo">Eight selected markets keep the routes readable.</strong> Five European destinations combine edition records with a rights sale, while the United States and China appear through editions and Taiwan through a rights sale.</p><p>Solid lines indicate a published foreign edition; dashed lines indicate publishing rights sold, which do not by themselves confirm publication. Endpoints are representative city coordinates, and the selected titles are a sourced sample rather than a complete count of Australian literature overseas.</p></div>
     </div>
 
     <div class="map-pair" aria-label="Publisher contact and winner maps">
@@ -435,7 +437,7 @@
     } catch (error) { console.error(error); container.textContent = 'Map unavailable. Check the browser console and local server.'; }
   }
   const awardFlowTarget = document.querySelector('#award-edition-flow-map');
-  embedInteractiveMap(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=11', 'international publishing flows');
+  embedInteractiveMap(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=16', 'international publishing flows');
 
   const stateMapTarget = document.querySelector('#publisher-state-winners-map');
   embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=13', 'publisher winner-share');

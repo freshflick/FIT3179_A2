@@ -19,21 +19,21 @@ MARKET_OUTPUT = ROOT / "data/award_winning_book_edition_markets.csv"
 # Representative market cities, not publisher addresses. Label offsets are
 # in screen pixels so the dense European labels can be spaced around their dots.
 MARKETS = {
-    "United States": {"city": "New York", "xy": (-74.0060, 40.7128), "label": "US", "label_offset": (10, -18)},
+    "United States": {"city": "New York", "xy": (-74.0060, 40.7128), "label": "US", "label_offset": (-18, -18)},
     "Canada": {"city": "Toronto", "xy": (-79.3832, 43.6532), "label": "Canada", "label_offset": (-55, -22)},
-    "United Kingdom": {"city": "London", "xy": (-0.1276, 51.5072), "label": "UK", "label_offset": (-28, -34)},
-    "France": {"city": "Paris", "xy": (2.3522, 48.8566), "label": "France", "label_offset": (-60, -10)},
+    "United Kingdom": {"city": "London", "xy": (-0.1276, 51.5072), "label": "UK", "label_xy": (12, 62)},
+    "France": {"city": "Paris", "xy": (2.3522, 48.8566), "label": "France", "label_xy": (12, 47)},
     "Italy": {"city": "Rome", "xy": (12.4964, 41.9028), "label": "Italy", "label_offset": (28, 30)},
-    "Poland": {"city": "Warsaw", "xy": (21.0122, 52.2297), "label": "Poland", "label_offset": (46, -5)},
-    "Germany": {"city": "Berlin", "xy": (13.4050, 52.5200), "label": "Germany", "label_offset": (28, -34)},
-    "China": {"city": "Beijing", "xy": (116.4074, 39.9042), "label": "China", "label_offset": (-22, -25)},
+    "Poland": {"city": "Warsaw", "xy": (21.0122, 52.2297), "label": "Poland", "label_xy": (35, 47)},
+    "Germany": {"city": "Berlin", "xy": (13.4050, 52.5200), "label": "Germany", "label_xy": (25, 63)},
+    "China": {"city": "Beijing", "xy": (116.4074, 39.9042), "label": "China", "label_offset": (22, -25)},
     "Netherlands": {"city": "Amsterdam", "xy": (4.9041, 52.3676), "label": "Netherlands", "label_offset": (-76, -46)},
-    "Serbia": {"city": "Belgrade", "xy": (20.4489, 44.7866), "label": "Serbia", "label_offset": (53, 20)},
+    "Serbia": {"city": "Belgrade", "xy": (20.4489, 44.7866), "label": "Serbia", "label_xy": (38, 27)},
     "Sweden": {"city": "Stockholm", "xy": (18.0686, 59.3293), "label": "Sweden", "label_offset": (35, -35)},
     "North America": {"city": "North American market", "xy": (-100.0, 39.0), "label": "N. America", "label_offset": (-24, 18)},
     "Spain": {"city": "Madrid", "xy": (-3.7038, 40.4168), "label": "Spain", "label_offset": (-48, 14)},
     "Portugal": {"city": "Lisbon", "xy": (-9.1393, 38.7223), "label": "Portugal", "label_offset": (-54, 40)},
-    "Taiwan": {"city": "Taipei", "xy": (121.5654, 25.0330), "label": "Taiwan", "label_offset": (22, -17)},
+    "Taiwan": {"city": "Taipei", "xy": (121.5654, 25.0330), "label": "Taiwan", "label_offset": (28, -17)},
     "Egypt": {"city": "Cairo", "xy": (31.2357, 30.0444), "label": "Egypt", "label_offset": (27, 14)},
     "Turkey": {"city": "Ankara", "xy": (32.8597, 39.9334), "label": "Turkey", "label_offset": (48, 27)},
     "Denmark": {"city": "Copenhagen", "xy": (12.5683, 55.6761), "label": "Denmark", "label_offset": (35, -55)},
@@ -75,6 +75,11 @@ for row in editions:
     markets[row["edition_country"]]["editions"].append(row)
 for row in rights_sales:
     markets[row["rights_market"]]["rights"].append(row)
+
+# Focus the map on eight well-documented destination markets. The full source
+# edition and rights tables remain available for auditing.
+SELECTED_MARKETS = {"United States", "United Kingdom", "France", "Germany", "Poland", "China", "Taiwan", "Serbia"}
+markets = {market: evidence for market, evidence in markets.items() if market in SELECTED_MARKETS}
 
 features = []
 for market, evidence in markets.items():
@@ -129,7 +134,7 @@ OUTPUT.write_text(json.dumps(feature_collection, ensure_ascii=False, indent=2) +
 
 with MARKET_OUTPUT.open("w", newline="", encoding="utf-8") as stream:
     columns = ["place", "longitude", "latitude", "label", "label_longitude", "label_latitude", "title_count", "evidence_type", "kind"]
-    writer = csv.DictWriter(stream, fieldnames=columns)
+    writer = csv.DictWriter(stream, fieldnames=columns, lineterminator="\n")
     writer.writeheader()
     edition_titles = {row["book"] for row in editions}
     rights_titles = {row["book"] for row in rights_sales}
@@ -140,7 +145,10 @@ with MARKET_OUTPUT.open("w", newline="", encoding="utf-8") as stream:
         evidence_type = "both" if evidence["editions"] and evidence["rights"] else "edition" if evidence["editions"] else "rights"
         # Geographic projection marks cannot use data-driven pixel offsets.
         # Approximate the intended screen offsets as lon/lat displacement.
-        dx, dy = location["label_offset"]
-        label_lon = location["xy"][0] + dx / 2.8
-        label_lat = location["xy"][1] - dy / 2.8
+        if "label_xy" in location:
+            label_lon, label_lat = location["label_xy"]
+        else:
+            dx, dy = location["label_offset"]
+            label_lon = location["xy"][0] + dx / 2.8
+            label_lat = location["xy"][1] - dy / 2.8
         writer.writerow({"place": market, "longitude": location["xy"][0], "latitude": location["xy"][1], "label": location["label"], "label_longitude": round(label_lon, 4), "label_latitude": round(label_lat, 4), "title_count": title_count, "evidence_type": evidence_type, "kind": "market"})
