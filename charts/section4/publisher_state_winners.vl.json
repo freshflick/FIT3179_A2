@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "ABS 2021 state boundaries shaded by winning PMLA books associated with the documented office states of the ten most represented publishers, 2024–2026.",
+  "description": "ABS 2021 state boundaries shaded by PMLA winner share among listed books associated with documented publisher contact states, 2024–2026; all 18 winners are included.",
   "width": "container",
   "height": 430,
   "background": "#ffffff",
@@ -12,7 +12,7 @@
         {
           "lookup": "properties.state",
           "from": {
-            "data": {"url": "data/publisher_office_state_summary.csv"},
+            "data": {"url": "data/publisher_contact_state_summary.csv"},
             "key": "state_name",
             "fields": ["listed_books", "winning_books", "winner_share_pct"]
           }
@@ -22,12 +22,12 @@
       "encoding": {
         "color": {
           "condition": {"test": "datum.listed_books == 0", "value": "#e8eceb"},
-          "field": "winning_books", "type": "quantitative", "title": "Winning books",
-          "scale": {"domain": [0, 8], "range": ["#f7eadb", "#a34d2b"]},
+          "field": "winner_share_pct", "type": "quantitative", "title": "Winner share (%)",
+          "scale": {"domain": [0, 40], "range": ["#f7eadb", "#a34d2b"]},
           "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 220, "tickCount": 5}
         },
         "tooltip": [
-          {"field": "properties.state", "type": "nominal", "title": "Publisher office state"},
+          {"field": "properties.state", "type": "nominal", "title": "Publisher contact state"},
           {"field": "winning_books", "type": "quantitative", "title": "Winning books"},
           {"field": "listed_books", "type": "quantitative", "title": "Listed books"},
           {"field": "winner_share_pct", "type": "quantitative", "title": "Winner share (%)", "format": ".1f"}
@@ -42,15 +42,15 @@
         {"state": "VIC", "longitude": 143, "latitude": -37}
       ]},
       "transform": [
-        {"lookup": "state", "from": {"data": {"url": "data/publisher_office_state_summary.csv"}, "key": "state", "fields": ["winning_books"]}},
-        {"calculate": "datum.state + '  ' + datum.winning_books", "as": "label"}
+        {"lookup": "state", "from": {"data": {"url": "data/publisher_contact_state_summary.csv"}, "key": "state", "fields": ["winner_share_pct"]}},
+        {"calculate": "datum.state + '  ' + format(datum.winner_share_pct, '.1f') + '%'", "as": "label"}
       ],
       "mark": {"type": "text", "font": "Arial", "fontSize": 12, "fontWeight": "bold"},
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
         "latitude": {"field": "latitude", "type": "quantitative"},
         "text": {"field": "label", "type": "nominal"},
-        "color": {"condition": {"test": "datum.state == 'NSW'", "value": "#ffffff"}, "value": "#233441"}
+        "color": {"condition": {"test": "datum.state == 'QLD'", "value": "#ffffff"}, "value": "#233441"}
       }
     }
   ],

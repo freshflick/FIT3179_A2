@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "City reference points for documented offices of the ten most represented publishers in the 2024–2026 Prime Minister's Literary Awards lists. Circle area represents listed books.",
+  "description": "Eight metro reference points for documented publisher contact localities covering 86 of 90 listed books in the 2024–2026 Prime Minister's Literary Awards. Circle area represents listed books.",
   "width": "container",
   "height": 430,
   "background": "#ffffff",
@@ -16,57 +16,19 @@
       }
     },
     {
-      "data": {"url": "data/pmla_2024_2026.csv"},
+      "data": {"url": "data/publisher_contact_city_summary.csv"},
       "transform": [
-        {
-          "aggregate": [{"op": "count", "as": "publisher_books"}],
-          "groupby": ["publisher_key"]
-        },
-        {
-          "window": [{"op": "row_number", "as": "publisher_rank"}],
-          "sort": [
-            {"field": "publisher_books", "order": "descending"},
-            {"field": "publisher_key", "order": "ascending"}
-          ]
-        },
-        {"filter": "datum.publisher_rank <= 10"},
-        {
-          "lookup": "publisher_key",
-          "from": {
-            "data": {"url": "data/publisher_office_locations_top10.csv"},
-            "key": "publisher_key",
-            "fields": [
-              "office_city",
-              "map_city",
-              "state",
-              "longitude",
-              "latitude"
-            ]
-          }
-        },
-        {
-          "filter": "isValid(datum.longitude) && isValid(datum.latitude)"
-        },
-        {
-          "aggregate": [
-            {"op": "sum", "field": "publisher_books", "as": "books"},
-            {"op": "count", "as": "publishers"}
-          ],
-          "groupby": ["map_city", "state", "longitude", "latitude"]
-        },
-        {
-          "calculate": "datum.map_city + ' · ' + datum.books + ' books'",
-          "as": "map_label"
-        }
+        {"calculate": "datum.map_city + ' · ' + datum.listed_books", "as": "map_label"}
       ],
       "layer": [
         {
           "mark": {
             "type": "circle",
-            "color": "#ad6d37",
+            "color": "#286f91",
             "opacity": 0.84,
             "stroke": "#ffffff",
-            "strokeWidth": 1.7
+            "strokeWidth": 1.7,
+            "size": 100
           },
           "encoding": {
             "longitude": {
@@ -78,17 +40,17 @@
               "type": "quantitative"
             },
             "size": {
-              "field": "books",
+              "field": "listed_books",
               "type": "quantitative",
               "title": "Listed books",
-              "scale": {"domain": [0, 37], "range": [0, 3100]},
-              "legend": {"orient": "bottom", "values": [5, 15, 30]}
+              "scale": {"domain": [0, 45], "range": [90, 2700]},
+              "legend": {"orient": "bottom", "values": [1, 10, 25, 45]}
             },
             "tooltip": [
               {
                 "field": "map_city",
                 "type": "nominal",
-                "title": "Office metro area"
+                "title": "Publisher contact metro"
               },
               {
                 "field": "state",
@@ -96,14 +58,15 @@
                 "title": "State"
               },
               {
-                "field": "books",
+                "field": "listed_books",
                 "type": "quantitative",
                 "title": "Listed books"
               },
+              {"field": "winning_books", "type": "quantitative", "title": "Winning books"},
               {
                 "field": "publishers",
                 "type": "quantitative",
-                "title": "Top-ten publishers"
+                "title": "Publishers"
               }
             ]
           }
@@ -111,7 +74,9 @@
         {
           "mark": {
             "type": "text",
-            "dy": -29,
+            "dy": -19,
+            "dx": -12,
+            "align": "right",
             "font": "Arial",
             "fontSize": 13,
             "fontWeight": "bold",
@@ -130,6 +95,16 @@
               "field": "map_label",
               "type": "nominal"
             }
+          },
+          "transform": [{"filter": "datum.listed_books >= 3 && datum.map_city != 'Broome'"}]
+        },
+        {
+          "transform": [{"filter": "datum.map_city == 'Broome'"}],
+          "mark": {"type": "text", "dy": -17, "dx": 11, "align": "left", "font": "Arial", "fontSize": 13, "fontWeight": "bold", "color": "#233441"},
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude": {"field": "latitude", "type": "quantitative"},
+            "text": {"field": "map_label", "type": "nominal"}
           }
         }
       ]

@@ -1,4 +1,4 @@
-"""Rebuild the publisher-office state table and simplified ABS boundaries.
+"""Rebuild publisher-location summaries and simplified ABS boundaries.
 
 Download the ABS GDA2020 2021 States and Territories shapefile ZIP from
 https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files
@@ -179,23 +179,38 @@ def point_in_ring(lon, lat, ring):
 
 
 def counts():
-    offices = {row["publisher_key"]: row for row in csv.DictReader(
-        (DATA / "publisher_office_locations_top10.csv").open())}
-    listed, wins = Counter(), Counter()
-    for row in csv.DictReader((DATA / "pmla_2024_2026.csv").open()):
-        office = offices.get(row["publisher_key"])
-        if not office:
+    locations = {row["publisher_key"]: row for row in csv.DictReader(
+        (DATA / "publisher_contact_locations.csv").open())}
+    listed, wins, city_listed, city_wins = Counter(), Counter(), Counter(), Counter()
+    city_publishers = {}
+    books = list(csv.DictReader((DATA / "pmla_2024_2026.csv").open()))
+    for row in books:
+        location = locations.get(row["publisher_key"])
+        if not location:
             continue
-        state = office["state"]
+        state = location["state"]
+        city = location["map_city"]
         listed[state] += 1
         wins[state] += row["outcome"].strip().lower() == "winner"
-    assert sum(listed.values()) == 65
-    with (DATA / "publisher_office_state_summary.csv").open("w", newline="") as f:
+        city_listed[city] += 1
+        city_wins[city] += row["outcome"].strip().lower() == "winner"
+        city_publishers.setdefault(city, set()).add(row["publisher_key"])
+    assert len(books) == 90 and len(locations) == 26
+    assert sum(listed.values()) == 86
+    assert sum(wins.values()) == sum(row["outcome"].strip().lower() == "winner" for row in books)
+    with (DATA / "publisher_contact_state_summary.csv").open("w", newline="") as f:
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["state", "state_name", "listed_books", "winning_books", "winner_share_pct"])
         for state, name in STATE_NAMES.items():
             n = listed[state]
             writer.writerow([state, name, n, wins[state], round(100 * wins[state] / n, 1) if n else ""])
+    with (DATA / "publisher_contact_city_summary.csv").open("w", newline="") as f:
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(["map_city", "state", "longitude", "latitude", "listed_books", "winning_books", "publishers", "publisher_names"])
+        for city, n in city_listed.most_common():
+            location = next(item for item in locations.values() if item["map_city"] == city)
+            names = sorted(city_publishers[city])
+            writer.writerow([city, location["state"], location["longitude"], location["latitude"], n, city_wins[city], len(names), "; ".join(names)])
 
 
 if __name__ == "__main__":

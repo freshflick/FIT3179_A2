@@ -1,0 +1,46 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Distinct publishers of 2024–2026 PMLA-listed books grouped by documented Australian contact metro in 115 km equal-area hexagonal cells. Neutral cells have no mapped publisher contact; 26 publishers and 86 books are covered.",
+  "width": "container",
+  "height": 430,
+  "background": "#ffffff",
+  "projection": {"type": "azimuthalEqualArea", "rotate": [-134, 25]},
+  "params": [
+    {"name": "minimumPublishers", "value": 1, "bind": {"input": "range", "min": 1, "max": 11, "step": 1, "name": "Minimum publishers per cell: "}}
+  ],
+  "layer": [
+    {
+      "data": {"url": "data/abs_states_2021.geojson", "format": {"type": "json", "property": "features"}},
+      "mark": {"type": "geoshape", "fill": "#f2f5f4", "stroke": "#b8cbd0", "strokeWidth": 0.9}
+    },
+    {
+      "data": {"url": "data/pmla_publisher_contact_hex_bins.geojson", "format": {"type": "json", "property": "features"}},
+      "mark": {"type": "geoshape", "fill": "#e5eeec", "stroke": "#ffffff", "strokeWidth": 0.65, "opacity": 0.96}
+    },
+    {
+      "data": {"url": "data/pmla_publisher_contact_hex_bins.geojson", "format": {"type": "json", "property": "features"}},
+      "transform": [
+        {"calculate": "datum.properties.publishers", "as": "publishers"},
+        {"calculate": "datum.properties.listed_books", "as": "listed_books"},
+        {"calculate": "datum.properties.winning_books", "as": "winning_books"},
+        {"calculate": "datum.properties.metro_areas", "as": "metro_areas"},
+        {"filter": "datum.publishers >= minimumPublishers"}
+      ],
+      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.1, "opacity": 0.98},
+      "encoding": {
+        "color": {
+          "field": "publishers", "type": "quantitative", "title": "PMLA publishers per cell",
+          "scale": {"domain": [1, 11], "range": ["#aed6c7", "#116b5b"]},
+          "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 215, "tickCount": 4}
+        },
+        "tooltip": [
+          {"field": "metro_areas", "type": "nominal", "title": "Contact metro"},
+          {"field": "publishers", "type": "quantitative", "title": "Distinct PMLA publishers"},
+          {"field": "listed_books", "type": "quantitative", "title": "Listed books"},
+          {"field": "winning_books", "type": "quantitative", "title": "Winning books"}
+        ]
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}, "legend": {"labelFont": "Arial", "titleFont": "Arial"}}
+}
