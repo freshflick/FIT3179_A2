@@ -220,19 +220,23 @@
           "as": "dy"
         },
         {
-          "calculate": "datum.start_lon + datum.dx / 3 - datum.dy * 0.09",
+          "calculate": "sqrt(pow(datum.dx, 2) + pow(datum.dy, 2)) * 0.08 < 7 ? 7 : sqrt(pow(datum.dx, 2) + pow(datum.dy, 2)) * 0.08",
+          "as": "route_bow"
+        },
+        {
+          "calculate": "datum.start_lon + datum.dx / 3",
           "as": "c1_lon"
         },
         {
-          "calculate": "datum.start_lat + datum.dy / 3 + datum.dx * 0.09",
+          "calculate": "datum.start_lat + datum.dy / 3 + datum.route_bow",
           "as": "c1_lat"
         },
         {
-          "calculate": "datum.start_lon + 2 * datum.dx / 3 - datum.dy * 0.09",
+          "calculate": "datum.start_lon + 2 * datum.dx / 3",
           "as": "c2_lon"
         },
         {
-          "calculate": "datum.start_lat + 2 * datum.dy / 3 + datum.dx * 0.09",
+          "calculate": "datum.start_lat + 2 * datum.dy / 3 + datum.route_bow",
           "as": "c2_lat"
         },
         {
@@ -507,8 +511,8 @@
         "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": -48,
-        "dy": 2,
+        "dx": -14,
+        "dy": 8,
         "align": "right",
         "baseline": "middle"
       },

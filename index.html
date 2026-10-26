@@ -228,7 +228,7 @@
       <p class="section-number">04 / The geography of literary visibility</p>
       <h2 id="geography-heading">Prize-winning books travel through global publishing</h2>
     </div>
-    <p class="section-lead">The map follows <strong class="emphasis-indigo">published editions and documented rights sales</strong> for four books recognised by Australian literary prizes. Their international paths show how a local award can connect a book with readers well beyond Australia.</p>
+    <p class="section-lead">After tracing who is shortlisted and wins Australia’s literary prizes, this map follows what happens next: where a selection of prize-winning books has reached readers abroad. It separates <strong class="emphasis-indigo">published foreign editions</strong> from rights-sale records, which show a deal but do not confirm that an edition appeared.</p>
 
     <div class="chart-block map-card map-primary">
       <h3>Europe carries the broadest documented reach</h3>
@@ -236,12 +236,12 @@
       <div class="flow-map-visual-wrap">
         <div id="award-edition-flow-map" class="chart map-visual" role="img" aria-label="World flow map linking Australia to eight selected international publishing markets for four books recognised by Australian literary prizes; solid routes are documented editions, dashed routes are rights sales"></div>
         <div class="flow-map-overlay" aria-label="Map annotations">
-          <aside class="flow-overlay-note"><h4>UK and France lead</h4><p>Each has published editions of <strong>all four selected titles</strong>. Germany and Poland have three each.</p></aside>
-          <aside class="flow-overlay-note"><h4>Rights reach beyond editions</h4><p><em>No Friend But the Mountains</em> has rights-sale records in <strong>six mapped markets</strong>. Taiwan is rights-only here; a sale does not confirm publication.</p></aside>
+          <aside class="flow-overlay-note"><h4>UK and France lead</h4><p>UK and France each have editions of <strong>all four selected books</strong>; Germany and Poland have three.</p></aside>
+          <aside class="flow-overlay-note"><h4>Rights reach beyond editions</h4><p>Rights sales for <em>No Friend But the Mountains</em> appear in <strong>six mapped markets</strong>. Taiwan is rights-only here.</p></aside>
         </div>
       </div>
       <div class="flow-map-legend" aria-label="Flow map legend"><span><i class="flow-line-sample" aria-hidden="true"></i>Published foreign edition</span><span><i class="flow-rights-sample" aria-hidden="true"></i>Publishing rights sold</span><span><i class="flow-both-sample" aria-hidden="true"></i>Both evidence types</span><span><i class="flow-dot-sample" aria-hidden="true"></i>Market; Australia is the origin anchor</span><span class="flow-size-legend"><strong>Books represented</strong><i class="flow-size-line flow-size-1" aria-hidden="true"></i>1<i class="flow-size-line flow-size-2" aria-hidden="true"></i>2<i class="flow-size-line flow-size-4" aria-hidden="true"></i>4</span></div>
-      <div class="map-summary"><p><strong class="emphasis-indigo">The strongest edition reach sits in Europe.</strong> UK and France each have records for all four titles; Germany and Poland have three, and Serbia has two. The United States has three, while China has one.</p><p><strong class="emphasis-indigo">Edition and rights evidence tell different parts of the story.</strong> Seven mapped markets have published-edition records. Six have a rights-sale record for <em>No Friend But the Mountains</em>, including Taiwan, where this sample shows no published edition. Its rights catalogue lists 19 territories overall, so the map is a documented selection, not a complete global count.</p></div>
+      <div class="map-summary"><p><strong class="emphasis-indigo">The UK and France have the broadest documented editions.</strong> Each appears for all four selected books; Germany and Poland have three titles apiece, followed by Serbia with two. The United States has three, and China has one. In this sample, the densest publishing links cluster in Europe.</p><p><strong class="emphasis-indigo">A rights deal is a step toward publication, not proof of it.</strong> Seven mapped markets have published-edition records; six also have rights-sale records for <em>No Friend But the Mountains</em>. Taiwan is rights-only in this selection. The catalogue lists 19 territories for that title, while this map shows eight markets with documented evidence. The pattern describes the books’ recorded reach; it does not claim that prize recognition caused each deal.</p></div>
     </div>
 
     <div class="map-pair" aria-label="Publisher contact and winner maps">
@@ -437,7 +437,7 @@
     } catch (error) { console.error(error); container.textContent = 'Map unavailable. Check the browser console and local server.'; }
   }
   const awardFlowTarget = document.querySelector('#award-edition-flow-map');
-  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=19', { actions: true, renderer: 'svg' }).catch(error => {
+  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=20', { actions: true, renderer: 'svg' }).catch(error => {
     console.error(error); awardFlowTarget.textContent = 'Map unavailable. Check the browser console and local server.';
   });
 
