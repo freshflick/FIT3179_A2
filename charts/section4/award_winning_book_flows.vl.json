@@ -212,7 +212,11 @@
           "as": "start_lat"
         },
         {
-          "calculate": "datum.end_lon - datum.start_lon",
+          "calculate": "datum.end_lon - 150 > 180 ? datum.end_lon - 510 : datum.end_lon - 150",
+          "as": "end_x"
+        },
+        {
+          "calculate": "datum.end_x + 16.2249",
           "as": "dx"
         },
         {
@@ -220,27 +224,35 @@
           "as": "dy"
         },
         {
-          "calculate": "sqrt(pow(datum.dx, 2) + pow(datum.dy, 2)) * 0.08 < 7 ? 7 : sqrt(pow(datum.dx, 2) + pow(datum.dy, 2)) * 0.08",
-          "as": "route_bow"
+          "calculate": "datum.destination_market === 'United States' ? 10 : datum.destination_market === 'Taiwan' ? -27 : datum.destination_market === 'China' ? -39 : datum.destination_market === 'Poland' ? -36 : datum.destination_market === 'Germany' ? -42 : datum.destination_market === 'Serbia' ? -16 : datum.destination_market === 'United Kingdom' ? -35 : datum.destination_market === 'France' ? -15 : 0",
+          "as": "route_offset"
         },
         {
-          "calculate": "datum.start_lon + datum.dx / 3",
-          "as": "c1_lon"
+          "calculate": "-datum.dy / sqrt(datum.dx * datum.dx + datum.dy * datum.dy)",
+          "as": "normal_x"
         },
         {
-          "calculate": "datum.start_lat + datum.dy / 3 + datum.route_bow",
-          "as": "c1_lat"
+          "calculate": "datum.dx / sqrt(datum.dx * datum.dx + datum.dy * datum.dy)",
+          "as": "normal_y"
         },
         {
-          "calculate": "datum.start_lon + 2 * datum.dx / 3",
-          "as": "c2_lon"
+          "calculate": "-16.2249 + datum.dx / 3 + datum.normal_x * datum.route_offset",
+          "as": "c1_x"
         },
         {
-          "calculate": "datum.start_lat + 2 * datum.dy / 3 + datum.route_bow",
-          "as": "c2_lat"
+          "calculate": "-25.2744 + datum.dy / 3 + datum.normal_y * datum.route_offset",
+          "as": "c1_y"
         },
         {
-          "calculate": "sequence(0, 41, 1)",
+          "calculate": "-16.2249 + 2 * datum.dx / 3 + datum.normal_x * datum.route_offset",
+          "as": "c2_x"
+        },
+        {
+          "calculate": "-25.2744 + 2 * datum.dy / 3 + datum.normal_y * datum.route_offset",
+          "as": "c2_y"
+        },
+        {
+          "calculate": "sequence(0, 61, 1)",
           "as": "steps"
         },
         {
@@ -252,21 +264,21 @@
           ]
         },
         {
-          "calculate": "datum.step / 40",
+          "calculate": "datum.step / 60",
           "as": "t"
         },
         {
-          "calculate": "pow(1 - datum.t, 3) * datum.start_lon + 3 * pow(1 - datum.t, 2) * datum.t * datum.c1_lon + 3 * (1 - datum.t) * pow(datum.t, 2) * datum.c2_lon + pow(datum.t, 3) * datum.end_lon",
+          "calculate": "pow(1 - datum.t, 3) * -16.2249 + 3 * pow(1 - datum.t, 2) * datum.t * datum.c1_x + 3 * (1 - datum.t) * pow(datum.t, 2) * datum.c2_x + pow(datum.t, 3) * datum.end_x + 150",
           "as": "route_lon"
         },
         {
-          "calculate": "pow(1 - datum.t, 3) * datum.start_lat + 3 * pow(1 - datum.t, 2) * datum.t * datum.c1_lat + 3 * (1 - datum.t) * pow(datum.t, 2) * datum.c2_lat + pow(datum.t, 3) * datum.latitude",
+          "calculate": "pow(1 - datum.t, 3) * -25.2744 + 3 * pow(1 - datum.t, 2) * datum.t * datum.c1_y + 3 * (1 - datum.t) * pow(datum.t, 2) * datum.c2_y + pow(datum.t, 3) * datum.latitude",
           "as": "route_lat"
         }
       ],
       "mark": {
         "type": "line",
-        "interpolate": "basis",
+        "interpolate": "linear",
         "strokeCap": "round",
         "opacity": 0.9,
         "clip": true
@@ -322,8 +334,8 @@
                 3
               ],
               [
-                2,
-                2
+                8,
+                5
               ]
             ]
           },
@@ -338,8 +350,8 @@
               4
             ],
             "range": [
-              1.5,
-              6
+              1.2,
+              4.5
             ]
           },
           "legend": null

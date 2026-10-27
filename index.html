@@ -437,7 +437,7 @@
     } catch (error) { console.error(error); container.textContent = 'Map unavailable. Check the browser console and local server.'; }
   }
   const awardFlowTarget = document.querySelector('#award-edition-flow-map');
-  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=20', { actions: true, renderer: 'svg' }).catch(error => {
+  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=23', { actions: true, renderer: 'svg' }).catch(error => {
     console.error(error); awardFlowTarget.textContent = 'Map unavailable. Check the browser console and local server.';
   });
 
