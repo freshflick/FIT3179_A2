@@ -989,7 +989,7 @@
             "value": 80
           },
           "fill": {
-            "value": "#B36E21"
+            "value": "#8C6D00"
           }
         }
       }
@@ -1061,7 +1061,7 @@
             "value": 218
           },
           "fill": {
-            "signal": "datum.pattern === '11111' ? '#B36E21' : '#3B7693'"
+            "signal": "datum.pattern === '11111' ? '#8C6D00' : '#173B69'"
           },
           "cornerRadiusTopLeft": {
             "value": 2
@@ -1224,7 +1224,7 @@
             "field": "lastYear"
           },
           "stroke": {
-            "signal": "datum.allFive ? '#B36E21' : '#35566B'"
+            "signal": "datum.allFive ? '#8C6D00' : '#173B69'"
           },
           "strokeWidth": {
             "value": 2
@@ -1255,7 +1255,7 @@
             "value": "circle"
           },
           "fill": {
-            "signal": "datum.active ? (datum.pattern === '11111' ? '#B36E21' : '#35566B') : '#DFE8EC'"
+            "signal": "datum.active ? (datum.pattern === '11111' ? '#8C6D00' : '#173B69') : '#DFE8EC'"
           },
           "stroke": {
             "value": "#ffffff"
