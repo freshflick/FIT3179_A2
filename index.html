@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=37">
+  <link rel="stylesheet" href="css/styles.css?v=40">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -248,7 +248,6 @@
         </div>
       </div>
       <div class="flow-map-legend" aria-label="Flow map legend"><span><i class="flow-line-sample" aria-hidden="true"></i>Published foreign edition</span><span><i class="flow-rights-sample" aria-hidden="true"></i>Publishing rights sold</span><span><i class="flow-both-sample" aria-hidden="true"></i>Both evidence types</span><span><i class="flow-dot-sample" aria-hidden="true"></i>Market; Australia is the origin anchor</span><span class="flow-size-legend"><strong>Books represented</strong><i class="flow-size-line flow-size-1" aria-hidden="true"></i>1<i class="flow-size-line flow-size-2" aria-hidden="true"></i>2<i class="flow-size-line flow-size-4" aria-hidden="true"></i>4</span></div>
-      <p class="chart-note">The world extent is intentional: routes span many publishing markets, so most countries show no evidence for the four selected books.</p>
       <div class="finding-row flow-map-findings" aria-label="International publishing findings">
         <aside class="finding finding-teal"><h4>Europe holds most mapped edition links</h4><p><strong class="emphasis-teal">Eleven of the 15 confirmed edition-to-market links shown are European</strong> (73%). The United States accounts for three links and China for one.</p></aside>
         <aside class="finding finding-lilac"><h4>The Yield reaches the most countries</h4><p>It has documented editions in <strong class="emphasis-lilac">seven countries</strong>; <em>Carpentaria</em> and <em>Cold Enough for Snow</em> each appear in six. Together, the three books have 19 edition records across 11 countries.</p></aside>
@@ -298,7 +297,7 @@
         <h3>References and Authorship</h3>
         <ul class="reference-list" aria-label="References">
           <li><strong>Prime Minister’s Literary Awards book lists</strong> - Creative Australia. (2022). <em>2022 Prime Minister’s Literary Awards winners, shortlistees and judges</em>. Creative Australia. <a href="https://creative.gov.au/2022-prime-ministers-literary-awards-winners-shortlistees-and-judges">https://creative.gov.au/2022-prime-ministers-literary-awards-winners-shortlistees-and-judges</a> / Creative Australia. (2023). <em>2023 Prime Minister’s Literary Awards winners, shortlistees and judges</em>. <a href="https://creative.gov.au/2023-prime-ministers-literary-awards-winners-shortlistees-and-judges">https://creative.gov.au/2023-prime-ministers-literary-awards-winners-shortlistees-and-judges</a> / Creative Australia. (2024). <em>Announcing shortlists: 2024 Prime Minister’s Literary Awards</em>. <a href="https://creative.gov.au/news-events/news/announcing-shortlists-2024-prime-ministers-literary-awards">https://creative.gov.au/news-events/news/announcing-shortlists-2024-prime-ministers-literary-awards</a></li>
-          <li><strong>Stella Prize book lists</strong> - The Stella Prize. (2026). <em>The Stella Prize: Longlisted titles and judges’ reports, 2022–2026</em>. The Stella Prize. <a href="https://stella.org.au/prize/">https://stella.org.au/prize/</a></li>
+          <li><strong>Stella Prize book lists</strong> - The Stella Prize. (2026). <em>The Stella Prize: Longlisted titles and judges’ reports, 2022–2026</em>. The Stella Prize. <a href="https://stella.org.au/the-stella-prize-2026-winner/">https://stella.org.au/the-stella-prize-2026-winner/</a></li>
           <li><strong>Miles Franklin Literary Award records</strong> - Perpetual. (2021). <em>Miles Franklin Literary Award: Judges and history of recipients</em>. Perpetual. <a href="https://www.perpetual.com.au/wealth-management/milesfranklin/judges-and-history-of-recipients/">https://www.perpetual.com.au/wealth-management/milesfranklin/judges-and-history-of-recipients/</a></li>
           <li><strong>Victorian Premier’s Prize for Literature record</strong> - State Library of New South Wales. (2019). <em>2019 winner: No Friend but the Mountains</em>. State Library of New South Wales. <a href="https://www.sl.nsw.gov.au/awards/national-biography-award/2019-winner-no-friend-mountains">https://www.sl.nsw.gov.au/awards/national-biography-award/2019-winner-no-friend-mountains</a></li>
           <li><strong>Foreign editions of selected winning books</strong> - Wright, A. (2007). <em>Carpentaria</em>. United States / United Kingdom / Germany editions; Winch, T. J. (2020). <em>Cold Enough for Snow</em>. Giramondo Publishing. <a href="https://giramondopublishing.com/books/jessica-au-cold-enough-for-snow/">https://giramondopublishing.com/books/jessica-au-cold-enough-for-snow/</a>; New Directions. (2024). <em>Carpentaria</em>. <a href="https://www.ndbooks.com/book/carpentaria/">https://www.ndbooks.com/book/carpentaria/</a></li>
@@ -444,7 +443,7 @@
     ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json?v=8'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json?v=5'],
     ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=10'],
-    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=5'],
+    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=6'],
     ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=7']
   ];
   charts.forEach(([target, spec]) => vegaEmbed(target, spec, { actions: true }).catch(error => {
@@ -479,10 +478,10 @@
   });
 
   const stateMapTarget = document.querySelector('#publisher-state-winners-map');
-  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=16', 'publisher winner-share');
+  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=24', 'publisher winner-share');
 
   const publisherMapViews = {
-    australia: { source: 'charts/section4/publisher_contact_metros.vl.json?v=13' },
+    australia: { source: 'charts/section4/publisher_contact_metros.vl.json?v=18' },
     sydney: { source: 'charts/section4/publisher_sydney_localities.vl.json?v=25' },
     melbourne: { source: 'charts/section4/publisher_melbourne_localities.vl.json?v=25' }
   };
