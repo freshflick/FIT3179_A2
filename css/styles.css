@@ -18,7 +18,7 @@ body {
 }
 .page {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 0 36px 64px;
     background: var(--paper);
@@ -179,7 +179,7 @@ body {
     background: #e9efee;
 }
 .page {
-    max-width: 1260px;
+    max-width: 1380px;
     box-shadow: 0 18px 75px rgba(28, 56, 65, .08);
 }
 .site-nav {
