@@ -213,33 +213,53 @@ body {
     padding-top: 62px;
     padding-bottom: 60px;
 }
-.hero::before {
-    position: absolute;
-    top: 17px;
-    right: 0;
-    width: 36%;
-    height: 1px;
-    background: #b6813e;
-    content: "";
-}
 .hero-meta {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 650px;
     margin-top: 30px;
     border-top: 1px solid #cfdbdc;
-    border-bottom: 1px solid #cfdbdc;
 }
-.hero-meta span {
+.hero-stat {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
     padding: 14px 18px 15px;
     border-left: 1px solid #cfdbdc;
 }
-.hero-meta span:first-child { border-left: 0; padding-left: 0; }
-.hero-meta strong { color: var(--ink); font-size: 24px; line-height: 1; font-variant-numeric: tabular-nums; }
-.hero-meta small { color: var(--muted); font-size: 11px; font-weight: 600; line-height: 1.35; }
+.hero-stat:first-child { border-left: 0; padding-left: 0; }
+.hero-stat strong {
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+}
+.hero-stat strong::after {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 3px;
+    margin-top: 7px;
+    border-radius: 2px;
+    background: var(--accent, #173B69);
+}
+.hero-stat em {
+    color: var(--accent, #173B69);
+    font-size: 10.5px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 1px;
+}
+.hero-stat small { color: var(--muted); font-size: 11px; font-weight: 600; line-height: 1.35; }
+.hero-stat-blue strong::after, .hero-stat-blue { --accent: #173B69; }
+.hero-stat-gold { --accent: #B08A2E; }
+.hero-stat-lilac { --accent: #6E5598; }
 .story-section { margin-top: 62px; }
 .section-heading {
     border-left-width: 5px;
@@ -304,7 +324,6 @@ footer { padding-top: 24px; }
     .site-nav { display: block; }
     .site-nav-links { justify-content: flex-start; margin-top: 8px; }
     .hero { padding-top: 38px; padding-bottom: 40px; }
-    .hero::before { display: none; }
     .chart-block, .map-card { padding: 20px 14px; }
     .map-card-heading { display: block; }
     .map-card-heading > p { margin-top: 5px; text-align: left; }
