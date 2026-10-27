@@ -222,7 +222,7 @@ def counts():
         for city, n in city_listed.most_common():
             location = next(item for item in locations.values() if item["map_city"] == city)
             names = sorted(city_publishers[city])
-            writer.writerow([city, location["state"], *city_centres[city], n, city_wins[city], len(names), "; ".join(names)])
+            writer.writerow([city, STATE_NAMES[location["state"]], *city_centres[city], n, city_wins[city], len(names), "; ".join(names)])
     with (DATA / "publisher_contact_locality_summary.csv").open("w", newline="") as f:
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["map_city", "contact_locality", "state", "longitude", "latitude", "listed_books", "winning_books", "publishers", "publisher_names"])
@@ -230,7 +230,7 @@ def counts():
             location = next(item for item in locations.values()
                             if item["map_city"] == city and item["contact_locality"] == locality)
             names = sorted(locality_publishers[(city, locality)])
-            writer.writerow([city, locality, location["state"], location["longitude"], location["latitude"],
+            writer.writerow([city, locality, STATE_NAMES[location["state"]], location["longitude"], location["latitude"],
                              n, locality_wins[(city, locality)], len(names), "; ".join(names)])
     print(f"{sum(listed.values())} of {len(books)} books mapped from "
           f"{len({row['publisher_key'] for row in books if row['publisher_key'] in locations})} publishers")

@@ -19,9 +19,9 @@ MARKET_OUTPUT = ROOT / "data/award_winning_book_edition_markets.csv"
 # Representative market cities, not publisher addresses. Label offsets are
 # in screen pixels so the dense European labels can be spaced around their dots.
 MARKETS = {
-    "United States": {"city": "New York", "xy": (-74.0060, 40.7128), "label": "US", "label_offset": (-18, -18)},
+    "United States": {"city": "New York", "xy": (-74.0060, 40.7128), "label": "United States", "label_offset": (-18, -18)},
     "Canada": {"city": "Toronto", "xy": (-79.3832, 43.6532), "label": "Canada", "label_offset": (-55, -22)},
-    "United Kingdom": {"city": "London", "xy": (-0.1276, 51.5072), "label": "UK", "label_xy": (12, 62)},
+    "United Kingdom": {"city": "London", "xy": (-0.1276, 51.5072), "label": "United Kingdom", "label_xy": (12, 62)},
     "France": {"city": "Paris", "xy": (2.3522, 48.8566), "label": "France", "label_xy": (12, 47)},
     "Italy": {"city": "Rome", "xy": (12.4964, 41.9028), "label": "Italy", "label_offset": (28, 30)},
     "Poland": {"city": "Warsaw", "xy": (21.0122, 52.2297), "label": "Poland", "label_xy": (35, 47)},

@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "One square per Stella Prize longlisted book, grouped by genre and year, 2024–2026.",
-  "data": { "url": "data/stella_2024_2026.csv" },
+  "description": "One square per Stella Prize longlisted book, grouped by broad genre and year, 2022–2026.",
+  "data": { "url": "data/stella_2022_2026.csv" },
   "transform": [
     {
       "calculate": "datum.genre == 'Fiction' ? 'Fiction' : datum.genre == 'Poetry' ? 'Poetry' : datum.genre == 'Graphic Novel' ? 'Graphic novel' : 'Non-fiction & memoir'",
@@ -35,7 +35,7 @@
       "sort": "ascending",
       "header": {
         "title": null,
-        "labelFont": "Arial",
+        "labelFont": "Georgia",
         "labelFontSize": 16,
         "labelFontWeight": "bold",
         "labelColor": "#233441",
@@ -45,8 +45,8 @@
   },
   "spacing": 22,
   "spec": {
-    "width": 268,
-    "height": 204,
+    "width": 142,
+    "height": 180,
     "mark": {
       "type": "rect",
       "stroke": "white",
