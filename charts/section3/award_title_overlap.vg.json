@@ -491,7 +491,7 @@
             "signal": "datum.key === 'Both awards' ? '#A76A16' : '#344F62'"
           },
           "tooltip": {
-            "signal": "datum.key + ': ' + datum.books + ' distinct books'"
+            "signal": "datum.key + ' — ' + datum.books + ' distinct titles on this list'"
           }
         }
       },
@@ -520,13 +520,13 @@
             "field": "wins"
           },
           "stroke": {
-            "signal": "datum.dual_wins > 0 ? '#203847' : '#ffffff'"
+            "value": "#ffffff"
           },
           "strokeWidth": {
-            "signal": "datum.dual_wins > 0 ? 3 : 1.5"
+            "value": 1.5
           },
           "tooltip": {
-            "signal": "datum.publisher_label + ' | ' + datum.membership + ' | ' + datum.books + ' distinct books | ' + datum.wins + ' winning books' + (datum.publishers > 1 ? ' | ' + datum.publishers + ' publishers combined' : '')"
+            "signal": "datum.publisher_label + ' · ' + (datum.membership === 'Both awards' ? 'appears on both prize lists' : 'appears only in ' + datum.membership) + ' — ' + datum.books + (datum.books === 1 ? ' distinct book' : ' distinct books') + ', ' + datum.wins + ' of which won a prize' + (datum.publishers > 1 ? ' (combined across ' + datum.publishers + ' publishers)' : '')"
           }
         }
       },
@@ -700,7 +700,7 @@
       "encode": {
         "update": {
           "x": {
-            "signal": "(datum.x0 + datum.x1) / 2"
+            "signal": "datum.x1 + 4"
           },
           "y": {
             "signal": "(datum.y0 + datum.y1) / 2"
@@ -732,7 +732,7 @@
       "encode": {
         "update": {
           "x": {
-            "signal": "(datum.x0 + datum.x1) / 2"
+            "signal": "datum.x1 + 4"
           },
           "y": {
             "signal": "(datum.y0 + datum.y1) / 2"
