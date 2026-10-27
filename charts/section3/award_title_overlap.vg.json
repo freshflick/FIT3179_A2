@@ -467,7 +467,7 @@
       "titleFont": "Arial",
       "titleFontSize": 12,
       "titleColor": "#233441",
-      "labelColor": "#50616b"
+      "labelColor": "#1A1A1A"
     }
   ],
   "marks": [
@@ -911,7 +911,7 @@
             "value": 12
           },
           "fill": {
-            "value": "#50616b"
+            "value": "#1A1A1A"
           }
         }
       },
@@ -1007,7 +1007,7 @@
             "value": 12
           },
           "fill": {
-            "value": "#50616b"
+            "value": "#1A1A1A"
           }
         }
       },

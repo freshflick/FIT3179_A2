@@ -4,8 +4,9 @@
   "width": "container",
   "height": 370,
   "autosize": {
-    "type": "fit",
-    "contains": "padding"
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
   },
   "layer": [
     {
@@ -397,8 +398,8 @@
     "axis": {
       "labelFont": "Arial",
       "titleFont": "Arial",
-      "labelColor": "#3c4c56",
-      "titleColor": "#3c4c56",
+      "labelColor": "#1A1A1A",
+      "titleColor": "#1A1A1A",
       "labelFontSize": 12,
       "titleFontSize": 12
     }

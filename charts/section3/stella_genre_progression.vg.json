@@ -529,7 +529,7 @@
       "symbolSize": 115,
       "labelFont": "Arial",
       "labelFontSize": 11,
-      "labelColor": "#3c4c56",
+      "labelColor": "#1A1A1A",
       "columns": 2,
       "offset": 10
     }
@@ -700,7 +700,7 @@
             "field": "weight"
           },
           "fill": {
-            "value": "#3c4c56"
+            "value": "#1A1A1A"
           },
           "opacity": {
             "signal": "width >= 620 ? 1 : 0"

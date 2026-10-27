@@ -235,14 +235,14 @@
     "axis": {
       "labelFont": "Arial",
       "titleFont": "Arial",
-      "labelColor": "#3c4c56",
+      "labelColor": "#1A1A1A",
       "titleColor": "#233441",
       "labelFontSize": 11,
       "titleFontSize": 12
     },
     "legend": {
       "labelFont": "Arial",
-      "labelColor": "#3c4c56",
+      "labelColor": "#1A1A1A",
       "labelFontSize": 11,
       "symbolSize": 85
     }
