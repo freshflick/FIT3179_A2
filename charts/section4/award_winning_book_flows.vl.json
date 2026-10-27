@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "International publishing reach of four books recognised by Australian literary prizes. Solid teal routes mark published foreign editions; dashed violet routes mark territories where an agent lists publishing-rights sales. Gold routes have both types of evidence.",
   "width": "container",
-  "height": 330,
+  "height": 380,
   "autosize": {
     "type": "fit-x",
     "contains": "padding",
@@ -139,22 +139,22 @@
           {
             "longitude": 0,
             "latitude": -49,
-            "label": "0°"
+            "label": "0\u00b0"
           },
           {
             "longitude": -24,
             "latitude": 30,
-            "label": "30°N"
+            "label": "30\u00b0N"
           },
           {
             "longitude": -24,
             "latitude": 0,
-            "label": "0°"
+            "label": "0\u00b0"
           },
           {
             "longitude": -24,
             "latitude": -30,
-            "label": "30°S"
+            "label": "30\u00b0S"
           }
         ]
       },
@@ -181,7 +181,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -224,7 +224,7 @@
           "as": "dy"
         },
         {
-          "calculate": "datum.destination_market === 'United States' ? 10 : datum.destination_market === 'Taiwan' ? -27 : datum.destination_market === 'China' ? -39 : datum.destination_market === 'Poland' ? -36 : datum.destination_market === 'Germany' ? -42 : datum.destination_market === 'Serbia' ? -16 : datum.destination_market === 'United Kingdom' ? -35 : datum.destination_market === 'France' ? -15 : 0",
+          "calculate": "datum.destination_market === 'United Kingdom' ? 41.436 : datum.destination_market === 'France' ? 22.939 : datum.destination_market === 'Germany' ? -37.610 : datum.destination_market === 'Poland' ? -28.791 : datum.destination_market === 'Serbia' ? 14.712 : datum.destination_market === 'China' ? -24.251 : datum.destination_market === 'Taiwan' ? -11.986 : datum.destination_market === 'United States' ? 38 : 0",
           "as": "route_offset"
         },
         {
@@ -377,7 +377,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -459,7 +459,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -480,10 +480,10 @@
         "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": -10,
-        "dy": -27,
+        "dx": 22,
+        "dy": -15,
         "align": "right",
-        "baseline": "middle"
+        "baseline": "bottom"
       },
       "encoding": {
         "longitude": {
@@ -502,7 +502,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -523,8 +523,8 @@
         "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": -14,
-        "dy": 8,
+        "dx": -8,
+        "dy": 13,
         "align": "right",
         "baseline": "middle"
       },
@@ -545,7 +545,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -566,8 +566,8 @@
         "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": 28,
-        "dy": -31,
+        "dx": 8,
+        "dy": -15,
         "align": "left",
         "baseline": "middle"
       },
@@ -588,7 +588,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -609,8 +609,8 @@
         "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": 32,
-        "dy": -3,
+        "dx": 10,
+        "dy": 12,
         "align": "left",
         "baseline": "middle"
       },
@@ -631,7 +631,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -652,8 +652,8 @@
         "fontSize": 11,
         "fontWeight": "bold",
         "color": "#263746",
-        "dx": 27,
-        "dy": 24,
+        "dx": 12,
+        "dy": 20,
         "align": "left",
         "baseline": "middle"
       },
@@ -674,7 +674,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -717,7 +717,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -760,7 +760,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {
@@ -803,7 +803,7 @@
     },
     {
       "data": {
-        "url": "data/award_winning_book_edition_markets.csv?v=14",
+        "url": "data/award_winning_book_edition_markets.csv?v=15",
         "format": {
           "type": "csv",
           "parse": {

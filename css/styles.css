@@ -32,7 +32,7 @@ body {
     letter-spacing: .09em;
     text-transform: uppercase;
 }
-h1, h2 { font-family: Georgia, 'Times New Roman', serif; }
+h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; }
 h1 {
     max-width: 760px;
     margin: 0 0 16px;
@@ -41,7 +41,7 @@ h1 {
     letter-spacing: -.025em;
 }
 .intro {
-    max-width: 66ch;
+    max-width: 58ch;
     margin: 0;
     color: var(--muted);
     font-size: 18px;
@@ -55,7 +55,7 @@ h1 {
 }
 .section-number { margin-bottom: 4px; }
 h2 { margin: 0; font-size: clamp(26px, 3vw, 32px); line-height: 1.2; }
-.section-lead { max-width: 67ch; margin: 19px 0 0; }
+.section-lead { max-width: 78ch; margin: 14px 0 0; font-size: 16px; line-height: 1.5; }
 .chart-block { margin: 24px 0 0; }
 .chart-block + .chart-block { margin-top: 24px; }
 h3 { margin: 0 0 6px; font-size: 21px; line-height: 1.3; }
@@ -152,7 +152,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
     .hero { padding: 36px 0 32px; }
     .section-heading { padding: 16px 18px; }
     .chart-block { margin-top: 34px; }
-    .chart { overflow-x: auto; }
+    .chart { overflow-x: clip; }
 }
 .publisher-layout {
     display: grid;
@@ -293,6 +293,8 @@ body {
     font-size: 13px;
     line-height: 1.6;
 }
+.geography-source p { max-width: 76ch; margin: 0 0 12px; }
+.geography-source p:last-child { margin-bottom: 0; }
 footer { padding-top: 24px; }
 @media (max-width: 800px) {
     .site-nav { align-items: start; padding: 14px 0; }
@@ -364,9 +366,14 @@ footer { padding-top: 24px; }
     margin-top: 2px;
     margin-bottom: 16px;
     font-size: 13px;
+    line-height: 1.4;
+    min-height: 2.8em;
 }
 .map-pair .map-visual { width: 100%; min-width: 0; height: auto; min-height: 0; flex: initial; }
-.state-map-navigation { flex: none; min-height: 44px; padding-bottom: 12px; }
+.map-pair .map-view-controls { height: 31px; min-height: 31px; flex: none; align-content: flex-start; }
+.map-pair .map-view-controls-spacer { visibility: hidden; }
+.map-pair #publisher-map-navigation, .map-pair #state-map-navigation { min-height: 51px; flex: none; }
+.state-map-navigation { padding: 0; }
 .state-map-navigation .map-toolbar { margin: 7px 0 13px; }
 .map-pair .map-insight {
     margin-top: 14px;
@@ -377,6 +384,7 @@ footer { padding-top: 24px; }
 }
 .map-pair .map-insight h4 { margin-bottom: 7px; }
 .map-pair .map-insight p { font-size: 14px; }
+.stella-units-chart { overflow-x: auto; }
 @media (max-width: 940px) {
     .map-pair { grid-template-columns: minmax(0, 1fr); }
     .map-pair .map-card h3, .map-pair .chart-intro { min-height: 0; }
@@ -450,6 +458,11 @@ footer { padding-top: 24px; }
     padding-top: 18px;
     border-top: 1px solid var(--rule);
 }
+.chart-pair .finding-row .finding {
+    margin-top: 0;
+    padding-top: 2px;
+    border-top: 0;
+}
 .finding h4 {
     display: flex;
     align-items: baseline;
@@ -458,7 +471,7 @@ footer { padding-top: 24px; }
     font-size: 16px;
     line-height: 1.35;
 }
-.finding p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+.finding p { max-width: 54ch; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 .finding strong { color: var(--ink); }
 .finding-index {
     color: var(--accent);
@@ -493,17 +506,17 @@ strong.emphasis-teal { color: #317a84; }
 .map-callouts { display: grid; gap: 16px; }
 .map-callout {
     padding: 15px 16px 16px;
-    border: 1px solid #d4e6df;
-    border-left: 3px solid var(--accent);
+    --accent: #147f79;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, white);
     border-radius: 5px;
-    background: #f2f8f5;
+    background: color-mix(in srgb, var(--accent) 6%, white);
 }
 .map-callout-green { --accent: #267c59; }
 .map-callout-copper { --accent: #a5672c; border-color: #eadfce; background: #faf6ee; }
 .map-callout-label {
     display: block;
     margin-bottom: 5px;
-    color: var(--ink);
+    color: var(--accent);
     font-size: 12px;
     font-weight: 700;
 }
@@ -517,7 +530,7 @@ strong.emphasis-teal { color: #317a84; }
     padding-top: 18px;
     border-top: 1px solid var(--rule);
 }
-.map-summary p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+.map-summary p { max-width: 58ch; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
 .hex-city-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 .hex-city-panel { min-width: 0; }
 .hex-city-panel h4 { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 8px; font-size: 17px; }
@@ -535,10 +548,23 @@ strong.emphasis-teal { color: #317a84; }
 .flow-map-legend > span { display: inline-flex; align-items: center; gap: 8px; }
 .flow-map-visual-wrap { position: relative; }
 .flow-map-visual-wrap > .chart { min-height: 0; }
-.flow-map-overlay { position: absolute; z-index: 2; right: 12%; bottom: 5%; display: grid; gap: 10px; width: min(250px, 27%); pointer-events: none; }
-.flow-overlay-note { padding: 10px 12px; border: 1px solid #C4CBE0; border-radius: 4px; background: rgba(242, 244, 250, .97); box-shadow: 0 1px 4px rgba(27, 42, 72, .1); }
-.flow-overlay-note h4 { margin: 0 0 4px; color: #4C5688; font-size: 12px; line-height: 1.3; }
-.flow-overlay-note p { margin: 0; color: #354B58; font-size: 11px; line-height: 1.35; }
+.plot-annotation-wrap {
+    position: relative;
+    min-height: 390px;
+}
+.plot-annotation-wrap > .chart { width: 100%; min-height: 0; }
+.plot-annotation-cards {
+    position: absolute;
+    top: 49%;
+    right: 2%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    width: 28%;
+    max-width: 310px;
+    min-width: 250px;
+}
+.plot-annotation-cards .flow-callout { min-height: 0; padding: 10px 12px; }
 .flow-line-sample { display: inline-block; width: 28px; border-top: 3px solid #147F79; }
 .flow-rights-sample { display: inline-block; width: 28px; border-top: 3px dashed #6554A4; }
 .flow-both-sample { display: inline-block; width: 28px; border-top: 3px dashed #D18A32; }
@@ -550,12 +576,34 @@ strong.emphasis-teal { color: #317a84; }
 .flow-size-2 { border-top-width: 2.3px; }
 .flow-size-4 { border-top-width: 4.5px; }
 .flow-map-callouts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 2px 0 16px; }
-.flow-callout { min-height: 94px; padding: 12px 15px; border-left: 3px solid #6554A4; background: #F4F2FA; }
-.flow-callout-editions { border-left-color: #147F79; background: #EEF6F5; }
-.flow-callout h4 { margin: 0 0 6px; color: var(--ink); font-size: 14px; line-height: 1.3; }
+.flow-map-callouts-overlay {
+    position: absolute;
+    top: 48%;
+    left: 61%;
+    z-index: 3;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+    width: 25%;
+    max-width: 285px;
+    margin: 0;
+    pointer-events: none;
+}
+.flow-callout { --accent: #147f79; min-height: 0; padding: 9px 11px; border: 1px solid color-mix(in srgb, var(--accent) 35%, white); border-radius: 5px; background: color-mix(in srgb, var(--accent) 6%, white); }
+.flow-callout-editions { --accent: #147f79; }
+.flow-callout h4 { margin: 0 0 6px; color: var(--accent); font-size: 14px; line-height: 1.3; }
 .flow-callout p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.flow-callout strong { color: var(--accent); }
+.flow-map-callouts-overlay .flow-callout { padding: 8px 10px; }
+.flow-map-callouts-overlay .flow-callout h4 { margin-bottom: 4px; font-size: 13px; }
+.flow-map-callouts-overlay .flow-callout p { font-size: 12px; line-height: 1.35; }
 @media (max-width: 700px) {
-  .flow-map-overlay { position: static; width: auto; margin: -4px 10px 12px; }
+  .flow-map-callouts { grid-template-columns: minmax(0, 1fr); }
+  .flow-map-callouts-overlay { top: 49%; left: 53%; width: 44%; max-width: none; }
+  .plot-annotation-wrap { min-height: 0; }
+  .plot-annotation-wrap > .chart { width: 100%; }
+  .plot-annotation-cards { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; min-width: 0; margin-top: 8px; gap: 6px; }
+  .flow-callout h4 { font-size: 12px; }
+  .flow-callout p { font-size: 11px; }
 }
 .map-pair .finding { min-height: 174px; margin-top: auto; padding-top: 15px; border-top: 1px solid var(--rule); }
 .map-pair .finding p { font-size: 14px; }

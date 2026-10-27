@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Publishers with at least three appearances among 2024–2026 Prime Minister's Literary Awards shortlisted and winning books.",
-  "data": { "url": "data/pmla_2024_2026.csv" },
+  "description": "Publisher-attributed shortlist and winning records for the Prime Minister’s Literary Awards, 2022–2026.",
+  "data": { "url": "data/pmla_2022_2026.csv" },
   "width": "container",
   "height": 390,
   "autosize": { "type": "fit-x", "contains": "padding", "resize": true },
@@ -24,9 +24,9 @@
       "field": "books",
       "type": "quantitative",
       "title": "Books on the award list",
-      "scale": { "domain": [0, 20] },
+      "scale": { "domain": [0, 25] },
       "axis": {
-        "values": [0, 5, 10, 15, 20],
+        "values": [0, 5, 10, 15, 20, 25],
         "grid": true,
         "gridColor": "#e6ecee",
         "tickSize": 0

@@ -21,20 +21,21 @@ def group_genre(value):
 
 
 def records():
-    books = list(csv.DictReader((ROOT / "data/stella_2024_2026.csv").open()))
+    books = list(csv.DictReader((ROOT / "data/stella_2022_2026.csv").open()))
     counts = {genre: [0, 0, 0] for genre in GENRES}
     for book in books:
         entry = counts[group_genre(book["genre"])]
         entry[0] += 1
         entry[1] += book["outcome"] != "longlisted"
         entry[2] += book["outcome"] == "winner"
-    assert [sum(x[i] for x in counts.values()) for i in range(3)] == [36, 18, 3]
+    totals = [sum(x[i] for x in counts.values()) for i in range(3)]
+    assert totals == [60, 30, 5]
     return counts
 
 
 def make_data(counts):
     lpos = apos = epos = wpos = fpos = qpos = 0
-    epos, fpos, qpos = 18, 3, 18
+    epos, fpos, qpos = 30, 5, 30
     nodes, links = [], []
 
     def node(stage, genre, phase, start, size, opacity):
@@ -73,7 +74,7 @@ def make_data(counts):
         wpos += winners
         fpos += lost_late
         qpos += lost_early
-    assert (lpos, apos, epos, wpos, fpos, qpos) == (36, 18, 36, 3, 18, 36)
+    assert (lpos, apos, epos, wpos, fpos, qpos) == (60, 30, 60, 5, 30, 60)
     return nodes, links
 
 
@@ -90,7 +91,7 @@ def make_spec(nodes, links):
     )
     return {
         "$schema": "https://vega.github.io/schema/vega/v5.json",
-        "description": "Alluvial of 36 Stella longlisted books in 2024–2026, retaining the 18 books that stopped at the longlist and the 15 that stopped after the shortlist.",
+        "description": "Alluvial of 60 Stella longlisted books in 2022–2026, retaining the 30 books that stopped at the longlist and the 25 that stopped after the shortlist.",
         "height": 435,
         "padding": {"left": 18, "right": 18, "top": 8, "bottom": 48},
         "autosize": "pad", "background": "#ffffff",
@@ -103,19 +104,19 @@ def make_spec(nodes, links):
             {"name": "nodes", "values": nodes},
             {"name": "links", "values": links},
             {"name": "stageLabels", "values": [
-                {"stage": "longlist", "heading": "LONGLIST · 36"},
-                {"stage": "shortlist", "heading": "SHORTLIST · 18"},
-                {"stage": "outcome", "heading": "WINNERS · 3"}]},
+                {"stage": "longlist", "heading": "LONGLIST · 60"},
+                {"stage": "shortlist", "heading": "SHORTLIST · 30"},
+                {"stage": "outcome", "heading": "WINNERS · 5"}]},
             {"name": "outcomeLabels", "values": [
-                {"label": "3 winners", "y": 1.5, "weight": "bold"},
-                {"label": "15 stopped after shortlist", "y": 10.5, "weight": "normal"},
-                {"label": "18 stopped at longlist", "y": 27, "weight": "normal"}]}
+                {"label": "5 winners", "y": 2.5, "weight": "bold"},
+                {"label": "25 stopped after shortlist", "y": 17.5, "weight": "normal"},
+                {"label": "30 stopped at longlist", "y": 45, "weight": "normal"}]}
         ],
         "scales": [
             {"name": "stageX", "type": "ordinal", "domain": ["longlist", "shortlist", "outcome"],
              "range": [{"signal": "width < 600 ? 32 : 68"}, {"signal": "width * 0.48"},
                        {"signal": "width - (width < 600 ? 32 : 195)"}]},
-            {"name": "booksY", "type": "linear", "domain": [0, 36], "range": [68, 388], "zero": True},
+            {"name": "booksY", "type": "linear", "domain": [0, 60], "range": [68, 388], "zero": True},
             {"name": "genreColour", "type": "ordinal", "domain": list(GENRES), "range": list(COLOURS)}
         ],
         "legends": [{"fill": "genreColour", "orient": "bottom", "direction": "horizontal",

@@ -1,7 +1,7 @@
 place,longitude,latitude,label,label_longitude,label_latitude,title_count,evidence_type,kind
 Australia,133.7751,-25.2744,Australia,133.7751,-25.2744,4,origin,origin
-United States,-74.006,40.7128,US,-80.4346,47.1414,3,edition,market
-United Kingdom,-0.1276,51.5072,UK,12,62,4,both,market
+United States,-74.006,40.7128,United States,-80.4346,47.1414,3,edition,market
+United Kingdom,-0.1276,51.5072,United Kingdom,12,62,4,both,market
 France,2.3522,48.8566,France,12,47,4,both,market
 Poland,21.0122,52.2297,Poland,35,47,3,both,market
 China,116.4074,39.9042,China,124.2645,48.8328,1,edition,market

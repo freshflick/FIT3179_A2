@@ -199,7 +199,7 @@ def bin_small_multiples_spec():
                     "color": {
                         "field": "listed_books",
                         "type": "quantitative",
-                        "title": "PMLA books in one area",
+                        "title": "Award books in one area",
                         "scale": {
                             "domain": [1, 34],
                             "range": ["#DCEDE4", "#0F6652"],
@@ -235,7 +235,7 @@ def bin_small_multiples_spec():
         )
     return {
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "description": "Equal-area bins show the number of PMLA shortlist books associated with documented publisher contacts across Sydney and Melbourne, 2022–2026.",
+        "description": "Equal-area bins show the number of Prime Minister’s Literary Awards books associated with documented publisher contacts across Sydney and Melbourne, 2022–2026.",
         "spacing": 16,
         "params": params("sydney") + params("melbourne"),
         "data": {

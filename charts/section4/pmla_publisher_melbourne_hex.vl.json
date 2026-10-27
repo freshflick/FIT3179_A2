@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Distinct publishers of 2022\u20132026 PMLA-listed books in occupied 2 km equal-area cells around Melbourne. Locations are sourced publisher-contact locality centroids.",
+  "description": "Distinct publishers of 2022\u20132026 Prime Minister’s Literary Awards books in occupied 2 km equal-area cells around Melbourne. Locations are sourced publisher-contact locality centroids.",
   "width": "container",
   "height": 340,
   "background": "#ffffff",

@@ -1,27 +1,40 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Publisher shares of the 2024–2026 Prime Minister's Literary Awards and Stella Prize lists.",
-  "data": { "url": "data/publisher_award_comparison.csv" },
+  "description": "Publisher shares of 2022–2026 Prime Minister’s Literary Awards records with named publishers and Stella longlists.",
+  "data": {
+    "url": "data/publisher_award_comparison.csv"
+  },
   "width": "container",
   "height": 340,
   "transform": [
     {
-      "calculate": "datum.pmla_books / 90",
+      "calculate": "datum.pmla_books / 144",
       "as": "pmla_share"
     },
     {
-      "calculate": "datum.stella_books / 36",
+      "calculate": "datum.stella_books / 60",
       "as": "stella_share"
     },
     {
-      "calculate": "abs(datum.pmla_books * 36 - datum.stella_books * 90)",
+      "calculate": "abs(datum.pmla_books * 60 - datum.stella_books * 144)",
       "as": "share_gap_order"
     },
     {
-      "window": [{ "op": "row_number", "as": "difference_rank" }],
+      "window": [
+        {
+          "op": "row_number",
+          "as": "difference_rank"
+        }
+      ],
       "sort": [
-        { "field": "share_gap_order", "order": "descending" },
-        { "field": "publisher_key", "order": "ascending" }
+        {
+          "field": "share_gap_order",
+          "order": "descending"
+        },
+        {
+          "field": "publisher_key",
+          "order": "ascending"
+        }
       ]
     }
   ],
@@ -54,23 +67,42 @@
           "field": "pmla_share",
           "type": "quantitative",
           "title": "Share of books on each award list",
-          "scale": { "domain": [0, 0.22] },
+          "scale": {
+            "domain": [
+              -0.015,
+              0.17
+            ],
+            "zero": false
+          },
           "axis": {
             "format": ".0%",
-            "values": [0, 0.05, 0.10, 0.15, 0.20],
+            "values": [
+              0,
+              0.05,
+              0.1,
+              0.15
+            ],
             "grid": true,
             "gridColor": "#e8ecee",
             "tickSize": 0
           }
         },
-        "x2": { "field": "stella_share" }
+        "x2": {
+          "field": "stella_share"
+        }
       }
     },
     {
       "transform": [
         {
-          "fold": ["pmla_share", "stella_share"],
-          "as": ["award_key", "share"]
+          "fold": [
+            "pmla_share",
+            "stella_share"
+          ],
+          "as": [
+            "award_key",
+            "share"
+          ]
         },
         {
           "calculate": "datum.award_key === 'pmla_share' ? 'Prime Minister’s Literary Awards' : 'Stella Prize'",
@@ -92,10 +124,21 @@
           "field": "share",
           "type": "quantitative",
           "title": "Share of books on each award list",
-          "scale": { "domain": [0, 0.22] },
+          "scale": {
+            "domain": [
+              -0.015,
+              0.17
+            ],
+            "zero": false
+          },
           "axis": {
             "format": ".0%",
-            "values": [0, 0.05, 0.10, 0.15, 0.20],
+            "values": [
+              0,
+              0.05,
+              0.1,
+              0.15
+            ],
             "grid": true,
             "gridColor": "#e8ecee",
             "tickSize": 0
@@ -110,9 +153,14 @@
               "Prime Minister’s Literary Awards",
               "Stella Prize"
             ],
-            "range": ["#ad6d37", "#7565a3"]
+            "range": [
+              "#ad6d37",
+              "#7565a3"
+            ]
           },
-          "legend": { "orient": "bottom" }
+          "legend": {
+            "orient": "bottom"
+          }
         },
         "tooltip": [
           {
@@ -141,19 +189,49 @@
     },
     {
       "transform": [
-        {"filter": "datum.publisher_key == 'Allen & Unwin' || datum.publisher_key == 'Giramondo Publishing'"},
-        {"calculate": "(datum.pmla_share + datum.stella_share) / 2", "as": "gap_midpoint"},
-        {"calculate": "(datum.pmla_share > datum.stella_share ? 'PMLA +' : 'Stella +') + format(abs(datum.pmla_share - datum.stella_share) * 100, '.1f') + ' pts'", "as": "gap_label"}
+        {
+          "filter": "datum.publisher_key == 'Allen & Unwin' || datum.publisher_key == 'Giramondo Publishing'"
+        },
+        {
+          "calculate": "(datum.pmla_share + datum.stella_share) / 2",
+          "as": "gap_midpoint"
+        },
+        {
+          "calculate": "format(abs(datum.pmla_share - datum.stella_share) * 100, '.1f') + ' percentage points'",
+          "as": "gap_label"
+        }
       ],
-      "mark": {"type": "text", "dy": -13, "font": "Arial", "fontSize": 11, "fontWeight": "bold", "color": "#233441"},
+      "mark": {
+        "type": "text",
+        "dy": -13,
+        "font": "Arial",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#233441"
+      },
       "encoding": {
-        "x": {"field": "gap_midpoint", "type": "quantitative", "scale": {"domain": [0, 0.22]}},
-        "text": {"field": "gap_label", "type": "nominal"}
+        "x": {
+          "field": "gap_midpoint",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -0.015,
+              0.17
+            ],
+            "zero": false
+          }
+        },
+        "text": {
+          "field": "gap_label",
+          "type": "nominal"
+        }
       }
     }
   ],
   "config": {
-    "view": { "stroke": null },
+    "view": {
+      "stroke": null
+    },
     "axis": {
       "labelFont": "Arial",
       "titleFont": "Arial",

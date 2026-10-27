@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Equal-area bins show the number of PMLA shortlist books associated with documented publisher contacts across Sydney and Melbourne, 2022\u20132026.",
+  "description": "Equal-area bins show the number of Prime Minister’s Literary Awards books associated with documented publisher contacts across Sydney and Melbourne, 2022\u20132026.",
   "spacing": 16,
   "params": [
     {
@@ -169,7 +169,7 @@
             "color": {
               "field": "listed_books",
               "type": "quantitative",
-              "title": "PMLA books in one area",
+              "title": "Award books in one area",
               "scale": {
                 "domain": [
                   1,
@@ -324,7 +324,7 @@
             "color": {
               "field": "listed_books",
               "type": "quantitative",
-              "title": "PMLA books in one area",
+              "title": "Award books in one area",
               "scale": {
                 "domain": [
                   1,

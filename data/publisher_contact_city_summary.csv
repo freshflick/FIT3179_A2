@@ -1,9 +1,9 @@
 map_city,state,longitude,latitude,listed_books,winning_books,publishers,publisher_names
-Sydney,NSW,151.207,-33.868,67,15,14,Allen & Unwin; Echo Publishing; Giramondo Publishing; Hachette Australia; Halstead Press; HarperCollins Publishers; NewSouth Publishing; Pan Macmillan Australia; Penguin Random House Australia; Pitt Street Poetry; Powerhouse Museum; Scribner Australia; Simon & Schuster Australia; Ultimo Press
-Melbourne,VIC,144.963,-37.814,39,8,11,Affirm Press; Black Inc.; Hardie Grant Children's Publishing; Hardie Grant Explore; La Trobe University Press; Melbourne University Publishing; Monash University Publishing; Scribe Publications; Text Publishing; Thames & Hudson Australia; Transit Lounge
-Brisbane,QLD,153.028,-27.468,16,5,1,University of Queensland Press
-Broome,WA,122.23922,-17.955379,5,2,1,Magabala Books
-Newcastle,NSW,151.78,-32.93,3,0,1,Puncher and Wattmann
-Perth,WA,115.861,-31.952,3,0,3,Fremantle Press; UWA Publishing; Upswell Publishing
-Canberra,ACT,149.128,-35.283,1,0,1,Recent Work Press
-Geelong,VIC,144.361,-38.147,1,0,1,Spinifex Press
+Sydney,New South Wales,151.207,-33.868,67,15,14,Allen & Unwin; Echo Publishing; Giramondo Publishing; Hachette Australia; Halstead Press; HarperCollins Publishers; NewSouth Publishing; Pan Macmillan Australia; Penguin Random House Australia; Pitt Street Poetry; Powerhouse Museum; Scribner Australia; Simon & Schuster Australia; Ultimo Press
+Melbourne,Victoria,144.963,-37.814,39,8,11,Affirm Press; Black Inc.; Hardie Grant Children's Publishing; Hardie Grant Explore; La Trobe University Press; Melbourne University Publishing; Monash University Publishing; Scribe Publications; Text Publishing; Thames & Hudson Australia; Transit Lounge
+Brisbane,Queensland,153.028,-27.468,16,5,1,University of Queensland Press
+Broome,Western Australia,122.23922,-17.955379,5,2,1,Magabala Books
+Newcastle,New South Wales,151.78,-32.93,3,0,1,Puncher and Wattmann
+Perth,Western Australia,115.861,-31.952,3,0,3,Fremantle Press; UWA Publishing; Upswell Publishing
+Canberra,Australian Capital Territory,149.128,-35.283,1,0,1,Recent Work Press
+Geelong,Victoria,144.361,-38.147,1,0,1,Spinifex Press

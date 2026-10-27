@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Award category appearances for publishers with at least three books in the 2024–2026 Prime Minister's Literary Awards data.",
-  "data": { "url": "data/pmla_2024_2026.csv" },
+  "description": "Award category appearances for publishers with at least three publisher-attributed records, 2022–2026.",
+  "data": { "url": "data/pmla_2022_2026.csv" },
   "width": "container",
   "height": 311,
   "transform": [
@@ -97,7 +97,7 @@
           "type": "quantitative",
           "title": "Books on list",
           "scale": {
-            "domain": [0, 6],
+            "domain": [0, 8],
             "range": ["#fff1ef", "#a53e59"]
           },
           "legend": {

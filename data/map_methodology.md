@@ -1,11 +1,13 @@
 # Award geography: sources and count method
 
-The main dashboard compares **2024–2026** Prime Minister’s Literary Awards
-(PMLA) and Stella Prize lists. The geographic section extends the **PMLA
-selection to 2022–2026**. This gives 144 book records with a named publisher:
-90 from the [2024–2026 table](pmla_2024_2026.csv) and 54 from the
-[2022–2023 extension](pmla_2022_2023_geography.csv). These are shortlist
-records, including winners, rather than all submitted books or all Australian
+The dashboard compares Prime Minister’s Literary Awards and Stella Prize
+selections across **2022–2026**. Publisher analyses use 144 shortlisted
+Prime Minister’s Literary Awards records with a published publisher name:
+54 from the [2022–2023 records](pmla_2022_2023_geography.csv) and 90 from
+the [2024–2026 table](pmla_2024_2026.csv). The official shortlists contain
+150 books across these five years; six older records omit publisher names and
+are excluded from publisher-based charts. Stella charts use all 60 longlisted
+books. These are selected lists, not all submissions or all Australian
 literary awards.
 
 ## International literary-publishing flow map

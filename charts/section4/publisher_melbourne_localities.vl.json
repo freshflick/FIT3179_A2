@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Publisher-contact localities around Melbourne for Prime Minister's Literary Awards shortlist records, 2022\u20132026. Circle area shows listed books; copper color shows winner share.",
   "width": "container",
-  "height": 340,
+  "height": 430,
   "background": "white",
   "params": [
     {

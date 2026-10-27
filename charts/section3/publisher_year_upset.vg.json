@@ -1,58 +1,1279 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "UpSet plot of Prime Minister’s Literary Awards publishers by the years in which they appeared, 2024–2026.",
-  "padding": 4,
-  "autosize": "pad",
+  "description": "UpSet plot of publisher appearances across publisher-attributed Prime Minister’s Literary Awards shortlist records, 2022–2026.",
+  "width": {
+    "signal": "width"
+  },
+  "height": 470,
+  "padding": {
+    "left": 4,
+    "right": 4,
+    "top": 8,
+    "bottom": 4
+  },
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
+  },
   "background": "#ffffff",
   "signals": [
-    {"name":"width","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 110 : windowSize()[0] < 1100 ? 160 : 96)))","on":[{"events":"window:resize","update":"max(100, min(1120, windowSize()[0] - (windowSize()[0] < 600 ? 110 : windowSize()[0] < 1100 ? 160 : 96)))"}]},
-    {"name":"compact","update":"width < 980"},
-    {"name":"twoCards","update":"compact && width >= 650"},
-    {"name":"plotW","update":"compact ? width - 8 : width - 300"},
-    {"name":"panelX","update":"compact ? 4 : plotW + 25"},
-    {"name":"panelW","update":"compact ? (twoCards ? width / 2 - 10 : width - 8) : width - panelX - 4"},
-    {"name":"panel2X","update":"twoCards ? width / 2 + 4 : panelX"},
-    {"name":"card1Y","update":"compact ? 458 : 78"},
-    {"name":"card2Y","update":"twoCards ? card1Y : (compact ? 572 : 252)"},
-    {"name":"height","update":"compact ? (twoCards ? 590 : 700) : 455"}
+    {
+      "name": "width",
+      "update": "max(280, min(1120, windowSize()[0] - (windowSize()[0] < 650 ? 92 : 128)))",
+      "on": [
+        {
+          "events": "window:resize",
+          "update": "max(280, min(1120, windowSize()[0] - (windowSize()[0] < 650 ? 92 : 128)))"
+        }
+      ]
+    }
   ],
   "data": [
-    {"name":"pmla","url":"data/pmla_2024_2026.csv","format":{"type":"csv"}},
-    {"name":"publisherYear","source":"pmla","transform":[{"type":"aggregate","groupby":["publisher_key","award_year"],"fields":["publisher_key"],"ops":["count"],"as":["books"]},{"type":"formula","as":"y2024","expr":"datum.award_year == '2024' ? 1 : 0"},{"type":"formula","as":"y2025","expr":"datum.award_year == '2025' ? 1 : 0"},{"type":"formula","as":"y2026","expr":"datum.award_year == '2026' ? 1 : 0"}]},
-    {"name":"publisherPresence","source":"publisherYear","transform":[{"type":"aggregate","groupby":["publisher_key"],"fields":["y2024","y2025","y2026"],"ops":["max","max","max"],"as":["y2024","y2025","y2026"]},{"type":"formula","as":"pattern","expr":"datum.y2024 + '' + datum.y2025 + '' + datum.y2026"},{"type":"formula","as":"years","expr":"datum.y2024 + datum.y2025 + datum.y2026"},{"type":"formula","as":"oneYear","expr":"datum.years === 1 ? 1 : 0"},{"type":"formula","as":"allYears","expr":"datum.years === 3 ? 1 : 0"}]},
-    {"name":"patternCounts","source":"publisherPresence","transform":[{"type":"aggregate","groupby":["pattern","y2024","y2025","y2026","years"],"fields":["publisher_key","publisher_key"],"ops":["count","values"],"as":["publishers","members"]},{"type":"formula","as":"yearList","expr":"(datum.y2024 ? '2024 ' : '') + (datum.y2025 ? '2025 ' : '') + (datum.y2026 ? '2026' : '')"}]},
-    {"name":"summary","source":"publisherPresence","transform":[{"type":"aggregate","fields":["publisher_key","oneYear","allYears"],"ops":["count","sum","sum"],"as":["total","once","everyYear"]}]},
-    {"name":"threeYearPattern","source":"patternCounts","transform":[{"type":"filter","expr":"datum.years === 3"}]}
+    {
+      "name": "patterns",
+      "values": [
+        {
+          "pattern": "00010",
+          "publishers": 6,
+          "yearList": "2025",
+          "members": [
+            "Fremantle Press",
+            "NewSouth Publishing",
+            "Recent Work Press",
+            "Scribe Publications",
+            "Shearsman Books",
+            "Thames & Hudson Australia"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "01000",
+          "publishers": 6,
+          "yearList": "2023",
+          "members": [
+            "MIP",
+            "The Hare & Tortoise Books",
+            "Ultimo Press",
+            "Upswell Publishing",
+            "Virago",
+            "Yandaarra Community Group"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "10000",
+          "publishers": 6,
+          "yearList": "2022",
+          "members": [
+            "Fomite",
+            "Halstead Press",
+            "Pan Macmillan Australia",
+            "Pitt Street Poetry",
+            "Simon & Schuster Australia",
+            "UWA Publishing"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "11111",
+          "publishers": 6,
+          "yearList": "2022, 2023, 2024, 2025, 2026",
+          "members": [
+            "Allen & Unwin",
+            "Black Inc.",
+            "Giramondo Publishing",
+            "Penguin Random House Australia",
+            "Text Publishing",
+            "University of Queensland Press"
+          ],
+          "showLabel": true
+        },
+        {
+          "pattern": "00001",
+          "publishers": 3,
+          "yearList": "2026",
+          "members": [
+            "Echo Publishing",
+            "Powerhouse Museum",
+            "Spinifex Press"
+          ],
+          "showLabel": true
+        },
+        {
+          "pattern": "00100",
+          "publishers": 2,
+          "yearList": "2024",
+          "members": [
+            "Hardie Grant Explore",
+            "Quemar Press"
+          ],
+          "showLabel": true
+        },
+        {
+          "pattern": "00110",
+          "publishers": 2,
+          "yearList": "2024, 2025",
+          "members": [
+            "Affirm Press",
+            "Scribner Australia"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "00011",
+          "publishers": 1,
+          "yearList": "2025, 2026",
+          "members": [
+            "Vagabond Press"
+          ],
+          "showLabel": true
+        },
+        {
+          "pattern": "00111",
+          "publishers": 1,
+          "yearList": "2024, 2025, 2026",
+          "members": [
+            "Hardie Grant Children's Publishing"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "01001",
+          "publishers": 1,
+          "yearList": "2023, 2026",
+          "members": [
+            "Monash University Publishing"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "01111",
+          "publishers": 1,
+          "yearList": "2023, 2024, 2025, 2026",
+          "members": [
+            "Hachette Australia"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "10001",
+          "publishers": 1,
+          "yearList": "2022, 2026",
+          "members": [
+            "Transit Lounge"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "10100",
+          "publishers": 1,
+          "yearList": "2022, 2024",
+          "members": [
+            "La Trobe University Press"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "10110",
+          "publishers": 1,
+          "yearList": "2022, 2024, 2025",
+          "members": [
+            "HarperCollins Publishers"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "11011",
+          "publishers": 1,
+          "yearList": "2022, 2023, 2025, 2026",
+          "members": [
+            "Melbourne University Publishing"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "11100",
+          "publishers": 1,
+          "yearList": "2022, 2023, 2024",
+          "members": [
+            "Puncher and Wattmann"
+          ],
+          "showLabel": false
+        },
+        {
+          "pattern": "11110",
+          "publishers": 1,
+          "yearList": "2022, 2023, 2024, 2025",
+          "members": [
+            "Magabala Books"
+          ],
+          "showLabel": false
+        }
+      ]
+    },
+    {
+      "name": "dots",
+      "values": [
+        {
+          "pattern": "00010",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 6,
+          "year": "2022"
+        },
+        {
+          "pattern": "00010",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 6,
+          "year": "2023"
+        },
+        {
+          "pattern": "00010",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 6,
+          "year": "2024"
+        },
+        {
+          "pattern": "00010",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 6,
+          "year": "2025"
+        },
+        {
+          "pattern": "00010",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 6,
+          "year": "2026"
+        },
+        {
+          "pattern": "01000",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 6,
+          "year": "2022"
+        },
+        {
+          "pattern": "01000",
+          "yearIndex": 1,
+          "active": true,
+          "publishers": 6,
+          "year": "2023"
+        },
+        {
+          "pattern": "01000",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 6,
+          "year": "2024"
+        },
+        {
+          "pattern": "01000",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 6,
+          "year": "2025"
+        },
+        {
+          "pattern": "01000",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 6,
+          "year": "2026"
+        },
+        {
+          "pattern": "10000",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 6,
+          "year": "2022"
+        },
+        {
+          "pattern": "10000",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 6,
+          "year": "2023"
+        },
+        {
+          "pattern": "10000",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 6,
+          "year": "2024"
+        },
+        {
+          "pattern": "10000",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 6,
+          "year": "2025"
+        },
+        {
+          "pattern": "10000",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 6,
+          "year": "2026"
+        },
+        {
+          "pattern": "11111",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 6,
+          "year": "2022"
+        },
+        {
+          "pattern": "11111",
+          "yearIndex": 1,
+          "active": true,
+          "publishers": 6,
+          "year": "2023"
+        },
+        {
+          "pattern": "11111",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 6,
+          "year": "2024"
+        },
+        {
+          "pattern": "11111",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 6,
+          "year": "2025"
+        },
+        {
+          "pattern": "11111",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 6,
+          "year": "2026"
+        },
+        {
+          "pattern": "00001",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 3,
+          "year": "2022"
+        },
+        {
+          "pattern": "00001",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 3,
+          "year": "2023"
+        },
+        {
+          "pattern": "00001",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 3,
+          "year": "2024"
+        },
+        {
+          "pattern": "00001",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 3,
+          "year": "2025"
+        },
+        {
+          "pattern": "00001",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 3,
+          "year": "2026"
+        },
+        {
+          "pattern": "00100",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 2,
+          "year": "2022"
+        },
+        {
+          "pattern": "00100",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 2,
+          "year": "2023"
+        },
+        {
+          "pattern": "00100",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 2,
+          "year": "2024"
+        },
+        {
+          "pattern": "00100",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 2,
+          "year": "2025"
+        },
+        {
+          "pattern": "00100",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 2,
+          "year": "2026"
+        },
+        {
+          "pattern": "00110",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 2,
+          "year": "2022"
+        },
+        {
+          "pattern": "00110",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 2,
+          "year": "2023"
+        },
+        {
+          "pattern": "00110",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 2,
+          "year": "2024"
+        },
+        {
+          "pattern": "00110",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 2,
+          "year": "2025"
+        },
+        {
+          "pattern": "00110",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 2,
+          "year": "2026"
+        },
+        {
+          "pattern": "00011",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "00011",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "00011",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "00011",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "00011",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "00111",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "00111",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "00111",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "00111",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "00111",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "01001",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "01001",
+          "yearIndex": 1,
+          "active": true,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "01001",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "01001",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "01001",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "01111",
+          "yearIndex": 0,
+          "active": false,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "01111",
+          "yearIndex": 1,
+          "active": true,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "01111",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "01111",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "01111",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "10001",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "10001",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "10001",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "10001",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "10001",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "10100",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "10100",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "10100",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "10100",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "10100",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "10110",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "10110",
+          "yearIndex": 1,
+          "active": false,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "10110",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "10110",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "10110",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "11011",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "11011",
+          "yearIndex": 1,
+          "active": true,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "11011",
+          "yearIndex": 2,
+          "active": false,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "11011",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "11011",
+          "yearIndex": 4,
+          "active": true,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "11100",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "11100",
+          "yearIndex": 1,
+          "active": true,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "11100",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "11100",
+          "yearIndex": 3,
+          "active": false,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "11100",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 1,
+          "year": "2026"
+        },
+        {
+          "pattern": "11110",
+          "yearIndex": 0,
+          "active": true,
+          "publishers": 1,
+          "year": "2022"
+        },
+        {
+          "pattern": "11110",
+          "yearIndex": 1,
+          "active": true,
+          "publishers": 1,
+          "year": "2023"
+        },
+        {
+          "pattern": "11110",
+          "yearIndex": 2,
+          "active": true,
+          "publishers": 1,
+          "year": "2024"
+        },
+        {
+          "pattern": "11110",
+          "yearIndex": 3,
+          "active": true,
+          "publishers": 1,
+          "year": "2025"
+        },
+        {
+          "pattern": "11110",
+          "yearIndex": 4,
+          "active": false,
+          "publishers": 1,
+          "year": "2026"
+        }
+      ]
+    },
+    {
+      "name": "connectors",
+      "values": [
+        {
+          "pattern": "11111",
+          "firstYear": 0,
+          "lastYear": 4,
+          "allFive": true
+        },
+        {
+          "pattern": "00110",
+          "firstYear": 2,
+          "lastYear": 3,
+          "allFive": false
+        },
+        {
+          "pattern": "00011",
+          "firstYear": 3,
+          "lastYear": 4,
+          "allFive": false
+        },
+        {
+          "pattern": "00111",
+          "firstYear": 2,
+          "lastYear": 4,
+          "allFive": false
+        },
+        {
+          "pattern": "01001",
+          "firstYear": 1,
+          "lastYear": 4,
+          "allFive": false
+        },
+        {
+          "pattern": "01111",
+          "firstYear": 1,
+          "lastYear": 4,
+          "allFive": false
+        },
+        {
+          "pattern": "10001",
+          "firstYear": 0,
+          "lastYear": 4,
+          "allFive": false
+        },
+        {
+          "pattern": "10100",
+          "firstYear": 0,
+          "lastYear": 2,
+          "allFive": false
+        },
+        {
+          "pattern": "10110",
+          "firstYear": 0,
+          "lastYear": 3,
+          "allFive": false
+        },
+        {
+          "pattern": "11011",
+          "firstYear": 0,
+          "lastYear": 4,
+          "allFive": false
+        },
+        {
+          "pattern": "11100",
+          "firstYear": 0,
+          "lastYear": 2,
+          "allFive": false
+        },
+        {
+          "pattern": "11110",
+          "firstYear": 0,
+          "lastYear": 3,
+          "allFive": false
+        }
+      ]
+    },
+    {
+      "name": "years",
+      "values": [
+        {
+          "year": "2022",
+          "yearIndex": 0
+        },
+        {
+          "year": "2023",
+          "yearIndex": 1
+        },
+        {
+          "year": "2024",
+          "yearIndex": 2
+        },
+        {
+          "year": "2025",
+          "yearIndex": 3
+        },
+        {
+          "year": "2026",
+          "yearIndex": 4
+        }
+      ]
+    }
   ],
   "scales": [
-    {"name":"x","type":"band","domain":{"data":"patternCounts","field":"pattern","sort":{"op":"max","field":"publishers","order":"descending"}},"range":[68,{"signal":"plotW - 12"}],"paddingInner":0.22,"paddingOuter":0.12},
-    {"name":"y","type":"linear","domain":{"data":"patternCounts","field":"publishers"},"zero":true,"nice":true,"range":[244,46]}
+    {
+      "name": "x",
+      "type": "band",
+      "domain": [
+        "00010",
+        "01000",
+        "10000",
+        "11111",
+        "00001",
+        "00100",
+        "00110",
+        "00011",
+        "00111",
+        "01001",
+        "01111",
+        "10001",
+        "10100",
+        "10110",
+        "11011",
+        "11100",
+        "11110"
+      ],
+      "range": [
+        94,
+        {
+          "signal": "width - 20"
+        }
+      ],
+      "paddingInner": 0.2,
+      "paddingOuter": 0.08
+    },
+    {
+      "name": "barY",
+      "type": "linear",
+      "domain": {
+        "data": "patterns",
+        "field": "publishers"
+      },
+      "zero": true,
+      "nice": true,
+      "range": [
+        218,
+        56
+      ]
+    },
+    {
+      "name": "yearY",
+      "type": "linear",
+      "domain": [
+        0,
+        4
+      ],
+      "range": [
+        300,
+        420
+      ]
+    }
   ],
   "marks": [
-    {"type":"text","encode":{"update":{"x":{"value":68},"y":{"value":22},"text":{"value":"Publishers in each year combination"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"interactive":false},
-    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":244},"stroke":{"value":"#C9D7DD"},"strokeWidth":{"value":1}}},"interactive":false},
-    {"type":"rect","encode":{"update":{"x":{"scale":"x","field":"pattern"},"width":{"scale":"x","band":1},"y":{"scale":"y","field":"publishers"},"y2":{"scale":"y","value":0},"fill":{"signal":"datum.years === 3 ? '#B36E21' : '#3B7693'"},"cornerRadiusTopLeft":{"value":3},"cornerRadiusTopRight":{"value":3},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
-    {"type":"text","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"signal":"scale('y', datum.publishers) - 9"},"align":{"value":"center"},"text":{"field":"publishers"},"font":{"value":"Arial"},"fontSize":{"value":14},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"patternCounts"},"interactive":false},
-    {"type":"rule","encode":{"update":{"x":{"value":64},"x2":{"signal":"plotW - 5"},"y":{"value":276},"stroke":{"value":"#DCE5E9"},"strokeWidth":{"value":1}}},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"value":68},"y":{"value":269},"text":{"value":"Years represented"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
-    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":310},"stroke":{"value":"#EEF2F4"},"strokeWidth":{"value":1}}},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"value":10},"y":{"value":310},"baseline":{"value":"middle"},"text":{"value":"2024"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
-    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":350},"stroke":{"value":"#EEF2F4"},"strokeWidth":{"value":1}}},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"value":10},"y":{"value":350},"baseline":{"value":"middle"},"text":{"value":"2025"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
-    {"type":"rule","encode":{"update":{"x":{"value":68},"x2":{"signal":"plotW - 12"},"y":{"value":390},"stroke":{"value":"#EEF2F4"},"strokeWidth":{"value":1}}},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"value":10},"y":{"value":390},"baseline":{"value":"middle"},"text":{"value":"2026"},"font":{"value":"Arial"},"fontSize":{"value":12},"fontWeight":{"value":"bold"},"fill":{"value":"#50616b"}}},"interactive":false},
-    {"type":"rule","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"signal":"datum.y2024 ? 310 : datum.y2025 ? 350 : 390"},"y2":{"signal":"datum.y2026 ? 390 : datum.y2025 ? 350 : 310"},"stroke":{"value":"#35566B"},"strokeWidth":{"value":2},"opacity":{"signal":"datum.years > 1 ? 1 : 0"}}},"from":{"data":"patternCounts"},"interactive":false},
-    {"type":"symbol","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"value":310},"size":{"value":125},"shape":{"value":"circle"},"fill":{"signal":"datum.y2024 ? (datum.years === 3 ? '#B36E21' : '#35566B') : '#DFE8EC'"},"stroke":{"value":"#ffffff"},"strokeWidth":{"value":1},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
-    {"type":"symbol","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"value":350},"size":{"value":125},"shape":{"value":"circle"},"fill":{"signal":"datum.y2025 ? (datum.years === 3 ? '#B36E21' : '#35566B') : '#DFE8EC'"},"stroke":{"value":"#ffffff"},"strokeWidth":{"value":1},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
-    {"type":"symbol","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"value":390},"size":{"value":125},"shape":{"value":"circle"},"fill":{"signal":"datum.y2026 ? (datum.years === 3 ? '#B36E21' : '#35566B') : '#DFE8EC'"},"stroke":{"value":"#ffffff"},"strokeWidth":{"value":1},"tooltip":{"signal":"datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' present in ' + trim(datum.yearList) + ': ' + join(pluck(datum.members, 'publisher_key'), ', ')"}}},"from":{"data":"patternCounts"}},
-    {"type":"rule","encode":{"update":{"x":{"scale":"x","field":"pattern","band":0.5},"y":{"signal":"scale('y', datum.publishers)"},"x2":{"signal":"panelX"},"y2":{"signal":"card2Y + 51"},"stroke":{"value":"#A9B9C1"},"strokeWidth":{"value":1},"opacity":{"signal":"compact ? 0 : 1"}}},"from":{"data":"threeYearPattern"},"interactive":false},
-    {"type":"rect","encode":{"update":{"x":{"signal":"panelX"},"x2":{"signal":"panelX + panelW"},"y":{"signal":"card1Y"},"y2":{"signal":"card1Y + 100"},"fill":{"value":"#F1F5F7"}}},"from":{"data":"summary"}},
-    {"type":"rect","encode":{"update":{"x":{"signal":"panel2X"},"x2":{"signal":"panel2X + panelW"},"y":{"signal":"card2Y"},"y2":{"signal":"card2Y + 100"},"fill":{"value":"#F1F5F7"}}},"from":{"data":"summary"}},
-    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 14"},"y":{"signal":"card1Y + 25"},"text":{"value":"One-year appearances dominate"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 14"},"y":{"signal":"card1Y + 51"},"text":{"signal":"datum.once + ' of ' + datum.total + ' publishers'"},"font":{"value":"Arial"},"fontSize":{"value":16},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"signal":"panelX + 14"},"y":{"signal":"card1Y + 76"},"text":{"value":"appear in just one year."},"font":{"value":"Arial"},"fontSize":{"value":12},"fill":{"value":"#50616b"}}},"from":{"data":"summary"},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 14"},"y":{"signal":"card2Y + 25"},"text":{"value":"A smaller recurring core"},"font":{"value":"Arial"},"fontSize":{"value":13},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 14"},"y":{"signal":"card2Y + 51"},"text":{"signal":"datum.everyYear + ' publishers'"},"font":{"value":"Arial"},"fontSize":{"value":16},"fontWeight":{"value":"bold"},"fill":{"value":"#233441"}}},"from":{"data":"summary"},"interactive":false},
-    {"type":"text","encode":{"update":{"x":{"signal":"panel2X + 14"},"y":{"signal":"card2Y + 76"},"text":{"value":"appear in all three years."},"font":{"value":"Arial"},"fontSize":{"value":12},"fill":{"value":"#50616b"}}},"from":{"data":"summary"},"interactive":false}
-  ]
+    {
+      "type": "symbol",
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "width - 226"
+          },
+          "y": {
+            "value": 21
+          },
+          "size": {
+            "value": 80
+          },
+          "fill": {
+            "value": "#B36E21"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "signal": "width - 214"
+          },
+          "y": {
+            "value": 24
+          },
+          "text": {
+            "value": "Appears in all five years"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fill": {
+            "value": "#50616b"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 92
+          },
+          "x2": {
+            "signal": "width - 18"
+          },
+          "y": {
+            "value": 218
+          },
+          "stroke": {
+            "value": "#C9D7DD"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {
+        "data": "patterns"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "pattern"
+          },
+          "width": {
+            "scale": "x",
+            "band": 1
+          },
+          "y": {
+            "scale": "barY",
+            "field": "publishers"
+          },
+          "y2": {
+            "value": 218
+          },
+          "fill": {
+            "signal": "datum.pattern === '11111' ? '#B36E21' : '#3B7693'"
+          },
+          "cornerRadiusTopLeft": {
+            "value": 2
+          },
+          "cornerRadiusTopRight": {
+            "value": 2
+          },
+          "tooltip": {
+            "signal": "datum.publishers + (datum.publishers === 1 ? ' publisher' : ' publishers') + ' appeared in ' + datum.yearList + ': ' + join(datum.members, ', ')"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "patterns"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "pattern",
+            "band": 0.5
+          },
+          "y": {
+            "signal": "scale('barY', datum.publishers) - 7"
+          },
+          "align": {
+            "value": "center"
+          },
+          "text": {
+            "signal": "datum.showLabel ? datum.publishers : ''"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#233441"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "update": {
+          "x": {
+            "value": 94
+          },
+          "y": {
+            "value": 260
+          },
+          "text": {
+            "value": "Years represented"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#50616b"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "years"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "value": 92
+          },
+          "x2": {
+            "signal": "width - 18"
+          },
+          "y": {
+            "scale": "yearY",
+            "field": "yearIndex"
+          },
+          "stroke": {
+            "value": "#EEF2F4"
+          },
+          "strokeWidth": {
+            "value": 1
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "years"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "value": 86
+          },
+          "y": {
+            "scale": "yearY",
+            "field": "yearIndex"
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "text": {
+            "field": "year"
+          },
+          "font": {
+            "value": "Arial"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "fill": {
+            "value": "#50616b"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "connectors"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "pattern",
+            "band": 0.5
+          },
+          "y": {
+            "scale": "yearY",
+            "field": "firstYear"
+          },
+          "y2": {
+            "scale": "yearY",
+            "field": "lastYear"
+          },
+          "stroke": {
+            "signal": "datum.allFive ? '#B36E21' : '#35566B'"
+          },
+          "strokeWidth": {
+            "value": 2
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "dots"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "pattern",
+            "band": 0.5
+          },
+          "y": {
+            "scale": "yearY",
+            "field": "yearIndex"
+          },
+          "size": {
+            "value": 100
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "fill": {
+            "signal": "datum.active ? (datum.pattern === '11111' ? '#B36E21' : '#35566B') : '#DFE8EC'"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1
+          },
+          "tooltip": {
+            "signal": "datum.year + ': ' + (datum.active ? 'present' : 'not present') + '; ' + datum.publishers + ' publishers share this pattern'"
+          }
+        }
+      }
+    }
+  ],
+  "usermeta": {
+    "source_rows": 144,
+    "publishers": 41,
+    "appeared_once": 23,
+    "appeared_all_five": 6
+  }
 }

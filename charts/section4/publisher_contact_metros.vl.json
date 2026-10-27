@@ -1,28 +1,73 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Eight metro reference points for documented publisher contact localities covering 135 of 144 publisher-attributed PMLA shortlist records in 2022–2026. Circle area represents listed-book records.",
+  "description": "Eight metro reference points for documented publisher contact localities covering 135 of 144 publisher-attributed Prime Minister’s Literary Awards records in 2022–2026. Circle area represents listed-book records.",
   "width": "container",
   "height": 430,
   "background": "#ffffff",
   "params": [
-    {"name": "map_zoom", "value": 1},
-    {"name": "map_pan_x", "value": 0},
-    {"name": "map_pan_y", "value": 0}
+    {
+      "name": "map_zoom",
+      "value": 1
+    },
+    {
+      "name": "map_pan_x",
+      "value": 0
+    },
+    {
+      "name": "map_pan_y",
+      "value": 0
+    }
   ],
   "projection": {
     "type": "mercator",
-    "center": [134, -27],
-    "fit": {"type": "Feature", "properties": {}, "geometry": {"type": "MultiPoint", "coordinates": [[112, -45], [155, -9]]}},
-    "extent": {"expr": "[[width / 2 + map_pan_x - (width - 20) * map_zoom / 2, height / 2 + map_pan_y - (height - 20) * map_zoom / 2], [width / 2 + map_pan_x + (width - 20) * map_zoom / 2, height / 2 + map_pan_y + (height - 20) * map_zoom / 2]]"},
-    "clipExtent": {"expr": "[[0, 0], [width, height]]"}
+    "center": [
+      134,
+      -27
+    ],
+    "fit": {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            112,
+            -45
+          ],
+          [
+            155,
+            -9
+          ]
+        ]
+      }
+    },
+    "extent": {
+      "expr": "[[width / 2 + map_pan_x - (width - 20) * map_zoom / 2, height / 2 + map_pan_y - (height - 20) * map_zoom / 2], [width / 2 + map_pan_x + (width - 20) * map_zoom / 2, height / 2 + map_pan_y + (height - 20) * map_zoom / 2]]"
+    },
+    "clipExtent": {
+      "expr": "[[0, 0], [width, height]]"
+    }
   },
   "layer": [
     {
-      "data": {"sphere": true},
-      "mark": {"type": "geoshape", "fill": "#EAF3F8", "stroke": null, "clip": true}
+      "data": {
+        "sphere": true
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#EAF3F8",
+        "stroke": null,
+        "clip": true
+      }
     },
     {
-      "data": {"url": "data/abs_states_2021.geojson", "format": {"type": "json", "property": "features"}},
+      "data": {
+        "url": "data/abs_states_2021.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
       "mark": {
         "type": "geoshape",
         "fill": "#F4F3EF",
@@ -32,41 +77,140 @@
       }
     },
     {
-      "data": {"graticule": {"extent": [[112, -45], [155, -9]], "step": [10, 10]}},
-      "mark": {"type": "geoshape", "fill": null, "stroke": "#B9D1DE", "strokeWidth": 0.4, "opacity": 0.35, "clip": true}
-    },
-    {
-      "data": {"values": [
-        {"longitude": 120, "latitude": -9.5, "label": "120°E"},
-        {"longitude": 130, "latitude": -9.5, "label": "130°E"},
-        {"longitude": 140, "latitude": -9.5, "label": "140°E"},
-        {"longitude": 150, "latitude": -9.5, "label": "150°E"}
-      ]},
-      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "color": "#526c75", "clip": true},
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "label", "type": "nominal"}
+      "data": {
+        "graticule": {
+          "extent": [
+            [
+              112,
+              -45
+            ],
+            [
+              155,
+              -9
+            ]
+          ],
+          "step": [
+            10,
+            10
+          ]
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#B9D1DE",
+        "strokeWidth": 0.4,
+        "opacity": 0.35,
+        "clip": true
       }
     },
     {
-      "data": {"values": [
-        {"longitude": 113.8, "latitude": -20, "label": "20°S"},
-        {"longitude": 113.8, "latitude": -30, "label": "30°S"},
-        {"longitude": 113.8, "latitude": -40, "label": "40°S"}
-      ]},
-      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "color": "#526c75", "align": "left", "dx": 2, "clip": true},
+      "data": {
+        "values": [
+          {
+            "longitude": 120,
+            "latitude": -9.5,
+            "label": "120°E"
+          },
+          {
+            "longitude": 130,
+            "latitude": -9.5,
+            "label": "130°E"
+          },
+          {
+            "longitude": 140,
+            "latitude": -9.5,
+            "label": "140°E"
+          },
+          {
+            "longitude": 150,
+            "latitude": -9.5,
+            "label": "150°E"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 11,
+        "color": "#526c75",
+        "clip": true
+      },
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "label", "type": "nominal"}
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
       }
     },
     {
-      "data": {"url": "data/publisher_contact_city_summary.csv"},
+      "data": {
+        "values": [
+          {
+            "longitude": 113.8,
+            "latitude": -20,
+            "label": "20°S"
+          },
+          {
+            "longitude": 113.8,
+            "latitude": -30,
+            "label": "30°S"
+          },
+          {
+            "longitude": 113.8,
+            "latitude": -40,
+            "label": "40°S"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 11,
+        "color": "#526c75",
+        "align": "left",
+        "dx": 2,
+        "clip": true
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/publisher_contact_city_summary.csv?v=2",
+        "format": {
+          "type": "csv"
+        }
+      },
       "transform": [
-        {"calculate": "datum.map_city + ' · ' + datum.listed_books", "as": "map_label"},
-        {"calculate": "datum.winning_books / datum.listed_books * 100", "as": "winner_share_pct"}
+        {
+          "calculate": "datum.map_city + ' · ' + datum.listed_books",
+          "as": "map_label"
+        },
+        {
+          "calculate": "datum.winning_books / datum.listed_books * 100",
+          "as": "winner_share_pct"
+        }
       ],
       "layer": [
         {
@@ -91,15 +235,62 @@
               "field": "listed_books",
               "type": "quantitative",
               "title": "Listed books",
-              "scale": {"domain": [0, 67], "range": [12, 1000], "zero": true},
-              "legend": {"orient": "bottom", "values": [1, 15, 35, 65], "symbolFillColor": "white", "symbolStrokeColor": "#74300B", "symbolStrokeWidth": 1.5}
+              "scale": {
+                "domain": [
+                  0,
+                  67
+                ],
+                "range": [
+                  12,
+                  1000
+                ],
+                "zero": true
+              },
+              "legend": {
+                "orient": "bottom",
+                "values": [
+                  1,
+                  15,
+                  35,
+                  65
+                ],
+                "symbolFillColor": "white",
+                "symbolStrokeColor": "#74300B",
+                "symbolStrokeWidth": 1.5
+              }
             },
             "color": {
               "field": "winner_share_pct",
               "type": "quantitative",
               "title": "Winner share (%)",
-              "scale": {"domain": [0, 20, 40], "range": ["#E8BB82", "#BB7330", "#74300B"], "interpolate": "lab", "clamp": true},
-              "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 190, "gradientThickness": 10, "values": [0, 20, 40], "format": ".0f", "titleOrient": "top", "titleAnchor": "start"}
+              "scale": {
+                "domain": [
+                  0,
+                  20,
+                  40
+                ],
+                "range": [
+                  "#E8BB82",
+                  "#BB7330",
+                  "#74300B"
+                ],
+                "interpolate": "lab",
+                "clamp": true
+              },
+              "legend": {
+                "orient": "bottom",
+                "direction": "horizontal",
+                "gradientLength": 190,
+                "gradientThickness": 10,
+                "values": [
+                  0,
+                  20,
+                  40
+                ],
+                "format": ".0f",
+                "titleOrient": "top",
+                "titleAnchor": "start"
+              }
             },
             "tooltip": [
               {
@@ -110,15 +301,24 @@
               {
                 "field": "state",
                 "type": "nominal",
-                "title": "State"
+                "title": "State or territory"
               },
               {
                 "field": "listed_books",
                 "type": "quantitative",
                 "title": "Listed books"
               },
-              {"field": "winning_books", "type": "quantitative", "title": "Winning books"},
-              {"field": "winner_share_pct", "type": "quantitative", "title": "Winner share (%)", "format": ".1f"},
+              {
+                "field": "winning_books",
+                "type": "quantitative",
+                "title": "Winning books"
+              },
+              {
+                "field": "winner_share_pct",
+                "type": "quantitative",
+                "title": "Winner share (%)",
+                "format": ".1f"
+              },
               {
                 "field": "publishers",
                 "type": "quantitative",
@@ -152,19 +352,56 @@
               "type": "nominal"
             }
           },
-          "transform": [{"filter": "indexof(['Sydney', 'Melbourne', 'Brisbane'], datum.map_city) >= 0"}]
+          "transform": [
+            {
+              "filter": "indexof(['Sydney', 'Melbourne', 'Brisbane'], datum.map_city) >= 0"
+            }
+          ]
         },
         {
-          "transform": [{"filter": "datum.map_city == 'Broome'"}],
-          "mark": {"type": "text", "dy": -17, "dx": 11, "align": "left", "font": "Arial", "fontSize": 13, "fontWeight": "bold", "color": "#233441"},
+          "transform": [
+            {
+              "filter": "datum.map_city == 'Broome'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "dy": -17,
+            "dx": 11,
+            "align": "left",
+            "font": "Arial",
+            "fontSize": 13,
+            "fontWeight": "bold",
+            "color": "#233441"
+          },
           "encoding": {
-            "longitude": {"field": "longitude", "type": "quantitative"},
-            "latitude": {"field": "latitude", "type": "quantitative"},
-            "text": {"field": "map_label", "type": "nominal"}
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "map_label",
+              "type": "nominal"
+            }
           }
         }
       ]
     }
   ],
-  "config": {"font": "Arial", "view": {"stroke": "#C7D6DE", "strokeWidth": 0.7, "fill": "white"}, "legend": {"labelFont": "Arial", "titleFont": "Arial"}}
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": "#C7D6DE",
+      "strokeWidth": 0.7,
+      "fill": "white"
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
 }

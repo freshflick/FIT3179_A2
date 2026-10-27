@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "ABS 2021 state boundaries shaded by PMLA winner share among publisher-attributed shortlist records associated with documented publisher contact states, 2022–2026; all 30 winners are included.",
+  "description": "Australian Bureau of Statistics 2021 state boundaries shaded by winner share among publisher-attributed Prime Minister’s Literary Awards records associated with documented publisher contact states, 2022–2026; all 30 winners are included.",
   "width": "container",
   "height": 430,
   "background": "#ffffff",
@@ -81,16 +81,16 @@
     },
     {
       "data": {"values": [
-        {"state": "WA", "longitude": 122, "latitude": -26},
-        {"state": "QLD", "longitude": 144, "latitude": -21},
-        {"state": "NSW", "longitude": 147, "latitude": -32},
-        {"state": "VIC", "longitude": 145, "latitude": -36.6}
+        {"state": "WA", "state_name": "Western Australia", "longitude": 121.5, "latitude": -26},
+        {"state": "QLD", "state_name": "Queensland", "longitude": 143.5, "latitude": -21},
+        {"state": "NSW", "state_name": "New South Wales", "longitude": 147, "latitude": -32},
+        {"state": "VIC", "state_name": "Victoria", "longitude": 145, "latitude": -36.6}
       ]},
       "transform": [
         {"lookup": "state", "from": {"data": {"url": "data/publisher_contact_state_summary.csv"}, "key": "state", "fields": ["winner_share_pct"]}},
-        {"calculate": "datum.state + '  ' + format(datum.winner_share_pct, '.1f') + '%'", "as": "label"}
+        {"calculate": "datum.state_name + '  ' + format(datum.winner_share_pct, '.1f') + '%'", "as": "label"}
       ],
-      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "fontWeight": "bold", "align": "center", "baseline": "middle", "clip": true},
+      "mark": {"type": "text", "font": "Arial", "fontSize": 10, "fontWeight": "bold", "align": "center", "baseline": "middle", "clip": true},
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
         "latitude": {"field": "latitude", "type": "quantitative"},
