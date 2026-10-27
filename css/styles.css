@@ -577,6 +577,8 @@ strong.emphasis-teal { color: #317a84; }
 .flow-size-2 { border-top-width: 2.3px; }
 .flow-size-4 { border-top-width: 4.5px; }
 .flow-map-callouts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 2px 0 16px; }
+/* The flow legend already carries the divider rule; don't draw a second one. */
+.flow-map-findings { margin-top: 0; padding-top: 14px; border-top: 0; }
 .flow-map-callouts-overlay {
     position: absolute;
     top: 48%;
