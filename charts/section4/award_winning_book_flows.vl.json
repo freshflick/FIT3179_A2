@@ -137,19 +137,52 @@
       "data": {
         "values": [
           {
-            "longitude": 0,
-            "latitude": -49,
-            "label": "0\u00b0"
-          },
+            "type": "Feature",
+            "geometry": {
+              "type": "LineString",
+              "coordinates": [
+                [
+                  0,
+                  -80
+                ],
+                [
+                  0,
+                  80
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#8A9BAA",
+        "strokeWidth": 0.8,
+        "strokeDash": [
+          4,
+          4
+        ],
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "values": [
           {
             "longitude": -24,
             "latitude": 30,
             "label": "30\u00b0N"
           },
           {
-            "longitude": -24,
+            "longitude": 2,
+            "latitude": -49,
+            "label": "0°E"
+          },
+          {
+            "longitude": 4,
             "latitude": 0,
-            "label": "0\u00b0"
+            "label": "0°"
           },
           {
             "longitude": -24,

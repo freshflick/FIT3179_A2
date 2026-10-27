@@ -135,14 +135,14 @@
       <p class="section-number">02 / Comparing award selections</p>
       <h2 id="awards-heading">The prize changes the picture</h2>
     </div>
-    <p class="section-lead">The prizes favour different publishers: <strong class="emphasis-lilac">Allen &amp; Unwin leads PMLA</strong>, while University of Queensland Press and Giramondo take larger shares of Stella’s longlists.</p>
+    <p class="section-lead">The prizes favour different publishers: <strong class="emphasis-lilac">Allen &amp; Unwin leads the Prime Minister’s Literary Awards</strong>, while University of Queensland Press and Giramondo take larger shares of Stella’s longlists.</p>
     <div class="chart-block">
       <h3>Publisher share of the two award lists</h3>
       <p class="chart-intro">Percentage of named Prime Minister’s Literary Awards records and Stella Prize longlisted books · 2022–2026</p>
       <div id="award-comparison-chart" class="chart dot-chart" role="img" aria-label="Connected dot plot comparing each publisher’s share of the two award lists"></div>
       <div class="finding-row" aria-label="Publisher share findings">
-        <aside class="finding finding-copper"><h4>Allen &amp; Unwin’s lead is prize-specific</h4><p>It supplies <strong class="emphasis-copper">22 of 144 named PMLA records (15.3%)</strong>, but three of 60 Stella longlisted books (5.0%). That 10.3-point gap shows its scale in one selection does not carry across both prizes.</p></aside>
-        <aside class="finding finding-lilac"><h4>Giramondo gains share in Stella</h4><p>Its share rises from <strong class="emphasis-lilac">9 of 144 PMLA records (6.3%) to 7 of 60 Stella books (11.7%)</strong>. University of Queensland Press also rises, from 11.1% to 13.3%. Only 12 of 192 titles appear on both lists, so the shift compares mostly separate selections.</p></aside>
+        <aside class="finding finding-copper"><h4>Allen &amp; Unwin’s lead is prize-specific</h4><p>It supplies <strong class="emphasis-copper">22 of 144 named records (15.3%)</strong>, but three of 60 Stella longlisted books (5.0%). That 10.3-point gap shows its scale in one selection does not carry across both prizes.</p></aside>
+        <aside class="finding finding-lilac"><h4>Giramondo gains share in Stella</h4><p>Its share rises from <strong class="emphasis-lilac">9 of 144 named records (6.3%) to 7 of 60 Stella books (11.7%)</strong>. University of Queensland Press also rises, from 11.1% to 13.3%. Only 12 of 192 titles appear on both lists, so the shift compares mostly separate selections.</p></aside>
       </div>
     </div>
 
@@ -248,6 +248,7 @@
         </div>
       </div>
       <div class="flow-map-legend" aria-label="Flow map legend"><span><i class="flow-line-sample" aria-hidden="true"></i>Published foreign edition</span><span><i class="flow-rights-sample" aria-hidden="true"></i>Publishing rights sold</span><span><i class="flow-both-sample" aria-hidden="true"></i>Both evidence types</span><span><i class="flow-dot-sample" aria-hidden="true"></i>Market; Australia is the origin anchor</span><span class="flow-size-legend"><strong>Books represented</strong><i class="flow-size-line flow-size-1" aria-hidden="true"></i>1<i class="flow-size-line flow-size-2" aria-hidden="true"></i>2<i class="flow-size-line flow-size-4" aria-hidden="true"></i>4</span></div>
+      <p class="chart-note">The world extent is intentional: routes span many publishing markets, so most countries show no evidence for the four selected books.</p>
       <div class="finding-row flow-map-findings" aria-label="International publishing findings">
         <aside class="finding finding-teal"><h4>Europe holds most mapped edition links</h4><p><strong class="emphasis-teal">Eleven of the 15 confirmed edition-to-market links shown are European</strong> (73%). The United States accounts for three links and China for one.</p></aside>
         <aside class="finding finding-lilac"><h4>The Yield reaches the most countries</h4><p>It has documented editions in <strong class="emphasis-lilac">seven countries</strong>; <em>Carpentaria</em> and <em>Cold Enough for Snow</em> each appear in six. Together, the three books have 19 edition records across 11 countries.</p></aside>
@@ -286,7 +287,7 @@
         <h2>Visibility clusters; recognition varies.</h2>
         <ul class="conclusion-points">
           <li><strong class="emphasis-copper">Ten publishers account for 100 of 144 named-publisher records.</strong> Allen &amp; Unwin alone holds 22, six ahead of the next publisher.</li>
-          <li><strong class="emphasis-blue">The two prizes favour different publishers.</strong> Allen &amp; Unwin drops from 15.3% of PMLA to 5.0% of Stella, while Giramondo nearly doubles its share.</li>
+          <li><strong class="emphasis-blue">The two prizes favour different publishers.</strong> Allen &amp; Unwin drops from 15.3% of the Prime Minister’s list to 5.0% of Stella, while Giramondo nearly doubles its share.</li>
           <li><strong class="emphasis-plum">Half of the 60 Stella longlisted books stop at the longlist,</strong> and only five shortlisted books win; category focus appears to matter, with Poetry supplying the most winners.</li>
           <li><strong class="emphasis-copper">Twelve of 192 distinct titles appear on both award lists,</strong> including one book that won both prizes in 2025.</li>
           <li><strong class="emphasis-lilac">Sydney and Melbourne hold 106 of 135 mapped publisher-contact records,</strong> and Queensland’s mapped winner share reaches 31.2%.</li>
@@ -473,12 +474,12 @@
   }
   window.addEventListener('resize', () => requestAnimationFrame(alignPairedMapChartHeights));
   const awardFlowTarget = document.querySelector('#award-edition-flow-map');
-  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=31', { actions: true, renderer: 'svg' }).catch(error => {
+  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=32', { actions: true, renderer: 'svg' }).catch(error => {
     console.error(error); awardFlowTarget.textContent = 'Map unavailable. Check the browser console and local server.';
   });
 
   const stateMapTarget = document.querySelector('#publisher-state-winners-map');
-  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=14', 'publisher winner-share');
+  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=15', 'publisher winner-share');
 
   const publisherMapViews = {
     australia: { source: 'charts/section4/publisher_contact_metros.vl.json?v=12' },

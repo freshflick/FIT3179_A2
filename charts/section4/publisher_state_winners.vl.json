@@ -95,7 +95,7 @@
         "longitude": {"field": "longitude", "type": "quantitative"},
         "latitude": {"field": "latitude", "type": "quantitative"},
         "text": {"field": "label", "type": "nominal"},
-        "color": {"condition": {"test": "datum.state == 'QLD'", "value": "#ffffff"}, "value": "#233441"}
+        "color": {"value": "#ffffff"}
       }
     }
   ],
