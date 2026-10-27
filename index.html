@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=26">
+  <link rel="stylesheet" href="css/styles.css?v=31">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -282,19 +282,37 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-panel">
-        <p class="section-number">The story in brief</p>
+        <p class="section-number">Conclusion – The story in brief</p>
         <h2>Visibility clusters; recognition varies.</h2>
-        <p><strong class="emphasis-copper">Ten publishers account for 100 of 144 named-publisher records.</strong> Twelve of 192 distinct titles appear on both award lists. Sydney and Melbourne hold 106 of 135 mapped publisher-contact records.</p>
+        <ul class="conclusion-points">
+          <li><strong class="emphasis-copper">Ten publishers account for 100 of 144 named-publisher records.</strong> Allen &amp; Unwin alone holds 22, six ahead of the next publisher.</li>
+          <li><strong class="emphasis-blue">The two prizes favour different publishers.</strong> Allen &amp; Unwin drops from 15.3% of PMLA to 5.0% of Stella, while Giramondo nearly doubles its share.</li>
+          <li><strong class="emphasis-plum">Half of the 60 Stella longlisted books stop at the longlist,</strong> and only five shortlisted books win; category focus appears to matter, with Poetry supplying the most winners.</li>
+          <li><strong class="emphasis-copper">Twelve of 192 distinct titles appear on both award lists,</strong> including one book that won both prizes in 2025.</li>
+          <li><strong class="emphasis-lilac">Sydney and Melbourne hold 106 of 135 mapped publisher-contact records,</strong> and Queensland’s mapped winner share reaches 31.2%.</li>
+          <li><strong class="emphasis-teal">Europe leads the overseas reach of prize-winning books</strong>, holding 11 of the 15 confirmed edition-to-market links shown.</li>
+        </ul>
       </div>
-      <div class="footer-panel">
-        <h3>Sources and method</h3>
-        <p>Book lists: <a href="https://www.creative.gov.au/news-events/events/prime-ministers-literary-awards">Creative Australia</a> and the <a href="https://stella.org.au/prize/">Stella Prize</a>. Charts cover 2022–2026. The Prime Minister’s Literary Awards publisher charts exclude six older records without a published publisher name. These selections do not represent all Australian publishing.</p>
-        <p>Map geography: <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">ABS boundaries</a> and <a href="data/publisher_contact_locations.csv">publisher contact sources</a>. Chart specifications and prepared data are in the <a href="https://github.com/freshflick/FIT3179_A2/tree/main/charts">JSON folder</a>.</p>
+      <div class="footer-panel footer-panel-references">
+        <h3>References and Authorship</h3>
+        <ul class="reference-list" aria-label="References">
+          <li><strong>Prime Minister’s Literary Awards book lists</strong> - Creative Australia. (2022). <em>2022 Prime Minister’s Literary Awards winners, shortlistees and judges</em>. Creative Australia. <a href="https://creative.gov.au/2022-prime-ministers-literary-awards-winners-shortlistees-and-judges">https://creative.gov.au/2022-prime-ministers-literary-awards-winners-shortlistees-and-judges</a> / Creative Australia. (2023). <em>2023 Prime Minister’s Literary Awards winners, shortlistees and judges</em>. <a href="https://creative.gov.au/2023-prime-ministers-literary-awards-winners-shortlistees-and-judges">https://creative.gov.au/2023-prime-ministers-literary-awards-winners-shortlistees-and-judges</a> / Creative Australia. (2024). <em>Announcing shortlists: 2024 Prime Minister’s Literary Awards</em>. <a href="https://creative.gov.au/news-events/news/announcing-shortlists-2024-prime-ministers-literary-awards">https://creative.gov.au/news-events/news/announcing-shortlists-2024-prime-ministers-literary-awards</a></li>
+          <li><strong>Stella Prize book lists</strong> - The Stella Prize. (2026). <em>The Stella Prize: Longlisted titles and judges’ reports, 2022–2026</em>. The Stella Prize. <a href="https://stella.org.au/prize/">https://stella.org.au/prize/</a></li>
+          <li><strong>Miles Franklin Literary Award records</strong> - Perpetual. (2021). <em>Miles Franklin Literary Award: Judges and history of recipients</em>. Perpetual. <a href="https://www.perpetual.com.au/wealth-management/milesfranklin/judges-and-history-of-recipients/">https://www.perpetual.com.au/wealth-management/milesfranklin/judges-and-history-of-recipients/</a></li>
+          <li><strong>Victorian Premier’s Prize for Literature record</strong> - State Library of New South Wales. (2019). <em>2019 winner: No Friend but the Mountains</em>. State Library of New South Wales. <a href="https://www.sl.nsw.gov.au/awards/national-biography-award/2019-winner-no-friend-mountains">https://www.sl.nsw.gov.au/awards/national-biography-award/2019-winner-no-friend-mountains</a></li>
+          <li><strong>Foreign editions of selected winning books</strong> - Wright, A. (2007). <em>Carpentaria</em>. United States / United Kingdom / Germany editions; Winch, T. J. (2020). <em>Cold Enough for Snow</em>. Giramondo Publishing. <a href="https://giramondopublishing.com/books/jessica-au-cold-enough-for-snow/">https://giramondopublishing.com/books/jessica-au-cold-enough-for-snow/</a>; New Directions. (2024). <em>Carpentaria</em>. <a href="https://www.ndbooks.com/book/carpentaria/">https://www.ndbooks.com/book/carpentaria/</a></li>
+          <li><strong>Publishing rights sales record</strong> - Boochani, B. (2019). <em>No Friend but the Mountains</em> rights catalogue. Balcells Agency. <a href="https://www.agenciabalcells.com/fileadmin/Catalogos/Jane_Novak_2023_rights_catalogue.pdf">https://www.agenciabalcells.com/fileadmin/Catalogos/Jane_Novak_2023_rights_catalogue.pdf</a></li>
+          <li><strong>Australia map boundaries</strong> - Australian Bureau of Statistics. (2021). <em>Australian Statistical Geography Standard (ASGS) Edition 3 digital boundary files</em>. Australian Bureau of Statistics. <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files">https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files</a></li>
+          <li><strong>Sydney and Melbourne suburb boundaries</strong> - Australian Bureau of Statistics. (2021). <em>Australian Statistical Geography Standard (ASGS) 2021 Suburbs and Localities (SAL)</em>. <a href="https://geo.abs.gov.au/arcgis/rest/services/ASGS2021/SAL/MapServer/0">https://geo.abs.gov.au/arcgis/rest/services/ASGS2021/SAL/MapServer/0</a></li>
+          <li><strong>Locality and metro coordinates</strong> - OpenStreetMap contributors. (2026). <em>OpenStreetMap database</em> [Data set]. OpenStreetMap Foundation. <a href="https://www.openstreetmap.org/copyright">https://www.openstreetmap.org/copyright</a> / GeoNames. (n.d.). <em>Largest cities in Australia</em>. <a href="https://www.geonames.org/AU/largest-cities-in-australia.html">https://www.geonames.org/AU/largest-cities-in-australia.html</a></li>
+          <li><strong>World map geography</strong> - Vega Project. (n.d.). <em>world-110m</em> [Data set]. Vega Datasets. <a href="https://github.com/vega/vega-datasets/blob/main/data/world-110m.json">https://github.com/vega/vega-datasets/blob/main/data/world-110m.json</a></li>
+          <li><strong>Publisher contact location data</strong> - Malik, S. N. (2026). <em>Australian publisher contact locations 2022–2026</em> [Data set]. GitHub. <a href="https://github.com/freshflick/FIT3179_A2/tree/main/A2_code/data/publisher_contact_locations.csv">https://github.com/freshflick/FIT3179_A2/tree/main/A2_code/data/publisher_contact_locations.csv</a></li>
+          <li><strong>Embedding method</strong> - Monash University. (n.d.). <em>Embedding multiple charts in HTML: Vega-Lite multiple charts (FIT3179 teaching example)</em>. GitHub. <a href="https://github.com/FIT3179/Vega-Lite/tree/main/5_multiple_charts_html">https://github.com/FIT3179/Vega-Lite/tree/main/5_multiple_charts_html</a></li>
+        </ul>
       </div>
     </div>
     <div class="footer-meta">
-      <p>By Shayan · FIT3179 Data Visualisation 2 · October 2026 · <a href="https://github.com/freshflick/FIT3179_A2">View the repository</a></p>
-      <p>AI acknowledgement: Codex assisted with layout, map specification code and geographic data preparation. The page embedding follows the <a href="https://github.com/FIT3179/Vega-Lite/tree/main/5_multiple_charts_html">FIT3179 teaching example</a>.</p>
+      <p><strong>Author:</strong> Shayan Nadeem · <strong>Published:</strong> 27th October 2026 · FIT3179 Data Visualisation 2 · <a href="https://github.com/freshflick/FIT3179_A2">View the repository</a></p>
     </div>
   </footer>
 </main>
@@ -422,12 +440,12 @@
   const charts = [
     ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=6'],
     ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=6'],
-    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=5'],
-    ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json?v=2'],
+    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=7'],
+    ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json?v=6'],
     ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json?v=3'],
-    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=6'],
+    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=8'],
     ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=4'],
-    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=5']
+    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=6']
   ];
   charts.forEach(([target, spec]) => vegaEmbed(target, spec, { actions: true }).catch(error => {
     console.error(error); document.querySelector(target).textContent = 'Chart unavailable. Check the browser console and local server.';
