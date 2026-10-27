@@ -1,6 +1,6 @@
 :root {
     --ink: #233441;
-    --muted: #50616b;
+    --muted: #1A1A1A;
     --teal: #0f6179;
     --paper: #ffffff;
     --canvas: #f2f5f5;
@@ -67,6 +67,9 @@ h3 { margin: 0 0 6px; font-size: 21px; line-height: 1.3; }
     align-items: start;
 }
 .chart { width: 100%; min-width: 0; min-height: 360px; }
+/* v2.34: stop the reserved right gutter from compressing container-width charts */
+.chart.vega-embed { padding-right: 0 !important; }
+.chart .vega-actions { position: absolute; right: 6px; z-index: 5; }
 .story { padding: 8px 0 8px 20px; border-left: 2px solid var(--rule); }
 .story h4, .chart-explanation h4 {
     margin: 0 0 12px;

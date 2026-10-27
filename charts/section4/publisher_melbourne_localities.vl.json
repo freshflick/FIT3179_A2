@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Publisher-contact localities around Melbourne for Prime Minister's Literary Awards shortlist records, 2022\u20132026. Circle area shows listed books; copper color shows winner share.",
+  "description": "Publisher-contact localities around Melbourne for Prime Minister's Literary Awards shortlist records, 2022–2026. Circle area shows listed books; copper color shows winner share.",
   "width": "container",
   "height": 430,
   "background": "white",
@@ -71,8 +71,24 @@
       "mark": {
         "type": "geoshape",
         "fill": "#F4F3EF",
-        "stroke": "#92A6AE",
+        "stroke": null,
         "strokeWidth": 0.45,
+        "clip": true
+      }
+    },
+    {
+      "data": {
+        "url": "data/metro_outline_melbourne.geojson?v=1",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#5E7482",
+        "strokeWidth": 0.9,
         "clip": true
       }
     },
@@ -240,9 +256,12 @@
       "strokeWidth": 0.7
     },
     "legend": {
-      "labelFont": "Arial",
-      "titleFont": "Arial",
-      "orient": "bottom"
+      "labelFontSize": 13,
+      "labelColor": "#1A1A1A",
+      "labelFontWeight": 600,
+      "titleFontSize": 13,
+      "titleColor": "#233441",
+      "titleFontWeight": 700
     }
   }
 }

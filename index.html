@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Behind Australia's Literary Shortlists</title>
-  <link rel="stylesheet" href="css/styles.css?v=34">
+  <link rel="stylesheet" href="css/styles.css?v=35">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -438,14 +438,14 @@
   }
 
   const charts = [
-    ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=6'],
-    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=6'],
-    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=7'],
-    ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json?v=7'],
-    ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json?v=3'],
-    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=9'],
-    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=4'],
-    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=6']
+    ['#publisher-chart', 'charts/section1/publisher_counts.vg.json?v=7'],
+    ['#heatmap-chart', 'charts/section1/publisher_category_heatmap.vg.json?v=7'],
+    ['#award-comparison-chart', 'charts/section2/publisher_award_comparison.vg.json?v=8'],
+    ['#stella-genre-chart', 'charts/section2/stella_genre_units.vg.json?v=8'],
+    ['#publisher-wins-chart', 'charts/section3/publisher_shortlist_wins.vg.json?v=5'],
+    ['#stella-progression-chart', 'charts/section3/stella_genre_progression.vg.json?v=10'],
+    ['#award-overlap-chart', 'charts/section3/award_title_overlap.vg.json?v=5'],
+    ['#publisher-year-chart', 'charts/section3/publisher_year_upset.vg.json?v=7']
   ];
   charts.forEach(([target, spec]) => vegaEmbed(target, spec, { actions: true }).catch(error => {
     console.error(error); document.querySelector(target).textContent = 'Chart unavailable. Check the browser console and local server.';
@@ -474,17 +474,17 @@
   }
   window.addEventListener('resize', () => requestAnimationFrame(alignPairedMapChartHeights));
   const awardFlowTarget = document.querySelector('#award-edition-flow-map');
-  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=32', { actions: true, renderer: 'svg' }).catch(error => {
+  vegaEmbed(awardFlowTarget, 'charts/section4/award_winning_book_flows.vl.json?v=33', { actions: true, renderer: 'svg' }).catch(error => {
     console.error(error); awardFlowTarget.textContent = 'Map unavailable. Check the browser console and local server.';
   });
 
   const stateMapTarget = document.querySelector('#publisher-state-winners-map');
-  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=15', 'publisher winner-share');
+  embedInteractiveMap(stateMapTarget, 'charts/section4/publisher_state_winners.vl.json?v=16', 'publisher winner-share');
 
   const publisherMapViews = {
-    australia: { source: 'charts/section4/publisher_contact_metros.vl.json?v=12' },
-    sydney: { source: 'charts/section4/publisher_sydney_localities.vl.json?v=21' },
-    melbourne: { source: 'charts/section4/publisher_melbourne_localities.vl.json?v=21' }
+    australia: { source: 'charts/section4/publisher_contact_metros.vl.json?v=13' },
+    sydney: { source: 'charts/section4/publisher_sydney_localities.vl.json?v=25' },
+    melbourne: { source: 'charts/section4/publisher_melbourne_localities.vl.json?v=25' }
   };
   let publisherMapPlace = 'australia', publisherMapView = null, publisherMapSuppressClickUntil = 0;
   const publisherMapTarget = document.querySelector('#publisher-office-map');
